@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 151c17c9aa4b64246a9750ca7c6fe857
-timeCreated: 1486505063
+timeCreated: 1486770386
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - floorTile: {fileID: 1000011137630582, guid: 63479e236ace6ce4abf1ae49161607fd,
+      type: 2}
+  - wallTile: {fileID: 1811600136781426, guid: 84255c901ae2a724094e384617812699, type: 2}
+  - gameController: {fileID: 1133688171390954, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

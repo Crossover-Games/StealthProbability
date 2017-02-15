@@ -45,7 +45,7 @@ public class Tile : MonoBehaviour {
 	}
 		
 	/// <summary>
-	/// Returns the highest point on the tile where the arrow cursor will be. Will be either over a character's head or over simple ground. Not yet programmed to do the former though. Encapsulates field for TileGridUnitVisualizer.
+	/// Returns the highest point on the tile where the arrow cursor will be. Will be either over a character's head or over simple ground.
 	/// </summary>
 	public Vector3 cursorConnectionPoint {
 		get {
@@ -56,6 +56,13 @@ public class Tile : MonoBehaviour {
 				return new Vector3 (transform.position.x, occupant.elevationOfTop, transform.position.z);
 			}
 		}
+	}
+
+	/// <summary>
+	/// Returns the center of the top of tile where the occupying character will stand.
+	/// </summary>
+	public Vector3 characterConnectionPoint {
+		get { return new Vector3 (transform.position.x, visualizer.elevationOfTop, transform.position.z); }
 	}
 
 	void Awake () {
