@@ -1,0 +1,57 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// A cluster of related states in the game control state machine grouped together to form a phase of game control.
+/// </summary>
+public abstract class GameControlPhase : MonoBehaviour {
+
+	/// <summary>
+	/// Reference to the scene's GameBrain
+	/// </summary>
+	[SerializeField] protected GameBrain brain;
+
+	/// <summary>
+	/// Puts this phase in control of the GameBrain. First, it calls the OnLeaveControl() of the previous phase, then calls this phase's OnTakeControl().
+	/// </summary>
+	public void TakeControl () {
+		brain.AssignControl (this);
+	}
+
+	/// <summary>
+	/// This happens when this phase takes control, after the previous phase runs its OnLeaveControl.
+	/// </summary>
+	virtual public void OnTakeControl () {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// This happens immediately before a new phase takes control.
+	/// </summary>
+	virtual public void OnLeaveControl () {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// Like MonoBehaviour.Update(), but is only called when in control of the GameBrain.
+	/// </summary>
+	virtual public void ControlUpdate () {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// Called by GameBrain when the left mouse button goes down while the mouse is over a tile. Not called if the tile is null.
+	/// </summary>
+	virtual public void TileClickEvent (Tile t) {
+		// by default, do nothing
+	}
+}
+
+
+
+
+// override public void OnTakeControl ()
+// override public void OnLeaveControl ()
+// override public void ControlUpdate () 
+// override public void TileClickEvent (Tile t)
