@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class PathingNode : MonoBehaviour {
 
+	public string message;
+
 	private Tile tile;
 	/// <summary>
 	/// The tile this PathingNode is associated with.
@@ -26,7 +28,7 @@ public class PathingNode : MonoBehaviour {
 	/// </summary>
 	public PathingNode[] connections {
 		get {
-			return Useful.HashSetToArray (myConnections);
+			return myConnections.ToArray ();
 		}
 	}
 		
@@ -83,15 +85,16 @@ public class PathingNode : MonoBehaviour {
 	public PathingNode nextOnPath (PathingNode cameFrom) {
 		if (cameFrom == null) {
 			//return null;
-			return Useful.RandomElementInHashSet (myConnections);
+			return myConnections.RandomElement ();
 		}
 		else {
 			HashSet<PathingNode> remainingNodes = new HashSet<PathingNode> (myConnections);
 			HashSet<PathingNode> previous = new HashSet<PathingNode> ();
 			previous.Add (cameFrom);
 			remainingNodes.ExceptWith (previous);
+
 			if (remainingNodes.Count == 1) {
-				return Useful.GetHashSetSingleton (remainingNodes);
+				return remainingNodes.ToArray () [0];
 			}
 			else if (remainingNodes.Count == 0) {
 				return cameFrom;

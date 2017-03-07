@@ -46,6 +46,13 @@ public abstract class GameControlPhase : MonoBehaviour {
 	virtual public void TileClickEvent (Tile t) {
 		// by default, do nothing
 	}
+
+	/// <summary>
+	/// Called by GameBrain when the mouse hovers over a different tile than before. Be mindful that this may mean the new "tile" is null if the mouse went off the map.
+	/// </summary>
+	virtual public void MouseOverChangeEvent () {
+		// by default, do nothing
+	}
 }
 
 
@@ -53,5 +60,6 @@ public abstract class GameControlPhase : MonoBehaviour {
 
 // override public void OnTakeControl ()
 // override public void OnLeaveControl ()
-// override public void ControlUpdate () 
+// override public void ControlUpdate ()
 // override public void TileClickEvent (Tile t)
+// override public void MouseOverChangeEvent ()

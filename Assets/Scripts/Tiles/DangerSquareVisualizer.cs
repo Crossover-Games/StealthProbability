@@ -15,6 +15,9 @@ public class DangerSquareVisualizer : MonoBehaviour {
 	public static Color WHITE {
 		get{ return new Color (1f, 1f, 1f, 1f); }
 	}
+	public static Color CAROLINA_BLUE {
+		get{ return new Color (123f/255f, 175f/255f, 212f/255f, 1f); }
+	}
 
 	public static Color RandomColor () {
 		return Random.ColorHSV (0f, 1f, 1f, 1f, 1f, 1f, 1f, 1f);

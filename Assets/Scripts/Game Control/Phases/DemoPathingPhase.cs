@@ -8,13 +8,9 @@ public class DemoPathingPhase : GameControlPhase {
 
 	[SerializeField] private PlayerTurnIdlePhase playerTurnIdlePhase;
 
-	private const float timeToNextSquare = 0.5f;
-	private float elapsedTime = 0f;
-
 	[SerializeField] private Dog exampleDog;
 
 	override public void OnTakeControl () {
-		elapsedTime = 0f;
 		foreach (Tile t in brain.tileManager.allTiles) {
 			t.dangerColor = DangerSquareVisualizer.RandomColor ();
 			t.dangerVisualizerEnabled = true;
@@ -22,13 +18,9 @@ public class DemoPathingPhase : GameControlPhase {
 	}
 
 	override public void ControlUpdate () {
-		elapsedTime += Time.deltaTime;
-		if (elapsedTime >= timeToNextSquare) {
-			elapsedTime = 0f;
-			exampleDog.DemoMoveAlongTrack ();
-		}
+		exampleDog.DemoMoveAlongTrack ();
 
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKey (KeyCode.P)) {
 			playerTurnIdlePhase.TakeControl ();
 		}
 	}

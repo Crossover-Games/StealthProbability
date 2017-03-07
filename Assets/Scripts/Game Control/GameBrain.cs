@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class GameBrain : MonoBehaviour {
 
+	// only serialized so that you can choose the starting phase.
 	[SerializeField] private GameControlPhase inControl = null;
 
 	[SerializeField] private UniversalTileManager universalTileManager;
@@ -15,6 +16,14 @@ public class GameBrain : MonoBehaviour {
 	/// </summary>
 	public UniversalTileManager tileManager {
 		get { return universalTileManager; }
+	}
+		
+	[SerializeField] private AnimationManager myAnimationManager;
+	/// <summary>
+	/// The unit that animates movement for pieces on the board.
+	/// </summary>
+	public AnimationManager animationManager{
+		get { return myAnimationManager; }
 	}
 
 	/// <summary>
@@ -29,7 +38,10 @@ public class GameBrain : MonoBehaviour {
 	}
 
 	void Update () {
-		if (inControl != null) {
+		if (myAnimationManager.activelyAnimating) {
+			myAnimationManager.AnimationUpdate ();
+		}
+		else if (inControl != null) {
 			inControl.ControlUpdate ();
 		}
 	}
@@ -37,9 +49,18 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's TileClickEvent().
 	/// </summary>
-	public void NotifyActivePhaseOfTileClick (Tile t) {
+	public void NotifyBrainTileClickEvent (Tile t) {
 		if (inControl != null) {
 			inControl.TileClickEvent (t);
+		}
+	}
+
+	/// <summary>
+	/// Calls the operating GameControlPhase's MouseOverChangeEvent().
+	/// </summary>
+	public void NotifyBrainMouseOverChangeEvent () {
+		if (inControl != null) {
+			inControl.MouseOverChangeEvent ();
 		}
 	}
 }

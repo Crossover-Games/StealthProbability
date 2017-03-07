@@ -6,7 +6,19 @@ using System.Collections;
 /// Represents a player unit or enemy guard.
 /// </summary>
 public abstract class GameCharacter : MonoBehaviour {
+	/// <summary>
+	/// Reference to the scene's GameBrain.
+	/// </summary>
+	private GameBrain brain;
+
 	[SerializeField] private Collider myCollider;
+	[SerializeField] private CharacterController myCharacterController;
+	/// <summary>
+	/// The character controller that moves this object.
+	/// </summary>
+	public CharacterController characterController {
+		get{ return myCharacterController; }
+	}
 
 	/// <summary>
 	/// Cat, dog, machine, or something else not thought of yet. It's safe to assume that a cat is implemented as a cat, and so on.
@@ -16,9 +28,9 @@ public abstract class GameCharacter : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Encapsulated variable for the tile this character is standing on. Please don't modify this.
+	/// Encapsulated variable for myTile.
 	/// </summary>
-	[SerializeField] private Tile associatedTile;
+	private Tile associatedTile;
 	/// <summary>
 	/// The tile this character is standing on.
 	/// </summary>
@@ -29,7 +41,7 @@ public abstract class GameCharacter : MonoBehaviour {
 			associatedTile.SetOccupant (this);
 		}
 	}
-
+		
 	/// <summary>
 	/// Compass direction this character is facing.
 	/// </summary>
@@ -45,6 +57,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	}
 
 	virtual protected void Awake () {
+		brain = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameBrain> ();
 		FindMyStartingTile ();
 	}
 
@@ -64,15 +77,20 @@ public abstract class GameCharacter : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// PLACEHOLDER. Moves this character on top of the specified tile. Ideally, this would do some animation too, but that's not implemented yet.
+	/// Moves this character on top of the specified tile. This is intended to be used for neighboring tiles. There will be no animation if the destination is not a neighbor.
 	/// </summary>
 	virtual public void MoveTo (Tile destination) {	//don't forget that this changes the tile's occupant
 		if (destination != null) {
-			Tile tmp = myTile;
-			tmp.SetOccupant (null);
-
+			Tile previous = myTile;
+			previous.SetOccupant (null);
 			myTile = destination;
-			transform.position = myTile.characterConnectionPoint;
+
+			if (previous.IsNeighbor (myTile)) {
+				brain.animationManager.StartAnimating (this, myTile.characterConnectionPoint, previous.GetDirectionOfNeighbor (myTile));
+			}
+			else {
+				transform.position = myTile.characterConnectionPoint;
+			}
 		}
 	}
 }

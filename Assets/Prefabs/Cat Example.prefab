@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4041854434648068}
   - component: {fileID: 143680283396849028}
-  - component: {fileID: 114447524609195550}
+  - component: {fileID: 114096137034361474}
   m_Layer: 2
   m_Name: Cat Example
   m_TagString: Untagged
@@ -753,7 +753,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1257381611334170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.319, y: 0.5, z: 2}
+  m_LocalPosition: {x: 3, y: 0.5, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4305086652476862}
@@ -1365,7 +1365,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114447524609195550
+--- !u!114 &114096137034361474
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1373,12 +1373,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1257381611334170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3d1a8c49f0122443b26b3801af8560f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ba75c8a55183de4b9a29370f17b0513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myCollider: {fileID: 143680283396849028}
   myCharacterController: {fileID: 143680283396849028}
-  myAnimator: {fileID: 95763421915811124}
+  orientation: 0
+  myMaxEnergy: 3
+  livesRemaining: 2
 --- !u!137 &137832728629854744
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

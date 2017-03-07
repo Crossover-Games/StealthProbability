@@ -16,13 +16,8 @@ public class Dog : GameCharacter {
 	override public void MoveTo (Tile destination) {
 		if (destination != null) {
 			lastVisited = myTile.pathingNode;
-
-			Tile tmp = myTile;
-			tmp.SetOccupant (null);
-
-			myTile = destination;
-			transform.position = myTile.characterConnectionPoint;
 		}
+		base.MoveTo (destination);
 	}
 
 	//also has vision pattern

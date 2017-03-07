@@ -149,6 +149,18 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Relative to this tile, in what direction would you move to step on the other tile? Returns north as a failsafe, but please don't even call this if you know the other isn't a neighbor.
+	/// </summary>
+	public Compass.Direction GetDirectionOfNeighbor (Tile other) {
+		foreach (Compass.Direction direction in Compass.allDirections) {
+			if (GetNeighborInDirection (direction) == other) {
+				return direction;
+			}
+		}
+		return Compass.Direction.North;
+	}
+
+	/// <summary>
 	/// State of the tile's highlight. Encapsulates field for TileGridUnitVisualizer.
 	/// </summary>
 	public bool mouseOverVisualState {

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 /// </summary>
 public class UniversalTileManager : MonoBehaviour {
 
+	private Tile prevMousedOver = null;
 	private Tile mousedOver = null;
 	/// <summary>
 	/// The tile the mouse cursor is currently hovering over.
@@ -75,13 +76,18 @@ public class UniversalTileManager : MonoBehaviour {
 	}
 
 	void Start () {
-		a_allTiles = Useful.HashSetToArray (s_allTiles);
+		a_allTiles = s_allTiles.ToArray ();
 	}
 		
 	void Update () {
-		if (mousedOver != null && Input.GetMouseButtonDown (0)) {
-			brain.NotifyActivePhaseOfTileClick (mousedOver);
+		if (mousedOver != prevMousedOver) {
+			brain.NotifyBrainMouseOverChangeEvent ();
 		}
+		if (mousedOver != null && Input.GetMouseButtonDown (0)) {
+			brain.NotifyBrainTileClickEvent (mousedOver);
+		}
+
+		prevMousedOver = mousedOver;
 	}
 
 }

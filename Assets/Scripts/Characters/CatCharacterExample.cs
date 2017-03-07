@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CatCharacterExample : GameCharacter {
-	[SerializeField] private CharacterController myCharacterController;
-	[SerializeField] private Animator myAnimator;
-
 	private Animator anim;
 
 	override public CharacterType characterType {

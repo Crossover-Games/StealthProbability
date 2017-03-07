@@ -26,6 +26,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!1 &1066631402201092
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4284248191724834}
+  - component: {fileID: 114429912522199312}
+  m_Layer: 0
+  m_Name: CatContextMenuPhase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1129952790023236
 GameObject:
   m_ObjectHideFlags: 1
@@ -52,6 +68,7 @@ GameObject:
   - component: {fileID: 4099466641717754}
   - component: {fileID: 114703195367254134}
   - component: {fileID: 114842886613549936}
+  - component: {fileID: 114471362836056170}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -124,6 +141,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1843392061816026
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4928520480104364}
+  - component: {fileID: 114925043850094324}
+  m_Layer: 0
+  m_Name: CatExecutePhase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4090360656723186
 Transform:
   m_ObjectHideFlags: 1
@@ -165,6 +198,8 @@ Transform:
   - {fileID: 4180402791932474}
   - {fileID: 4090360656723186}
   - {fileID: 4494626078363118}
+  - {fileID: 4284248191724834}
+  - {fileID: 4928520480104364}
   m_Father: {fileID: 4099466641717754}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -180,6 +215,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4176201243537944}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4284248191724834
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1066631402201092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4176201243537944}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4463064787674790
 Transform:
@@ -220,6 +268,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4463064787674790}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4928520480104364
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1843392061816026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4176201243537944}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23124070361841554
 MeshRenderer:
@@ -276,6 +337,22 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114429912522199312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1066631402201092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a20055c4abb9242a4830fee3ef3ddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 114842886613549936}
+  playerTurnIdlePhase: {fileID: 114703959096884388}
+  catExecutePhase: {fileID: 114925043850094324}
+  selectedCat: {fileID: 0}
+  tilePath: []
 --- !u!114 &114465517834126654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,9 +366,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brain: {fileID: 114842886613549936}
   playerTurnIdlePhase: {fileID: 114703959096884388}
+  catContextMenuPhase: {fileID: 114429912522199312}
   lowPass: {fileID: 0}
   selectedCat: {fileID: 0}
-  stretch: {fileID: 0}
+--- !u!114 &114471362836056170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1133688171390954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f947a04158c80cb409c5568cccd4d546, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114703195367254134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -332,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inControl: {fileID: 114703959096884388}
   universalTileManager: {fileID: 114703195367254134}
+  myAnimationManager: {fileID: 114471362836056170}
 --- !u!114 &114892419804097440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,3 +435,18 @@ MonoBehaviour:
   brain: {fileID: 114842886613549936}
   playerTurnIdlePhase: {fileID: 114703959096884388}
   exampleDog: {fileID: 0}
+--- !u!114 &114925043850094324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1843392061816026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cd1929e53a7afb4288269763acf48d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 114842886613549936}
+  playerTurnIdlePhase: {fileID: 114703959096884388}
+  selectedCat: {fileID: 0}
+  tilePath: []
