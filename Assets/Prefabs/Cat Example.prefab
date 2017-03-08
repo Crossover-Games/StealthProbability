@@ -199,11 +199,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4041854434648068}
-  - component: {fileID: 143680283396849028}
   - component: {fileID: 114096137034361474}
+  - component: {fileID: 65105485324859798}
   m_Layer: 2
   m_Name: Cat Example
-  m_TagString: Untagged
+  m_TagString: Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1348,6 +1348,18 @@ Transform:
   m_Father: {fileID: 4031644105039074}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &65105485324859798
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1257381611334170}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.25, y: 0.44, z: 0.65}
+  m_Center: {x: 0, y: 0.22, z: -0.04}
 --- !u!95 &95763421915811124
 Animator:
   serializedVersion: 3
@@ -1376,10 +1388,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba75c8a55183de4b9a29370f17b0513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCollider: {fileID: 143680283396849028}
-  myCharacterController: {fileID: 143680283396849028}
+  myCollider: {fileID: 65105485324859798}
   orientation: 0
-  myMaxEnergy: 3
+  ableToMove: 1
+  myMaxEnergy: 4
   livesRemaining: 2
 --- !u!137 &137832728629854744
 SkinnedMeshRenderer:
@@ -1457,20 +1469,3 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.015887339, y: 0.0000047273934, z: 0.007896272}
     m_Extent: {x: 0.04582901, y: 0.021630652, z: 0.02933886}
   m_DirtyAABB: 0
---- !u!143 &143680283396849028
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1257381611334170}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 0
-  m_Radius: 0.32
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.32, z: 0}

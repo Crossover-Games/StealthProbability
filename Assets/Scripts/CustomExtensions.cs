@@ -25,12 +25,29 @@ public static class CustomExtensions {
 		return tempArray;
 	}
 
+	/*
 	/// <summary>
 	/// Returns a random element in the set.
 	/// </summary>
 	public static T RandomElement<T> (this HashSet<T> theSet) {
 		T[] tmp = theSet.ToArray ();
 		return tmp [Random.Range (0, tmp.Length)];
+	}*/
+
+	/// <summary>
+	/// Returns a random element in the collection.
+	/// </summary>
+	public static T RandomElement<T> (this ICollection<T> collection) {
+		int current = 0;
+		int magicIndex = Random.Range (0, collection.Count);
+		foreach (T t in collection) {
+			if (current == magicIndex) {
+				return t;
+			}
+			current++;
+		}
+		//this shouldn't fire, but who knows
+		return default(T);
 	}
 
 	// LIST

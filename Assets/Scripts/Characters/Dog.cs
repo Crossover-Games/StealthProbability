@@ -7,14 +7,18 @@ public class Dog : GameCharacter {
 		get{ return CharacterType.Dog; }
 	}
 
+	override public float animationTime {
+		get { return 0.5f; }
+	}
+
 	public PathingNode lastVisited = null;
 
 	/// <summary>
-	/// PLACEHOLDER OVERRIDE. Stores the last visited pathing node, in addition to everything the parent method does.
+	/// Doggoveride. In addition to GameCharacter.MoveTo(Tile), this stores the pathing node of the last tile it visited.
 	/// that's not implemented yet.
 	/// </summary>
 	override public void MoveTo (Tile destination) {
-		if (destination != null) {
+		if (Tile.IsValidMoveDestination (destination)) {
 			lastVisited = myTile.pathingNode;
 		}
 		base.MoveTo (destination);
@@ -26,6 +30,6 @@ public class Dog : GameCharacter {
 	/// For demonstration purposes, this dog moves to the next node in a hard coded ring.
 	/// </summary>
 	public void DemoMoveAlongTrack () {
-		MoveTo (myTile.pathingNode.nextOnPath (lastVisited).myTile);
+		MoveTo (myTile.pathingNode.NextOnPath (lastVisited).myTile);
 	}
 }

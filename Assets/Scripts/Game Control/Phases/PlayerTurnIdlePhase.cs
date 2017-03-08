@@ -6,22 +6,32 @@ using UnityEngine;
 /// This phase is when you're just looking around the map, planning out your turn. Leads into the DrawArrowPhase and dog turn.
 /// </summary>
 public class PlayerTurnIdlePhase : GameControlPhase {
-	// override public void OnTakeControl ()	// should update the loose camera follow target to some custom point you control
-
 	/// <summary>
 	/// Exit node to draw arrow phase. Needs to know the target cat.
 	/// </summary>
 	[SerializeField] private DrawArrowPhase drawArrowPhase;
 
 	/// <summary>
-	/// Exit node demo pathing phase.
+	/// Exit node to dog turn phase.
 	/// </summary>
-	[SerializeField] private DemoPathingPhase demoPathingPhase;
+	[SerializeField] private DogTurnPhase dogTurnPhase;
 
+	private bool catsAvailable = true;
+	/// <summary>
+	/// All cats.
+	/// </summary>
+	private List<Cat> allCats;
+
+	[Tooltip("Parent of all cats in the scene.")]
+	[SerializeField] private GameObject catParent;
 
 	private bool listenForMouseChange = false;
 	private Vector3 previousMousePosition = Vector3.zero;
 	private Tile clickedTile = null;
+
+	void Awake () {
+		allCats = new List<Cat> (catParent.GetComponentsInChildren<Cat> ());
+	}
 
 	/// <summary>
 	/// Called by GameBrain when the left mouse button goes down while the mouse is over a tile. Not called if the tile is null.
@@ -39,19 +49,22 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 		}
 	}
 
+	override public void OnTakeControl () {	// should update the loose camera follow target to some custom point you control
+		CheckCatsAvailable ();
+	}
+
 	override public void ControlUpdate () {
-		if (listenForMouseChange) {
+		if (!catsAvailable) {
+			dogTurnPhase.TakeControl ();
+		}
+		// checks for mouse drag
+		else if (listenForMouseChange) {
 			if (!Input.GetMouseButton (0)) {
 				listenForMouseChange = false;
 			}
 			else if (previousMousePosition != Input.mousePosition) {	//mouse dragged
 				ExitToDrawArrowPhase ();
 			}
-		}
-
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			brain.tileManager.cursorTile = null;
-			demoPathingPhase.TakeControl ();
 		}
 	}
 
@@ -62,5 +75,22 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 
 	override public void OnLeaveControl () {
 		listenForMouseChange = false;
+	}
+
+	private void CheckCatsAvailable () {
+		catsAvailable = false;
+		foreach (Cat c in allCats) {
+			if (c.ableToMove) {
+				catsAvailable = true;
+			}
+		}
+	}
+
+	public void RejuvenateAllCats () {
+		foreach (Cat c in allCats) {
+			c.ableToMove = true;
+			c.isGrayedOut = false;
+		}
+		catsAvailable = true;
 	}
 }

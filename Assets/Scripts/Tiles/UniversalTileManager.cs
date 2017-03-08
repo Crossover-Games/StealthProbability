@@ -6,6 +6,9 @@ using System.Collections.Generic;
 /// </summary>
 public class UniversalTileManager : MonoBehaviour {
 
+	[SerializeField] private AudioSource dogSound;
+	[SerializeField] private AudioSource catSound;
+
 	private Tile prevMousedOver = null;
 	private Tile mousedOver = null;
 	/// <summary>
@@ -14,7 +17,6 @@ public class UniversalTileManager : MonoBehaviour {
 	public Tile tileMousedOver {
 		get{ return mousedOver; }
 	}
-
 
 	private HashSet<Tile> s_allTiles = new HashSet<Tile> ();
 	private Tile[] a_allTiles;
@@ -43,14 +45,26 @@ public class UniversalTileManager : MonoBehaviour {
 	public Tile cursorTile {
 		get{ return cursored; }
 		set { 
-			cursored = value;
-			if (cursored == null) {
+			if (value == null) {
 				arrowCursor.SetActive (false);
 			}
 			else {
-				arrowCursor.transform.position = cursored.cursorConnectionPoint;
-				arrowCursor.SetActive (true);
+				if (cursored != value) {
+					arrowCursor.transform.position = value.cursorConnectionPoint;
+					arrowCursor.SetActive (true);
+
+					// lel factor
+					if (value.occupant != null) {
+						if (value.occupant.characterType == CharacterType.Cat) {
+							catSound.Play ();
+						}
+						else if (value.occupant.characterType == CharacterType.Dog) {
+							dogSound.Play ();
+						}
+					}
+				}
 			}
+			cursored = value;
 		}
 	}
 

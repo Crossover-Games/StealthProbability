@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 /// <summary>
 /// Represents a player unit or enemy guard.
@@ -11,14 +11,10 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// </summary>
 	private GameBrain brain;
 
-	[SerializeField] private Collider myCollider;
-	[SerializeField] private CharacterController myCharacterController;
 	/// <summary>
-	/// The character controller that moves this object.
+	/// Collider used to calculate the elevation of top.
 	/// </summary>
-	public CharacterController characterController {
-		get{ return myCharacterController; }
-	}
+	[SerializeField] private Collider myCollider;
 
 	/// <summary>
 	/// Cat, dog, machine, or something else not thought of yet. It's safe to assume that a cat is implemented as a cat, and so on.
@@ -26,6 +22,11 @@ public abstract class GameCharacter : MonoBehaviour {
 	virtual public CharacterType characterType {
 		get{ return CharacterType.Machine; }
 	}
+
+	/// <summary>
+	/// The amount of time it takes to step from one tile to the next.
+	/// </summary>
+	abstract public float animationTime { get; }
 
 	/// <summary>
 	/// Encapsulated variable for myTile.
@@ -41,11 +42,14 @@ public abstract class GameCharacter : MonoBehaviour {
 			associatedTile.SetOccupant (this);
 		}
 	}
-		
+
 	/// <summary>
 	/// Compass direction this character is facing.
 	/// </summary>
 	public Compass.Direction orientation;
+
+	private Renderer[] myRenderers;
+	private Color myColor;
 
 	/// <summary>
 	/// Elevation of the top of the character's head in world space. Used for aligning the cursor.
@@ -59,6 +63,8 @@ public abstract class GameCharacter : MonoBehaviour {
 	virtual protected void Awake () {
 		brain = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameBrain> ();
 		FindMyStartingTile ();
+		myRenderers = GetComponentsInChildren<Renderer> ();
+		myColor = myRenderers[0].material.color;
 	}
 
 	/// <summary>
@@ -80,7 +86,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// Moves this character on top of the specified tile. This is intended to be used for neighboring tiles. There will be no animation if the destination is not a neighbor.
 	/// </summary>
 	virtual public void MoveTo (Tile destination) {	//don't forget that this changes the tile's occupant
-		if (destination != null) {
+		if (Tile.IsValidMoveDestination (destination)) {
 			Tile previous = myTile;
 			previous.SetOccupant (null);
 			myTile = destination;
@@ -90,6 +96,33 @@ public abstract class GameCharacter : MonoBehaviour {
 			}
 			else {
 				transform.position = myTile.characterConnectionPoint;
+			}
+		}
+	}
+
+
+	/// <summary>
+	/// True if this character hasn't moved yet in its own turn.
+	/// </summary>
+	public bool ableToMove = true;
+
+	private bool grayed = false;
+	/// <summary>
+	/// Is the character grayed out?
+	/// </summary>
+	public bool isGrayedOut{
+		get{ return grayed; }
+		set{
+			if (value != grayed) {
+				grayed = value;
+				foreach (Renderer r in myRenderers) {
+					if (grayed) {
+						r.material.color = Color.gray;
+					}
+					else {
+						r.material.color = myColor;
+					}
+				}
 			}
 		}
 	}

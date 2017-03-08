@@ -8,6 +8,10 @@ public class Cat : GameCharacter {
 		get{ return CharacterType.Cat; }
 	}
 
+	override public float animationTime {
+		get { return 0.33f; }
+	}
+
 	[SerializeField] private int myMaxEnergy;
 	/// <summary>
 	/// The measure for how much a cat can do in a turn. Converts to movement, actions, and extra stealth.
@@ -20,4 +24,5 @@ public class Cat : GameCharacter {
 	/// Decreased by one on detection. If this hits zero, this cat is GONE
 	/// </summary>
 	public int livesRemaining = 2;
+
 }

@@ -32,7 +32,7 @@ public class Tile : MonoBehaviour {
 		get{ return myTileType; }
 	}
 		
-	[SerializeField] private GameCharacter myOccupant;
+	private GameCharacter myOccupant;
 	/// <summary>
 	/// The character currently standing on this tile. Automatically updated by movement of a GameCharacter.
 	/// </summary>
@@ -158,6 +158,13 @@ public class Tile : MonoBehaviour {
 			}
 		}
 		return Compass.Direction.North;
+	}
+
+	/// <summary>
+	/// Checks if a certain tile exists, is not obstructed, and is not a wall. Not related to paths or energy.
+	/// </summary>
+	public static bool IsValidMoveDestination (Tile tile) {
+		return (tile != null && tile.tileType != TileType.Wall && tile.occupant == null);
 	}
 
 	/// <summary>

@@ -9,11 +9,6 @@ public class DrawArrowPhase : GameControlPhase {
 	// override public void TileClickEvent (Tile t)
 
 	/// <summary>
-	/// Exit node to player turn idle phase.
-	/// </summary>
-	[SerializeField] private PlayerTurnIdlePhase playerTurnIdlePhase;
-
-	/// <summary>
 	/// Exit node to cat context menu phase. Needs to know the target cat and the path.
 	/// </summary>
 	[SerializeField] private CatContextMenuPhase catContextMenuPhase;
@@ -38,7 +33,7 @@ public class DrawArrowPhase : GameControlPhase {
 
 	private HashSet<Tile> availableTiles = new HashSet<Tile> ();
 	private void HighlightAvailableSquares () {
-		HashSet<Tile> previouslyHighlighted  = new HashSet<Tile> (availableTiles);
+		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (availableTiles);
 
 		availableTiles = new HashSet<Tile> ();
 		availableTiles.Add (tilePath.LastElement ());
@@ -48,7 +43,7 @@ public class DrawArrowPhase : GameControlPhase {
 			foreach (Tile t in tempTiles) {
 				foreach (Compass.Direction d in Compass.allDirections) {
 					Tile tmp = t.GetNeighborInDirection (d);
-					if (tmp != null && tmp.tileType != TileType.Wall && tmp.occupant == null) {
+					if (Tile.IsValidMoveDestination (tmp)) {
 						availableTiles.Add (tmp);
 					}
 				}
@@ -108,8 +103,6 @@ public class DrawArrowPhase : GameControlPhase {
 		foreach (Tile t in availableTiles) {
 			t.dangerVisualizerEnabled = false;
 		}
-
-		lowPass.cutoffFrequency = 22000f;
 	}
 
 	private void AddTileToPath (Tile t) {

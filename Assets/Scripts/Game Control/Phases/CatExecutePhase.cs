@@ -6,8 +6,6 @@ using UnityEngine;
 /// In this phase, the cat just carries out the orders it was given.
 /// </summary>
 public class CatExecutePhase : GameControlPhase {
-	// override public void OnTakeControl ()
-	// override public void OnLeaveControl ()
 	// override public void TileClickEvent (Tile t)
 
 	/// <summary>
@@ -25,6 +23,17 @@ public class CatExecutePhase : GameControlPhase {
 	/// </summary>
 	[HideInInspector] public List<Tile> tilePath;
 
+	/// <summary>
+	/// DEMO ONLY, changes demo music
+	/// </summary>
+	[SerializeField] private AudioLowPassFilter lowPass;
+
+	[SerializeField] private AudioSource purrSound;
+
+	override public void OnTakeControl (){
+		purrSound.Play ();
+	}
+
 	override public void ControlUpdate (){
 		if (tilePath.Count > 0) {
 			selectedCat.MoveTo (tilePath [0]);
@@ -33,5 +42,12 @@ public class CatExecutePhase : GameControlPhase {
 		else {
 			playerTurnIdlePhase.TakeControl ();
 		}
+	}
+
+	override public void OnLeaveControl (){
+		purrSound.Stop ();
+		lowPass.cutoffFrequency = 22000f;
+		selectedCat.ableToMove = false;
+		selectedCat.isGrayedOut = true;
 	}
 }

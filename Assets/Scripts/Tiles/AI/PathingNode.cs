@@ -82,16 +82,17 @@ public class PathingNode : MonoBehaviour {
 	/// <summary>
 	/// Given the previous node in a dog's path, what is the next node the dog should take? Null if this node is a stopping point. Returns the previous node for dead ends.
 	/// </summary>
-	public PathingNode nextOnPath (PathingNode cameFrom) {
-		if (cameFrom == null) {
+	public PathingNode NextOnPath (PathingNode cameFrom) {
+		if (stoppingPoint) {
+			return null;
+		}
+		else if (cameFrom == null) {
 			//return null;
 			return myConnections.RandomElement ();
 		}
 		else {
 			HashSet<PathingNode> remainingNodes = new HashSet<PathingNode> (myConnections);
-			HashSet<PathingNode> previous = new HashSet<PathingNode> ();
-			previous.Add (cameFrom);
-			remainingNodes.ExceptWith (previous);
+			remainingNodes.Remove (cameFrom);
 
 			if (remainingNodes.Count == 1) {
 				return remainingNodes.ToArray () [0];
@@ -101,6 +102,30 @@ public class PathingNode : MonoBehaviour {
 			}
 			else {
 				return null;
+			}
+		}
+	}
+
+	/// <summary>
+	/// From a stopping point, randomly selects the next route to take. No backtracking to the last visited square. Only intended to be called for stopping points; null otherwise.
+	/// </summary>
+	public PathingNode SelectNextPath (PathingNode cameFrom) {
+		if (!stoppingPoint) {
+			return null;
+		}
+		else {
+			if (cameFrom == null) {
+				return myConnections.RandomElement ();
+			}
+			else {
+				HashSet<PathingNode> remainingNodes = new HashSet<PathingNode> (myConnections);
+				remainingNodes.Remove (cameFrom);
+				if (remainingNodes.Count == 0) {
+					return cameFrom;
+				}
+				else {
+					return remainingNodes.RandomElement ();
+				}
 			}
 		}
 	}

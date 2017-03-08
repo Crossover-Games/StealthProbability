@@ -15,22 +15,22 @@ public class AnimationManager : MonoBehaviour {
 	/// <summary>
 	/// The total time one step animation takes.
 	/// </summary>
-	private static float ANIM_TIME = 0.25f;
+	private float animationTime;
 	/// <summary>
 	/// If the character rotates, this fraction of the time is spent rotating.
 	/// </summary>
 	private static float ROTATION_FRACTION = 0.33f;
 
 	private float ROTATION_TIME {
-		get { return ANIM_TIME * ROTATION_FRACTION; }
+		get { return animationTime * ROTATION_FRACTION; }
 	}
 	private float MOVE_TIME {
 		get {
 			if (startRotation == endRotation) {
-				return ANIM_TIME;
+				return animationTime;
 			}
 			else {
-				return ANIM_TIME - ROTATION_TIME;
+				return animationTime - ROTATION_TIME;
 			}
 		}
 	}
@@ -39,7 +39,7 @@ public class AnimationManager : MonoBehaviour {
 	private Vector3 endPosition = Vector3.zero;
 	private Compass.Direction startRotation;
 	private Compass.Direction endRotation;
-	private CharacterController character = null;
+	private GameCharacter character = null;
 
 	/// <summary>
 	/// If there is animation to be done, this is true.
@@ -59,7 +59,9 @@ public class AnimationManager : MonoBehaviour {
 
 			startRotation = theCharacter.orientation;
 			endRotation = targetOrientation;
-			
+
+			animationTime = theCharacter.animationTime;
+
 			// no rotation needed
 			if (startRotation == endRotation) {
 				phase = AnimationPhase.Moving;
@@ -69,7 +71,7 @@ public class AnimationManager : MonoBehaviour {
 				theCharacter.orientation = targetOrientation;
 			}
 				
-			character = theCharacter.characterController;
+			character = theCharacter;
 		}
 		else {
 			print ("attempting to interrupt animation");
