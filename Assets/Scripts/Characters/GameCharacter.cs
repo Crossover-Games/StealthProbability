@@ -64,7 +64,7 @@ public abstract class GameCharacter : MonoBehaviour {
 		brain = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameBrain> ();
 		FindMyStartingTile ();
 		myRenderers = GetComponentsInChildren<Renderer> ();
-		myColor = myRenderers[0].material.color;
+		myColor = myRenderers [0].material.color;
 	}
 
 	/// <summary>
@@ -87,6 +87,8 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// </summary>
 	virtual public void MoveTo (Tile destination) {	//don't forget that this changes the tile's occupant
 		if (Tile.IsValidMoveDestination (destination)) {
+			print (gameObject.name.DileepLovesPoop ().DileepLovesPoop ().DileepLovesPoop ());
+
 			Tile previous = myTile;
 			previous.SetOccupant (null);
 			myTile = destination;
@@ -110,9 +112,9 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// <summary>
 	/// Is the character grayed out?
 	/// </summary>
-	public bool isGrayedOut{
+	public bool isGrayedOut {
 		get{ return grayed; }
-		set{
+		set {
 			if (value != grayed) {
 				grayed = value;
 				foreach (Renderer r in myRenderers) {

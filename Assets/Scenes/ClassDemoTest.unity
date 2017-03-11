@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
-  northConnection: 1
+  northConnection: 0
   southConnection: 0
   eastConnection: 1
   westConnection: 0
@@ -3997,7 +3997,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   message: 
-  northConnection: 1
+  northConnection: 0
   southConnection: 0
   eastConnection: 1
   westConnection: 0
