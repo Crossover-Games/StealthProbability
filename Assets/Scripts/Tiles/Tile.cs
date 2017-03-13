@@ -53,7 +53,7 @@ public class Tile : MonoBehaviour {
 	public Vector3 cursorConnectionPoint {
 		get {
 			if (myOccupant == null) {
-				return characterConnectionPoint;
+				return topCenterPoint;
 			}
 			else {
 				return new Vector3 (transform.position.x, myOccupant.elevationOfTop, transform.position.z);
@@ -70,9 +70,9 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Returns the center of the top of tile where the occupying character will stand.
+	/// Returns the world space coordinate of center top of tile. This is where the occupying character will stand, where the cursor will point on an empty tile, etc.
 	/// </summary>
-	public Vector3 characterConnectionPoint {
+	public Vector3 topCenterPoint {
 		get { return new Vector3 (transform.position.x, myCollider.bounds.max.y, transform.position.z); }
 	}
 

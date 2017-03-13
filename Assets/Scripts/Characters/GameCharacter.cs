@@ -87,17 +87,15 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// </summary>
 	virtual public void MoveTo (Tile destination) {	//don't forget that this changes the tile's occupant
 		if (Tile.IsValidMoveDestination (destination)) {
-			print (gameObject.name.DileepLovesPoop ().DileepLovesPoop ().DileepLovesPoop ());
-
 			Tile previous = myTile;
 			previous.SetOccupant (null);
 			myTile = destination;
 
 			if (previous.IsNeighbor (myTile)) {
-				brain.animationManager.StartAnimating (this, myTile.characterConnectionPoint, previous.GetDirectionOfNeighbor (myTile));
+				brain.animationManager.StartAnimating (this, myTile.topCenterPoint, previous.GetDirectionOfNeighbor (myTile));
 			}
 			else {
-				transform.position = myTile.characterConnectionPoint;
+				transform.position = myTile.topCenterPoint;
 			}
 		}
 	}

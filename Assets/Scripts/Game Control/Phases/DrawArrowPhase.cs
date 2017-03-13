@@ -43,16 +43,14 @@ public class DrawArrowPhase : GameControlPhase {
 			foreach (Tile t in tempTiles) {
 				foreach (Compass.Direction d in Compass.allDirections) {
 					Tile tmp = t.GetNeighborInDirection (d);
-					if (Tile.IsValidMoveDestination (tmp)) {
+					if (!tilePath.Contains (tmp) && Tile.IsValidMoveDestination (tmp)) {
 						availableTiles.Add (tmp);
 					}
 				}
 			}
 		}
 
-		foreach (Tile t in tilePath) {
-			availableTiles.Remove (t);
-		}
+		availableTiles.Remove (tilePath.LastElement ());
 
 		foreach (Tile t in previouslyHighlighted) {
 			if (!availableTiles.Contains (t)) {
@@ -109,7 +107,7 @@ public class DrawArrowPhase : GameControlPhase {
 		//tilePath.LastElement ().characterConnectionPoint.Halfway (t.characterConnectionPoint);
 		Tile head = tilePath.LastElement ();
 		GameObject tmp = GameObject.Instantiate (arrowSegment, arrowSegmentParent.transform);
-		tmp.transform.position = head.characterConnectionPoint.Halfway (t.characterConnectionPoint);
+		tmp.transform.position = head.topCenterPoint.Halfway (t.topCenterPoint);
 		tmp.transform.rotation = Compass.DirectionToRotation (head.GetDirectionOfNeighbor (t));
 		tilePath.Add (t);
 	}

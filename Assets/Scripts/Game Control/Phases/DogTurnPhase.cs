@@ -37,6 +37,7 @@ public class DogTurnPhase : GameControlPhase {
 	override public void OnTakeControl () {
 		activeDogs = new List<Dog> (allDogs);
 		activeDogSelecting = true;
+		brain.cameraControl.SetCamFollowTarget (activeDogs [0].transform);
 	}
 
 	override public void ControlUpdate () {
@@ -51,6 +52,9 @@ public class DogTurnPhase : GameControlPhase {
 			else {
 				activeDogs [0].isGrayedOut = true;
 				activeDogs.RemoveAt (0);
+				if (activeDogs.Count != 0) {
+					brain.cameraControl.SetCamFollowTarget (activeDogs [0].transform);
+				}
 				activeDogSelecting = true;
 			}
 		}

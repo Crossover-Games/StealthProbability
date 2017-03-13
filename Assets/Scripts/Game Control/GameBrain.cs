@@ -22,8 +22,16 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// The unit that animates movement for pieces on the board.
 	/// </summary>
-	public AnimationManager animationManager{
+	public AnimationManager animationManager {
 		get { return myAnimationManager; }
+	}
+
+	[SerializeField] private CameraOverheadControl myCameraControl;
+	/// <summary>
+	/// Contains methods to control the camera.
+	/// </summary>
+	public CameraOverheadControl cameraControl {
+		get{ return myCameraControl; }
 	}
 
 	/// <summary>

@@ -22,7 +22,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// </summary>
 	private List<Cat> allCats;
 
-	[Tooltip("Parent of all cats in the scene.")]
+	[Tooltip ("Parent of all cats in the scene.")]
 	[SerializeField] private GameObject catParent;
 
 	private bool listenForMouseChange = false;
@@ -38,6 +38,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
 		brain.tileManager.cursorTile = t;
+		if (t != null) {
+			brain.cameraControl.SetCamFocusPoint (t.topCenterPoint);
+		}
 
 		// once we have the holy grail info box working, we can put stuff like that in there too.
 

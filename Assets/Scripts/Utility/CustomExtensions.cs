@@ -58,10 +58,4 @@ public static class CustomExtensions {
 	public static Vector3 Halfway (this Vector3 vector, Vector3 other) {
 		return Vector3.Lerp (vector, other, 0.5f);
 	}
-
-	/// FAKE
-
-	public static string DileepLovesPoop (this string poopoodilu) {
-		return poopoodilu + " because dileep loves poop lol";
-	}
 }

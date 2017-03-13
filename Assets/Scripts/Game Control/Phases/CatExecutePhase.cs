@@ -30,11 +30,12 @@ public class CatExecutePhase : GameControlPhase {
 
 	[SerializeField] private AudioSource purrSound;
 
-	override public void OnTakeControl (){
+	override public void OnTakeControl () {
+		brain.cameraControl.SetCamFollowTarget (selectedCat.transform);
 		purrSound.Play ();
 	}
 
-	override public void ControlUpdate (){
+	override public void ControlUpdate () {
 		if (tilePath.Count > 0) {
 			selectedCat.MoveTo (tilePath [0]);
 			tilePath.RemoveAt (0);
@@ -44,7 +45,7 @@ public class CatExecutePhase : GameControlPhase {
 		}
 	}
 
-	override public void OnLeaveControl (){
+	override public void OnLeaveControl () {
 		purrSound.Stop ();
 		lowPass.cutoffFrequency = 22000f;
 		selectedCat.ableToMove = false;
