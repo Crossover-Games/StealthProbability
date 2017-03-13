@@ -64,6 +64,15 @@ public class GameBrain : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Calls the operating GameControlPhase's TileDoubleClickEvent().
+	/// </summary>
+	public void NotifyBrainTileDoubleClickEvent (Tile t) {
+		if (inControl != null) {
+			inControl.TileDoubleClickEvent (t);
+		}
+	}
+
+	/// <summary>
 	/// Calls the operating GameControlPhase's MouseOverChangeEvent().
 	/// </summary>
 	public void NotifyBrainMouseOverChangeEvent () {

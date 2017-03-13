@@ -18,9 +18,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 
 	private bool catsAvailable = true;
 	/// <summary>
-	/// All cats.
+	/// All cats the player can control.
 	/// </summary>
-	private List<Cat> allCats;
+	public List<Cat> allCats;
 
 	[Tooltip ("Parent of all cats in the scene.")]
 	[SerializeField] private GameObject catParent;
@@ -37,10 +37,8 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Called by GameBrain when the left mouse button goes down while the mouse is over a tile. Not called if the tile is null.
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
+
 		brain.tileManager.cursorTile = t;
-		if (t != null) {
-			brain.cameraControl.SetCamFocusPoint (t.topCenterPoint);
-		}
 
 		// once we have the holy grail info box working, we can put stuff like that in there too.
 
@@ -50,6 +48,15 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 			previousMousePosition = Input.mousePosition;
 			clickedTile = t;
 		}
+	}
+
+	/// <summary>
+	/// Called by GameBrain when the left mouse button goes down twice in rapid succession while the mouse is over a tile.
+	/// Not called if the tile is null.
+	/// </summary>
+	/// <param name="t">T.</param>
+	override public void TileDoubleClickEvent(Tile t){
+		brain.cameraControl.SetCamFocusPoint (t.topCenterPoint);
 	}
 
 	override public void OnTakeControl () {	// should update the loose camera follow target to some custom point you control

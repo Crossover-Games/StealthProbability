@@ -93,15 +93,37 @@ public class UniversalTileManager : MonoBehaviour {
 		a_allTiles = s_allTiles.ToArray ();
 	}
 		
+	private float DOUBLE_CLICK_WINDOW = 0.5F;
+	private float doubleClickTimeElapsed = 0f;
+	private Tile lastClicked = null;
+
 	void Update () {
 		if (mousedOver != prevMousedOver) {
 			brain.NotifyBrainMouseOverChangeEvent ();
 		}
 		if (mousedOver != null && Input.GetMouseButtonDown (0)) {
-			brain.NotifyBrainTileClickEvent (mousedOver);
+			if (lastClicked != null && lastClicked == mousedOver) {
+				RegisterFirstClick (null);
+				brain.NotifyBrainTileDoubleClickEvent (mousedOver);
+			}
+			else {
+				RegisterFirstClick (mousedOver);
+				brain.NotifyBrainTileClickEvent (mousedOver);
+			}
+		}
+
+		if (lastClicked != null) {
+			doubleClickTimeElapsed += Time.deltaTime;
+		}
+		if (doubleClickTimeElapsed > DOUBLE_CLICK_WINDOW) {
+			RegisterFirstClick (null);
 		}
 
 		prevMousedOver = mousedOver;
 	}
 
+	private void RegisterFirstClick (Tile t) {
+		lastClicked = t;
+		doubleClickTimeElapsed = 0f;
+	}
 }

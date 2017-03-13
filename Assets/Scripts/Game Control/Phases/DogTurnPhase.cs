@@ -6,7 +6,6 @@ using UnityEngine;
 /// Dogs just move around and do dog things in this phase.
 /// </summary>
 public class DogTurnPhase : GameControlPhase {
-	// override public void OnLeaveControl ()
 	// override public void ControlUpdate ()
 	// override public void TileClickEvent (Tile t)
 	// override public void MouseOverChangeEvent ()
@@ -27,7 +26,7 @@ public class DogTurnPhase : GameControlPhase {
 	/// </summary>
 	private bool activeDogSelecting;
 
-	[Tooltip("Parent of all dogs in the scene.")]
+	[Tooltip ("Parent of all dogs in the scene.")]
 	[SerializeField] private GameObject dogParent;
 
 	void Awake () {
@@ -50,7 +49,9 @@ public class DogTurnPhase : GameControlPhase {
 				activeDogs [0].MoveTo (activeDogs [0].myTile.pathingNode.NextOnPath (activeDogs [0].lastVisited).myTile);
 			}
 			else {
-				activeDogs [0].isGrayedOut = true;
+				if (activeDogs.Count > 1) {
+					activeDogs [0].isGrayedOut = true;
+				}
 				activeDogs.RemoveAt (0);
 				if (activeDogs.Count != 0) {
 					brain.cameraControl.SetCamFollowTarget (activeDogs [0].transform);
@@ -65,5 +66,9 @@ public class DogTurnPhase : GameControlPhase {
 			playerTurnIdlePhase.RejuvenateAllCats ();
 			playerTurnIdlePhase.TakeControl ();
 		}			
+	}
+
+	override public void OnLeaveControl () {
+		brain.cameraControl.SetCamFollowTarget (playerTurnIdlePhase.allCats.RandomElement ().transform);
 	}
 }

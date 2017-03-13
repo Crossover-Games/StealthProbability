@@ -41,9 +41,16 @@ public abstract class GameControlPhase : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Called by GameBrain when the left mouse button goes down while the mouse is over a tile. Not called if the tile is null.
+	/// Called by GameBrain when the left mouse button goes down while the mouse is over a tile. Not called if the tile is null or if this is a double click.
 	/// </summary>
 	virtual public void TileClickEvent (Tile t) {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// Called by GameBrain when the left mouse button goes down twice in rapid succession while the mouse is over a tile. Not called if the tile is null.
+	/// </summary>
+	virtual public void TileDoubleClickEvent (Tile t) {
 		// by default, do nothing
 	}
 
