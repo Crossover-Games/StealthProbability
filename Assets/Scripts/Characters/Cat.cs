@@ -8,8 +8,8 @@ public class Cat : GameCharacter {
 		get{ return CharacterType.Cat; }
 	}
 
-	override public float animationTime {
-		get { return 0.33f; }
+	override public float stepAnimationTime {
+		get { return 0.5f; }
 	}
 
 	[SerializeField] private int myMaxEnergy;
@@ -17,7 +17,7 @@ public class Cat : GameCharacter {
 	/// The measure for how much a cat can do in a turn. Converts to movement, actions, and extra stealth.
 	/// </summary>
 	public int maxEnergy {
-		get{ return myMaxEnergy; }
+		get { return myMaxEnergy; }
 	}
 
 	/// <summary>
@@ -25,4 +25,9 @@ public class Cat : GameCharacter {
 	/// </summary>
 	public int livesRemaining = 2;
 
+
+	public bool walkingAnimation {
+		get { return animator.GetBool ("Moving"); }
+		set { animator.SetBool ("Moving", value); }
+	}
 }

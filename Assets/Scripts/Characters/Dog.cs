@@ -7,7 +7,7 @@ public class Dog : GameCharacter {
 		get{ return CharacterType.Dog; }
 	}
 
-	override public float animationTime {
+	override public float stepAnimationTime {
 		get { return 0.5f; }
 	}
 

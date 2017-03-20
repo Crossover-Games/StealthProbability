@@ -60,7 +60,7 @@ public class AnimationManager : MonoBehaviour {
 			startRotation = theCharacter.orientation;
 			endRotation = targetOrientation;
 
-			animationTime = theCharacter.animationTime;
+			animationTime = theCharacter.stepAnimationTime;
 
 			// no rotation needed
 			if (startRotation == endRotation) {
@@ -97,7 +97,6 @@ public class AnimationManager : MonoBehaviour {
 			case AnimationPhase.Moving:
 				if (elapsedTime < MOVE_TIME) {
 					elapsedTime += Time.deltaTime;
-					//character.transform.position = Interpolation.Sqrterp (startPosition, endPosition, elapsedTime / MOVE_TIME);
 					character.transform.position = Interpolation.Sinerp (startPosition, endPosition, elapsedTime / MOVE_TIME);
 					//character.transform.position = Vector3.Lerp (startPosition, endPosition, elapsedTime / MOVE_TIME);
 				}

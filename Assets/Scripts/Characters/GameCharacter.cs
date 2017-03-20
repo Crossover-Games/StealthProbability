@@ -26,7 +26,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// <summary>
 	/// The amount of time it takes to step from one tile to the next.
 	/// </summary>
-	abstract public float animationTime { get; }
+	abstract public float stepAnimationTime { get; }
 
 	/// <summary>
 	/// Encapsulated variable for myTile.
@@ -48,6 +48,8 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// </summary>
 	public Compass.Direction orientation;
 
+	protected Animator animator;
+
 	private Renderer[] myRenderers;
 	private Color myColor;
 
@@ -65,6 +67,7 @@ public abstract class GameCharacter : MonoBehaviour {
 		FindMyStartingTile ();
 		myRenderers = GetComponentsInChildren<Renderer> ();
 		myColor = myRenderers [0].material.color;
+		animator = GetComponentInChildren<Animator> ();
 	}
 
 	/// <summary>

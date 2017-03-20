@@ -103,13 +103,12 @@ public class UniversalTileManager : MonoBehaviour {
 		}
 		if (mousedOver != null && Input.GetMouseButtonDown (0)) {
 			if (lastClicked != null && lastClicked == mousedOver) {
-				RegisterFirstClick (null);
 				brain.NotifyBrainTileDoubleClickEvent (mousedOver);
 			}
 			else {
-				RegisterFirstClick (mousedOver);
 				brain.NotifyBrainTileClickEvent (mousedOver);
 			}
+			RegisterFirstClick (mousedOver);
 		}
 
 		if (lastClicked != null) {

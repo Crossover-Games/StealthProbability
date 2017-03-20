@@ -7,8 +7,6 @@ using UnityEngine;
 /// </summary>
 public static class CustomExtensions {
 
-	// HASHSET
-
 	/// <summary>
 	/// Moves the character to an absolute location in world space. Velocity is calculated normally.
 	/// </summary>
@@ -16,6 +14,8 @@ public static class CustomExtensions {
 		character.Move (destination - character.transform.position);
 	}
 
+	// HASHSET
+	
 	/// <summary>
 	/// Returns this set as an array in no particular order.
 	/// </summary>

@@ -33,6 +33,7 @@ public class CatExecutePhase : GameControlPhase {
 	override public void OnTakeControl () {
 		brain.cameraControl.SetCamFollowTarget (selectedCat.transform);
 		purrSound.Play ();
+		selectedCat.walkingAnimation = true;
 	}
 
 	override public void ControlUpdate () {
@@ -50,5 +51,6 @@ public class CatExecutePhase : GameControlPhase {
 		lowPass.cutoffFrequency = 22000f;
 		selectedCat.ableToMove = false;
 		selectedCat.isGrayedOut = true;
+		selectedCat.walkingAnimation = false;
 	}
 }
