@@ -57,6 +57,11 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 						}
 					}
 				}
+				else if (t.occupant.characterType == CharacterType.Dog) {
+					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts((t.occupant as Dog).lastVisited)) {
+						//while(next
+					}
+				}
 			}
 		}
 		// once we have the holy grail info box working, we can put stuff like that in there too.
@@ -73,7 +78,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Switches to the drag arrow phase.
 	/// </summary>
 	override public void TileDragEvent (Tile t) {
-		if (brain.tileManager.cursorTile.occupant.characterType == CharacterType.Cat) {
+		if (brain.tileManager.cursorTile.occupant != null && brain.tileManager.cursorTile.occupant.characterType == CharacterType.Cat) {
 			ExitToDrawArrowPhase ();
 		}
 	}

@@ -43,7 +43,7 @@ public class DogTurnPhase : GameControlPhase {
 		if (activeDogs.Count != 0) {
 			if (activeDogSelecting) {
 				activeDogSelecting = false;
-				activeDogs [0].MoveTo (activeDogs [0].myTile.pathingNode.SelectNextPath (activeDogs [0].lastVisited).myTile);
+				activeDogs [0].MoveTo (activeDogs [0].myTile.pathingNode.SelectNextPathStart (activeDogs [0].lastVisited).myTile);
 			}
 			else if (!activeDogs [0].myTile.pathingNode.isStoppingPoint) {
 				activeDogs [0].MoveTo (activeDogs [0].myTile.pathingNode.NextOnPath (activeDogs [0].lastVisited).myTile);

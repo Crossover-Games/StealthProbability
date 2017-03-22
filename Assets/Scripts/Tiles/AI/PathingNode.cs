@@ -109,7 +109,7 @@ public class PathingNode : MonoBehaviour {
 	/// <summary>
 	/// From a stopping point, randomly selects the next route to take. No backtracking to the last visited square. Only intended to be called for stopping points; null otherwise.
 	/// </summary>
-	public PathingNode SelectNextPath (PathingNode cameFrom) {
+	public PathingNode SelectNextPathStart (PathingNode cameFrom) {
 		if (!stoppingPoint) {
 			return null;
 		}
@@ -125,6 +125,32 @@ public class PathingNode : MonoBehaviour {
 				}
 				else {
 					return remainingNodes.RandomElement ();
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Returns all potential path starts for a dog who came from a particular node. Only valid for stopping points.
+	/// </summary>
+	public HashSet<PathingNode> AllPotentialPathStarts (PathingNode cameFrom) {
+		if (!stoppingPoint) {
+			return null;
+		}
+		else {
+			if (cameFrom == null) {
+				return myConnections;
+			}
+			else {
+				HashSet<PathingNode> remainingNodes = new HashSet<PathingNode> (myConnections);
+				remainingNodes.Remove (cameFrom);
+				if (remainingNodes.Count == 0) {
+					HashSet<PathingNode> tmp = new HashSet<PathingNode> ();
+					tmp.Add (cameFrom);
+					return tmp;
+				}
+				else {
+					return remainingNodes;
 				}
 			}
 		}
