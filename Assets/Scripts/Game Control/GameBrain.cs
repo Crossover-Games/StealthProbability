@@ -80,4 +80,13 @@ public class GameBrain : MonoBehaviour {
 			inControl.MouseOverChangeEvent ();
 		}
 	}
+
+	/// <summary>
+	/// Calls the operating GameControlPhase's TileDragEvent().
+	/// </summary>
+	public void NotifyBrainTileDragEvent (Tile t) {
+		if (inControl != null) {
+			inControl.TileDragEvent (t);
+		}
+	}
 }

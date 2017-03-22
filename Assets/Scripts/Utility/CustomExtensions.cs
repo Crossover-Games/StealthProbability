@@ -14,7 +14,7 @@ public static class CustomExtensions {
 		character.Move (destination - character.transform.position);
 	}
 
-	// HASHSET
+	// ---HASHSET
 	
 	/// <summary>
 	/// Returns this set as an array in no particular order.
@@ -24,6 +24,30 @@ public static class CustomExtensions {
 		theSet.CopyTo (tempArray);
 		return tempArray;
 	}
+
+	/// <summary>
+	/// Returns this set as a list in no particular order.
+	/// </summary>
+	public static List<T> ToList<T> (this HashSet<T> theSet) {
+		List<T> tmp = new List<T> ();
+		foreach (T t in theSet) {
+			tmp.Add (t);
+		}
+		return tmp;
+	}
+
+	/// <summary>
+	/// Create a shallow copy of this set.
+	/// </summary>
+	public static HashSet<T> Clone<T> (this HashSet<T> theSet) {
+		HashSet<T> tmp = new HashSet<T> ();
+		foreach (T t in theSet) {
+			tmp.Add (t);
+		}
+		return tmp;
+	}
+
+	// ---ICOLLECTION
 
 	/// <summary>
 	/// Returns a random element in the collection.
@@ -41,7 +65,7 @@ public static class CustomExtensions {
 		return default(T);
 	}
 
-	// LIST
+	// ---LIST
 
 	/// <summary>
 	/// Returns the last element in the list.
@@ -50,7 +74,43 @@ public static class CustomExtensions {
 		return theList [theList.Count - 1];
 	}
 
-	// VECTOR3
+	/// <summary>
+	/// Create a shallow copy of this list.
+	/// </summary>
+	public static List<T> Clone<T> (this List<T> theList) {
+		List<T> tmp = new List<T> ();
+		for (int x = 0; x < theList.Count; x++) {
+			tmp.Add (theList [x]);
+		}
+		return tmp;
+	}
+
+	/// <summary>
+	/// Create a new list from startIndex to endIndex, inclusive. 
+	/// </summary>
+	public static List<T> Subset<T> (this List<T> theList, int startIndex, int endIndex) {
+		if (startIndex > endIndex) {
+			return null;
+		}
+		else {
+			int newStart = Mathf.Max (startIndex, 0);
+			int newEnd = Mathf.Min (endIndex, theList.Count - 1);
+			List<T> tmp = new List<T> ();
+			for (int x = newStart; x <= newEnd; x++) {
+				tmp.Add (theList [x]);
+			}
+			return tmp;
+		}
+	}
+
+	/// <summary>
+	/// Create a new list from startIndex (inclusive) to the end of the list. There is an overload with the end index.
+	/// </summary>
+	public static List<T> Subset<T> (this List<T> theList, int startIndex) {
+		return Subset (theList, startIndex, theList.Count - 1);
+	}
+
+	// ---VECTOR3
 
 	/// <summary>
 	/// Returns the midpoint between this vector and the other.

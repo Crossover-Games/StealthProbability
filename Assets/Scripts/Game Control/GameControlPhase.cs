@@ -48,6 +48,13 @@ public abstract class GameControlPhase : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Called by GameBrain when the a tile is dragged a certain distance.
+	/// </summary>
+	virtual public void TileDragEvent (Tile t) {
+		// by default, do nothing
+	}
+
+	/// <summary>
 	/// Called by GameBrain when the left mouse button goes down twice in rapid succession while the mouse is over a tile. Not called if the tile is null.
 	/// </summary>
 	virtual public void TileDoubleClickEvent (Tile t) {

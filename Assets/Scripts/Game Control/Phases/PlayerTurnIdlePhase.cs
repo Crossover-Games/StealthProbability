@@ -25,66 +25,53 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	[Tooltip ("Parent of all cats in the scene.")]
 	[SerializeField] private GameObject catParent;
 
-	private bool listenForMouseChange = false;
-	private Vector3 previousMousePosition = Vector3.zero;
-	private Tile clickedTile = null;
-
 	void Awake () {
 		allCats = new List<Cat> (catParent.GetComponentsInChildren<Cat> ());
 	}
 
 	/// <summary>
-	/// Called by GameBrain when the left mouse button goes down while the mouse is over a tile. Not called if the tile is null.
+	/// Moves cursor
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
-
 		brain.tileManager.cursorTile = t;
-
 		// once we have the holy grail info box working, we can put stuff like that in there too.
+	}
 
-		// if t.occupant is a cat, wait for the user to move the mouse. That would indicate a drag and move to the draw arrow phase.
-		if (t.occupant != null && t.occupant.characterType == CharacterType.Cat) {
-			listenForMouseChange = true;
-			previousMousePosition = Input.mousePosition;
-			clickedTile = t;
+	/// <summary>
+	/// Move camera to double clicked tile.
+	/// </summary>
+	override public void TileDoubleClickEvent (Tile t) {
+		brain.cameraControl.SetCamFocusPoint (t.topCenterPoint);
+	}
+
+	/// <summary>
+	/// Switches to the drag arrow phase.
+	/// </summary>
+	override public void TileDragEvent (Tile t) {
+		if (brain.tileManager.cursorTile.occupant.characterType == CharacterType.Cat) {
+			ExitToDrawArrowPhase ();
 		}
 	}
 
 	/// <summary>
-	/// Called by GameBrain when the left mouse button goes down twice in rapid succession while the mouse is over a tile.
-	/// Not called if the tile is null.
+	/// Reminds which cats are available to be moved.
 	/// </summary>
-	/// <param name="t">T.</param>
-	override public void TileDoubleClickEvent(Tile t){
-		brain.cameraControl.SetCamFocusPoint (t.topCenterPoint);
-	}
-
 	override public void OnTakeControl () {	// should update the loose camera follow target to some custom point you control
 		CheckCatsAvailable ();
 	}
 
+	/// <summary>
+	/// Switches to the dog turn if all cats did their move
+	/// </summary>
 	override public void ControlUpdate () {
 		if (!catsAvailable) {
 			dogTurnPhase.TakeControl ();
 		}
-		// checks for mouse drag
-		else if (listenForMouseChange) {
-			if (!Input.GetMouseButton (0)) {
-				listenForMouseChange = false;
-			}
-			else if (previousMousePosition != Input.mousePosition) {	//mouse dragged
-				ExitToDrawArrowPhase ();
-			}
-		}
 	}
 
 	private void ExitToDrawArrowPhase () {
-		drawArrowPhase.selectedCat = clickedTile.occupant as Cat;
+		drawArrowPhase.selectedCat = brain.tileManager.cursorTile.occupant as Cat;
 		drawArrowPhase.TakeControl ();
-	}
-
-	override public void OnLeaveControl () {
-		listenForMouseChange = false;
 	}
 
 	private void CheckCatsAvailable () {

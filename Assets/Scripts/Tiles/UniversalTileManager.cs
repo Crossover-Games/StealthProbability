@@ -95,34 +95,87 @@ public class UniversalTileManager : MonoBehaviour {
 		
 	private float DOUBLE_CLICK_WINDOW = 0.5F;
 	private float doubleClickTimeElapsed = 0f;
-	private Tile lastClicked = null;
+	private Tile doubleClickMemory = null;
+	private Tile dragMemory = null;
+
+	/// <summary>
+	/// Minimum distance the mouse has to move for a drag to be registered.
+	/// </summary>
+	private float MIN_DRAG_DISTANCE = 20f;
+	/// <summary>
+	/// Position of the last mouse click.
+	/// </summary>
+	private Vector3 mouseClickPos;
 
 	void Update () {
-		if (mousedOver != prevMousedOver) {
-			brain.NotifyBrainMouseOverChangeEvent ();
-		}
-		if (mousedOver != null && Input.GetMouseButtonDown (0)) {
-			if (lastClicked != null && lastClicked == mousedOver) {
-				brain.NotifyBrainTileDoubleClickEvent (mousedOver);
+		if (mousedOver != null) {
+			// mouse over
+			if (mousedOver != prevMousedOver) {
+				brain.NotifyBrainMouseOverChangeEvent ();
+				prevMousedOver = mousedOver;
 			}
-			else {
-				brain.NotifyBrainTileClickEvent (mousedOver);
+
+			// click and double click
+			if (Input.GetMouseButtonDown (0)) {
+				if (doubleClickMemory != null && doubleClickMemory == mousedOver) {
+					brain.NotifyBrainTileDoubleClickEvent (mousedOver);
+				}
+				else {
+					brain.NotifyBrainTileClickEvent (mousedOver);
+					dragMemory = mousedOver;
+				}
+				RegisterFirstClick (mousedOver);
 			}
-			RegisterFirstClick (mousedOver);
 		}
 
-		if (lastClicked != null) {
+
+		if (dragMemory != null && Input.GetMouseButton (0)) {
+			if (Vector3.Distance (mouseClickPos, Input.mousePosition) >= MIN_DRAG_DISTANCE) {
+				brain.NotifyBrainTileDragEvent (doubleClickMemory);
+				dragMemory = null;
+			}
+		}
+
+		if (doubleClickMemory != null) {
 			doubleClickTimeElapsed += Time.deltaTime;
 		}
 		if (doubleClickTimeElapsed > DOUBLE_CLICK_WINDOW) {
 			RegisterFirstClick (null);
 		}
-
-		prevMousedOver = mousedOver;
 	}
 
+	/// <summary>
+	/// Registers the first click of a double click, or clears it.
+	/// </summary>
 	private void RegisterFirstClick (Tile t) {
-		lastClicked = t;
+		doubleClickMemory = t;
+		mouseClickPos = Input.mousePosition;
 		doubleClickTimeElapsed = 0f;
+	}
+
+	// ---STATIC METHODS
+
+	/// <summary>
+	/// Checks if a certain tile exists, is not obstructed, and is not a wall. Not related to paths or energy.
+	/// </summary>
+	public static bool IsValidMoveDestination (Tile tile) {
+		return (tile != null && tile.tileType != TileType.Wall && tile.occupant == null);
+	}
+
+	/// <summary>
+	/// Gets the tile at location in <x,z> float coordinates, or null if none. Remember that the center of each tile is at an integer intersection. This uses physics to calculate and may be inefficient. Consider reworking later.
+	/// </summary>
+	public static Tile GetTileAtLocation (Vector2 location) {
+		RaycastHit hit;
+		if (Physics.Raycast (new Vector3 (location.x, -100f, location.y), Vector3.up, out hit)) {
+			Tile tileTemp = hit.collider.gameObject.GetComponent<Tile> ();
+			if (tileTemp != null) {
+				return tileTemp;
+			}
+			else {
+				return null;
+			}
+		}
+		return null;
 	}
 }

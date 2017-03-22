@@ -161,10 +161,10 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Checks if a certain tile exists, is not obstructed, and is not a wall. Not related to paths or energy.
+	/// Checks if this tile is not obstructed and is not a wall. Not related to paths or energy.
 	/// </summary>
-	public static bool IsValidMoveDestination (Tile tile) {
-		return (tile != null && tile.tileType != TileType.Wall && tile.occupant == null);
+	public bool IsValidMoveDestination {
+		get { return (tileType != TileType.Wall && occupant == null); }
 	}
 
 	/// <summary>

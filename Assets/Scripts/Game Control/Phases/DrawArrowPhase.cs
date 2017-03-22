@@ -32,7 +32,7 @@ public class DrawArrowPhase : GameControlPhase {
 	private GameObject arrowSegmentParent;
 
 	private HashSet<Tile> availableTiles = new HashSet<Tile> ();
-	private void HighlightAvailableSquares () {
+	private void UpdateAvailableTiles () {
 		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (availableTiles);
 
 		availableTiles = new HashSet<Tile> ();
@@ -43,7 +43,7 @@ public class DrawArrowPhase : GameControlPhase {
 			foreach (Tile t in tempTiles) {
 				foreach (Compass.Direction d in Compass.allDirections) {
 					Tile tmp = t.GetNeighborInDirection (d);
-					if (!tilePath.Contains (tmp) && Tile.IsValidMoveDestination (tmp)) {
+					if (!tilePath.Contains (tmp) && UniversalTileManager.IsValidMoveDestination (tmp)) {
 						availableTiles.Add (tmp);
 					}
 				}
@@ -63,14 +63,14 @@ public class DrawArrowPhase : GameControlPhase {
 			t.dangerVisualizerEnabled = true;
 		}
 	}
-
-
+		
 	override public void OnTakeControl () {
 		arrowSegmentParent = new GameObject ();
 
 		tilePath = new List<Tile> ();
 		tilePath.Add (selectedCat.myTile);
-		HighlightAvailableSquares ();
+
+		UpdateAvailableTiles ();
 
 		lowPass.cutoffFrequency = 1000f;
 	}
@@ -79,18 +79,35 @@ public class DrawArrowPhase : GameControlPhase {
 		// if the moused over tile is a valid step in the path
 		if (tilePath.Count <= selectedCat.maxEnergy && availableTiles.Contains (brain.tileManager.tileMousedOver) && tilePath.LastElement ().IsNeighbor (brain.tileManager.tileMousedOver)) {
 			AddTileToPath (brain.tileManager.tileMousedOver);
-			HighlightAvailableSquares ();
 		}
 	}
 		
+	/// <summary>
+	/// If mouse is not held, go to next phase. If the mouse changes, update the path.
+	/// </summary>
 	override public void ControlUpdate () {
-		// if mouse is released, change phases.
 		if (Input.GetMouseButton (0) == false) {
 			brain.tileManager.cursorTile = null;
 
 			catContextMenuPhase.tilePath = tilePath;
 			catContextMenuPhase.selectedCat = selectedCat;
 			catContextMenuPhase.TakeControl ();
+		}
+		else if (brain.tileManager.tileMousedOver != tilePath.LastElement () && availableTiles.Contains (brain.tileManager.tileMousedOver)) {
+			// simple solution: don't run the shortest path algorithm
+			if (brain.tileManager.tileMousedOver.IsNeighbor (tilePath.LastElement ())) {
+				AddTileToPath (brain.tileManager.tileMousedOver);
+			}
+			else {
+				List<Tile> pathMap = availableTiles.ToList ();
+				Tile lastVisited = tilePath.LastElement ();
+				pathMap.Add (lastVisited);
+				List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, brain.tileManager.tileMousedOver, pathMap);
+				newPath = newPath.Subset (1);
+				foreach (Tile t in newPath) {
+					AddTileToPath (t);
+				}
+			}
 		}
 	}
 
@@ -103,6 +120,9 @@ public class DrawArrowPhase : GameControlPhase {
 		}
 	}
 
+	/// <summary>
+	/// Adds the tile to path and updates selectable tiles.
+	/// </summary>
 	private void AddTileToPath (Tile t) {
 		//tilePath.LastElement ().characterConnectionPoint.Halfway (t.characterConnectionPoint);
 		Tile head = tilePath.LastElement ();
@@ -110,5 +130,6 @@ public class DrawArrowPhase : GameControlPhase {
 		tmp.transform.position = head.topCenterPoint.Halfway (t.topCenterPoint);
 		tmp.transform.rotation = Compass.DirectionToRotation (head.GetDirectionOfNeighbor (t));
 		tilePath.Add (t);
+		UpdateAvailableTiles ();
 	}
 }

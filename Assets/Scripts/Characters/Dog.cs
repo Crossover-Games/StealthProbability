@@ -18,7 +18,7 @@ public class Dog : GameCharacter {
 	/// that's not implemented yet.
 	/// </summary>
 	override public void MoveTo (Tile destination) {
-		if (Tile.IsValidMoveDestination (destination)) {
+		if (UniversalTileManager.IsValidMoveDestination (destination)) {
 			lastVisited = myTile.pathingNode;
 		}
 		base.MoveTo (destination);
