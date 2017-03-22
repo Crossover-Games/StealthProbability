@@ -1,7 +1,28 @@
-﻿using System.Collections;
+﻿/// 
+/// WHAT WE NEED
+/// 
+/// * List<TileDangerPair> allTilesAffected { get; }
+/// All floor tiles affected by this vision pattern's sight, and the danger value associated with each.
+/// This will change depending on the orientation and position of the dog.
+/// We need this for detection checks.
+/// 
+/// * A way to load and store vision patterns as a resource. 
+/// Since multiple dogs will have the same vision pattern, but there will still multiple kinds of vision patterns, 
+/// this is important. This is especially so because this is probably going to be one of the first things we tweak for balance.
+/// A text file is perfectly fine.
+/// 
+/// Everything that's here so far is untested and incomplete. You're welcome to use it as a start if it's helpful, but it
+/// very well may not be. Feel free to scrap anything too, or just start over if you like.
+/// 
+/// 
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Vision pattern. Incomplete.
+/// </summary>
 public class VisionPattern : MonoBehaviour {
 
 	// probabilities[y,x]
@@ -14,10 +35,29 @@ public class VisionPattern : MonoBehaviour {
 	private int originX;
 	private int originY;
 
+	[SerializeField] private Dog m_Owner;
 	/// <summary>
-	/// Gets the probability of a square a certain number of squares forward/back and right/left of the dog facing a certain direction. 
+	/// The dog who owns this vision pattern.
 	/// </summary>
-	public float GetProbability (int forward, int right, Compass.Direction direction) {
+	public Dog myOwner {
+		get { return m_Owner; }
+	}
+
+	/// <summary>
+	/// NOT IMPLEMENTED
+	/// All floor tiles affected by this vision pattern's sight, and the danger value associated with each.
+	/// This will change depending on the orientation and position of the dog.
+	/// </summary>
+	/// <value>All tiles affected.</value>
+	public List<TileDangerPair> allTilesAffected {
+		get { return null; }
+	}
+
+	/// <summary>
+	/// Not mandatory. 
+	/// Gets the probability of a square a certain number of squares forward/back and right/left of the dog. Adjusted for dog orientation.
+	/// </summary>
+	public float GetProbability (int forward, int right) {
 		/* NORTH
 		 *  forward y-, right x+
 		 * EAST
@@ -25,7 +65,7 @@ public class VisionPattern : MonoBehaviour {
 		*/
 		int xOffset, yOffset;
 
-		switch (direction) {
+		switch (m_Owner.orientation) {
 			case Compass.Direction.North:
 				xOffset = right;
 				yOffset = -forward;

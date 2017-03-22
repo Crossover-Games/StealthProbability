@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// The game board is made up of these! IMPORTANT: Heavily dependent on the convention that a tile is 1x1x1 units and spaced accordingly. Remember to hold CTRL while dragging an object in the editor.
@@ -87,10 +88,6 @@ public class Tile : MonoBehaviour {
 		theManager.RegisterTileSetup (this);
 	}
 
-	void Start () {
-		//
-	}
-
 	private void RegisterNeighboringTiles () {
 		RaycastHit hit;
 		Vector3 rayOrigin = transform.position + Vector3.down * 100;
@@ -161,6 +158,22 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Returns a list of all neighboring tiles.
+	/// </summary>
+	public List<Tile> allNeighbors {
+		get {
+			List<Tile> tmp = new List<Tile> ();
+			foreach (Compass.Direction direction in Compass.allDirections) {
+				Tile possibleNeighbor = GetNeighborInDirection (direction);
+				if (possibleNeighbor != null) {
+					tmp.Add (possibleNeighbor);
+				}
+			}
+			return tmp;
+		}
+	}
+
+	/// <summary>
 	/// Checks if this tile is not obstructed and is not a wall. Not related to paths or energy.
 	/// </summary>
 	public bool IsValidMoveDestination {
@@ -189,5 +202,15 @@ public class Tile : MonoBehaviour {
 	public bool dangerVisualizerEnabled {
 		get{ return visualizer.dangerVisualizerEnabled; }
 		set{ visualizer.dangerVisualizerEnabled = value; }
+	}
+
+	[SerializeField] private GameObject shimmerParticles;
+	/// <summary>
+	/// Pretty much placeholder, but works anyway. 
+	/// A visual shimmer effect used for highlights other than danger squares.
+	/// </summary>
+	public bool shimmer {
+		get { return shimmerParticles.activeSelf; }
+		set { shimmerParticles.SetActive (value); }
 	}
 }

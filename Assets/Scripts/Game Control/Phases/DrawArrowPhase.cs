@@ -54,13 +54,12 @@ public class DrawArrowPhase : GameControlPhase {
 
 		foreach (Tile t in previouslyHighlighted) {
 			if (!availableTiles.Contains (t)) {
-				t.dangerVisualizerEnabled = false;
+				t.shimmer = false;
 			}
 		}
 
 		foreach (Tile t in availableTiles) {
-			t.dangerColor = DangerSquareVisualizer.CAROLINA_BLUE;
-			t.dangerVisualizerEnabled = true;
+			t.shimmer = true;
 		}
 	}
 		
@@ -116,7 +115,7 @@ public class DrawArrowPhase : GameControlPhase {
 		GameObject.Destroy (arrowSegmentParent);
 
 		foreach (Tile t in availableTiles) {
-			t.dangerVisualizerEnabled = false;
+			t.shimmer = false;
 		}
 	}
 

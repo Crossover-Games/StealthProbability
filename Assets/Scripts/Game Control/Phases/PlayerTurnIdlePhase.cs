@@ -30,10 +30,35 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	}
 
 	/// <summary>
+	/// All tiles where the selected object may move to
+	/// </summary>
+	private List<Tile> shimmerInfo = new List<Tile> ();
+
+	/// <summary>
 	/// Moves cursor
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
-		brain.tileManager.cursorTile = t;
+		if (brain.tileManager.cursorTile != t) {
+			brain.tileManager.cursorTile = t;
+			RemoveShimmer ();
+
+			if (t.occupant != null) {
+				if (t.occupant.characterType == CharacterType.Cat) {
+					shimmerInfo.Add (t);
+					for (int x = 0; x < (t.occupant as Cat).maxEnergy; x++) {
+						List<Tile> tempShimmer = shimmerInfo.Clone ();
+						foreach (Tile tmp in tempShimmer) {
+							foreach (Tile neighbor in tmp.allNeighbors) {
+								if (UniversalTileManager.IsValidMoveDestination (neighbor)) {
+									neighbor.shimmer = true;
+									shimmerInfo.Add (neighbor);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		// once we have the holy grail info box working, we can put stuff like that in there too.
 	}
 
@@ -60,6 +85,10 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 		CheckCatsAvailable ();
 	}
 
+	override public void OnLeaveControl () {
+		RemoveShimmer ();
+	}
+
 	/// <summary>
 	/// Switches to the dog turn if all cats did their move
 	/// </summary>
@@ -83,11 +112,21 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 		}
 	}
 
+	/// <summary>
+	/// Un-grays all cats and allows them to move.
+	/// </summary>
 	public void RejuvenateAllCats () {
 		foreach (Cat c in allCats) {
 			c.ableToMove = true;
 			c.isGrayedOut = false;
 		}
 		catsAvailable = true;
+	}
+
+	private void RemoveShimmer () {
+		foreach (Tile t in shimmerInfo) {
+			t.shimmer = false;
+		}
+		shimmerInfo = new List<Tile> ();
 	}
 }
