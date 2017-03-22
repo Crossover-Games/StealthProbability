@@ -7,6 +7,6 @@ public interface IVisionPattern {
 	/// All floor tiles affected by this vision pattern's sight, and the danger value associated with each.
 	/// This will change depending on the orientation and position of the dog.
 	/// </summary>
-	List<TileDangerPair> allTilesAffected{ get; }
+	List<TileDangerData> allTilesAffected{ get; }
 
 }

@@ -39,7 +39,7 @@ public class VisionPattern : MonoBehaviour {
 	/// <summary>
 	/// The dog who owns this vision pattern.
 	/// </summary>
-	public Dog myOwner {
+	public Dog owner {
 		get { return m_Owner; }
 	}
 
@@ -49,15 +49,14 @@ public class VisionPattern : MonoBehaviour {
 	/// This will change depending on the orientation and position of the dog.
 	/// </summary>
 	/// <value>All tiles affected.</value>
-	public List<TileDangerPair> allTilesAffected {
+	public List<TileDangerData> allTilesAffected {
 		get { return null; }
 	}
 
 	/// <summary>
-	/// Not mandatory. 
 	/// Gets the probability of a square a certain number of squares forward/back and right/left of the dog. Adjusted for dog orientation.
 	/// </summary>
-	public float GetProbability (int forward, int right) {
+	private float GetProbability (int forward, int right) {
 		/* NORTH
 		 *  forward y-, right x+
 		 * EAST
