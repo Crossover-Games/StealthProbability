@@ -189,11 +189,76 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// This tile's danger color.
+	/// Temporary and always-changing list of currently applied danger squares.
+	/// </summary>
+	private List<TileDangerData> visionInfo = new List<TileDangerData> ();
+
+	/// <summary>
+	/// Adds one piece of tile danger data to this tile. Changes color, enables visualizer, registers to cat.
+	/// </summary>
+	public void AddDangerData (TileDangerData data) {
+		visualizer.dangerVisualizerEnabled = true;
+		if (myOccupant != null && myOccupant.characterType == CharacterType.Cat) {
+			(myOccupant as Cat).RegisterDangerData (data);
+		}
+		visionInfo.Add (data);
+		UpdateDangerColor ();
+	}
+
+	/// <summary>
+	/// Remove the danger imposed by a specified dog.
+	/// </summary>
+	public void RemoveDangerDataByDog (Dog dog) {
+		TileDangerData[] allData = visionInfo.ToArray ();
+		foreach (TileDangerData tdd in allData) {
+			if (tdd.watchingDog == dog) {
+				visionInfo.Remove (tdd);
+			}
+		}
+		if (visionInfo.Count == 0) {
+			visualizer.dangerVisualizerEnabled = false;
+		}
+		else {
+			UpdateDangerColor ();
+		}
+	}
+
+	/// <summary>
+	/// Practically, there should be no need to call this.
+	/// Remove all tile danger data elements from this tile. Also removes the visualizer.
+	/// </summary>
+	public void ClearAllDangerData () {
+		visualizer.dangerVisualizerEnabled = false;
+		visionInfo = new List<TileDangerData> ();
+	}
+
+	/// <summary>
+	/// Temporary. Only overlays the highest color.
+	/// </summary>
+	private void UpdateDangerColor () {
+		float maxDanger = Mathf.NegativeInfinity;
+		Color currentColor = Color.white;
+		foreach (TileDangerData tdd in visionInfo) {
+			if (tdd.danger > maxDanger) {
+				maxDanger = tdd.danger;
+				currentColor = tdd.dangerColor;
+			}
+		}
+		visualizer.dangerColor = currentColor;
+	}
+
+	/// <summary>
+	/// All danger data for all dogs currently observing this tile.
+	/// </summary>
+	public TileDangerData[] dangerData {
+		get { return visionInfo.ToArray (); }
+	}
+
+	/// <summary>
+	/// This tile's danger color. Changes according to the danger data on this tile.
 	/// </summary>
 	public Color dangerColor {
 		get{ return visualizer.dangerColor; }
-		set{ visualizer.dangerColor = value; }
 	}
 
 	/// <summary>

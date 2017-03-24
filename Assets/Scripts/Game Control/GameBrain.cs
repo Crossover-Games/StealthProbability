@@ -7,8 +7,13 @@ using UnityEngine;
 /// </summary>
 public class GameBrain : MonoBehaviour {
 
-	// only serialized so that you can choose the starting phase.
-	[SerializeField] private GameControlPhase inControl = null;
+	[Tooltip ("The first phase. Its OnTakeControl will be called.")]
+	[SerializeField] private GameControlPhase startingPhase;
+
+	/// <summary>
+	/// The phase that is currently controlling the game.
+	/// </summary>
+	private GameControlPhase inControl = null;
 
 
 	// ---REFERENCES
@@ -41,7 +46,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Has knowledge of all cats.
 	/// </summary>
-	public TeamMananger<Cat> catManager{
+	public TeamMananger<Cat> catManager {
 		get { return m_catManager; }
 	}
 
@@ -49,7 +54,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Has knowledge of all dogs.
 	/// </summary>
-	public TeamMananger<Dog> dogManager{
+	public TeamMananger<Dog> dogManager {
 		get { return m_dogManager; }
 	}
 
@@ -61,9 +66,13 @@ public class GameBrain : MonoBehaviour {
 	[Tooltip ("Parent of all dogs in the scene.")]
 	[SerializeField] private GameObject dogParent;
 
-	void Awake(){
+	void Awake () {
 		m_catManager = new TeamMananger<Cat> (new List<Cat> (catParent.GetComponentsInChildren<Cat> ()));
 		m_dogManager = new TeamMananger<Dog> (new List<Dog> (dogParent.GetComponentsInChildren<Dog> ()));
+	}
+
+	void Start () {
+		startingPhase.TakeControl ();
 	}
 
 	void Update () {

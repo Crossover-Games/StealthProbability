@@ -139,4 +139,13 @@ public static class CustomExtensions {
 	public static Vector3 Halfway (this Vector3 vector, Vector3 other) {
 		return Vector3.Lerp (vector, other, 0.5f);
 	}
+
+	// ---COLOR
+
+	/// <summary>
+	/// Returns the RGB components of the color in a vector.
+	/// </summary>
+	public static Vector3 ToRGBVector(this Color color){
+		return new Vector3 (color.r, color.g, color.b);
+	}
 }

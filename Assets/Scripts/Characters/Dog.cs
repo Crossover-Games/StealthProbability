@@ -16,12 +16,17 @@ public class Dog : GameCharacter {
 
 	public PathingNode lastVisited = null;
 
-	[SerializeField] private VisionPattern m_VisionPattern;
+	private VisionPattern m_VisionPattern;
 	/// <summary>
 	/// This dog's vision pattern.
 	/// </summary>
 	public VisionPattern visionPattern {
 		get{ return m_VisionPattern; }
+	}
+
+	override protected void Awake () {
+		base.Awake ();
+		m_VisionPattern = new VisionPattern (this);
 	}
 
 	/// <summary>
@@ -30,17 +35,28 @@ public class Dog : GameCharacter {
 	/// </summary>
 	override public void MoveTo (Tile destination) {
 		if (UniversalTileManager.IsValidMoveDestination (destination)) {
+			ClearVisionPattern ();
 			lastVisited = myTile.pathingNode;
 		}
 		base.MoveTo (destination);
+		ApplyVisionPattern ();
 	}
 
-	//also has vision pattern
+	/// <summary>
+	/// Applies the vision pattern to the ground. If any tile is under a cat, register to that cat.
+	/// </summary>
+	public void ApplyVisionPattern () {
+		foreach (TileDangerData tdd in m_VisionPattern.allTilesAffected) {
+			tdd.myTile.AddDangerData (tdd);
+		}
+	}
 
 	/// <summary>
-	/// For demonstration purposes, this dog moves to the next node in a hard coded ring.
+	/// Lifts this dog's vision pattern from the ground.
 	/// </summary>
-	public void DemoMoveAlongTrack () {
-		MoveTo (myTile.pathingNode.NextOnPath (lastVisited).myTile);
+	public void ClearVisionPattern () {
+		foreach (TileDangerData tdd in m_VisionPattern.allTilesAffected) {
+			tdd.myTile.RemoveDangerDataByDog (this);
+		}
 	}
 }

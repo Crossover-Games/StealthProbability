@@ -23,7 +23,7 @@ using UnityEngine;
 /// <summary>
 /// Vision pattern. Incomplete.
 /// </summary>
-public class VisionPattern : MonoBehaviour {
+public class VisionPattern {
 
 	// probabilities[y,x]
 	// y: dim0, x: dim1
@@ -35,7 +35,7 @@ public class VisionPattern : MonoBehaviour {
 	private int originX;
 	private int originY;
 
-	[SerializeField] private Dog m_Owner;
+	private Dog m_Owner;
 	/// <summary>
 	/// The dog who owns this vision pattern.
 	/// </summary>
@@ -43,14 +43,28 @@ public class VisionPattern : MonoBehaviour {
 		get { return m_Owner; }
 	}
 
+	public VisionPattern (Dog theOwner) {
+		m_Owner = theOwner;
+	}
+
 	/// <summary>
-	/// NOT IMPLEMENTED
+	/// NOT IMPLEMENTED CURRENTLY FAKING
 	/// All floor tiles affected by this vision pattern's sight, and the danger value associated with each.
 	/// This will change depending on the orientation and position of the dog.
 	/// </summary>
 	/// <value>All tiles affected.</value>
 	public List<TileDangerData> allTilesAffected {
-		get { return null; }
+		get { 
+			List<TileDangerData> tmp = new List<TileDangerData> ();
+			foreach (Tile t in m_Owner.myTile.allNeighbors) {
+				if (t.tileType == TileType.Floor) {
+					TileDangerData tempTile = new TileDangerData (0.5f, t, m_Owner, Color.green);
+					tmp.Add (tempTile);
+				}
+			}
+
+			return tmp;
+		}
 	}
 
 	/// <summary>

@@ -108,6 +108,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1555290208182806
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4180299735302380}
+  - component: {fileID: 114583325461451670}
+  m_Layer: 0
+  m_Name: GameSetupPhase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1644453238138144
 GameObject:
   m_ObjectHideFlags: 1
@@ -168,7 +184,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4176201243537944}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4099466641717754
 Transform:
@@ -195,6 +211,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 4180299735302380}
   - {fileID: 4180402791932474}
   - {fileID: 4090360656723186}
   - {fileID: 4284248191724834}
@@ -202,6 +219,19 @@ Transform:
   - {fileID: 4517214523138064}
   m_Father: {fileID: 4099466641717754}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4180299735302380
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555290208182806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4176201243537944}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4180402791932474
 Transform:
@@ -214,7 +244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4176201243537944}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4284248191724834
 Transform:
@@ -227,7 +257,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4176201243537944}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4463064787674790
 Transform:
@@ -254,7 +284,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4176201243537944}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4702064972565626
 Transform:
@@ -280,7 +310,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4176201243537944}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23124070361841554
 MeshRenderer:
@@ -394,8 +424,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brain: {fileID: 114842886613549936}
   playerTurnIdlePhase: {fileID: 114703959096884388}
-  allDogs:
-  - {fileID: 0}
+--- !u!114 &114583325461451670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1555290208182806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2723da27fe553c44abfb8130fbfce5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 114842886613549936}
+  playerTurnIdlePhase: {fileID: 114703959096884388}
 --- !u!114 &114703195367254134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,6 +448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c723a4eda48a3dd4ca60382ed70ba6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dogSound: {fileID: 0}
+  catSound: {fileID: 0}
   brain: {fileID: 114842886613549936}
   arrowCursor: {fileID: 1065533802364952}
 --- !u!114 &114703959096884388
@@ -423,8 +466,6 @@ MonoBehaviour:
   brain: {fileID: 114842886613549936}
   drawArrowPhase: {fileID: 114465517834126654}
   dogTurnPhase: {fileID: 114531499742561692}
-  allCats:
-  - {fileID: 0}
 --- !u!114 &114842886613549936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -436,9 +477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b71f9ec1a614c140be9095260116d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inControl: {fileID: 114703959096884388}
+  startingPhase: {fileID: 114583325461451670}
   universalTileManager: {fileID: 114703195367254134}
   myAnimationManager: {fileID: 114471362836056170}
+  myCameraControl: {fileID: 0}
+  catParent: {fileID: 0}
+  dogParent: {fileID: 0}
 --- !u!114 &114925043850094324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -455,3 +499,4 @@ MonoBehaviour:
   selectedCat: {fileID: 0}
   tilePath: []
   lowPass: {fileID: 0}
+  purrSound: {fileID: 0}

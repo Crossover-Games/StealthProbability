@@ -31,15 +31,21 @@ public class DogTurnPhase : GameControlPhase {
 				currentDog.MoveTo (currentDog.myTile.pathingNode.SelectNextPathStart (currentDog.lastVisited).myTile);
 			}
 			else if (!currentDog.myTile.pathingNode.isStoppingPoint) {
+				// TEMPORARY CHECKING FOR BLOCKED PASSAGE
+				if (currentDog.myTile.pathingNode.NextOnPath (currentDog.lastVisited).myTile.occupant != null) {
+					PathingNode last = currentDog.myTile.pathingNode;
+					PathingNode current = currentDog.myTile.pathingNode.NextOnPath (currentDog.lastVisited);
+					while (current != null) {
+						PathingNode tempLast = current;
+						current = current.NextOnPath (last);
+						last = tempLast;
+					}
+					currentDog.MoveTo (last.myTile);
+				}
 				currentDog.MoveTo (currentDog.myTile.pathingNode.NextOnPath (currentDog.lastVisited).myTile);
 			}
 			else {
-				// Normally, don't bother graying out the last dog because it's just going to switch anyway. That's not done right now tho
-				currentDog.grayedOut = true;
-				if (brain.dogManager.anyAvailable) {
-					brain.cameraControl.SetCamFollowTarget (brain.dogManager.availableCharacters [0].transform);
-				}
-				activeDogSelecting = true;
+				EndCurrentDogMovement();
 			}
 		}
 		else {
@@ -47,6 +53,17 @@ public class DogTurnPhase : GameControlPhase {
 			brain.catManager.RejuvenateAll ();
 			playerTurnIdlePhase.TakeControl ();
 		}			
+	}
+
+	/// <summary>
+	/// Ends the current dog movement.
+	/// </summary>
+	private void EndCurrentDogMovement(){
+		brain.dogManager.availableCharacters [0].grayedOut = true;
+		if (brain.dogManager.anyAvailable) {
+			brain.cameraControl.SetCamFollowTarget (brain.dogManager.availableCharacters [0].transform);
+		}
+		activeDogSelecting = true;
 	}
 
 	override public void OnLeaveControl () {

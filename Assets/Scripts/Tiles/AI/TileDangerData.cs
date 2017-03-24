@@ -34,9 +34,8 @@ public struct TileDangerData {
 
 	private Color m_Color;
 	/// <summary>
-	/// The color of the 
+	/// The color used to visualize the danger of this tile. 
 	/// </summary>
-	/// <value>The color of the danger.</value>
 	public Color dangerColor {
 		get { return m_Color; }
 	}
