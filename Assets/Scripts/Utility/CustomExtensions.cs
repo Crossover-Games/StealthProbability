@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 /// <summary>
@@ -54,7 +56,7 @@ public static class CustomExtensions {
 	/// </summary>
 	public static T RandomElement<T> (this ICollection<T> collection) {
 		int current = 0;
-		int magicIndex = Random.Range (0, collection.Count);
+		int magicIndex = UnityEngine.Random.Range (0, collection.Count);
 		foreach (T t in collection) {
 			if (current == magicIndex) {
 				return t;
@@ -108,6 +110,25 @@ public static class CustomExtensions {
 	/// </summary>
 	public static List<T> Subset<T> (this List<T> theList, int startIndex) {
 		return Subset (theList, startIndex, theList.Count - 1);
+	}
+
+	/// <summary>
+	/// Randomly reorders this list.
+	/// </summary>
+	public static void Shuffle<T> (this List<T> list) {
+		RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider ();
+		int n = list.Count;
+		while (n > 1) {
+			byte[] box = new byte[1];
+			do {
+				provider.GetBytes (box);
+			} while (!(box [0] < n * (Byte.MaxValue / n)));
+			int k = (box [0] % n);
+			n--;
+			T value = list [k];
+			list [k] = list [n];
+			list [n] = value;
+		}
 	}
 
 	// ---VECTOR3

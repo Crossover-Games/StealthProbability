@@ -16,19 +16,6 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// </summary>
 	[SerializeField] private DogTurnPhase dogTurnPhase;
 
-	private bool catsAvailable = true;
-	/// <summary>
-	/// All cats the player can control.
-	/// </summary>
-	public List<Cat> allCats;
-
-	[Tooltip ("Parent of all cats in the scene.")]
-	[SerializeField] private GameObject catParent;
-
-	void Awake () {
-		allCats = new List<Cat> (catParent.GetComponentsInChildren<Cat> ());
-	}
-
 	/// <summary>
 	/// All tiles where the selected object may move to
 	/// </summary>
@@ -43,7 +30,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 			RemoveShimmer ();
 
 			if (t.occupant != null) {
-				if (t.occupant.characterType == CharacterType.Cat) {
+				if (t.occupant.characterType == CharacterType.Cat && !t.occupant.grayedOut) {
 					shimmerInfo.Add (t);
 					for (int x = 0; x < (t.occupant as Cat).maxEnergy; x++) {
 						List<Tile> tempShimmer = shimmerInfo.Clone ();
@@ -59,7 +46,15 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
 					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts((t.occupant as Dog).lastVisited)) {
-						//while(next
+						PathingNode last = t.pathingNode;
+						PathingNode current = p;
+						while (current != null) {
+							current.myTile.shimmer = true;
+							shimmerInfo.Add (current.myTile);
+							PathingNode tempLast = current;
+							current = current.NextOnPath (last);
+							last = tempLast;
+						}
 					}
 				}
 			}
@@ -78,19 +73,20 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Switches to the drag arrow phase.
 	/// </summary>
 	override public void TileDragEvent (Tile t) {
-		if (brain.tileManager.cursorTile.occupant != null && brain.tileManager.cursorTile.occupant.characterType == CharacterType.Cat) {
+		if (Input.GetMouseButton (0) && brain.tileManager.cursorTile.occupant != null && brain.tileManager.cursorTile.occupant.characterType == CharacterType.Cat && !brain.tileManager.cursorTile.occupant.grayedOut) {
 			ExitToDrawArrowPhase ();
 		}
 	}
 
 	/// <summary>
-	/// Reminds which cats are available to be moved.
+	/// allows you to control the camera
 	/// </summary>
-	override public void OnTakeControl () {	// should update the loose camera follow target to some custom point you control
-		CheckCatsAvailable ();
+	override public void OnTakeControl () {
+		brain.cameraControl.dragControlAllowed = true;
 	}
 
 	override public void OnLeaveControl () {
+		brain.cameraControl.dragControlAllowed = false;
 		RemoveShimmer ();
 	}
 
@@ -98,7 +94,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Switches to the dog turn if all cats did their move
 	/// </summary>
 	override public void ControlUpdate () {
-		if (!catsAvailable) {
+		if (!brain.catManager.anyAvailable) {
 			dogTurnPhase.TakeControl ();
 		}
 	}
@@ -106,26 +102,6 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	private void ExitToDrawArrowPhase () {
 		drawArrowPhase.selectedCat = brain.tileManager.cursorTile.occupant as Cat;
 		drawArrowPhase.TakeControl ();
-	}
-
-	private void CheckCatsAvailable () {
-		catsAvailable = false;
-		foreach (Cat c in allCats) {
-			if (c.ableToMove) {
-				catsAvailable = true;
-			}
-		}
-	}
-
-	/// <summary>
-	/// Un-grays all cats and allows them to move.
-	/// </summary>
-	public void RejuvenateAllCats () {
-		foreach (Cat c in allCats) {
-			c.ableToMove = true;
-			c.isGrayedOut = false;
-		}
-		catsAvailable = true;
 	}
 
 	private void RemoveShimmer () {

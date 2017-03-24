@@ -10,6 +10,9 @@ public class GameBrain : MonoBehaviour {
 	// only serialized so that you can choose the starting phase.
 	[SerializeField] private GameControlPhase inControl = null;
 
+
+	// ---REFERENCES
+
 	[SerializeField] private UniversalTileManager universalTileManager;
 	/// <summary>
 	/// Reference to the scene's universal tile manager.
@@ -34,15 +37,33 @@ public class GameBrain : MonoBehaviour {
 		get{ return myCameraControl; }
 	}
 
+	private TeamMananger<Cat> m_catManager;
 	/// <summary>
-	/// Helper method for GameControlPhase.TakeControl(). Kicks the previous phase out of control, calls its OnLeaveControl, then puts the new phase in charge and calls its OnTakeControl.
+	/// Has knowledge of all cats.
 	/// </summary>
-	public void AssignControl (GameControlPhase phase) {
-		if (inControl != null) {
-			inControl.OnLeaveControl ();
-		}
-		phase.OnTakeControl ();
-		inControl = phase;
+	public TeamMananger<Cat> catManager{
+		get { return m_catManager; }
+	}
+
+	private TeamMananger<Dog> m_dogManager;
+	/// <summary>
+	/// Has knowledge of all dogs.
+	/// </summary>
+	public TeamMananger<Dog> dogManager{
+		get { return m_dogManager; }
+	}
+
+	// ---MONOBEHAVIOUR OVERRIDES
+
+	[Tooltip ("Parent of all cats in the scene.")]
+	[SerializeField] private GameObject catParent;
+
+	[Tooltip ("Parent of all dogs in the scene.")]
+	[SerializeField] private GameObject dogParent;
+
+	void Awake(){
+		m_catManager = new TeamMananger<Cat> (new List<Cat> (catParent.GetComponentsInChildren<Cat> ()));
+		m_dogManager = new TeamMananger<Dog> (new List<Dog> (dogParent.GetComponentsInChildren<Dog> ()));
 	}
 
 	void Update () {
@@ -54,10 +75,25 @@ public class GameBrain : MonoBehaviour {
 		}
 	}
 
+	// ---METHODS
+
+	/// <summary>
+	/// Helper method for GameControlPhase.TakeControl(). Kicks the previous phase out of control, calls its OnLeaveControl, then puts the new phase in charge and calls its OnTakeControl.
+	/// </summary>
+	public void AssignControl (GameControlPhase phase) {
+		if (inControl != null) {
+			inControl.OnLeaveControl ();
+		}
+		phase.OnTakeControl ();
+		inControl = phase;
+	}
+
+	// ---EVENT NOTIFIERS
+
 	/// <summary>
 	/// Calls the operating GameControlPhase's TileClickEvent().
 	/// </summary>
-	public void NotifyBrainTileClickEvent (Tile t) {
+	public void RaiseTileClickEvent (Tile t) {
 		if (inControl != null) {
 			inControl.TileClickEvent (t);
 		}
@@ -66,7 +102,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's TileDoubleClickEvent().
 	/// </summary>
-	public void NotifyBrainTileDoubleClickEvent (Tile t) {
+	public void RaiseTileDoubleClickEvent (Tile t) {
 		if (inControl != null) {
 			inControl.TileDoubleClickEvent (t);
 		}
@@ -75,7 +111,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's MouseOverChangeEvent().
 	/// </summary>
-	public void NotifyBrainMouseOverChangeEvent () {
+	public void RaiseMouseOverChangeEvent () {
 		if (inControl != null) {
 			inControl.MouseOverChangeEvent ();
 		}
@@ -84,7 +120,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's TileDragEvent().
 	/// </summary>
-	public void NotifyBrainTileDragEvent (Tile t) {
+	public void RaiseTileDragEvent (Tile t) {
 		if (inControl != null) {
 			inControl.TileDragEvent (t);
 		}

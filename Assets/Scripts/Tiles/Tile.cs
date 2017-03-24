@@ -204,13 +204,13 @@ public class Tile : MonoBehaviour {
 		set{ visualizer.dangerVisualizerEnabled = value; }
 	}
 
-	[SerializeField] private GameObject shimmerParticles;
+	[SerializeField] private GameObject shimmerObject;
 	/// <summary>
 	/// Pretty much placeholder, but works anyway. 
 	/// A visual shimmer effect used for highlights other than danger squares.
 	/// </summary>
 	public bool shimmer {
-		get { return shimmerParticles.activeSelf; }
-		set { shimmerParticles.SetActive (value); }
+		get { return shimmerObject.activeSelf; }
+		set { shimmerObject.SetActive (value); }
 	}
 }

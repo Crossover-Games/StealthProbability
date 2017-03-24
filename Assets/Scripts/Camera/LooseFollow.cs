@@ -9,7 +9,7 @@ public class LooseFollow : MonoBehaviour {
 	/// <summary>
 	/// The object will move toward this position. Set to null to disable following.
 	/// </summary>
-	public Transform target;
+	[HideInInspector] public Transform target;
 		
 	/// <summary>
 	/// faster at high numbers, none at zero 

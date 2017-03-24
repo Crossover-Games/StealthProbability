@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Misc useful static functions.
-/// </summary>
-public static class Utility {
-	//
+public class Utility : MonoBehaviour {
+	private static Vector2 previousMousePosition;
+	public static Vector2 mouseDelta;
+
+	void Update () {
+		previousMousePosition = Input.mousePosition;
+	}
 }

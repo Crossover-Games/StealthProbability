@@ -47,10 +47,10 @@ public class CatExecutePhase : GameControlPhase {
 	}
 
 	override public void OnLeaveControl () {
+		brain.cameraControl.StopFollowing ();
 		purrSound.Stop ();
 		lowPass.cutoffFrequency = 22000f;
-		selectedCat.ableToMove = false;
-		selectedCat.isGrayedOut = true;
+		selectedCat.grayedOut = true;
 		selectedCat.walkingAnimation = false;
 	}
 }

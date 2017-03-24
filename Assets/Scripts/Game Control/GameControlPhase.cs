@@ -68,12 +68,10 @@ public abstract class GameControlPhase : MonoBehaviour {
 		// by default, do nothing
 	}
 }
-
-
-
-
 // override public void OnTakeControl ()
 // override public void OnLeaveControl ()
 // override public void ControlUpdate ()
 // override public void TileClickEvent (Tile t)
+// override public void TileDragEvent (Tile t)
+// override public void TileDoubleClickEvent (Tile t)
 // override public void MouseOverChangeEvent ()

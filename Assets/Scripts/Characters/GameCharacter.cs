@@ -103,17 +103,11 @@ public abstract class GameCharacter : MonoBehaviour {
 		}
 	}
 
-
-	/// <summary>
-	/// True if this character hasn't moved yet in its own turn.
-	/// </summary>
-	public bool ableToMove = true;
-
 	private bool grayed = false;
 	/// <summary>
 	/// Is the character grayed out?
 	/// </summary>
-	public bool isGrayedOut {
+	public bool grayedOut {
 		get{ return grayed; }
 		set {
 			if (value != grayed) {

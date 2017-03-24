@@ -12,20 +12,17 @@ public class CameraOverheadControl : MonoBehaviour {
 	[Tooltip ("Assign the main camera to this.")]
 	[SerializeField] private LooseFollow cameraContraption;
 
-	[Tooltip ("This is just some dummy thing to guide the camera along the invisible ceiling.")]
+	[Tooltip ("Link to the pointer")]
 	[SerializeField] private TransformLink pointer;
+
+	[Tooltip ("Link to the pointer")]
+	[SerializeField] private DragCameraFollowPoint dragControl;
 
 	private int cameraPlaneLayer;
 
 	void Awake () {
+		cameraContraption.target = pointer.transform;
 		cameraPlaneLayer = LayerMask.GetMask ("Camera Plane");
-	}
-
-	/// <summary>
-	/// Tell the camera to stop moving. Ideally, there shouldn't be any reason to call this.
-	/// </summary>
-	public void DisableCameraFollow () {
-		cameraContraption.target = null;
 	}
 
 	private Vector3 DirectionToCeiling {
@@ -47,7 +44,6 @@ public class CameraOverheadControl : MonoBehaviour {
 
 		pointer.target = null;
 		pointer.transform.position = hit.point;
-		cameraContraption.target = pointer.transform;
 	}
 
 	/// <summary>
@@ -61,7 +57,21 @@ public class CameraOverheadControl : MonoBehaviour {
 
 		pointer.transform.position = hit.point;
 		pointer.target = thing;
-		cameraContraption.target = pointer.transform;
+	}
+
+	/// <summary>
+	/// The camera loses its association with the object it is tracking and stops at its current position.
+	/// </summary>
+	public void StopFollowing () {
+		pointer.target = null;
+	}
+
+	/// <summary>
+	/// Allows the player to drag the camera with the right mouse button.
+	/// </summary>
+	public bool dragControlAllowed {
+		get { return dragControl.enabled; }
+		set { dragControl.enabled = value; }
 	}
 
 }
