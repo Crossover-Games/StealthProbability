@@ -6,7 +6,6 @@ using UnityEngine;
 /// In this phase, the cat just carries out the orders it was given.
 /// </summary>
 public class CatExecutePhase : GameControlPhase {
-	// override public void TileClickEvent (Tile t)
 
 	/// <summary>
 	/// Exit node to player turn idle phase.
@@ -23,10 +22,6 @@ public class CatExecutePhase : GameControlPhase {
 	/// </summary>
 	[HideInInspector] public List<Tile> tilePath;
 
-	/// <summary>
-	/// DEMO ONLY, changes demo music
-	/// </summary>
-	[SerializeField] private AudioLowPassFilter lowPass;
 
 	[SerializeField] private AudioSource purrSound;
 
@@ -49,7 +44,6 @@ public class CatExecutePhase : GameControlPhase {
 	override public void OnLeaveControl () {
 		brain.cameraControl.StopFollowing ();
 		purrSound.Stop ();
-		lowPass.cutoffFrequency = 22000f;
 		selectedCat.grayedOut = true;
 		selectedCat.walkingAnimation = false;
 	}

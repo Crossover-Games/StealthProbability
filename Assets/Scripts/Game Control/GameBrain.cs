@@ -58,6 +58,14 @@ public class GameBrain : MonoBehaviour {
 		get { return m_dogManager; }
 	}
 
+	[SerializeField] private UIManager m_uiManager;
+	/// <summary>
+	/// Gets the user interface manager.
+	/// </summary>
+	public UIManager uiManager {
+		get { return m_uiManager; }
+	}
+
 	// ---MONOBEHAVIOUR OVERRIDES
 
 	[Tooltip ("Parent of all cats in the scene.")]
@@ -132,6 +140,33 @@ public class GameBrain : MonoBehaviour {
 	public void RaiseTileDragEvent (Tile t) {
 		if (inControl != null) {
 			inControl.TileDragEvent (t);
+		}
+	}
+		
+	/// <summary>
+	/// Calls the operating GameControlPhase's UICancelPathButtonEvent().
+	/// </summary>
+	public void RaiseUICancelPathButtonEvent () {
+		if (inControl != null) {
+			inControl.UICancelPathButtonEvent ();
+		}
+	}
+
+	/// <summary>
+	/// Calls the operating GameControlPhase's UIRestButtonEvent().
+	/// </summary>
+	public void RaiseUIRestButtonEvent () {
+		if (inControl != null) {
+			inControl.UIRestButtonEvent ();
+		}
+	}
+
+	/// <summary>
+	/// Calls the operating GameControlPhase's UIActionButtonEvent().
+	/// </summary>
+	public void RaiseUIActionButtonEvent () {
+		if (inControl != null) {
+			inControl.UIActionButtonEvent ();
 		}
 	}
 }

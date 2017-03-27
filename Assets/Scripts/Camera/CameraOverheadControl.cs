@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public class CameraOverheadControl : MonoBehaviour {
 	[Tooltip ("Assign the main camera to this.")]
-	[SerializeField] private Transform cameraTransform;
+	[SerializeField] private Transform cameraRotation;
 
-	[Tooltip ("Assign the main camera to this.")]
+	[Tooltip ("Assign the main camera offset to this.")]
 	[SerializeField] private LooseFollow cameraContraption;
 
 	[Tooltip ("Link to the pointer")]
@@ -20,6 +20,16 @@ public class CameraOverheadControl : MonoBehaviour {
 
 	private int cameraPlaneLayer;
 
+	/// <summary>
+	/// Adjusts the target point to go for the real camera instead of the rotational offset.
+	/// </summary>
+	/// <value>The camera offset.</value>
+	private Vector3 cameraOffset {
+		get {
+			return cameraContraption.transform.position - cameraRotation.position;
+		}
+	}
+
 	void Awake () {
 		cameraContraption.target = pointer.transform;
 		cameraPlaneLayer = LayerMask.GetMask ("Camera Plane");
@@ -27,7 +37,7 @@ public class CameraOverheadControl : MonoBehaviour {
 
 	private Vector3 DirectionToCeiling {
 		get {
-			Vector3 tmp = cameraTransform.rotation * Vector3.forward;
+			Vector3 tmp = cameraRotation.rotation * Vector3.forward;
 			tmp *= -1;
 			return tmp;
 		}
@@ -43,7 +53,7 @@ public class CameraOverheadControl : MonoBehaviour {
 		Physics.Raycast (location, DirectionToCeiling, out hit, Mathf.Infinity, cameraPlaneLayer);
 
 		pointer.target = null;
-		pointer.transform.position = hit.point;
+		pointer.transform.position = hit.point + cameraOffset;
 	}
 
 	/// <summary>
@@ -55,7 +65,7 @@ public class CameraOverheadControl : MonoBehaviour {
 		// raycasts from the target on the floor upwards to the ceiling
 		Physics.Raycast (thing.position, DirectionToCeiling, out hit, Mathf.Infinity, cameraPlaneLayer);
 
-		pointer.transform.position = hit.point;
+		pointer.transform.position = hit.point + cameraOffset;
 		pointer.target = thing;
 	}
 
@@ -73,5 +83,4 @@ public class CameraOverheadControl : MonoBehaviour {
 		get { return dragControl.enabled; }
 		set { dragControl.enabled = value; }
 	}
-
 }

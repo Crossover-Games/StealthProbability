@@ -174,6 +174,22 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Returns a list of all neighboring tiles that can currently be stepped on.
+	/// </summary>
+	public List<Tile> allTraversibleNeighbors {
+		get {
+			List<Tile> tmp = new List<Tile> ();
+			foreach (Compass.Direction direction in Compass.allDirections) {
+				Tile possibleNeighbor = GetNeighborInDirection (direction);
+				if (UniversalTileManager.IsValidMoveDestination (possibleNeighbor)) {
+					tmp.Add (possibleNeighbor);
+				}
+			}
+			return tmp;
+		}
+	}
+
+	/// <summary>
 	/// Checks if this tile is not obstructed and is not a wall. Not related to paths or energy.
 	/// </summary>
 	public bool IsValidMoveDestination {
@@ -276,6 +292,44 @@ public class Tile : MonoBehaviour {
 	/// </summary>
 	public bool shimmer {
 		get { return shimmerObject.activeSelf; }
-		set { shimmerObject.SetActive (value); }
+		set { 
+			if (value != shimmerObject.activeSelf) {
+				shimmerObject.SetActive (value);
+				if (value) {
+					theManager.RegisterShimmer (this);
+				}
+				else {
+					theManager.UnregisterShimmer (this);
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Only called by UniversalTileManager. 
+	/// </summary>
+	public void SetCosmeticShimmer (bool state) {
+		shimmerObject.SetActive (state);
+	}
+
+	/// <summary>
+	/// All traversible tiles in radius. Radius 0 is just this tile.
+	/// </summary>
+	public List<Tile> AllTraversibleTilesInRadius (int radius, bool includeSelf) {
+		HashSet<Tile> all = new HashSet<Tile> ();
+		all.Add (this);
+		for (int x = 0; x < radius; x++) {
+			HashSet<Tile> tempAll = all.Clone ();
+			foreach (Tile t in all) {
+				foreach (Tile n in t.allTraversibleNeighbors) {
+					tempAll.Add (n);
+				}
+			}
+			all = tempAll;
+		}
+		if (!includeSelf) {
+			all.Remove (this);
+		}
+		return all.ToList ();
 	}
 }

@@ -67,6 +67,27 @@ public abstract class GameControlPhase : MonoBehaviour {
 	virtual public void MouseOverChangeEvent () {
 		// by default, do nothing
 	}
+
+	/// <summary>
+	/// Called by GameBrain when the cancel path button is clicked.
+	/// </summary>
+	virtual public void UICancelPathButtonEvent () {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// Called by GameBrain when the rest button is clicked.
+	/// </summary>
+	virtual public void UIRestButtonEvent () {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// Called by GameBrain when the action button is clicked.
+	/// </summary>
+	virtual public void UIActionButtonEvent () {
+		// by default, do nothing
+	}
 }
 // override public void OnTakeControl ()
 // override public void OnLeaveControl ()

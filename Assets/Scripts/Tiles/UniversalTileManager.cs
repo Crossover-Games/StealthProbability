@@ -68,6 +68,56 @@ public class UniversalTileManager : MonoBehaviour {
 		}
 	}
 
+	private HashSet<Tile> m_shimmering = new HashSet<Tile> ();
+	/// <summary>
+	/// A list of all shimmering tiles.
+	/// </summary>
+	public Tile[] shimmeringTiles {
+		get { return m_shimmering.ToArray (); }
+	}
+
+	/// <summary>
+	/// Only called by Tile. Registers tile t as one of the shimmering tiles.
+	/// </summary>
+	public void RegisterShimmer (Tile t) {
+		m_shimmering.Add (t);
+	}
+
+	/// <summary>
+	/// Only called by Tile. Removes tile t as one of the shimmering tiles.
+	/// </summary>
+	public void UnregisterShimmer (Tile t) {
+		m_shimmering.Remove (t);
+	}
+
+	/// <summary>
+	/// Remove the shimmer effect from all tiles.
+	/// </summary>
+	public void ClearAllShimmer () {
+		foreach (Tile t in m_shimmering) {
+			t.SetCosmeticShimmer (false);
+		}
+		m_shimmering = new HashSet<Tile> ();
+	}
+
+	/// <summary>
+	/// Sets these tiles to be the only ones shimmering. Unshimmers all others.
+	/// </summary>
+	public void MassSetShimmer (ICollection<Tile> tiles) {
+		HashSet<Tile> oldTiles = m_shimmering.Clone ();
+		HashSet<Tile> newTiles = new HashSet<Tile> (tiles);
+
+		newTiles.ExceptWith (m_shimmering);
+		oldTiles.ExceptWith (tiles);
+
+		foreach (Tile t in newTiles) {
+			t.shimmer = true;
+		}
+		foreach (Tile t in oldTiles) {
+			t.shimmer = false;
+		}
+	}
+
 	/// <summary>
 	/// Only to be called in Tile.OnMouseEnter().
 	/// </summary>

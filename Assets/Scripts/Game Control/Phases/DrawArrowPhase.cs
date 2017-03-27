@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Game phase for when you're drawing the arrow to move a cat. Leads only into the ArrowMenuPhase.
+/// Game phase for when you're drawing the arrow to move a cat. Leads only into the CatContextMenuPhase.
 /// </summary>
 public class DrawArrowPhase : GameControlPhase {
-	// override public void TileClickEvent (Tile t)
 
 	/// <summary>
 	/// Exit node to cat context menu phase. Needs to know the target cat and the path.
 	/// </summary>
 	[SerializeField] private CatContextMenuPhase catContextMenuPhase;
-
-	/// <summary>
-	/// DEMO ONLY, changes demo music
-	/// </summary>
-	[SerializeField] private AudioLowPassFilter lowPass;
 
 	/// <summary>
 	/// The ordered path of all tiles for which the arrow follows.
@@ -52,26 +46,17 @@ public class DrawArrowPhase : GameControlPhase {
 
 		availableTiles.Remove (tilePath.LastElement ());
 
-		foreach (Tile t in previouslyHighlighted) {
-			if (!availableTiles.Contains (t)) {
-				t.shimmer = false;
-			}
-		}
-
-		foreach (Tile t in availableTiles) {
-			t.shimmer = true;
-		}
+		brain.tileManager.MassSetShimmer (availableTiles);
 	}
 		
 	override public void OnTakeControl () {
 		arrowSegmentParent = new GameObject ();
+		//brain.tileManager.cursorTile = null;
 
 		tilePath = new List<Tile> ();
 		tilePath.Add (selectedCat.myTile);
 
 		UpdateAvailableTiles ();
-
-		lowPass.cutoffFrequency = 1000f;
 	}
 
 	override public void MouseOverChangeEvent () {
@@ -90,6 +75,7 @@ public class DrawArrowPhase : GameControlPhase {
 
 			catContextMenuPhase.tilePath = tilePath;
 			catContextMenuPhase.selectedCat = selectedCat;
+			catContextMenuPhase.arrowSegmentParent = arrowSegmentParent;
 			catContextMenuPhase.TakeControl ();
 		}
 		else if (brain.tileManager.tileMousedOver != tilePath.LastElement () && availableTiles.Contains (brain.tileManager.tileMousedOver)) {
@@ -112,11 +98,7 @@ public class DrawArrowPhase : GameControlPhase {
 
 	override public void OnLeaveControl () {
 		selectedCat = null;
-		GameObject.Destroy (arrowSegmentParent);
-
-		foreach (Tile t in availableTiles) {
-			t.shimmer = false;
-		}
+		brain.tileManager.ClearAllShimmer ();
 	}
 
 	/// <summary>
