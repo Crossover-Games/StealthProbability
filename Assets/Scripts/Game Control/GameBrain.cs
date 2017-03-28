@@ -7,6 +7,15 @@ using UnityEngine;
 /// </summary>
 public class GameBrain : MonoBehaviour {
 
+	/// <summary>
+	/// forcibly stops the controlling object and forces the camera on the first cat
+	/// </summary>
+	public void JAMHACK () {
+		inControl = null;
+		myCameraControl.SetCamFocusPoint (m_catManager.allCharacters [0].myTile.topCenterPoint);
+	}
+
+
 	[Tooltip ("The first phase. Its OnTakeControl will be called.")]
 	[SerializeField] private GameControlPhase startingPhase;
 

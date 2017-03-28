@@ -313,16 +313,23 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// All traversible tiles in radius. Radius 0 is just this tile.
+	/// All tiles in radius. Radius 0 is just this tile. TraversibleOnly means that walls or filled squares won't be included.
 	/// </summary>
-	public List<Tile> AllTraversibleTilesInRadius (int radius, bool includeSelf) {
+	public List<Tile> AllTilesInRadius (int radius, bool traversibleOnly, bool includeSelf) {
 		HashSet<Tile> all = new HashSet<Tile> ();
 		all.Add (this);
 		for (int x = 0; x < radius; x++) {
 			HashSet<Tile> tempAll = all.Clone ();
 			foreach (Tile t in all) {
-				foreach (Tile n in t.allTraversibleNeighbors) {
-					tempAll.Add (n);
+				if (traversibleOnly) {
+					foreach (Tile n in t.allTraversibleNeighbors) {
+						tempAll.Add (n);
+					}
+				}
+				else {
+					foreach (Tile n in t.allNeighbors) {
+						tempAll.Add (n);
+					}
 				}
 			}
 			all = tempAll;

@@ -38,6 +38,39 @@ public class Cat : GameCharacter {
 	public void ClearDangerData () {
 		dangerData = new List<TileDangerData> ();
 	}
+
+	/// <summary>
+	/// All dogs who may have spotted this cat.
+	/// </summary>
+	public HashSet<Dog> dogsCrossed {
+		get {
+			HashSet<Dog> dogs = new HashSet<Dog> ();
+			foreach (TileDangerData tdd in dangerData) {
+				dogs.Add (tdd.watchingDog);
+			}
+			return dogs;
+		}
+	}
+
+	/// <summary>
+	/// Clears all danger data associated with a particular dog.
+	/// </summary>
+	public void ClearDangerByDog (Dog dog) {
+		List<TileDangerData> danger2 = dangerData.Clone ();
+		foreach (TileDangerData tdd in danger2) {
+			if (tdd.watchingDog == dog) {
+				dangerData.Remove (tdd);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Does this cat have any queued TileDangerDatas it needs resolved in a check?
+	/// </summary>
+	public bool inDanger {
+		get { return dangerData.Count > 0; }
+	}
+
 	/// <summary>
 	/// Runs a detection check by the specified dog. Returns true if the dog spotted the cat. Always false if the cat did not interfere with the vision pattern of the dog.
 	/// </summary>
@@ -49,6 +82,15 @@ public class Cat : GameCharacter {
 			}
 		}
 		return Random.value < maxDanger;
+	}
+
+	override public void MoveTo (Tile destination) {
+		if (UniversalTileManager.IsValidMoveDestination (destination)) {
+			foreach (TileDangerData tdd in destination.dangerData) {
+				dangerData.Add (tdd);
+			}
+		}
+		base.MoveTo (destination);
 	}
 
 	public bool walkingAnimation {

@@ -55,14 +55,32 @@ public class VisionPattern {
 	/// <value>All tiles affected.</value>
 	public List<TileDangerData> allTilesAffected {
 		get { 
-			List<TileDangerData> tmp = new List<TileDangerData> ();
-			foreach (Tile t in m_Owner.myTile.allNeighbors) {
+			HashSet<Tile> layer1 = new HashSet<Tile> ();
+			HashSet<Tile> layer2 = new HashSet<Tile> ();
+			foreach (Tile t in m_Owner.myTile.AllTilesInRadius(2, false, false)) {
 				if (t.tileType == TileType.Floor) {
-					TileDangerData tempTile = new TileDangerData (0.5f, t, m_Owner, Color.green);
-					tmp.Add (tempTile);
+					layer2.Add (t);
 				}
 			}
+			foreach (Tile t in m_Owner.myTile.AllTilesInRadius(1, false, false)) {
+				if (t.tileType == TileType.Floor) {
+					layer1.Add (t);
+				}
+			}
+			layer2.ExceptWith (layer1);
 
+			List<TileDangerData> tmp = new List<TileDangerData> ();
+			foreach (Tile t in layer1) {
+				if (t == m_Owner.myTile.GetNeighborInDirection (m_Owner.orientation)) {
+					tmp.Add (new TileDangerData (0.75f, t, m_Owner, Color.red));
+				}
+				else {
+					tmp.Add (new TileDangerData (0.5f, t, m_Owner, Color.yellow));
+				}
+			}
+			foreach (Tile t in layer2) {
+				tmp.Add (new TileDangerData (0.25f, t, m_Owner, Color.green));
+			}
 			return tmp;
 		}
 	}

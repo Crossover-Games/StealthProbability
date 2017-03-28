@@ -6,6 +6,7 @@ using UnityEngine;
 /// This phase is when you're just looking around the map, planning out your turn. Leads into the DrawArrowPhase and dog turn.
 /// </summary>
 public class PlayerTurnIdlePhase : GameControlPhase {
+	
 	/// <summary>
 	/// Exit node to draw arrow phase. Needs to know the target cat.
 	/// </summary>
@@ -14,7 +15,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// <summary>
 	/// Exit node to dog turn phase.
 	/// </summary>
-	[SerializeField] private DogTurnPhase dogTurnPhase;
+	[SerializeField] private DogSelectorPhase dogSelectorPhase;
 
 	/// <summary>
 	/// Moves cursor
@@ -23,10 +24,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 		if (brain.tileManager.cursorTile != t) {
 			brain.tileManager.cursorTile = t;
 
-
 			if (t.occupant != null) {
 				if (t.occupant.characterType == CharacterType.Cat && !t.occupant.grayedOut) {
-					brain.tileManager.MassSetShimmer (t.AllTraversibleTilesInRadius ((t.occupant as Cat).maxEnergy, false));
+					brain.tileManager.MassSetShimmer (t.AllTilesInRadius ((t.occupant as Cat).maxEnergy, true, false));
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
 					HashSet<Tile> toShimmer = new HashSet<Tile> ();
@@ -79,7 +79,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// </summary>
 	override public void ControlUpdate () {
 		if (!brain.catManager.anyAvailable) {
-			dogTurnPhase.TakeControl ();
+			dogSelectorPhase.TakeControl ();
 		}
 	}
 

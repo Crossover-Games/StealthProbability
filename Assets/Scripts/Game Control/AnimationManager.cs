@@ -12,6 +12,8 @@ public class AnimationManager : MonoBehaviour {
 
 	private float elapsedTime = 0f;
 
+	[SerializeField] private InterpolationMethod interpMethod = InterpolationMethod.Sinusoidal;
+
 	/// <summary>
 	/// The total time one step animation takes.
 	/// </summary>
@@ -97,7 +99,7 @@ public class AnimationManager : MonoBehaviour {
 			case AnimationPhase.Moving:
 				if (elapsedTime < MOVE_TIME) {
 					elapsedTime += Time.deltaTime;
-					character.transform.position = Interpolation.Sinerp (startPosition, endPosition, elapsedTime / MOVE_TIME);
+					character.transform.position = Interpolation.Interpolate (startPosition, endPosition, elapsedTime / MOVE_TIME, interpMethod);
 					//character.transform.position = Vector3.Lerp (startPosition, endPosition, elapsedTime / MOVE_TIME);
 				}
 				else {

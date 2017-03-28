@@ -6,7 +6,7 @@ using UnityEngine;
 /// Relates a probability to a tile, with respect to a single vision pattern. Also includes the danger color of that square.
 /// This structure knows nothing about other modifiers on the tile, such as other dogs looking at it.
 /// </summary>
-public struct TileDangerData {
+public class TileDangerData {
 
 	private float m_Danger;
 	/// <summary>

@@ -8,6 +8,12 @@ using UnityEngine;
 public class CatExecutePhase : GameControlPhase {
 
 	/// <summary>
+	/// a hack
+	/// </summary>
+	[SerializeField] private HACKCatReqtPhase reqt;
+
+
+	/// <summary>
 	/// Exit node to player turn idle phase.
 	/// </summary>
 	[SerializeField] private PlayerTurnIdlePhase playerTurnIdlePhase;
@@ -37,6 +43,35 @@ public class CatExecutePhase : GameControlPhase {
 			tilePath.RemoveAt (0);
 		}
 		else {
+			EndMovement ();
+		}
+	}
+
+	/// <summary>
+	/// Ends the movement. Does detection checks.
+	/// </summary>
+	private void EndMovement () {
+		bool HACK = false;
+
+		Dog[] tempDogs = selectedCat.dogsCrossed.ToArray ();
+		for (int x = 0; x < tempDogs.Length; x++) {
+			if (selectedCat.DetectionCheck (tempDogs [x])) {
+				brain.catManager.Remove (selectedCat);
+				//GameObject.Destroy (selectedCat.gameObject);
+
+				// LEL WHAT A HACK
+
+				reqt.rektCat = selectedCat;
+				reqt.TakeControl ();
+				HACK = true;
+				//x = tempDogs.Length;
+			}
+			else {
+				selectedCat.ClearDangerByDog (tempDogs [x]);
+			}
+		}
+
+		if (!HACK) {
 			playerTurnIdlePhase.TakeControl ();
 		}
 	}
