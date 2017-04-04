@@ -176,7 +176,7 @@ public class Tile : MonoBehaviour {
 	/// <summary>
 	/// Returns a list of all neighboring tiles that can currently be stepped on.
 	/// </summary>
-	public List<Tile> allTraversibleNeighbors {
+	public List<Tile> allTraversableNeighbors {
 		get {
 			List<Tile> tmp = new List<Tile> ();
 			foreach (Compass.Direction direction in Compass.allDirections) {
@@ -313,16 +313,16 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// All tiles in radius. Radius 0 is just this tile. TraversibleOnly means that walls or filled squares won't be included.
+	/// All tiles in radius. Radius 0 is just this tile. TraversableOnly means that walls or filled squares won't be included.
 	/// </summary>
-	public List<Tile> AllTilesInRadius (int radius, bool traversibleOnly, bool includeSelf) {
+	public List<Tile> AllTilesInRadius (int radius, bool traversableOnly, bool includeSelf) {
 		HashSet<Tile> all = new HashSet<Tile> ();
 		all.Add (this);
 		for (int x = 0; x < radius; x++) {
 			HashSet<Tile> tempAll = all.Clone ();
 			foreach (Tile t in all) {
-				if (traversibleOnly) {
-					foreach (Tile n in t.allTraversibleNeighbors) {
+				if (traversableOnly) {
+					foreach (Tile n in t.allTraversableNeighbors) {
 						tempAll.Add (n);
 					}
 				}

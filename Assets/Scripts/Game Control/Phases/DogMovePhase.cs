@@ -41,7 +41,7 @@ public class DogMovePhase : GameControlPhase {
 	/// Creates the path the dog will walk.
 	/// </summary>
 	private void BuildPath () {
-		PathingNode currentNode = selectedDog.myTile.pathingNode.SelectNextPathStart (selectedDog.lastVisited);
+		PathingNode currentNode = selectedDog.myTile.pathingNode.SelectNextPathStart (selectedDog);
 		PathingNode prevNode = selectedDog.lastVisited;
 		while (!currentNode.isStoppingPoint) {
 			tilePath.Add (currentNode.myTile);
@@ -57,7 +57,7 @@ public class DogMovePhase : GameControlPhase {
 	override public void ControlUpdate () {
 		if (selecting) {
 			selecting = false;
-			PathingNode nextNode = selectedDog.myTile.pathingNode.SelectNextPathStart (selectedDog.lastVisited);
+			PathingNode nextNode = selectedDog.myTile.pathingNode.SelectNextPathStart (selectedDog);
 			if (nextNode != null) {
 				selectedDog.MoveTo (nextNode.myTile);
 			}

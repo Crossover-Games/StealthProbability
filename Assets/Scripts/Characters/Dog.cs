@@ -16,6 +16,14 @@ public class Dog : GameCharacter {
 
 	public PathingNode lastVisited = null;
 
+	private PathingNode m_firstTurnNode;
+	/// <summary>
+	/// The dog only moves forward on the first turn. Null after the dog makes its first move.
+	/// </summary>
+	public PathingNode firstTurnNode {
+		get { return m_firstTurnNode; }
+	}
+
 	private VisionPattern m_VisionPattern;
 	/// <summary>
 	/// This dog's vision pattern.
@@ -29,6 +37,13 @@ public class Dog : GameCharacter {
 		m_VisionPattern = new VisionPattern (this);
 	}
 
+	void Start () {
+		Tile tempTile = myTile.GetNeighborInDirection (orientation);
+		if (tempTile != null) {
+			m_firstTurnNode = tempTile.pathingNode;
+		}
+	}
+
 	/// <summary>
 	/// Doggoveride. In addition to GameCharacter.MoveTo(Tile), this stores the pathing node of the last tile it visited.
 	/// that's not implemented yet.
@@ -38,6 +53,7 @@ public class Dog : GameCharacter {
 			ClearVisionPattern ();
 			lastVisited = myTile.pathingNode;
 		}
+		m_firstTurnNode = null;
 		base.MoveTo (destination);
 		ApplyVisionPattern ();
 	}

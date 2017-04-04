@@ -2190,11 +2190,6 @@ Prefab:
       propertyPath: unfreezer
       value: 
       objectReference: {fileID: 1382165218}
-    - target: {fileID: 224376053087091410, guid: c0708eb52ee4c694c9f856d41efc5d0d,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0708eb52ee4c694c9f856d41efc5d0d, type: 2}
   m_IsPrefabParent: 0

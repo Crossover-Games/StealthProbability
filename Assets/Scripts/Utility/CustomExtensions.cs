@@ -16,6 +16,34 @@ public static class CustomExtensions {
 		character.Move (destination - character.transform.position);
 	}
 
+	/// <summary>
+	/// Used in the level builder.
+	/// </summary>
+	public static GameObject ToStringCustom (this Compass.Direction myself) {
+		switch (myself) {
+			case Compass.Direction.North:
+				return "North";
+			case Compass.Direction.South:
+				return "South";
+			case Compass.Direction.East:
+				return "East";
+			case Compass.Direction.West:
+				return "West";
+			default:
+				return "Invalid";
+		}
+	}
+
+	/// <summary>
+	/// Destroys all immediate children of this object. Don't call this in game.
+	/// </summary>
+	public static GameObject DestroyAllChildren (this GameObject myself) {
+		foreach (Transform child in myself.transform) {
+			GameObject.DestroyImmediate (child.gameObject);
+		}
+		return null;
+	}
+
 	// ---HASHSET
 	
 	/// <summary>
@@ -145,7 +173,7 @@ public static class CustomExtensions {
 	/// <summary>
 	/// Returns the RGB components of the color in a vector.
 	/// </summary>
-	public static Vector3 ToRGBVector(this Color color){
+	public static Vector3 ToRGBVector (this Color color) {
 		return new Vector3 (color.r, color.g, color.b);
 	}
 }

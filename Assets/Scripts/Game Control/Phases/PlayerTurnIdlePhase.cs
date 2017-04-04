@@ -24,6 +24,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 		if (brain.tileManager.cursorTile != t) {
 			brain.tileManager.cursorTile = t;
 			brain.uiManager.masterInfoBox.ClearAllData ();
+			foreach (TileDangerData tdd in t.dangerData) {
+				brain.uiManager.masterInfoBox.AddDataFromTileDangerData (tdd);
+			}
 
 			if (t.occupant != null) {
 				brain.uiManager.masterInfoBox.headerText = t.occupant.name;
@@ -32,7 +35,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
 					HashSet<Tile> toShimmer = new HashSet<Tile> ();
-					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts((t.occupant as Dog).lastVisited)) {
+					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts((t.occupant as Dog))) {
 						PathingNode last = t.pathingNode;
 						PathingNode current = p;
 						while (current != null) {
@@ -46,10 +49,8 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				}
 			}
 			else {
+				brain.tileManager.ClearAllShimmer ();
 				brain.uiManager.masterInfoBox.headerText = "regular tile yo";
-				foreach (TileDangerData tdd in t.dangerData) {
-					brain.uiManager.masterInfoBox.AddDataFromTileDangerData (tdd);
-				}
 			}
 		}
 		// once we have the holy grail info box working, we can put stuff like that in there too.
@@ -79,6 +80,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	}
 
 	override public void OnLeaveControl () {
+		brain.uiManager.masterInfoBox.ClearAllData ();
 		brain.cameraControl.dragControlAllowed = false;
 	}
 

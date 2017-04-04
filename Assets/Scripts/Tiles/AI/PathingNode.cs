@@ -109,19 +109,25 @@ public class PathingNode : MonoBehaviour {
 	/// <summary>
 	/// From a stopping point, randomly selects the next route to take. No backtracking to the last visited square. Only intended to be called for stopping points; null otherwise.
 	/// </summary>
-	public PathingNode SelectNextPathStart (PathingNode cameFrom) {
+	public PathingNode SelectNextPathStart (Dog dog) {
 		if (!stoppingPoint) {
 			return null;
 		}
+		else if (dog.firstTurnNode != null) {
+			return dog.firstTurnNode;
+		}
 		else {
-			if (cameFrom == null) {
+			if (dog.lastVisited == null) {
 				return myConnections.RandomElement ();
+			}
+			else if (dog.firstTurnNode != null) {
+				return dog.firstTurnNode;
 			}
 			else {
 				HashSet<PathingNode> remainingNodes = new HashSet<PathingNode> (myConnections);
-				remainingNodes.Remove (cameFrom);
+				remainingNodes.Remove (dog.lastVisited);
 				if (remainingNodes.Count == 0) {
-					return cameFrom;
+					return dog.lastVisited;
 				}
 				else {
 					return remainingNodes.RandomElement ();
@@ -133,20 +139,25 @@ public class PathingNode : MonoBehaviour {
 	/// <summary>
 	/// Returns all potential path starts for a dog who came from a particular node. Only valid for stopping points.
 	/// </summary>
-	public HashSet<PathingNode> AllPotentialPathStarts (PathingNode cameFrom) {
+	public HashSet<PathingNode> AllPotentialPathStarts (Dog dog) {
 		if (!stoppingPoint) {
 			return null;
 		}
+		else if (dog.firstTurnNode != null) {
+			HashSet<PathingNode> oneNode = new HashSet<PathingNode> ();
+			oneNode.Add (dog.firstTurnNode);
+			return oneNode;
+		}
 		else {
-			if (cameFrom == null) {
+			if (dog.lastVisited == null) {
 				return myConnections;
 			}
 			else {
 				HashSet<PathingNode> remainingNodes = new HashSet<PathingNode> (myConnections);
-				remainingNodes.Remove (cameFrom);
+				remainingNodes.Remove (dog.lastVisited);
 				if (remainingNodes.Count == 0) {
 					HashSet<PathingNode> tmp = new HashSet<PathingNode> ();
-					tmp.Add (cameFrom);
+					tmp.Add (dog.lastVisited);
 					return tmp;
 				}
 				else {

@@ -28,7 +28,7 @@ public class DogTurnPhase : GameControlPhase {
 
 			if (activeDogSelecting) {
 				activeDogSelecting = false;
-				currentDog.MoveTo (currentDog.myTile.pathingNode.SelectNextPathStart (currentDog.lastVisited).myTile);
+				currentDog.MoveTo (currentDog.myTile.pathingNode.SelectNextPathStart (currentDog).myTile);
 			}
 			else if (!currentDog.myTile.pathingNode.isStoppingPoint) {
 				// TEMPORARY CHECKING FOR BLOCKED PASSAGE

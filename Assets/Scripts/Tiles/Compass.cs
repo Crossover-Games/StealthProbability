@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Contains the cardinal directions and related methods.
+/// </summary>
 public class Compass {
 	public enum Direction {
 		North,
