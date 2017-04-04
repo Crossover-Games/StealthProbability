@@ -9,14 +9,47 @@ using UnityEngine.UI;
 public class MasterInfoBox : MonoBehaviour {
 
 	/// <summary>
-	/// Title text on the box.
+	/// Header text on the box.
 	/// </summary>
-	public string title {
+	public string headerText {
 		get { return titleText.text; }
 		set { titleText.text = value; }
 	}
 
 	[SerializeField] private Text titleText;
 
+	private int numberOfDataEnabled = 0;
+	/// <summary>
+	/// All fields of text data. Assign in editor.
+	/// </summary>
+	[SerializeField] private Text[] dataFields;
 
+	/// <summary>
+	/// Adds one piece of text data.
+	/// </summary>
+	public void AddData (string info, Color color) {
+		if (numberOfDataEnabled < dataFields.Length) {
+			dataFields [numberOfDataEnabled].text = info;
+			dataFields [numberOfDataEnabled].color = color;
+			dataFields [numberOfDataEnabled].gameObject.SetActive (true);
+			numberOfDataEnabled++;
+		}
+	}
+
+	/// <summary>
+	/// Adds the data from tile danger data using a convention.
+	/// </summary>
+	public void AddDataFromTileDangerData (TileDangerData data) {
+		AddData ("* " + Mathf.FloorToInt (data.danger * 100).ToString () + "% from " + data.watchingDog.name, data.dangerColor);
+	}
+
+	/// <summary>
+	/// Clears all text data. Does not affect the header box.
+	/// </summary>
+	public void ClearAllData () {
+		numberOfDataEnabled = 0;
+		foreach (Text t in dataFields) {
+			dataFields [numberOfDataEnabled].gameObject.SetActive (false);
+		}
+	}
 }

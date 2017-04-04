@@ -43,29 +43,24 @@ public class UniversalTileManager : MonoBehaviour {
 	/// Gets or sets the tile with the arrow cursor pointing over it. Set it to null to disable it.
 	/// </summary>
 	public Tile cursorTile {
-		get{ return cursored; }
+		get { return cursored; }
 		set { 
 			if (value == null) {
 				arrowCursor.SetActive (false);
 			}
 			else {
 				if (cursored != value) {
-
 					arrowCursor.transform.position = value.cursorConnectionPoint;
 					arrowCursor.SetActive (true);
 
 					// lel factor
 					if (value.occupant != null) {
-						brain.uiManager.masterInfoBox.title = value.occupant.name;
 						if (value.occupant.characterType == CharacterType.Cat) {
 							catSound.Play ();
 						}
 						else if (value.occupant.characterType == CharacterType.Dog) {
 							dogSound.Play ();
 						}
-					}
-					else {
-						brain.uiManager.masterInfoBox.title = "regular ass tile";
 					}
 				}
 			}

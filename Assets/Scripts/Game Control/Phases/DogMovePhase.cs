@@ -108,6 +108,8 @@ public class DogMovePhase : GameControlPhase {
 				brain.cameraControl.SetCamFocusPoint (brain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
 				brain.dogManager.RejuvenateAll ();
 				brain.catManager.RejuvenateAll ();
+				brain.uiManager.masterInfoBox.ClearAllData ();
+				brain.uiManager.masterInfoBox.headerText = "";
 				playerTurnIdlePhase.TakeControl ();
 			}
 			else {

@@ -11,7 +11,10 @@ public class DogSelectorPhase : GameControlPhase {
 
 	override public void ControlUpdate () {
 		if (brain.dogManager.anyAvailable) {
-			dogMovePhase.selectedDog = brain.dogManager.availableCharacters [0];
+			brain.uiManager.masterInfoBox.ClearAllData ();
+			Dog nextDog = brain.dogManager.availableCharacters [0];
+			brain.uiManager.masterInfoBox.headerText = nextDog.name;
+			dogMovePhase.selectedDog = nextDog;
 			dogMovePhase.TakeControl ();
 		}
 	}

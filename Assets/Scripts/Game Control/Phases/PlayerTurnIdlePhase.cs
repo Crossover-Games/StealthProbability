@@ -18,13 +18,15 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	[SerializeField] private DogSelectorPhase dogSelectorPhase;
 
 	/// <summary>
-	/// Moves cursor
+	/// Moves cursor and displays overlays. Never null
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
 		if (brain.tileManager.cursorTile != t) {
 			brain.tileManager.cursorTile = t;
+			brain.uiManager.masterInfoBox.ClearAllData ();
 
 			if (t.occupant != null) {
+				brain.uiManager.masterInfoBox.headerText = t.occupant.name;
 				if (t.occupant.characterType == CharacterType.Cat && !t.occupant.grayedOut) {
 					brain.tileManager.MassSetShimmer (t.AllTilesInRadius ((t.occupant as Cat).maxEnergy, true, false));
 				}
@@ -41,6 +43,12 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 						}
 						brain.tileManager.MassSetShimmer (toShimmer);
 					}
+				}
+			}
+			else {
+				brain.uiManager.masterInfoBox.headerText = "regular tile yo";
+				foreach (TileDangerData tdd in t.dangerData) {
+					brain.uiManager.masterInfoBox.AddDataFromTileDangerData (tdd);
 				}
 			}
 		}
