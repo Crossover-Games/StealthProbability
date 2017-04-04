@@ -16,6 +16,15 @@ public class UIManager : MonoBehaviour {
 
 	private Vector3Reference followPoint = null;
 
+
+	[SerializeField] private MasterInfoBox m_infoBox;
+	/// <summary>
+	/// Controls the master text box that provides info on the selection.
+	/// </summary>
+	public MasterInfoBox masterInfoBox {
+		get { return m_infoBox; }
+	}
+
 	void Awake () {
 		canvasRect = canvas.GetComponent<RectTransform> ();
 	}

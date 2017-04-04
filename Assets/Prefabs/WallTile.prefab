@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 4706363867811756}
   - component: {fileID: 114179158129131846}
   - component: {fileID: 65381704441568572}
+  - component: {fileID: 114811201171401176}
   m_Layer: 0
   m_Name: WallTile
   m_TagString: Untagged
@@ -267,7 +268,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964447221201342}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -357,6 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualizer: {fileID: 114651172766252324}
   myTileType: 1
+  shimmerObject: {fileID: 0}
 --- !u!114 &114651172766252324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -371,6 +373,17 @@ MonoBehaviour:
   mouseOverMaterial: {fileID: 2100000, guid: e049720649c798d4f97804ca491e6b4e, type: 2}
   mouseAwayMaterial: {fileID: 2100000, guid: 00737682c9b04b84ab36ca890da72572, type: 2}
   dangerVisualizer: {fileID: 114816403923143848}
+--- !u!114 &114811201171401176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811600136781426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beca4f365d5b5b744a7ef19b486dcaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114816403923143848
 MonoBehaviour:
   m_ObjectHideFlags: 1

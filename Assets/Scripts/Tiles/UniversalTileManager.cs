@@ -50,17 +50,22 @@ public class UniversalTileManager : MonoBehaviour {
 			}
 			else {
 				if (cursored != value) {
+
 					arrowCursor.transform.position = value.cursorConnectionPoint;
 					arrowCursor.SetActive (true);
 
 					// lel factor
 					if (value.occupant != null) {
+						brain.uiManager.masterInfoBox.title = value.occupant.name;
 						if (value.occupant.characterType == CharacterType.Cat) {
 							catSound.Play ();
 						}
 						else if (value.occupant.characterType == CharacterType.Dog) {
 							dogSound.Play ();
 						}
+					}
+					else {
+						brain.uiManager.masterInfoBox.title = "regular ass tile";
 					}
 				}
 			}

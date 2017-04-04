@@ -57,10 +57,22 @@ public class DogMovePhase : GameControlPhase {
 	override public void ControlUpdate () {
 		if (selecting) {
 			selecting = false;
-			selectedDog.MoveTo (selectedDog.myTile.pathingNode.SelectNextPathStart (selectedDog.lastVisited).myTile);
+			PathingNode nextNode = selectedDog.myTile.pathingNode.SelectNextPathStart (selectedDog.lastVisited);
+			if (nextNode != null) {
+				selectedDog.MoveTo (nextNode.myTile);
+			}
+			else {
+				selectedDog.MoveTo (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile);
+			}
 		}
 		else if (!selectedDog.myTile.pathingNode.isStoppingPoint) {
-			selectedDog.MoveTo (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile);
+			Tile next = selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile;
+			if (next.occupant == null) {
+				selectedDog.MoveTo (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile);
+			}
+			else {
+				EndDogMovement ();
+			}
 		}
 		else if (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited) == null) {
 			EndDogMovement ();
