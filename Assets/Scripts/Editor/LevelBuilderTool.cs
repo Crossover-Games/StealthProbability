@@ -98,7 +98,101 @@ public class LevelBuilderTool : EditorWindow {
 
 		GUILayout.Label (new GUIContent ("Level Grid", "Checked is floor, unchecked is wall."), EditorStyles.boldLabel);
 
+		// Draws the array
 		ChangeGridWidthAndHeight ();
+
+		EditorGUILayout.BeginHorizontal ();
+		EditorGUILayout.Space ();
+		if (GUILayout.Button (new GUIContent ("Add Top", "Adds one row on top, shifts everything down."))) {
+			lengthDisplay++;
+			ExpandArray ();
+			for (int i = 0; i < width; i++) {
+				for (int j = length - 2; j > 0; j--) {
+					fieldsArray [i, j] = fieldsArray [i, j - 1];
+				}
+				fieldsArray [i, 0] = expandedFloorDefault;
+			}
+		}
+		if (GUILayout.Button (new GUIContent ("Delete Top", "Delete uppermost row, shift everything up."))) {
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < length - 1; j++) {
+					fieldsArray [i, j] = fieldsArray [i, j + 1];
+				}
+			}
+			lengthDisplay--;
+			ExpandArray ();
+		}
+		EditorGUILayout.Space ();
+		EditorGUILayout.EndHorizontal ();
+		EditorGUILayout.Space ();
+		EditorGUILayout.BeginHorizontal ();
+		if (GUILayout.Button (new GUIContent ("Add Left", "Adds one column to left, shifts everything right."))) {
+			widthDisplay++;
+			ExpandArray ();
+			for (int j = 0; j < length; j++) {
+				for (int i = width - 2; i > 0; i--) {
+					fieldsArray [i, j] = fieldsArray [i - 1, j];
+				}
+				fieldsArray [0, j] = expandedFloorDefault;
+			}
+		}
+		if (GUILayout.Button (new GUIContent ("Delete Left", "Delete leftmost column, shift everything left."))) {
+			for (int i = 0; i < width - 1; i++) {
+				for (int j = 0; j < length; j++) {
+					fieldsArray [i, j] = fieldsArray [i + 1, j];
+				}
+			}
+			widthDisplay--;
+			ExpandArray ();
+		}
+		EditorGUILayout.Space ();
+		if (GUILayout.Button (new GUIContent ("Add Right", "Adds one column to the right of everything."))) {
+			widthDisplay++;
+			ExpandArray ();
+		}
+		if (GUILayout.Button (new GUIContent ("Delete Right", "Delete rightmost column."))) {
+			widthDisplay--;
+			ExpandArray ();
+		}
+		EditorGUILayout.EndHorizontal ();
+		EditorGUILayout.Space ();
+		EditorGUILayout.BeginHorizontal ();
+		EditorGUILayout.Space ();
+		if (GUILayout.Button (new GUIContent ("Add Bottom", "Adds one row below everything."))) {
+			lengthDisplay++;
+			ExpandArray ();
+		}
+		if (GUILayout.Button (new GUIContent ("Delete Bottom", "Delete lowest row."))) {
+			lengthDisplay--;
+			ExpandArray ();
+		}
+		EditorGUILayout.Space ();
+		EditorGUILayout.EndHorizontal ();
+
+
+		DogBlueprint deletThis = null;
+		dogListFoldout = EditorGUILayout.Foldout (dogListFoldout, new GUIContent ("Dogs", "Must build level to update dogs."), true);
+		if (dogListFoldout) {
+			foreach (DogBlueprint dbp in dogList) {
+				EditorGUILayout.BeginHorizontal ();
+				dbp.name = EditorGUILayout.TextField (dbp.name);
+				GUILayout.Label (new GUIContent ("Coordinates", "(X,Z) coordinates of the dog."));
+				dbp.point.x = EditorGUILayout.IntField (dbp.point.x);
+				dbp.point.y = EditorGUILayout.IntField (dbp.point.y);
+				if (GUILayout.Button (new GUIContent ("Delete", "Remove this dog."))) {
+					deletThis = dbp;
+				}
+				EditorGUILayout.EndHorizontal ();
+			}
+			if (GUILayout.Button (new GUIContent ("Add dog", "Add a new dog"))) {
+				dogList.Add (new DogBlueprint ("New Dog", Compass.Direction.North, 0, 0));
+			}
+		}
+		if (deletThis != null) {
+			dogList.Remove (deletThis);
+			deletThis = null;
+		}
+
 		if (GUILayout.Button (new GUIContent ("Build / Update Level", "Please note that this will destroy the existing map. This will create a game controller if you don't have one, then place all the tiles according to the diagram."))) {
 			BuildLevel ();
 		}
@@ -128,31 +222,6 @@ public class LevelBuilderTool : EditorWindow {
 				//
 			}
 		}
-
-		DogBlueprint deletThis = null;
-		dogListFoldout = EditorGUILayout.Foldout (dogListFoldout, new GUIContent ("Dogs", "Must build level to update dogs."), true);
-		if (dogListFoldout) {
-			foreach (DogBlueprint dbp in dogList) {
-				EditorGUILayout.BeginHorizontal ();
-				dbp.name = EditorGUILayout.TextField (dbp.name);
-				GUILayout.Label (new GUIContent ("Coordinates", "(X,Z) coordinates of the dog."));
-				dbp.point.x = EditorGUILayout.IntField (dbp.point.x);
-				dbp.point.y = EditorGUILayout.IntField (dbp.point.y);
-				if (GUILayout.Button (new GUIContent ("Delete", "Remove this dog."))) {
-					deletThis = dbp;
-				}
-				EditorGUILayout.EndHorizontal ();
-			}
-			if (GUILayout.Button (new GUIContent ("Add dog", "Add a new dog"))) {
-				dogList.Add (new DogBlueprint ("New Dog", Compass.Direction.North, 0, 0));
-			}
-		}
-		if (deletThis != null) {
-			dogList.Remove (deletThis);
-			deletThis = null;
-		}
-
-
 	}
 
 	/// <summary>
@@ -185,7 +254,6 @@ public class LevelBuilderTool : EditorWindow {
 	/// Updates the physical representation of the array.
 	/// </summary>
 	private void ChangeGridWidthAndHeight () {
-		//using (new EditorGUI.DisabledScope (true)) {
 		for (int j = 0; j < length; j++) {
 			EditorGUILayout.BeginHorizontal ();
 			for (int i = 0; i < width; i++) {
@@ -193,7 +261,6 @@ public class LevelBuilderTool : EditorWindow {
 			}
 			EditorGUILayout.EndHorizontal ();
 		}
-		//}
 	}
 
 	private void BuildLevel () {

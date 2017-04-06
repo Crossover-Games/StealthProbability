@@ -22,7 +22,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// The phase that is currently controlling the game.
 	/// </summary>
-	private GameControlPhase inControl = null;
+	private static GameControlPhase inControl = null;
 
 
 	// ---REFERENCES
@@ -106,7 +106,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Helper method for GameControlPhase.TakeControl(). Kicks the previous phase out of control, calls its OnLeaveControl, then puts the new phase in charge and calls its OnTakeControl.
 	/// </summary>
-	public void AssignControl (GameControlPhase phase) {
+	public static void AssignControl (GameControlPhase phase) {
 		if (inControl != null) {
 			inControl.OnLeaveControl ();
 		}
@@ -119,7 +119,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's TileClickEvent().
 	/// </summary>
-	public void RaiseTileClickEvent (Tile t) {
+	public static void RaiseTileClickEvent (Tile t) {
 		if (inControl != null) {
 			inControl.TileClickEvent (t);
 		}
@@ -128,7 +128,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's TileDoubleClickEvent().
 	/// </summary>
-	public void RaiseTileDoubleClickEvent (Tile t) {
+	public static void RaiseTileDoubleClickEvent (Tile t) {
 		if (inControl != null) {
 			inControl.TileDoubleClickEvent (t);
 		}
@@ -137,7 +137,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's MouseOverChangeEvent().
 	/// </summary>
-	public void RaiseMouseOverChangeEvent () {
+	public static void RaiseMouseOverChangeEvent () {
 		if (inControl != null) {
 			inControl.MouseOverChangeEvent ();
 		}
@@ -146,7 +146,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's TileDragEvent().
 	/// </summary>
-	public void RaiseTileDragEvent (Tile t) {
+	public static void RaiseTileDragEvent (Tile t) {
 		if (inControl != null) {
 			inControl.TileDragEvent (t);
 		}
@@ -155,27 +155,45 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's UICancelPathButtonEvent().
 	/// </summary>
-	public void RaiseUICancelPathButtonEvent () {
+	public static void RaiseUICancelPathButtonEvent () {
 		if (inControl != null) {
 			inControl.UICancelPathButtonEvent ();
 		}
+	}
+	/// <summary>
+	/// Calls the operating GameControlPhase's UICancelPathButtonEvent().
+	/// </summary>
+	public static void InstanceRaiseUICancelPathButtonEvent () {
+		GameBrain.RaiseUICancelPathButtonEvent ();
 	}
 
 	/// <summary>
 	/// Calls the operating GameControlPhase's UIRestButtonEvent().
 	/// </summary>
-	public void RaiseUIRestButtonEvent () {
+	public static void RaiseUIRestButtonEvent () {
 		if (inControl != null) {
 			inControl.UIRestButtonEvent ();
 		}
+	}
+	/// <summary>
+	/// Calls the operating GameControlPhase's UIRestButtonEvent().
+	/// </summary>
+	public void InstanceRaiseUIRestButtonEvent () {
+		GameBrain.RaiseUIRestButtonEvent ();
 	}
 
 	/// <summary>
 	/// Calls the operating GameControlPhase's UIActionButtonEvent().
 	/// </summary>
-	public void RaiseUIActionButtonEvent () {
+	public static void RaiseUIActionButtonEvent () {
 		if (inControl != null) {
 			inControl.UIActionButtonEvent ();
 		}
+	}
+	/// <summary>
+	/// Calls the operating GameControlPhase's UIActionButtonEvent().
+	/// </summary>
+	public static void InstanceRaiseUIActionButtonEvent () {
+		GameBrain.RaiseUIActionButtonEvent ();
 	}
 }

@@ -19,7 +19,7 @@ public static class CustomExtensions {
 	/// <summary>
 	/// Used in the level builder.
 	/// </summary>
-	public static GameObject ToStringCustom (this Compass.Direction myself) {
+	public static string ToStringCustom (this Compass.Direction myself) {
 		switch (myself) {
 			case Compass.Direction.North:
 				return "North";

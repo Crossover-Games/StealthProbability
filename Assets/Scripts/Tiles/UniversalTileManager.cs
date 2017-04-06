@@ -161,17 +161,17 @@ public class UniversalTileManager : MonoBehaviour {
 		if (mousedOver != null) {
 			// mouse over
 			if (mousedOver != prevMousedOver) {
-				brain.RaiseMouseOverChangeEvent ();
+				GameBrain.RaiseMouseOverChangeEvent ();
 				prevMousedOver = mousedOver;
 			}
 
 			// click and double click
 			if (Input.GetMouseButtonDown (0)) {
 				if (doubleClickMemory != null && doubleClickMemory == mousedOver) {
-					brain.RaiseTileDoubleClickEvent (mousedOver);
+					GameBrain.RaiseTileDoubleClickEvent (mousedOver);
 				}
 				else {
-					brain.RaiseTileClickEvent (mousedOver);
+					GameBrain.RaiseTileClickEvent (mousedOver);
 					dragMemory = mousedOver;
 				}
 				RegisterFirstClick (mousedOver);
@@ -181,7 +181,7 @@ public class UniversalTileManager : MonoBehaviour {
 
 		if (dragMemory != null && Input.GetMouseButton (0)) {
 			if (Vector3.Distance (mouseClickPos, Input.mousePosition) >= MIN_DRAG_DISTANCE) {
-				brain.RaiseTileDragEvent (doubleClickMemory);
+				GameBrain.RaiseTileDragEvent (doubleClickMemory);
 				dragMemory = null;
 			}
 		}
