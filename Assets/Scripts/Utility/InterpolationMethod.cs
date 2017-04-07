@@ -1,0 +1,25 @@
+﻿/// <summary>
+/// Different methods for interpolation. Use them with Interpolation.Interpolate(...)
+/// </summary>
+public enum InterpolationMethod {
+	/// <summary>
+	/// Equal 
+	/// </summary>
+	Linear,
+	/// <summary>
+	/// Greatest change with t close to 1.
+	/// </summary>
+	Quadratic,
+	/// <summary>
+	/// Greatest change with t close to 0
+	/// </summary>
+	SquareRoot,
+	/// <summary>
+	/// Greatest change with t close to 0.5.
+	/// </summary>
+	Sinusoidal,
+	/// <summary>
+	/// Greatest change with t close to 0 and 1. Least change with t close to 0.5. 
+	/// </summary>
+	Cubic
+}

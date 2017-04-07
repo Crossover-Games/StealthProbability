@@ -22,37 +22,42 @@ public class CatContextMenuPhase : GameControlPhase {
 	/// Target cat.
 	/// </summary>
 	[HideInInspector] public Cat selectedCat;
+	/// <summary>
+	/// The arrow segment parent. Will be destroyed.
+	/// </summary>
+	[HideInInspector] public GameObject arrowSegmentParent;
 
 	/// <summary>
 	/// The ordered path the cat will take.
 	/// </summary>
 	[HideInInspector] public List<Tile> tilePath;
 
-	/*
-	 * opens a menu with Rest, Cancel, and Action (no action for now)
-	 * preferably, each of the buttons would have a clicked event which triggers an event here
-	 *
-	 */
-
 	override public void OnTakeControl () {
-		// show menu at cursor
+		//UIManager.CenterPathEndMenuOnMouse ();
+		Tile last = tilePath.LastElement ();
+		UIManager.CenterPathEndMenuOnWorldPoint (last.topCenterPoint);
+		UIManager.pathEndMenuState = true;
+		last.shimmer = true;
+		TileManager.cursorTile = last;
+
+		CameraOverheadControl.dragControlAllowed = true;
 	}
 
-	/// <summary>
-	/// when ya click cancel
-	/// </summary>
-	private void ExitToPlayerTurnIdlePhase () {
-		playerTurnIdlePhase.TakeControl ();
-	}
-
-	override public void ControlUpdate (){
-		// just jump straight into execute phase. No menu implemented yet.
+	public override void UIRestButtonEvent () {
 		catExecutePhase.selectedCat = selectedCat;
 		catExecutePhase.tilePath = tilePath;
 		catExecutePhase.TakeControl ();
 	}
 
+	override public void UICancelPathButtonEvent () {
+		playerTurnIdlePhase.TakeControl ();
+	}
+
 	override public void OnLeaveControl () {
-		// hide menu
+		UIManager.pathEndMenuState = false;
+		TileManager.ClearAllShimmer ();
+		TileManager.cursorTile = null;
+		GameObject.Destroy (arrowSegmentParent);
+		CameraOverheadControl.dragControlAllowed = false;
 	}
 }

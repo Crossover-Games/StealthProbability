@@ -6,69 +6,67 @@ using UnityEngine;
 /// Dogs just move around and do dog things in this phase.
 /// </summary>
 public class DogTurnPhase : GameControlPhase {
-	// override public void ControlUpdate ()
-	// override public void TileClickEvent (Tile t)
-	// override public void MouseOverChangeEvent ()
-
 	/// <summary>
 	/// Exit node to player turn idle phase.
 	/// </summary>
 	[SerializeField] private PlayerTurnIdlePhase playerTurnIdlePhase;
 
 	/// <summary>
-	/// All dogs.
-	/// </summary>
-	private List<Dog> allDogs;
-
-	private List<Dog> activeDogs;
-	/// <summary>
 	/// True if this is the absolute first time it's moving this turn. Useful for selecting a path.
 	/// </summary>
 	private bool activeDogSelecting;
 
-	[Tooltip ("Parent of all dogs in the scene.")]
-	[SerializeField] private GameObject dogParent;
-
-	void Awake () {
-		allDogs = new List<Dog> (dogParent.GetComponentsInChildren<Dog> ());
-	}
-
 	override public void OnTakeControl () {
-		activeDogs = new List<Dog> (allDogs);
+		GameBrain.dogManager.Shuffle ();
 		activeDogSelecting = true;
-		brain.cameraControl.SetCamFollowTarget (activeDogs [0].transform);
+		CameraOverheadControl.SetCamFollowTarget (GameBrain.dogManager.availableCharacters [0].transform);
 	}
 
 	override public void ControlUpdate () {
-		if (activeDogs.Count != 0) {
+		if (GameBrain.dogManager.anyAvailable) {
+			Dog currentDog = GameBrain.dogManager.availableCharacters [0];
+
 			if (activeDogSelecting) {
 				activeDogSelecting = false;
-				activeDogs [0].MoveTo (activeDogs [0].myTile.pathingNode.SelectNextPathStart (activeDogs [0].lastVisited).myTile);
+				currentDog.MoveTo (currentDog.myTile.pathingNode.SelectNextPathStart (currentDog).myTile);
 			}
-			else if (!activeDogs [0].myTile.pathingNode.isStoppingPoint) {
-				activeDogs [0].MoveTo (activeDogs [0].myTile.pathingNode.NextOnPath (activeDogs [0].lastVisited).myTile);
+			else if (!currentDog.myTile.pathingNode.isStoppingPoint) {
+				// TEMPORARY CHECKING FOR BLOCKED PASSAGE
+				if (currentDog.myTile.pathingNode.NextOnPath (currentDog.lastVisited).myTile.occupant != null) {
+					PathingNode last = currentDog.myTile.pathingNode;
+					PathingNode current = currentDog.myTile.pathingNode.NextOnPath (currentDog.lastVisited);
+					while (current != null) {
+						PathingNode tempLast = current;
+						current = current.NextOnPath (last);
+						last = tempLast;
+					}
+					currentDog.MoveTo (last.myTile);
+				}
+				currentDog.MoveTo (currentDog.myTile.pathingNode.NextOnPath (currentDog.lastVisited).myTile);
 			}
 			else {
-				if (activeDogs.Count > 1) {
-					activeDogs [0].isGrayedOut = true;
-				}
-				activeDogs.RemoveAt (0);
-				if (activeDogs.Count != 0) {
-					brain.cameraControl.SetCamFollowTarget (activeDogs [0].transform);
-				}
-				activeDogSelecting = true;
+				EndCurrentDogMovement();
 			}
 		}
 		else {
-			foreach (Dog d in allDogs) {
-				d.isGrayedOut = false;
-			}
-			playerTurnIdlePhase.RejuvenateAllCats ();
+			GameBrain.dogManager.RejuvenateAll ();
+			GameBrain.catManager.RejuvenateAll ();
 			playerTurnIdlePhase.TakeControl ();
 		}			
 	}
 
+	/// <summary>
+	/// Ends the current dog movement.
+	/// </summary>
+	private void EndCurrentDogMovement(){
+		GameBrain.dogManager.availableCharacters [0].grayedOut = true;
+		if (GameBrain.dogManager.anyAvailable) {
+			CameraOverheadControl.SetCamFollowTarget (GameBrain.dogManager.availableCharacters [0].transform);
+		}
+		activeDogSelecting = true;
+	}
+
 	override public void OnLeaveControl () {
-		brain.cameraControl.SetCamFollowTarget (playerTurnIdlePhase.allCats.RandomElement ().transform);
+		CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
 	}
 }

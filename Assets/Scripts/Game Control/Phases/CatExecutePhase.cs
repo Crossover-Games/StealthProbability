@@ -6,7 +6,6 @@ using UnityEngine;
 /// In this phase, the cat just carries out the orders it was given.
 /// </summary>
 public class CatExecutePhase : GameControlPhase {
-	// override public void TileClickEvent (Tile t)
 
 	/// <summary>
 	/// Exit node to player turn idle phase.
@@ -23,15 +22,11 @@ public class CatExecutePhase : GameControlPhase {
 	/// </summary>
 	[HideInInspector] public List<Tile> tilePath;
 
-	/// <summary>
-	/// DEMO ONLY, changes demo music
-	/// </summary>
-	[SerializeField] private AudioLowPassFilter lowPass;
 
 	[SerializeField] private AudioSource purrSound;
 
 	override public void OnTakeControl () {
-		brain.cameraControl.SetCamFollowTarget (selectedCat.transform);
+		CameraOverheadControl.SetCamFollowTarget (selectedCat.transform);
 		purrSound.Play ();
 		selectedCat.walkingAnimation = true;
 	}
@@ -42,15 +37,32 @@ public class CatExecutePhase : GameControlPhase {
 			tilePath.RemoveAt (0);
 		}
 		else {
-			playerTurnIdlePhase.TakeControl ();
+			EndMovement ();
 		}
 	}
 
+	/// <summary>
+	/// Ends the movement. Does detection checks.
+	/// </summary>
+	private void EndMovement () {
+
+		Dog[] tempDogs = selectedCat.dogsCrossed.ToArray ();
+		for (int x = 0; x < tempDogs.Length; x++) {
+			if (selectedCat.DetectionCheck (tempDogs [x])) {
+				GameBrain.catManager.Remove (selectedCat);
+				// destroy the cat in some way
+			}
+			else {
+				selectedCat.ClearDangerByDog (tempDogs [x]);
+			}
+		}
+		playerTurnIdlePhase.TakeControl ();
+	}
+
 	override public void OnLeaveControl () {
+		CameraOverheadControl.StopFollowing ();
 		purrSound.Stop ();
-		lowPass.cutoffFrequency = 22000f;
-		selectedCat.ableToMove = false;
-		selectedCat.isGrayedOut = true;
+		selectedCat.grayedOut = true;
 		selectedCat.walkingAnimation = false;
 	}
 }

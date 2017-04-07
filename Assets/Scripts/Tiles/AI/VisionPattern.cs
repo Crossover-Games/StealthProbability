@@ -23,7 +23,7 @@ using UnityEngine;
 /// <summary>
 /// Vision pattern. Incomplete.
 /// </summary>
-public class VisionPattern : MonoBehaviour {
+public class VisionPattern {
 
 	// probabilities[y,x]
 	// y: dim0, x: dim1
@@ -35,7 +35,7 @@ public class VisionPattern : MonoBehaviour {
 	private int originX;
 	private int originY;
 
-	[SerializeField] private Dog m_Owner;
+	private Dog m_Owner;
 	/// <summary>
 	/// The dog who owns this vision pattern.
 	/// </summary>
@@ -43,14 +43,46 @@ public class VisionPattern : MonoBehaviour {
 		get { return m_Owner; }
 	}
 
+	public VisionPattern (Dog theOwner) {
+		m_Owner = theOwner;
+	}
+
 	/// <summary>
-	/// NOT IMPLEMENTED
+	/// NOT IMPLEMENTED CURRENTLY FAKING
 	/// All floor tiles affected by this vision pattern's sight, and the danger value associated with each.
 	/// This will change depending on the orientation and position of the dog.
 	/// </summary>
 	/// <value>All tiles affected.</value>
 	public List<TileDangerData> allTilesAffected {
-		get { return null; }
+		get { 
+			HashSet<Tile> layer1 = new HashSet<Tile> ();
+			HashSet<Tile> layer2 = new HashSet<Tile> ();
+			foreach (Tile t in m_Owner.myTile.AllTilesInRadius(2, false, false)) {
+				if (t.tileType == TileType.Floor) {
+					layer2.Add (t);
+				}
+			}
+			foreach (Tile t in m_Owner.myTile.AllTilesInRadius(1, false, false)) {
+				if (t.tileType == TileType.Floor) {
+					layer1.Add (t);
+				}
+			}
+			layer2.ExceptWith (layer1);
+
+			List<TileDangerData> tmp = new List<TileDangerData> ();
+			foreach (Tile t in layer1) {
+				if (t == m_Owner.myTile.GetNeighborInDirection (m_Owner.orientation)) {
+					tmp.Add (new TileDangerData (0.75f, t, m_Owner, Color.red));
+				}
+				else {
+					tmp.Add (new TileDangerData (0.5f, t, m_Owner, Color.yellow));
+				}
+			}
+			foreach (Tile t in layer2) {
+				tmp.Add (new TileDangerData (0.25f, t, m_Owner, Color.green));
+			}
+			return tmp;
+		}
 	}
 
 	/// <summary>

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 /// <summary>
@@ -12,6 +14,34 @@ public static class CustomExtensions {
 	/// </summary>
 	public static void AbsoluteMove (this CharacterController character, Vector3 destination) {
 		character.Move (destination - character.transform.position);
+	}
+
+	/// <summary>
+	/// Used in the level builder.
+	/// </summary>
+	public static string ToStringCustom (this Compass.Direction myself) {
+		switch (myself) {
+			case Compass.Direction.North:
+				return "North";
+			case Compass.Direction.South:
+				return "South";
+			case Compass.Direction.East:
+				return "East";
+			case Compass.Direction.West:
+				return "West";
+			default:
+				return "Invalid";
+		}
+	}
+
+	/// <summary>
+	/// Destroys all immediate children of this object. Don't call this in game.
+	/// </summary>
+	public static GameObject DestroyAllChildren (this GameObject myself) {
+		foreach (Transform child in myself.transform) {
+			GameObject.DestroyImmediate (child.gameObject);
+		}
+		return null;
 	}
 
 	// ---HASHSET
@@ -54,7 +84,7 @@ public static class CustomExtensions {
 	/// </summary>
 	public static T RandomElement<T> (this ICollection<T> collection) {
 		int current = 0;
-		int magicIndex = Random.Range (0, collection.Count);
+		int magicIndex = UnityEngine.Random.Range (0, collection.Count);
 		foreach (T t in collection) {
 			if (current == magicIndex) {
 				return t;
@@ -110,6 +140,25 @@ public static class CustomExtensions {
 		return Subset (theList, startIndex, theList.Count - 1);
 	}
 
+	/// <summary>
+	/// Randomly reorders this list.
+	/// </summary>
+	public static void Shuffle<T> (this List<T> list) {
+		RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider ();
+		int n = list.Count;
+		while (n > 1) {
+			byte[] box = new byte[1];
+			do {
+				provider.GetBytes (box);
+			} while (!(box [0] < n * (Byte.MaxValue / n)));
+			int k = (box [0] % n);
+			n--;
+			T value = list [k];
+			list [k] = list [n];
+			list [n] = value;
+		}
+	}
+
 	// ---VECTOR3
 
 	/// <summary>
@@ -117,5 +166,14 @@ public static class CustomExtensions {
 	/// </summary>
 	public static Vector3 Halfway (this Vector3 vector, Vector3 other) {
 		return Vector3.Lerp (vector, other, 0.5f);
+	}
+
+	// ---COLOR
+
+	/// <summary>
+	/// Returns the RGB components of the color in a vector.
+	/// </summary>
+	public static Vector3 ToRGBVector (this Color color) {
+		return new Vector3 (color.r, color.g, color.b);
 	}
 }

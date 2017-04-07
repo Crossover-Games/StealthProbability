@@ -6,6 +6,7 @@ using UnityEngine;
 /// This phase is when you're just looking around the map, planning out your turn. Leads into the DrawArrowPhase and dog turn.
 /// </summary>
 public class PlayerTurnIdlePhase : GameControlPhase {
+	
 	/// <summary>
 	/// Exit node to draw arrow phase. Needs to know the target cat.
 	/// </summary>
@@ -14,54 +15,42 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// <summary>
 	/// Exit node to dog turn phase.
 	/// </summary>
-	[SerializeField] private DogTurnPhase dogTurnPhase;
-
-	private bool catsAvailable = true;
-	/// <summary>
-	/// All cats the player can control.
-	/// </summary>
-	public List<Cat> allCats;
-
-	[Tooltip ("Parent of all cats in the scene.")]
-	[SerializeField] private GameObject catParent;
-
-	void Awake () {
-		allCats = new List<Cat> (catParent.GetComponentsInChildren<Cat> ());
-	}
+	[SerializeField] private DogSelectorPhase dogSelectorPhase;
 
 	/// <summary>
-	/// All tiles where the selected object may move to
-	/// </summary>
-	private List<Tile> shimmerInfo = new List<Tile> ();
-
-	/// <summary>
-	/// Moves cursor
+	/// Moves cursor and displays overlays. Never null
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
-		if (brain.tileManager.cursorTile != t) {
-			brain.tileManager.cursorTile = t;
-			RemoveShimmer ();
+		if (TileManager.cursorTile != t) {
+			TileManager.cursorTile = t;
+			UIManager.masterInfoBox.ClearAllData ();
+			foreach (TileDangerData tdd in t.dangerData) {
+				UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
+			}
 
 			if (t.occupant != null) {
-				if (t.occupant.characterType == CharacterType.Cat) {
-					shimmerInfo.Add (t);
-					for (int x = 0; x < (t.occupant as Cat).maxEnergy; x++) {
-						List<Tile> tempShimmer = shimmerInfo.Clone ();
-						foreach (Tile tmp in tempShimmer) {
-							foreach (Tile neighbor in tmp.allNeighbors) {
-								if (UniversalTileManager.IsValidMoveDestination (neighbor)) {
-									neighbor.shimmer = true;
-									shimmerInfo.Add (neighbor);
-								}
-							}
-						}
-					}
+				UIManager.masterInfoBox.headerText = t.occupant.name;
+				if (t.occupant.characterType == CharacterType.Cat && !t.occupant.grayedOut) {
+					TileManager.MassSetShimmer (t.AllTilesInRadius ((t.occupant as Cat).maxEnergy, true, false));
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
-					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts((t.occupant as Dog).lastVisited)) {
-						//while(next
+					HashSet<Tile> toShimmer = new HashSet<Tile> ();
+					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts((t.occupant as Dog))) {
+						PathingNode last = t.pathingNode;
+						PathingNode current = p;
+						while (current != null) {
+							toShimmer.Add (current.myTile);
+							PathingNode tempLast = current;
+							current = current.NextOnPath (last);
+							last = tempLast;
+						}
+						TileManager.MassSetShimmer (toShimmer);
 					}
 				}
+			}
+			else {
+				TileManager.ClearAllShimmer ();
+				UIManager.masterInfoBox.headerText = "-FLOOR-";
 			}
 		}
 		// once we have the holy grail info box working, we can put stuff like that in there too.
@@ -71,67 +60,41 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Move camera to double clicked tile.
 	/// </summary>
 	override public void TileDoubleClickEvent (Tile t) {
-		brain.cameraControl.SetCamFocusPoint (t.topCenterPoint);
+		CameraOverheadControl.SetCamFocusPoint (t.topCenterPoint);
 	}
 
 	/// <summary>
 	/// Switches to the drag arrow phase.
 	/// </summary>
 	override public void TileDragEvent (Tile t) {
-		if (brain.tileManager.cursorTile.occupant != null && brain.tileManager.cursorTile.occupant.characterType == CharacterType.Cat) {
+		if (Input.GetMouseButton (0) && TileManager.cursorTile.occupant != null && TileManager.cursorTile.occupant.characterType == CharacterType.Cat && !TileManager.cursorTile.occupant.grayedOut) {
 			ExitToDrawArrowPhase ();
 		}
 	}
 
 	/// <summary>
-	/// Reminds which cats are available to be moved.
+	/// allows you to control the camera
 	/// </summary>
-	override public void OnTakeControl () {	// should update the loose camera follow target to some custom point you control
-		CheckCatsAvailable ();
+	override public void OnTakeControl () {
+		CameraOverheadControl.dragControlAllowed = true;
 	}
 
 	override public void OnLeaveControl () {
-		RemoveShimmer ();
+		UIManager.masterInfoBox.ClearAllData ();		// maybe not
+		CameraOverheadControl.dragControlAllowed = false;
 	}
 
 	/// <summary>
 	/// Switches to the dog turn if all cats did their move
 	/// </summary>
 	override public void ControlUpdate () {
-		if (!catsAvailable) {
-			dogTurnPhase.TakeControl ();
+		if (!GameBrain.catManager.anyAvailable) {
+			dogSelectorPhase.TakeControl ();
 		}
 	}
 
 	private void ExitToDrawArrowPhase () {
-		drawArrowPhase.selectedCat = brain.tileManager.cursorTile.occupant as Cat;
+		drawArrowPhase.selectedCat = TileManager.cursorTile.occupant as Cat;
 		drawArrowPhase.TakeControl ();
-	}
-
-	private void CheckCatsAvailable () {
-		catsAvailable = false;
-		foreach (Cat c in allCats) {
-			if (c.ableToMove) {
-				catsAvailable = true;
-			}
-		}
-	}
-
-	/// <summary>
-	/// Un-grays all cats and allows them to move.
-	/// </summary>
-	public void RejuvenateAllCats () {
-		foreach (Cat c in allCats) {
-			c.ableToMove = true;
-			c.isGrayedOut = false;
-		}
-		catsAvailable = true;
-	}
-
-	private void RemoveShimmer () {
-		foreach (Tile t in shimmerInfo) {
-			t.shimmer = false;
-		}
-		shimmerInfo = new List<Tile> ();
 	}
 }

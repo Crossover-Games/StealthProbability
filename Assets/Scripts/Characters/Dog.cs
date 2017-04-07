@@ -16,7 +16,15 @@ public class Dog : GameCharacter {
 
 	public PathingNode lastVisited = null;
 
-	[SerializeField] private VisionPattern m_VisionPattern;
+	private PathingNode m_firstTurnNode;
+	/// <summary>
+	/// The dog only moves forward on the first turn. Null after the dog makes its first move.
+	/// </summary>
+	public PathingNode firstTurnNode {
+		get { return m_firstTurnNode; }
+	}
+
+	private VisionPattern m_VisionPattern;
 	/// <summary>
 	/// This dog's vision pattern.
 	/// </summary>
@@ -24,23 +32,47 @@ public class Dog : GameCharacter {
 		get{ return m_VisionPattern; }
 	}
 
+	override protected void Awake () {
+		base.Awake ();
+		m_VisionPattern = new VisionPattern (this);
+	}
+
+	void Start () {
+		Tile tempTile = myTile.GetNeighborInDirection (orientation);
+		if (tempTile != null) {
+			m_firstTurnNode = tempTile.pathingNode;
+		}
+	}
+
 	/// <summary>
 	/// Doggoveride. In addition to GameCharacter.MoveTo(Tile), this stores the pathing node of the last tile it visited.
 	/// that's not implemented yet.
 	/// </summary>
 	override public void MoveTo (Tile destination) {
-		if (UniversalTileManager.IsValidMoveDestination (destination)) {
+		if (TileManager.IsValidMoveDestination (destination)) {
+			ClearVisionPattern ();
 			lastVisited = myTile.pathingNode;
 		}
+		m_firstTurnNode = null;
 		base.MoveTo (destination);
+		ApplyVisionPattern ();
 	}
 
-	//also has vision pattern
+	/// <summary>
+	/// Applies the vision pattern to the ground. If any tile is under a cat, register to that cat.
+	/// </summary>
+	public void ApplyVisionPattern () {
+		foreach (TileDangerData tdd in m_VisionPattern.allTilesAffected) {
+			tdd.myTile.AddDangerData (tdd);
+		}
+	}
 
 	/// <summary>
-	/// For demonstration purposes, this dog moves to the next node in a hard coded ring.
+	/// Lifts this dog's vision pattern from the ground.
 	/// </summary>
-	public void DemoMoveAlongTrack () {
-		MoveTo (myTile.pathingNode.NextOnPath (lastVisited).myTile);
+	public void ClearVisionPattern () {
+		foreach (TileDangerData tdd in m_VisionPattern.allTilesAffected) {
+			tdd.myTile.RemoveDangerDataByDog (this);
+		}
 	}
 }

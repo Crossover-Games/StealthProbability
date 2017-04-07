@@ -16,7 +16,7 @@ public abstract class GameControlPhase : MonoBehaviour {
 	/// Puts this phase in control of the GameBrain. First, it calls the OnLeaveControl() of the previous phase, then calls this phase's OnTakeControl().
 	/// </summary>
 	public void TakeControl () {
-		brain.AssignControl (this);
+		GameBrain.AssignControl (this);
 	}
 
 	/// <summary>
@@ -67,13 +67,32 @@ public abstract class GameControlPhase : MonoBehaviour {
 	virtual public void MouseOverChangeEvent () {
 		// by default, do nothing
 	}
+
+	/// <summary>
+	/// Called by GameBrain when the cancel path button is clicked.
+	/// </summary>
+	virtual public void UICancelPathButtonEvent () {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// Called by GameBrain when the rest button is clicked.
+	/// </summary>
+	virtual public void UIRestButtonEvent () {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// Called by GameBrain when the action button is clicked.
+	/// </summary>
+	virtual public void UIActionButtonEvent () {
+		// by default, do nothing
+	}
 }
-
-
-
-
 // override public void OnTakeControl ()
 // override public void OnLeaveControl ()
 // override public void ControlUpdate ()
 // override public void TileClickEvent (Tile t)
+// override public void TileDragEvent (Tile t)
+// override public void TileDoubleClickEvent (Tile t)
 // override public void MouseOverChangeEvent ()

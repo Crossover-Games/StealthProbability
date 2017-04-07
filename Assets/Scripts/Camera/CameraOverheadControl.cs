@@ -7,30 +7,60 @@ using UnityEngine;
 /// </summary>
 public class CameraOverheadControl : MonoBehaviour {
 	[Tooltip ("Assign the main camera to this.")]
-	[SerializeField] private Transform cameraTransform;
+	[SerializeField] private Transform cameraRotationInstance;
+	/// <summary>
+	/// Transform that reads the pure rotation of the camera.
+	/// </summary>
+	private static Transform cameraRotation;
 
-	[Tooltip ("Assign the main camera to this.")]
-	[SerializeField] private LooseFollow cameraContraption;
+	[Tooltip ("Assign the main camera offset to this.")]
+	[SerializeField] private LooseFollow cameraContraptionInstance;
+	/// <summary>
+	/// Loose follow control for the camera.
+	/// </summary>
+	private static LooseFollow cameraContraption;
 
-	[Tooltip ("This is just some dummy thing to guide the camera along the invisible ceiling.")]
-	[SerializeField] private TransformLink pointer;
+	[Tooltip ("Link to the pointer")]
+	[SerializeField] private TransformLink pointerInstance;
+	/// <summary>
+	/// The pointer's link to the current target.
+	/// </summary>
+	private static TransformLink pointer;
 
-	private int cameraPlaneLayer;
-
-	void Awake () {
-		cameraPlaneLayer = LayerMask.GetMask ("Camera Plane");
-	}
+	[Tooltip ("Link to the pointer")]
+	[SerializeField] private DragCameraFollowPoint dragControlInstance;
+	/// <summary>
+	/// Enables/disables user control of camera.
+	/// </summary>
+	private static DragCameraFollowPoint dragControl;
 
 	/// <summary>
-	/// Tell the camera to stop moving. Ideally, there shouldn't be any reason to call this.
+	/// Layer mask for the camera plane.
 	/// </summary>
-	public void DisableCameraFollow () {
-		cameraContraption.target = null;
+	private static int cameraPlaneLayer;
+
+	/// <summary>
+	/// Adjusts the target point to go for the real camera instead of the rotational offset.
+	/// </summary>
+	private static Vector3 cameraOffset {
+		get {
+			return cameraContraption.transform.position - cameraRotation.position;
+		}
 	}
 
-	private Vector3 DirectionToCeiling {
+	void Awake () {
+		cameraContraptionInstance.target = pointerInstance.transform;
+		cameraPlaneLayer = LayerMask.GetMask ("Camera Plane");
+
+		cameraRotation = cameraRotationInstance;
+		cameraContraption = cameraContraptionInstance;
+		pointer = pointerInstance;
+		dragControl = dragControlInstance;
+	}
+
+	private static Vector3 directionToCeiling {
 		get {
-			Vector3 tmp = cameraTransform.rotation * Vector3.forward;
+			Vector3 tmp = cameraRotation.rotation * Vector3.forward;
 			tmp *= -1;
 			return tmp;
 		}
@@ -39,29 +69,41 @@ public class CameraOverheadControl : MonoBehaviour {
 	/// <summary>
 	/// The camera will focus on this static point. Use SetCamFollowTarget instead if you want to follow a moving object.
 	/// </summary>
-	public void SetCamFocusPoint (Vector3 location) {
+	public static void SetCamFocusPoint (Vector3 location) {
 		RaycastHit hit;
 
 		// raycasts from the target on the floor upwards to the ceiling
-		Physics.Raycast (location, DirectionToCeiling, out hit, Mathf.Infinity, cameraPlaneLayer);
+		Physics.Raycast (location, directionToCeiling, out hit, Mathf.Infinity, cameraPlaneLayer);
 
 		pointer.target = null;
-		pointer.transform.position = hit.point;
-		cameraContraption.target = pointer.transform;
+		pointer.transform.position = hit.point + cameraOffset;
 	}
 
 	/// <summary>
 	/// The camera will follow this object. Use SetCamFocusPoint instead if you want to look at a static point.
 	/// </summary>
-	public void SetCamFollowTarget (Transform thing) {
+	public static void SetCamFollowTarget (Transform thing) {
 		RaycastHit hit;
 
 		// raycasts from the target on the floor upwards to the ceiling
-		Physics.Raycast (thing.position, DirectionToCeiling, out hit, Mathf.Infinity, cameraPlaneLayer);
+		Physics.Raycast (thing.position, directionToCeiling, out hit, Mathf.Infinity, cameraPlaneLayer);
 
-		pointer.transform.position = hit.point;
+		pointer.transform.position = hit.point + cameraOffset;
 		pointer.target = thing;
-		cameraContraption.target = pointer.transform;
 	}
 
+	/// <summary>
+	/// The camera loses its association with the object it is tracking and stops at its current position.
+	/// </summary>
+	public static void StopFollowing () {
+		pointer.target = null;
+	}
+
+	/// <summary>
+	/// Allows the player to drag the camera with the right mouse button.
+	/// </summary>
+	public static bool dragControlAllowed {
+		get { return dragControl.enabled; }
+		set { dragControl.enabled = value; }
+	}
 }

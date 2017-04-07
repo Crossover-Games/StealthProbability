@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - MapTilesParent
+  - DogParent
+  - CatParent
   - Cat
-  - Dog
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - 
   - Camera Plane
-  - 
+  - 2D
   - 
   - 
   - 

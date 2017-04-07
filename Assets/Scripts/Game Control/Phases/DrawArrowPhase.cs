@@ -3,20 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Game phase for when you're drawing the arrow to move a cat. Leads only into the ArrowMenuPhase.
+/// Game phase for when you're drawing the arrow to move a cat. Leads only into the CatContextMenuPhase.
 /// </summary>
 public class DrawArrowPhase : GameControlPhase {
-	// override public void TileClickEvent (Tile t)
 
 	/// <summary>
 	/// Exit node to cat context menu phase. Needs to know the target cat and the path.
 	/// </summary>
 	[SerializeField] private CatContextMenuPhase catContextMenuPhase;
-
-	/// <summary>
-	/// DEMO ONLY, changes demo music
-	/// </summary>
-	[SerializeField] private AudioLowPassFilter lowPass;
 
 	/// <summary>
 	/// The ordered path of all tiles for which the arrow follows.
@@ -43,7 +37,7 @@ public class DrawArrowPhase : GameControlPhase {
 			foreach (Tile t in tempTiles) {
 				foreach (Compass.Direction d in Compass.allDirections) {
 					Tile tmp = t.GetNeighborInDirection (d);
-					if (!tilePath.Contains (tmp) && UniversalTileManager.IsValidMoveDestination (tmp)) {
+					if (!tilePath.Contains (tmp) && TileManager.IsValidMoveDestination (tmp)) {
 						availableTiles.Add (tmp);
 					}
 				}
@@ -52,32 +46,23 @@ public class DrawArrowPhase : GameControlPhase {
 
 		availableTiles.Remove (tilePath.LastElement ());
 
-		foreach (Tile t in previouslyHighlighted) {
-			if (!availableTiles.Contains (t)) {
-				t.shimmer = false;
-			}
-		}
-
-		foreach (Tile t in availableTiles) {
-			t.shimmer = true;
-		}
+		TileManager.MassSetShimmer (availableTiles);
 	}
 		
 	override public void OnTakeControl () {
 		arrowSegmentParent = new GameObject ();
+		//UniversalTileManager.cursorTile = null;
 
 		tilePath = new List<Tile> ();
 		tilePath.Add (selectedCat.myTile);
 
 		UpdateAvailableTiles ();
-
-		lowPass.cutoffFrequency = 1000f;
 	}
 
 	override public void MouseOverChangeEvent () {
 		// if the moused over tile is a valid step in the path
-		if (tilePath.Count <= selectedCat.maxEnergy && availableTiles.Contains (brain.tileManager.tileMousedOver) && tilePath.LastElement ().IsNeighbor (brain.tileManager.tileMousedOver)) {
-			AddTileToPath (brain.tileManager.tileMousedOver);
+		if (tilePath.Count <= selectedCat.maxEnergy && availableTiles.Contains (TileManager.tileMousedOver) && tilePath.LastElement ().IsNeighbor (TileManager.tileMousedOver)) {
+			AddTileToPath (TileManager.tileMousedOver);
 		}
 	}
 		
@@ -86,22 +71,23 @@ public class DrawArrowPhase : GameControlPhase {
 	/// </summary>
 	override public void ControlUpdate () {
 		if (Input.GetMouseButton (0) == false) {
-			brain.tileManager.cursorTile = null;
+			TileManager.cursorTile = null;
 
 			catContextMenuPhase.tilePath = tilePath;
 			catContextMenuPhase.selectedCat = selectedCat;
+			catContextMenuPhase.arrowSegmentParent = arrowSegmentParent;
 			catContextMenuPhase.TakeControl ();
 		}
-		else if (brain.tileManager.tileMousedOver != tilePath.LastElement () && availableTiles.Contains (brain.tileManager.tileMousedOver)) {
+		else if (TileManager.tileMousedOver != tilePath.LastElement () && availableTiles.Contains (TileManager.tileMousedOver)) {
 			// simple solution: don't run the shortest path algorithm
-			if (brain.tileManager.tileMousedOver.IsNeighbor (tilePath.LastElement ())) {
-				AddTileToPath (brain.tileManager.tileMousedOver);
+			if (TileManager.tileMousedOver.IsNeighbor (tilePath.LastElement ())) {
+				AddTileToPath (TileManager.tileMousedOver);
 			}
 			else {
 				List<Tile> pathMap = availableTiles.ToList ();
 				Tile lastVisited = tilePath.LastElement ();
 				pathMap.Add (lastVisited);
-				List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, brain.tileManager.tileMousedOver, pathMap);
+				List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, TileManager.tileMousedOver, pathMap);
 				newPath = newPath.Subset (1);
 				foreach (Tile t in newPath) {
 					AddTileToPath (t);
@@ -112,11 +98,7 @@ public class DrawArrowPhase : GameControlPhase {
 
 	override public void OnLeaveControl () {
 		selectedCat = null;
-		GameObject.Destroy (arrowSegmentParent);
-
-		foreach (Tile t in availableTiles) {
-			t.shimmer = false;
-		}
+		TileManager.ClearAllShimmer ();
 	}
 
 	/// <summary>

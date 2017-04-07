@@ -7,15 +7,6 @@ using System.Collections.Generic;
 /// </summary>
 public class Tile : MonoBehaviour {
 
-	// universal tile manager
-	private UniversalTileManager theManager;
-	/// <summary>
-	/// Reference to the scene's universal tile manager.
-	/// </summary>
-	public UniversalTileManager tileManager {
-		get{ return theManager; }
-	}
-
 	// visualization
 	[Tooltip ("Set a reference to its grid square visualizer object.")]
 	[SerializeField] private TileGridUnitVisualizer visualizer;
@@ -78,14 +69,13 @@ public class Tile : MonoBehaviour {
 	}
 
 	void Awake () {
-		theManager = GameObject.FindGameObjectWithTag ("GameController").GetComponent<UniversalTileManager> ();
 		myCollider = GetComponent<Collider> ();
 		myPathingNode = GetComponent<PathingNode> ();
 
 		RegisterNeighboringTiles ();
 
 		visualizer.AssociateTile (this);
-		theManager.RegisterTileSetup (this);
+		TileManager.RegisterTileSetup (this);
 	}
 
 	private void RegisterNeighboringTiles () {
@@ -174,6 +164,22 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Returns a list of all neighboring tiles that can currently be stepped on.
+	/// </summary>
+	public List<Tile> allTraversableNeighbors {
+		get {
+			List<Tile> tmp = new List<Tile> ();
+			foreach (Compass.Direction direction in Compass.allDirections) {
+				Tile possibleNeighbor = GetNeighborInDirection (direction);
+				if (TileManager.IsValidMoveDestination (possibleNeighbor)) {
+					tmp.Add (possibleNeighbor);
+				}
+			}
+			return tmp;
+		}
+	}
+
+	/// <summary>
 	/// Checks if this tile is not obstructed and is not a wall. Not related to paths or energy.
 	/// </summary>
 	public bool IsValidMoveDestination {
@@ -189,11 +195,76 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// This tile's danger color.
+	/// Temporary and always-changing list of currently applied danger squares.
+	/// </summary>
+	private List<TileDangerData> visionInfo = new List<TileDangerData> ();
+
+	/// <summary>
+	/// Adds one piece of tile danger data to this tile. Changes color, enables visualizer, registers to cat.
+	/// </summary>
+	public void AddDangerData (TileDangerData data) {
+		visualizer.dangerVisualizerEnabled = true;
+		if (myOccupant != null && myOccupant.characterType == CharacterType.Cat) {
+			(myOccupant as Cat).RegisterDangerData (data);
+		}
+		visionInfo.Add (data);
+		UpdateDangerColor ();
+	}
+
+	/// <summary>
+	/// Remove the danger imposed by a specified dog.
+	/// </summary>
+	public void RemoveDangerDataByDog (Dog dog) {
+		TileDangerData[] allData = visionInfo.ToArray ();
+		foreach (TileDangerData tdd in allData) {
+			if (tdd.watchingDog == dog) {
+				visionInfo.Remove (tdd);
+			}
+		}
+		if (visionInfo.Count == 0) {
+			visualizer.dangerVisualizerEnabled = false;
+		}
+		else {
+			UpdateDangerColor ();
+		}
+	}
+
+	/// <summary>
+	/// Practically, there should be no need to call this.
+	/// Remove all tile danger data elements from this tile. Also removes the visualizer.
+	/// </summary>
+	public void ClearAllDangerData () {
+		visualizer.dangerVisualizerEnabled = false;
+		visionInfo = new List<TileDangerData> ();
+	}
+
+	/// <summary>
+	/// Temporary. Only overlays the highest color.
+	/// </summary>
+	private void UpdateDangerColor () {
+		float maxDanger = Mathf.NegativeInfinity;
+		Color currentColor = Color.white;
+		foreach (TileDangerData tdd in visionInfo) {
+			if (tdd.danger > maxDanger) {
+				maxDanger = tdd.danger;
+				currentColor = tdd.dangerColor;
+			}
+		}
+		visualizer.dangerColor = currentColor;
+	}
+
+	/// <summary>
+	/// All danger data for all dogs currently observing this tile.
+	/// </summary>
+	public TileDangerData[] dangerData {
+		get { return visionInfo.ToArray (); }
+	}
+
+	/// <summary>
+	/// This tile's danger color. Changes according to the danger data on this tile.
 	/// </summary>
 	public Color dangerColor {
 		get{ return visualizer.dangerColor; }
-		set{ visualizer.dangerColor = value; }
 	}
 
 	/// <summary>
@@ -204,13 +275,58 @@ public class Tile : MonoBehaviour {
 		set{ visualizer.dangerVisualizerEnabled = value; }
 	}
 
-	[SerializeField] private GameObject shimmerParticles;
+	[SerializeField] private GameObject shimmerObject;
 	/// <summary>
 	/// Pretty much placeholder, but works anyway. 
 	/// A visual shimmer effect used for highlights other than danger squares.
 	/// </summary>
 	public bool shimmer {
-		get { return shimmerParticles.activeSelf; }
-		set { shimmerParticles.SetActive (value); }
+		get { return shimmerObject.activeSelf; }
+		set { 
+			if (value != shimmerObject.activeSelf) {
+				shimmerObject.SetActive (value);
+				if (value) {
+					TileManager.RegisterShimmer (this);
+				}
+				else {
+					TileManager.UnregisterShimmer (this);
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Only called by UniversalTileManager. 
+	/// </summary>
+	public void SetCosmeticShimmer (bool state) {
+		shimmerObject.SetActive (state);
+	}
+
+	/// <summary>
+	/// All tiles in radius. Radius 0 is just this tile. TraversableOnly means that walls or filled squares won't be included.
+	/// </summary>
+	public List<Tile> AllTilesInRadius (int radius, bool traversableOnly, bool includeSelf) {
+		HashSet<Tile> all = new HashSet<Tile> ();
+		all.Add (this);
+		for (int x = 0; x < radius; x++) {
+			HashSet<Tile> tempAll = all.Clone ();
+			foreach (Tile t in all) {
+				if (traversableOnly) {
+					foreach (Tile n in t.allTraversableNeighbors) {
+						tempAll.Add (n);
+					}
+				}
+				else {
+					foreach (Tile n in t.allNeighbors) {
+						tempAll.Add (n);
+					}
+				}
+			}
+			all = tempAll;
+		}
+		if (!includeSelf) {
+			all.Remove (this);
+		}
+		return all.ToList ();
 	}
 }
