@@ -9,7 +9,6 @@ public class DragCameraFollowPoint : MonoBehaviour {
 
 	[SerializeField] private float followSpeed;
 
-	[Tooltip ("Assign the main camera to this.")]
 	[SerializeField] private Transform cameraTransform;
 
 	void Update () {

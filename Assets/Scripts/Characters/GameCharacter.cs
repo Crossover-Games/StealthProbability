@@ -6,11 +6,8 @@ using System.Collections.Generic;
 /// Represents a player unit or enemy guard.
 /// </summary>
 public abstract class GameCharacter : MonoBehaviour {
-	/// <summary>
-	/// Reference to the scene's GameBrain.
-	/// </summary>
-	private GameBrain brain;
 
+	[Tooltip ("This character's main sound")]
 	[SerializeField] private AudioSource mySound;
 
 	/// <summary>
@@ -78,7 +75,6 @@ public abstract class GameCharacter : MonoBehaviour {
 	}
 
 	virtual protected void Awake () {
-		brain = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameBrain> ();
 		FindMyStartingTile ();
 		myRenderers = GetComponentsInChildren<Renderer> ();
 		myColor = myRenderers [0].material.color;

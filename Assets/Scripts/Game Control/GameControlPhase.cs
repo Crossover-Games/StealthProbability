@@ -8,11 +8,6 @@ using UnityEngine;
 public abstract class GameControlPhase : MonoBehaviour {
 
 	/// <summary>
-	/// Reference to the scene's GameBrain
-	/// </summary>
-	[SerializeField] protected GameBrain brain;
-
-	/// <summary>
 	/// Puts this phase in control of the GameBrain. First, it calls the OnLeaveControl() of the previous phase, then calls this phase's OnTakeControl().
 	/// </summary>
 	public void TakeControl () {
