@@ -29,6 +29,10 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// The amount of time it takes to step from one tile to the next.
 	/// </summary>
 	abstract public float stepAnimationTime { get; }
+	/// <summary>
+	/// The fraction of stepAnimationTime spent rotating. 
+	/// </summary>
+	abstract public float stepRotationFraction { get; }
 
 	/// <summary>
 	/// Encapsulated variable for myTile.
@@ -107,10 +111,13 @@ public abstract class GameCharacter : MonoBehaviour {
 
 			if (previous.IsNeighbor (myTile)) {
 				Compass.Direction nextDirection = previous.GetDirectionOfNeighbor (myTile);
+				float moveTime = stepAnimationTime;
 				if (orientation != nextDirection) {
-					AnimationManager.AddAnimation (transform, new AnimationDestination (null, new QuaternionReference (Compass.DirectionToRotation (nextDirection), null, stepAnimationTime, InterpolationMethod.Linear)));
+					orientation = nextDirection;
+					moveTime = stepAnimationTime - stepAnimationTime * stepRotationFraction;
+					AnimationManager.AddAnimation (transform, new AnimationDestination (null, new QuaternionReference (Compass.DirectionToRotation (nextDirection)), null, stepAnimationTime * stepRotationFraction, InterpolationMethod.Sinusoidal));
 				}
-				AnimationManager.AddAnimation (transform, new AnimationDestination (new Vector3Reference (myTile.topCenterPoint), null, null, stepAnimationTime, InterpolationMethod.Sinusoidal));
+				AnimationManager.AddAnimation (transform, new AnimationDestination (new Vector3Reference (myTile.topCenterPoint), null, null, moveTime, InterpolationMethod.Sinusoidal));
 			}
 			else {
 				transform.position = myTile.topCenterPoint;

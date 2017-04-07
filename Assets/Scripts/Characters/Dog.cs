@@ -14,6 +14,10 @@ public class Dog : GameCharacter {
 		get { return 0.5f; }
 	}
 
+	override public float stepRotationFraction {
+		get { return 0.3f; }
+	}
+
 	public PathingNode lastVisited = null;
 
 	private PathingNode m_firstTurnNode;
