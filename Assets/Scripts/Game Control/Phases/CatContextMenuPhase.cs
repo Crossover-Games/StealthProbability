@@ -33,14 +33,14 @@ public class CatContextMenuPhase : GameControlPhase {
 	[HideInInspector] public List<Tile> tilePath;
 
 	override public void OnTakeControl () {
-		//brain.uiManager.CenterPathEndMenuOnMouse ();
+		//UIManager.CenterPathEndMenuOnMouse ();
 		Tile last = tilePath.LastElement ();
-		brain.uiManager.CenterPathEndMenuOnWorldPoint (last.topCenterPoint);
-		brain.uiManager.pathEndMenuState = true;
+		UIManager.CenterPathEndMenuOnWorldPoint (last.topCenterPoint);
+		UIManager.pathEndMenuState = true;
 		last.shimmer = true;
-		brain.tileManager.cursorTile = last;
+		TileManager.cursorTile = last;
 
-		brain.cameraControl.dragControlAllowed = true;
+		CameraOverheadControl.dragControlAllowed = true;
 	}
 
 	public override void UIRestButtonEvent () {
@@ -54,10 +54,10 @@ public class CatContextMenuPhase : GameControlPhase {
 	}
 
 	override public void OnLeaveControl () {
-		brain.uiManager.pathEndMenuState = false;
-		brain.tileManager.ClearAllShimmer ();
-		brain.tileManager.cursorTile = null;
+		UIManager.pathEndMenuState = false;
+		TileManager.ClearAllShimmer ();
+		TileManager.cursorTile = null;
 		GameObject.Destroy (arrowSegmentParent);
-		brain.cameraControl.dragControlAllowed = false;
+		CameraOverheadControl.dragControlAllowed = false;
 	}
 }

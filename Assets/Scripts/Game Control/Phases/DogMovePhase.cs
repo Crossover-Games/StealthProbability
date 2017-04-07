@@ -8,11 +8,6 @@ using UnityEngine;
 public class DogMovePhase : GameControlPhase {
 
 	/// <summary>
-	/// a hack
-	/// </summary>
-	[SerializeField] private HACKCatReqtPhase reqt;
-
-	/// <summary>
 	/// The dog selector phase. No info required.
 	/// </summary>
 	[SerializeField] private DogSelectorPhase dogSelectorPhase;
@@ -51,7 +46,7 @@ public class DogMovePhase : GameControlPhase {
 
 	override public void OnTakeControl () {
 		selecting = true;
-		brain.cameraControl.SetCamFollowTarget (selectedDog.transform);
+		CameraOverheadControl.SetCamFollowTarget (selectedDog.transform);
 	}
 
 	override public void ControlUpdate () {
@@ -83,18 +78,12 @@ public class DogMovePhase : GameControlPhase {
 	/// Ends the dog movement and decides what to do next. Includes detection check and advancing the phase.
 	/// </summary>
 	private void EndDogMovement () {
-
-		bool HACK = false;
-
-		Cat[] allCats = brain.catManager.allCharacters;
+		Cat[] allCats = GameBrain.catManager.allCharacters;
 		foreach (Cat c in allCats) {
 			if (c.inDanger) {
 				if (c.DetectionCheck (selectedDog)) {
-					brain.catManager.Remove (c);
-					//GameObject.Destroy (c.gameObject);
-					reqt.rektCat = c;
-					reqt.TakeControl ();
-					HACK = true;
+					GameBrain.catManager.Remove (c);
+					// destroy cat
 				}
 				else {
 					c.ClearDangerByDog (selectedDog);
@@ -102,20 +91,18 @@ public class DogMovePhase : GameControlPhase {
 			}
 		}
 
-		if (!HACK) {
-
-			if (brain.dogManager.availableCharacters.Length == 1) {
-				brain.cameraControl.SetCamFocusPoint (brain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
-				brain.dogManager.RejuvenateAll ();
-				brain.catManager.RejuvenateAll ();
-				brain.uiManager.masterInfoBox.ClearAllData ();
-				brain.uiManager.masterInfoBox.headerText = "";
-				playerTurnIdlePhase.TakeControl ();
-			}
-			else {
-				selectedDog.grayedOut = true;
-				dogSelectorPhase.TakeControl ();
-			}
+		if (GameBrain.dogManager.availableCharacters.Length == 1) {
+			CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
+			GameBrain.dogManager.RejuvenateAll ();
+			GameBrain.catManager.RejuvenateAll ();
+			UIManager.masterInfoBox.ClearAllData ();
+			UIManager.masterInfoBox.headerText = "";
+			playerTurnIdlePhase.TakeControl ();
 		}
+		else {
+			selectedDog.grayedOut = true;
+			dogSelectorPhase.TakeControl ();
+		}
+
 	}
 }

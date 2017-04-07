@@ -7,15 +7,6 @@ using System.Collections.Generic;
 /// </summary>
 public class Tile : MonoBehaviour {
 
-	// universal tile manager
-	private UniversalTileManager theManager;
-	/// <summary>
-	/// Reference to the scene's universal tile manager.
-	/// </summary>
-	public UniversalTileManager tileManager {
-		get{ return theManager; }
-	}
-
 	// visualization
 	[Tooltip ("Set a reference to its grid square visualizer object.")]
 	[SerializeField] private TileGridUnitVisualizer visualizer;
@@ -78,14 +69,13 @@ public class Tile : MonoBehaviour {
 	}
 
 	void Awake () {
-		theManager = GameObject.FindGameObjectWithTag ("GameController").GetComponent<UniversalTileManager> ();
 		myCollider = GetComponent<Collider> ();
 		myPathingNode = GetComponent<PathingNode> ();
 
 		RegisterNeighboringTiles ();
 
 		visualizer.AssociateTile (this);
-		theManager.RegisterTileSetup (this);
+		TileManager.RegisterTileSetup (this);
 	}
 
 	private void RegisterNeighboringTiles () {
@@ -181,7 +171,7 @@ public class Tile : MonoBehaviour {
 			List<Tile> tmp = new List<Tile> ();
 			foreach (Compass.Direction direction in Compass.allDirections) {
 				Tile possibleNeighbor = GetNeighborInDirection (direction);
-				if (UniversalTileManager.IsValidMoveDestination (possibleNeighbor)) {
+				if (TileManager.IsValidMoveDestination (possibleNeighbor)) {
 					tmp.Add (possibleNeighbor);
 				}
 			}
@@ -296,10 +286,10 @@ public class Tile : MonoBehaviour {
 			if (value != shimmerObject.activeSelf) {
 				shimmerObject.SetActive (value);
 				if (value) {
-					theManager.RegisterShimmer (this);
+					TileManager.RegisterShimmer (this);
 				}
 				else {
-					theManager.UnregisterShimmer (this);
+					TileManager.UnregisterShimmer (this);
 				}
 			}
 		}

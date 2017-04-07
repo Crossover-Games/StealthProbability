@@ -6,27 +6,40 @@ using UnityEngine;
 /// Controls various aspects of the UI. Largely undeveloped currently.
 /// </summary>
 public class UIManager : MonoBehaviour {
-	// control the thing that
 
-	[SerializeField] private GameBrain brain;
-	[SerializeField] private Canvas canvas;
-	private RectTransform canvasRect;
+	[SerializeField] private Canvas canvasInstance;
+	/// <summary>
+	/// The UI canvas.
+	/// </summary>
+	private static Canvas canvas;
+	/// <summary>
+	/// RectTransform associated with the UI canvas.
+	/// </summary>
+	private static RectTransform canvasRect;
 
-	[SerializeField] private RectTransform pathEndMenu;
+	[SerializeField] private RectTransform pathEndMenuInstance;
+	/// <summary>
+	/// The path end menu.
+	/// </summary>
+	private static RectTransform pathEndMenu;
 
-	private Vector3Reference followPoint = null;
+	private static Vector3Reference followPoint = null;
 
 
-	[SerializeField] private MasterInfoBox m_infoBox;
+	[SerializeField] private MasterInfoBox infoBoxInstance;
+	private static MasterInfoBox m_infoBox;
 	/// <summary>
 	/// Controls the master text box that provides info on the selection.
 	/// </summary>
-	public MasterInfoBox masterInfoBox {
+	public static MasterInfoBox masterInfoBox {
 		get { return m_infoBox; }
 	}
 
 	void Awake () {
-		canvasRect = canvas.GetComponent<RectTransform> ();
+		m_infoBox = infoBoxInstance;
+		canvas = canvasInstance;
+		canvasRect = canvasInstance.GetComponent<RectTransform> ();
+		pathEndMenu = pathEndMenuInstance;
 	}
 
 	void LateUpdate () {
@@ -38,7 +51,7 @@ public class UIManager : MonoBehaviour {
 	/// <summary>
 	/// State of the path end menu.
 	/// </summary>
-	public bool pathEndMenuState {
+	public static bool pathEndMenuState {
 		get { return pathEndMenu.gameObject.activeSelf; }
 		set { pathEndMenu.gameObject.SetActive (value); }
 	}
@@ -46,7 +59,7 @@ public class UIManager : MonoBehaviour {
 	/// <summary>
 	/// Centers the path end menu on the mouse position.
 	/// </summary>
-	public void CenterPathEndMenuOnMouse () {
+	public static void CenterPathEndMenuOnMouse () {
 		Vector3 screenPoint = Input.mousePosition;
 		screenPoint.z = canvas.planeDistance;
 		pathEndMenu.position = canvas.worldCamera.ScreenToWorldPoint (screenPoint);
@@ -55,17 +68,15 @@ public class UIManager : MonoBehaviour {
 	/// <summary>
 	/// Centers the path end menu on a specific world point. 
 	/// </summary>
-	public void CenterPathEndMenuOnWorldPoint (Vector3 point) {
+	public static void CenterPathEndMenuOnWorldPoint (Vector3 point) {
 		followPoint = new Vector3Reference (point);
 	}
 
-	private void PathEndMenuTracking () {
+	private static void PathEndMenuTracking () {
 		Vector2 viewportPosition = canvas.worldCamera.WorldToViewportPoint (followPoint.vector);
 		Vector2 WorldObject_ScreenPosition = new Vector2 (
 			                                     ((viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f)),
 			                                     ((viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f)));
 		pathEndMenu.anchoredPosition = WorldObject_ScreenPosition;
 	}
-
-	//public void
 }

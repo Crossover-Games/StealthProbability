@@ -85,7 +85,7 @@ public class Cat : GameCharacter {
 	}
 
 	override public void MoveTo (Tile destination) {
-		if (UniversalTileManager.IsValidMoveDestination (destination)) {
+		if (TileManager.IsValidMoveDestination (destination)) {
 			foreach (TileDangerData tdd in destination.dangerData) {
 				dangerData.Add (tdd);
 			}

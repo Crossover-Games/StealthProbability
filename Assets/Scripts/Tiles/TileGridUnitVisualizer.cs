@@ -33,10 +33,10 @@ public class TileGridUnitVisualizer : MonoBehaviour {
 	}
 
 	void OnMouseEnter () {
-		myTile.tileManager.RegisterMouseEnter (myTile);
+		TileManager.RegisterMouseEnter (myTile);
 	}
 	void OnMouseExit () {
-		myTile.tileManager.CheckIfUnregisterIsRequired (myTile);
+		TileManager.CheckIfUnregisterIsRequired (myTile);
 	}
 
 	private bool mouseOverVisual = false;

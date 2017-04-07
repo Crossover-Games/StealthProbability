@@ -7,15 +7,6 @@ using UnityEngine;
 /// </summary>
 public class GameBrain : MonoBehaviour {
 
-	/// <summary>
-	/// forcibly stops the controlling object and forces the camera on the first cat
-	/// </summary>
-	public void JAMHACK () {
-		inControl = null;
-		myCameraControl.SetCamFocusPoint (m_catManager.allCharacters [0].myTile.topCenterPoint);
-	}
-
-
 	[Tooltip ("The first phase. Its OnTakeControl will be called.")]
 	[SerializeField] private GameControlPhase startingPhase;
 
@@ -24,14 +15,13 @@ public class GameBrain : MonoBehaviour {
 	/// </summary>
 	private static GameControlPhase inControl = null;
 
-
 	// ---REFERENCES
 
-	[SerializeField] private UniversalTileManager universalTileManager;
+	[SerializeField] private TileManager universalTileManager;
 	/// <summary>
 	/// Reference to the scene's universal tile manager.
 	/// </summary>
-	public UniversalTileManager tileManager {
+	public TileManager tileManager {
 		get { return universalTileManager; }
 	}
 		
@@ -43,27 +33,19 @@ public class GameBrain : MonoBehaviour {
 		get { return myAnimationManager; }
 	}
 
-	[SerializeField] private CameraOverheadControl myCameraControl;
-	/// <summary>
-	/// Contains methods to control the camera.
-	/// </summary>
-	public CameraOverheadControl cameraControl {
-		get{ return myCameraControl; }
-	}
-
-	private TeamMananger<Cat> m_catManager;
+	private static TeamMananger<Cat> m_catManager;
 	/// <summary>
 	/// Has knowledge of all cats.
 	/// </summary>
-	public TeamMananger<Cat> catManager {
+	public static TeamMananger<Cat> catManager {
 		get { return m_catManager; }
 	}
 
-	private TeamMananger<Dog> m_dogManager;
+	private static TeamMananger<Dog> m_dogManager;
 	/// <summary>
 	/// Has knowledge of all dogs.
 	/// </summary>
-	public TeamMananger<Dog> dogManager {
+	public static TeamMananger<Dog> dogManager {
 		get { return m_dogManager; }
 	}
 
@@ -163,7 +145,7 @@ public class GameBrain : MonoBehaviour {
 	/// <summary>
 	/// Calls the operating GameControlPhase's UICancelPathButtonEvent().
 	/// </summary>
-	public static void InstanceRaiseUICancelPathButtonEvent () {
+	public void InstanceRaiseUICancelPathButtonEvent () {
 		GameBrain.RaiseUICancelPathButtonEvent ();
 	}
 

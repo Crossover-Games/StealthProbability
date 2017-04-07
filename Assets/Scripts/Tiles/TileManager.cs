@@ -4,45 +4,49 @@ using System.Collections.Generic;
 /// <summary>
 /// Manages mouse interaction for tiles and controls the pointer cursor.
 /// </summary>
-public class UniversalTileManager : MonoBehaviour {
+public class TileManager : MonoBehaviour {
 
-	[SerializeField] private AudioSource dogSound;
-	[SerializeField] private AudioSource catSound;
-
-	private Tile prevMousedOver = null;
-	private Tile mousedOver = null;
+	private static Tile prevMousedOver = null;
+	private static Tile mousedOver = null;
 	/// <summary>
 	/// The tile the mouse cursor is currently hovering over.
 	/// </summary>
-	public Tile tileMousedOver {
+	public static Tile tileMousedOver {
 		get{ return mousedOver; }
 	}
 
-	private HashSet<Tile> s_allTiles = new HashSet<Tile> ();
-	private Tile[] a_allTiles;
-	public Tile[] allTiles {
+	/// <summary>
+	/// Set of all tiles. Forgotten after start.
+	/// </summary>
+	private static HashSet<Tile> s_allTiles = new HashSet<Tile> ();
+	/// <summary>
+	/// Array of all tiles. Encapsulated by allTiles. Exists for time efficiency.
+	/// </summary>
+	private static Tile[] a_allTiles;
+
+	/// <summary>
+	/// All tiles in the level.
+	/// </summary>
+	public static Tile[] allTiles {
 		get{ return a_allTiles; }
 	}
 
 	/// <summary>
-	/// Reference to the scene's GameBrain.
+	/// Reference to cursor with tile. Please do not modify directly. Encapsulated by cursorTile
 	/// </summary>
-	[SerializeField] private GameBrain brain;
+	private static Tile cursored = null;
 
-	/// <summary>
-	/// Reference to cursor with tile. Please do not modify directly.
-	/// </summary>
-	private Tile cursored = null;
 
+	[SerializeField] private GameObject arrowCursorInstance;
 	/// <summary>
 	/// The game object for the arrow cursor.
 	/// </summary>
-	[SerializeField] private GameObject arrowCursor;
+	private static GameObject arrowCursor;
 
 	/// <summary>
 	/// Gets or sets the tile with the arrow cursor pointing over it. Set it to null to disable it.
 	/// </summary>
-	public Tile cursorTile {
+	public static Tile cursorTile {
 		get { return cursored; }
 		set { 
 			if (value == null) {
@@ -52,48 +56,38 @@ public class UniversalTileManager : MonoBehaviour {
 				if (cursored != value) {
 					arrowCursor.transform.position = value.cursorConnectionPoint;
 					arrowCursor.SetActive (true);
-
-					// lel factor
-					if (value.occupant != null) {
-						if (value.occupant.characterType == CharacterType.Cat) {
-							catSound.Play ();
-						}
-						else if (value.occupant.characterType == CharacterType.Dog) {
-							dogSound.Play ();
-						}
-					}
 				}
 			}
 			cursored = value;
 		}
 	}
 
-	private HashSet<Tile> m_shimmering = new HashSet<Tile> ();
+	private static HashSet<Tile> m_shimmering = new HashSet<Tile> ();
 	/// <summary>
 	/// A list of all shimmering tiles.
 	/// </summary>
-	public Tile[] shimmeringTiles {
+	public static Tile[] shimmeringTiles {
 		get { return m_shimmering.ToArray (); }
 	}
 
 	/// <summary>
 	/// Only called by Tile. Registers tile t as one of the shimmering tiles.
 	/// </summary>
-	public void RegisterShimmer (Tile t) {
+	public static void RegisterShimmer (Tile t) {
 		m_shimmering.Add (t);
 	}
 
 	/// <summary>
 	/// Only called by Tile. Removes tile t as one of the shimmering tiles.
 	/// </summary>
-	public void UnregisterShimmer (Tile t) {
+	public static void UnregisterShimmer (Tile t) {
 		m_shimmering.Remove (t);
 	}
 
 	/// <summary>
 	/// Remove the shimmer effect from all tiles.
 	/// </summary>
-	public void ClearAllShimmer () {
+	public static void ClearAllShimmer () {
 		foreach (Tile t in m_shimmering) {
 			t.SetCosmeticShimmer (false);
 		}
@@ -103,7 +97,7 @@ public class UniversalTileManager : MonoBehaviour {
 	/// <summary>
 	/// Sets these tiles to be the only ones shimmering. Unshimmers all others.
 	/// </summary>
-	public void MassSetShimmer (ICollection<Tile> tiles) {
+	public static void MassSetShimmer (ICollection<Tile> tiles) {
 		HashSet<Tile> oldTiles = m_shimmering.Clone ();
 		HashSet<Tile> newTiles = new HashSet<Tile> (tiles);
 
@@ -121,42 +115,52 @@ public class UniversalTileManager : MonoBehaviour {
 	/// <summary>
 	/// Only to be called in Tile.OnMouseEnter().
 	/// </summary>
-	public void RegisterMouseEnter (Tile t) {
+	public static void RegisterMouseEnter (Tile t) {
 		mousedOver = t;
 		mousedOver.mouseOverVisualState = true;
 	}
 	/// <summary>
 	/// Only to be called in Tile.OnMouseExit(). If you mouse off the map rather than on to another tile, the game needs to know you aren't still lingering on some tile. Though less straightforward, it's faster than checking every update.
 	/// </summary>
-	public void CheckIfUnregisterIsRequired (Tile t) {
+	public static void CheckIfUnregisterIsRequired (Tile t) {
 		t.mouseOverVisualState = false;
 		if (mousedOver == t) {
 			mousedOver = null;
 		}
 	}
 
-	public void RegisterTileSetup (Tile t) {
+	/// <summary>
+	/// On setup, let the tile manager know that this tile exists. Does nothing if not called in Awake.
+	/// </summary>
+	public static void RegisterTileSetup (Tile t) {
 		s_allTiles.Add (t);
+	}
+
+	void Awake () {
+		arrowCursor = arrowCursorInstance;
 	}
 
 	void Start () {
 		a_allTiles = s_allTiles.ToArray ();
 	}
 		
-	private float DOUBLE_CLICK_WINDOW = 0.5F;
-	private float doubleClickTimeElapsed = 0f;
-	private Tile doubleClickMemory = null;
-	private Tile dragMemory = null;
+	private static float DOUBLE_CLICK_WINDOW = 0.5F;
+	private static float doubleClickTimeElapsed = 0f;
+	private static Tile doubleClickMemory = null;
+	private static Tile dragMemory = null;
 
 	/// <summary>
 	/// Minimum distance the mouse has to move for a drag to be registered.
 	/// </summary>
-	private float MIN_DRAG_DISTANCE = 20f;
+	private static float MIN_DRAG_DISTANCE = 20f;
 	/// <summary>
 	/// Position of the last mouse click.
 	/// </summary>
-	private Vector3 mouseClickPos;
+	private static Vector3 mouseClickPos;
 
+	/// <summary>
+	/// Controls mouse over, click, double click, and drag.
+	/// </summary>
 	void Update () {
 		if (mousedOver != null) {
 			// mouse over
@@ -197,7 +201,7 @@ public class UniversalTileManager : MonoBehaviour {
 	/// <summary>
 	/// Registers the first click of a double click, or clears it.
 	/// </summary>
-	private void RegisterFirstClick (Tile t) {
+	private static void RegisterFirstClick (Tile t) {
 		doubleClickMemory = t;
 		mouseClickPos = Input.mousePosition;
 		doubleClickTimeElapsed = 0f;
@@ -206,26 +210,10 @@ public class UniversalTileManager : MonoBehaviour {
 	// ---STATIC METHODS
 
 	/// <summary>
+	/// WILL BE REMOVED IN REFACTOR.
 	/// Checks if a certain tile exists, is not obstructed, and is not a wall. Not related to paths or energy.
 	/// </summary>
 	public static bool IsValidMoveDestination (Tile tile) {
 		return (tile != null && tile.tileType != TileType.Wall && tile.occupant == null);
-	}
-
-	/// <summary>
-	/// Gets the tile at location in <x,z> float coordinates, or null if none. Remember that the center of each tile is at an integer intersection. This uses physics to calculate and may be inefficient. Consider reworking later.
-	/// </summary>
-	public static Tile GetTileAtLocation (Vector2 location) {
-		RaycastHit hit;
-		if (Physics.Raycast (new Vector3 (location.x, -100f, location.y), Vector3.up, out hit)) {
-			Tile tileTemp = hit.collider.gameObject.GetComponent<Tile> ();
-			if (tileTemp != null) {
-				return tileTemp;
-			}
-			else {
-				return null;
-			}
-		}
-		return null;
 	}
 }

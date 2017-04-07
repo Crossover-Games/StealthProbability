@@ -49,7 +49,7 @@ public class Dog : GameCharacter {
 	/// that's not implemented yet.
 	/// </summary>
 	override public void MoveTo (Tile destination) {
-		if (UniversalTileManager.IsValidMoveDestination (destination)) {
+		if (TileManager.IsValidMoveDestination (destination)) {
 			ClearVisionPattern ();
 			lastVisited = myTile.pathingNode;
 		}

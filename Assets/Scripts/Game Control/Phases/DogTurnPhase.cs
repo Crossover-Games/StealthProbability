@@ -17,14 +17,14 @@ public class DogTurnPhase : GameControlPhase {
 	private bool activeDogSelecting;
 
 	override public void OnTakeControl () {
-		brain.dogManager.Shuffle ();
+		GameBrain.dogManager.Shuffle ();
 		activeDogSelecting = true;
-		brain.cameraControl.SetCamFollowTarget (brain.dogManager.availableCharacters [0].transform);
+		CameraOverheadControl.SetCamFollowTarget (GameBrain.dogManager.availableCharacters [0].transform);
 	}
 
 	override public void ControlUpdate () {
-		if (brain.dogManager.anyAvailable) {
-			Dog currentDog = brain.dogManager.availableCharacters [0];
+		if (GameBrain.dogManager.anyAvailable) {
+			Dog currentDog = GameBrain.dogManager.availableCharacters [0];
 
 			if (activeDogSelecting) {
 				activeDogSelecting = false;
@@ -49,8 +49,8 @@ public class DogTurnPhase : GameControlPhase {
 			}
 		}
 		else {
-			brain.dogManager.RejuvenateAll ();
-			brain.catManager.RejuvenateAll ();
+			GameBrain.dogManager.RejuvenateAll ();
+			GameBrain.catManager.RejuvenateAll ();
 			playerTurnIdlePhase.TakeControl ();
 		}			
 	}
@@ -59,14 +59,14 @@ public class DogTurnPhase : GameControlPhase {
 	/// Ends the current dog movement.
 	/// </summary>
 	private void EndCurrentDogMovement(){
-		brain.dogManager.availableCharacters [0].grayedOut = true;
-		if (brain.dogManager.anyAvailable) {
-			brain.cameraControl.SetCamFollowTarget (brain.dogManager.availableCharacters [0].transform);
+		GameBrain.dogManager.availableCharacters [0].grayedOut = true;
+		if (GameBrain.dogManager.anyAvailable) {
+			CameraOverheadControl.SetCamFollowTarget (GameBrain.dogManager.availableCharacters [0].transform);
 		}
 		activeDogSelecting = true;
 	}
 
 	override public void OnLeaveControl () {
-		brain.cameraControl.SetCamFocusPoint (brain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
+		CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
 	}
 }

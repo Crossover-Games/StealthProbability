@@ -16,10 +16,10 @@ public class GameSetupPhase : GameControlPhase {
 	/// Displays dog vision patterns.
 	/// </summary>
 	public override void OnTakeControl () {
-		foreach (Dog dog in brain.dogManager.allCharacters) {
+		foreach (Dog dog in GameBrain.dogManager.allCharacters) {
 			dog.ApplyVisionPattern ();
 		}
-		foreach (Cat cat in brain.catManager.allCharacters) {
+		foreach (Cat cat in GameBrain.catManager.allCharacters) {
 			cat.ClearDangerData ();
 		}
 	}

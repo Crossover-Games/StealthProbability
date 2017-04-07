@@ -11,6 +11,8 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// </summary>
 	private GameBrain brain;
 
+	[SerializeField] private AudioSource mySound;
+
 	/// <summary>
 	/// Collider used to calculate the elevation of top.
 	/// </summary>
@@ -40,6 +42,15 @@ public abstract class GameCharacter : MonoBehaviour {
 		set {
 			associatedTile = value;
 			associatedTile.SetOccupant (this);
+		}
+	}
+
+	/// <summary>
+	/// Plays this character's primary sound.
+	/// </summary>
+	public void PlaySound () {
+		if (mySound != null) {
+			mySound.Play ();
 		}
 	}
 
@@ -89,7 +100,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// Moves this character on top of the specified tile. This is intended to be used for neighboring tiles. There will be no animation if the destination is not a neighbor.
 	/// </summary>
 	virtual public void MoveTo (Tile destination) {	//don't forget that this changes the tile's occupant
-		if (UniversalTileManager.IsValidMoveDestination (destination)) {
+		if (TileManager.IsValidMoveDestination (destination)) {
 			Tile previous = myTile;
 			previous.SetOccupant (null);
 			myTile = destination;

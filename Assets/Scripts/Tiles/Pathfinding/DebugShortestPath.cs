@@ -14,17 +14,17 @@ public class DebugShortestPath : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetMouseButtonDown (1) && brain.tileManager.cursorTile != null && brain.tileManager.tileMousedOver != null) {
-			brain.tileManager.tileMousedOver.shimmer = true;
+		if (Input.GetMouseButtonDown (1) && TileManager.cursorTile != null && TileManager.tileMousedOver != null) {
+			TileManager.tileMousedOver.shimmer = true;
 
 			List<Tile> validTiles = new List<Tile> ();
-			foreach (Tile t in brain.tileManager.allTiles) {
+			foreach (Tile t in TileManager.allTiles) {
 				if (t.IsValidMoveDestination) {
 					validTiles.Add (t);
 				}
 			}
 				
-			List<Tile> path = Pathfinding.ShortestPath (brain.tileManager.cursorTile, brain.tileManager.tileMousedOver, validTiles);
+			List<Tile> path = Pathfinding.ShortestPath (TileManager.cursorTile, TileManager.tileMousedOver, validTiles);
 			for (int x = 0; x < path.Count; x++) {
 				path [x].shimmer = true;
 			}

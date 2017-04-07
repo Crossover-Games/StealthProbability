@@ -10,10 +10,10 @@ public class DogSelectorPhase : GameControlPhase {
 	[SerializeField] private DogMovePhase dogMovePhase;
 
 	override public void ControlUpdate () {
-		if (brain.dogManager.anyAvailable) {
-			brain.uiManager.masterInfoBox.ClearAllData ();
-			Dog nextDog = brain.dogManager.availableCharacters [0];
-			brain.uiManager.masterInfoBox.headerText = nextDog.name;
+		if (GameBrain.dogManager.anyAvailable) {
+			UIManager.masterInfoBox.ClearAllData ();
+			Dog nextDog = GameBrain.dogManager.availableCharacters [0];
+			UIManager.masterInfoBox.headerText = nextDog.name;
 			dogMovePhase.selectedDog = nextDog;
 			dogMovePhase.TakeControl ();
 		}

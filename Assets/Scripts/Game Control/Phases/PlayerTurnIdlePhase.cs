@@ -21,17 +21,17 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Moves cursor and displays overlays. Never null
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
-		if (brain.tileManager.cursorTile != t) {
-			brain.tileManager.cursorTile = t;
-			brain.uiManager.masterInfoBox.ClearAllData ();
+		if (TileManager.cursorTile != t) {
+			TileManager.cursorTile = t;
+			UIManager.masterInfoBox.ClearAllData ();
 			foreach (TileDangerData tdd in t.dangerData) {
-				brain.uiManager.masterInfoBox.AddDataFromTileDangerData (tdd);
+				UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
 			}
 
 			if (t.occupant != null) {
-				brain.uiManager.masterInfoBox.headerText = t.occupant.name;
+				UIManager.masterInfoBox.headerText = t.occupant.name;
 				if (t.occupant.characterType == CharacterType.Cat && !t.occupant.grayedOut) {
-					brain.tileManager.MassSetShimmer (t.AllTilesInRadius ((t.occupant as Cat).maxEnergy, true, false));
+					TileManager.MassSetShimmer (t.AllTilesInRadius ((t.occupant as Cat).maxEnergy, true, false));
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
 					HashSet<Tile> toShimmer = new HashSet<Tile> ();
@@ -44,13 +44,13 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 							current = current.NextOnPath (last);
 							last = tempLast;
 						}
-						brain.tileManager.MassSetShimmer (toShimmer);
+						TileManager.MassSetShimmer (toShimmer);
 					}
 				}
 			}
 			else {
-				brain.tileManager.ClearAllShimmer ();
-				brain.uiManager.masterInfoBox.headerText = "regular tile yo";
+				TileManager.ClearAllShimmer ();
+				UIManager.masterInfoBox.headerText = "-FLOOR-";
 			}
 		}
 		// once we have the holy grail info box working, we can put stuff like that in there too.
@@ -60,14 +60,14 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Move camera to double clicked tile.
 	/// </summary>
 	override public void TileDoubleClickEvent (Tile t) {
-		brain.cameraControl.SetCamFocusPoint (t.topCenterPoint);
+		CameraOverheadControl.SetCamFocusPoint (t.topCenterPoint);
 	}
 
 	/// <summary>
 	/// Switches to the drag arrow phase.
 	/// </summary>
 	override public void TileDragEvent (Tile t) {
-		if (Input.GetMouseButton (0) && brain.tileManager.cursorTile.occupant != null && brain.tileManager.cursorTile.occupant.characterType == CharacterType.Cat && !brain.tileManager.cursorTile.occupant.grayedOut) {
+		if (Input.GetMouseButton (0) && TileManager.cursorTile.occupant != null && TileManager.cursorTile.occupant.characterType == CharacterType.Cat && !TileManager.cursorTile.occupant.grayedOut) {
 			ExitToDrawArrowPhase ();
 		}
 	}
@@ -76,25 +76,25 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// allows you to control the camera
 	/// </summary>
 	override public void OnTakeControl () {
-		brain.cameraControl.dragControlAllowed = true;
+		CameraOverheadControl.dragControlAllowed = true;
 	}
 
 	override public void OnLeaveControl () {
-		brain.uiManager.masterInfoBox.ClearAllData ();
-		brain.cameraControl.dragControlAllowed = false;
+		UIManager.masterInfoBox.ClearAllData ();		// maybe not
+		CameraOverheadControl.dragControlAllowed = false;
 	}
 
 	/// <summary>
 	/// Switches to the dog turn if all cats did their move
 	/// </summary>
 	override public void ControlUpdate () {
-		if (!brain.catManager.anyAvailable) {
+		if (!GameBrain.catManager.anyAvailable) {
 			dogSelectorPhase.TakeControl ();
 		}
 	}
 
 	private void ExitToDrawArrowPhase () {
-		drawArrowPhase.selectedCat = brain.tileManager.cursorTile.occupant as Cat;
+		drawArrowPhase.selectedCat = TileManager.cursorTile.occupant as Cat;
 		drawArrowPhase.TakeControl ();
 	}
 }
