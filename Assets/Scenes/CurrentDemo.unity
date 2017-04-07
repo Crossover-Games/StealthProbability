@@ -5798,9 +5798,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingPhase: {fileID: 972860018}
-  universalTileManager: {fileID: 1230063746}
-  myAnimationManager: {fileID: 1230063745}
-  m_uiManager: {fileID: 1230063744}
   catParent: {fileID: 1869362635}
   dogParent: {fileID: 443396211}
 --- !u!1001 &1195656019
@@ -6169,7 +6166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f947a04158c80cb409c5568cccd4d546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interpMethod: 3
 --- !u!114 &1230063746
 MonoBehaviour:
   m_ObjectHideFlags: 0

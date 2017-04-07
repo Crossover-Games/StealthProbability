@@ -106,7 +106,11 @@ public abstract class GameCharacter : MonoBehaviour {
 			myTile = destination;
 
 			if (previous.IsNeighbor (myTile)) {
-				brain.animationManager.StartAnimating (this, myTile.topCenterPoint, previous.GetDirectionOfNeighbor (myTile));
+				Compass.Direction nextDirection = previous.GetDirectionOfNeighbor (myTile);
+				if (orientation != nextDirection) {
+					AnimationManager.AddAnimation (transform, new AnimationDestination (null, new QuaternionReference (Compass.DirectionToRotation (nextDirection), null, stepAnimationTime, InterpolationMethod.Linear)));
+				}
+				AnimationManager.AddAnimation (transform, new AnimationDestination (new Vector3Reference (myTile.topCenterPoint), null, null, stepAnimationTime, InterpolationMethod.Sinusoidal));
 			}
 			else {
 				transform.position = myTile.topCenterPoint;

@@ -11,7 +11,7 @@ public class Vector3Reference {
 	/// </summary>
 	public Vector3 vector;
 
-	public Vector3Reference(Vector3 v){
+	public Vector3Reference (Vector3 v) {
 		vector = v;
 	}
 }

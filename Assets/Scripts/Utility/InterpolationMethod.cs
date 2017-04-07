@@ -22,4 +22,6 @@ public enum InterpolationMethod {
 	/// Greatest change with t close to 0 and 1. Least change with t close to 0.5. 
 	/// </summary>
 	Cubic
+
+	// Crazy interpolation type: extends past 
 }

@@ -17,22 +17,6 @@ public class GameBrain : MonoBehaviour {
 
 	// ---REFERENCES
 
-	[SerializeField] private TileManager universalTileManager;
-	/// <summary>
-	/// Reference to the scene's universal tile manager.
-	/// </summary>
-	public TileManager tileManager {
-		get { return universalTileManager; }
-	}
-		
-	[SerializeField] private AnimationManager myAnimationManager;
-	/// <summary>
-	/// The unit that animates movement for pieces on the board.
-	/// </summary>
-	public AnimationManager animationManager {
-		get { return myAnimationManager; }
-	}
-
 	private static TeamMananger<Cat> m_catManager;
 	/// <summary>
 	/// Has knowledge of all cats.
@@ -47,14 +31,6 @@ public class GameBrain : MonoBehaviour {
 	/// </summary>
 	public static TeamMananger<Dog> dogManager {
 		get { return m_dogManager; }
-	}
-
-	[SerializeField] private UIManager m_uiManager;
-	/// <summary>
-	/// Gets the user interface manager.
-	/// </summary>
-	public UIManager uiManager {
-		get { return m_uiManager; }
 	}
 
 	// ---MONOBEHAVIOUR OVERRIDES
@@ -75,10 +51,7 @@ public class GameBrain : MonoBehaviour {
 	}
 
 	void Update () {
-		if (myAnimationManager.activelyAnimating) {
-			myAnimationManager.AnimationUpdate ();
-		}
-		else if (inControl != null) {
+		if (inControl != null && !AnimationManager.active) {
 			inControl.ControlUpdate ();
 		}
 	}
