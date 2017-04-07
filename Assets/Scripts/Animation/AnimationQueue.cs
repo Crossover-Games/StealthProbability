@@ -75,10 +75,8 @@ public class AnimationQueue {
 	/// Called once per frame by the AnimationManager.
 	/// </summary>
 	public void AnimationUpdate () {
-		Debug.Log ("animupdate");
 		currentTimer.Tick ();
 		if (currentAnimation.position != null) {
-			Debug.Log ("position");
 			objectTransform.position = Interpolation.Interpolate (initialValues.position.vector, currentAnimation.position.vector, currentTimer.ratio, currentAnimation.interpolationMethod);
 		}
 		if (currentAnimation.localScale != null) {
