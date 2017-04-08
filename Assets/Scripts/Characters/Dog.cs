@@ -42,7 +42,7 @@ public class Dog : GameCharacter {
 	}
 
 	void Start () {
-		Tile tempTile = myTile.GetNeighborInDirection (orientation);
+		Floor tempTile = myTile.GetNeighborInDirection (orientation) as Floor;
 		if (tempTile != null) {
 			m_firstTurnNode = tempTile.pathingNode;
 		}
@@ -52,8 +52,8 @@ public class Dog : GameCharacter {
 	/// Doggoveride. In addition to GameCharacter.MoveTo(Tile), this stores the pathing node of the last tile it visited.
 	/// that's not implemented yet.
 	/// </summary>
-	override public void MoveTo (Tile destination) {
-		if (TileManager.IsValidMoveDestination (destination)) {
+	override public void MoveTo (Floor destination) {
+		if (Tile.IsValidMoveDestination (destination)) {
 			ClearVisionPattern ();
 			lastVisited = myTile.pathingNode;
 		}

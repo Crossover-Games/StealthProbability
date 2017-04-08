@@ -88,8 +88,8 @@ public class Cat : GameCharacter {
 		return Random.value < maxDanger;
 	}
 
-	override public void MoveTo (Tile destination) {
-		if (TileManager.IsValidMoveDestination (destination)) {
+	override public void MoveTo (Floor destination) {
+		if (Tile.IsValidMoveDestination (destination)) {
 			foreach (TileDangerData tdd in destination.dangerData) {
 				dangerData.Add (tdd);
 			}

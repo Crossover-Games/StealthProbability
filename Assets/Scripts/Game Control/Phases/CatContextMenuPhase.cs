@@ -30,11 +30,11 @@ public class CatContextMenuPhase : GameControlPhase {
 	/// <summary>
 	/// The ordered path the cat will take.
 	/// </summary>
-	[HideInInspector] public List<Tile> tilePath;
+	[HideInInspector] public List<Floor> tilePath;
 
 	override public void OnTakeControl () {
 		//UIManager.CenterPathEndMenuOnMouse ();
-		Tile last = tilePath.LastElement ();
+		Floor last = tilePath.LastElement ();
 		UIManager.CenterPathEndMenuOnWorldPoint (last.topCenterPoint);
 		UIManager.pathEndMenuState = true;
 		last.shimmer = true;
@@ -55,7 +55,7 @@ public class CatContextMenuPhase : GameControlPhase {
 
 	override public void OnLeaveControl () {
 		UIManager.pathEndMenuState = false;
-		TileManager.ClearAllShimmer ();
+		Floor.ClearAllShimmer ();
 		TileManager.cursorTile = null;
 		GameObject.Destroy (arrowSegmentParent);
 		CameraOverheadControl.dragControlAllowed = false;

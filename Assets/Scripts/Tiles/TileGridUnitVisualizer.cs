@@ -16,6 +16,11 @@ public class TileGridUnitVisualizer : MonoBehaviour {
 		get{ return myTile; }
 	}
 
+	/// <summary>
+	/// If enabled, this unit will react to being moused over. Not intended to be changed at any time but Awake.
+	/// </summary>
+	public bool mouseOverEnabled = true;
+
 	[SerializeField] private Material mouseOverMaterial;
 	[SerializeField] private Material mouseAwayMaterial;
 	[SerializeField] private DangerSquareVisualizer dangerVisualizer;
@@ -33,7 +38,9 @@ public class TileGridUnitVisualizer : MonoBehaviour {
 	}
 
 	void OnMouseEnter () {
-		TileManager.RegisterMouseEnter (myTile);
+		if (mouseOverEnabled) {
+			TileManager.RegisterMouseEnter (myTile);
+		}
 	}
 	void OnMouseExit () {
 		TileManager.CheckIfUnregisterIsRequired (myTile);
@@ -61,7 +68,7 @@ public class TileGridUnitVisualizer : MonoBehaviour {
 	/// <summary>
 	/// This square's danger color. Can still be updated if the dangerVisualizerState is off, but will not be displayed until dangerVisualizerState is turned on again.
 	/// </summary>
-	public Color dangerColor{
+	public Color dangerColor {
 		get{ return dangerVisualizer.color; }
 		set{ dangerVisualizer.color = value; }
 	}

@@ -15,7 +15,7 @@ public class DrawArrowPhase : GameControlPhase {
 	/// <summary>
 	/// The ordered path of all tiles for which the arrow follows.
 	/// </summary>
-	private List<Tile> tilePath;
+	private List<Floor> tilePath;
 
 	/// <summary>
 	/// The cat selected to move.
@@ -25,19 +25,19 @@ public class DrawArrowPhase : GameControlPhase {
 	[SerializeField] private GameObject arrowSegment;
 	private GameObject arrowSegmentParent;
 
-	private HashSet<Tile> availableTiles = new HashSet<Tile> ();
+	private HashSet<Floor> availableTiles = new HashSet<Floor> ();
 	private void UpdateAvailableTiles () {
-		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (availableTiles);
+		HashSet<Floor> previouslyHighlighted = new HashSet<Floor> (availableTiles);
 
-		availableTiles = new HashSet<Tile> ();
+		availableTiles = new HashSet<Floor> ();
 		availableTiles.Add (tilePath.LastElement ());
 
 		for (int x = 0; x < selectedCat.maxEnergy + 1 - tilePath.Count; x++) {
-			HashSet<Tile> tempTiles = new HashSet<Tile> (availableTiles);
-			foreach (Tile t in tempTiles) {
+			HashSet<Floor> tempTiles = new HashSet<Floor> (availableTiles);
+			foreach (Floor t in tempTiles) {
 				foreach (Compass.Direction d in Compass.allDirections) {
-					Tile tmp = t.GetNeighborInDirection (d);
-					if (!tilePath.Contains (tmp) && TileManager.IsValidMoveDestination (tmp)) {
+					Floor tmp = t.GetNeighborInDirection (d) as Floor;
+					if (Tile.IsValidMoveDestination (tmp) && !tilePath.Contains (tmp)) {
 						availableTiles.Add (tmp);
 					}
 				}
@@ -46,14 +46,14 @@ public class DrawArrowPhase : GameControlPhase {
 
 		availableTiles.Remove (tilePath.LastElement ());
 
-		TileManager.MassSetShimmer (availableTiles);
+		Floor.MassSetShimmer (availableTiles);
 	}
 		
 	override public void OnTakeControl () {
 		arrowSegmentParent = new GameObject ();
 		//UniversalTileManager.cursorTile = null;
 
-		tilePath = new List<Tile> ();
+		tilePath = new List<Floor> ();
 		tilePath.Add (selectedCat.myTile);
 
 		UpdateAvailableTiles ();
@@ -61,8 +61,8 @@ public class DrawArrowPhase : GameControlPhase {
 
 	override public void MouseOverChangeEvent () {
 		// if the moused over tile is a valid step in the path
-		if (tilePath.Count <= selectedCat.maxEnergy && availableTiles.Contains (TileManager.tileMousedOver) && tilePath.LastElement ().IsNeighbor (TileManager.tileMousedOver)) {
-			AddTileToPath (TileManager.tileMousedOver);
+		if (tilePath.Count <= selectedCat.maxEnergy && availableTiles.Contains (TileManager.floorTileMousedOver) && tilePath.LastElement ().IsNeighbor (TileManager.tileMousedOver)) {
+			AddTileToPath (TileManager.floorTileMousedOver);
 		}
 	}
 		
@@ -78,18 +78,18 @@ public class DrawArrowPhase : GameControlPhase {
 			catContextMenuPhase.arrowSegmentParent = arrowSegmentParent;
 			catContextMenuPhase.TakeControl ();
 		}
-		else if (TileManager.tileMousedOver != tilePath.LastElement () && availableTiles.Contains (TileManager.tileMousedOver)) {
+		else if (TileManager.tileMousedOver != tilePath.LastElement () && availableTiles.Contains (TileManager.floorTileMousedOver)) {
 			// simple solution: don't run the shortest path algorithm
 			if (TileManager.tileMousedOver.IsNeighbor (tilePath.LastElement ())) {
-				AddTileToPath (TileManager.tileMousedOver);
+				AddTileToPath (TileManager.floorTileMousedOver);
 			}
 			else {
-				List<Tile> pathMap = availableTiles.ToList ();
-				Tile lastVisited = tilePath.LastElement ();
+				List<Floor> pathMap = availableTiles.ToList ();
+				Floor lastVisited = tilePath.LastElement ();
 				pathMap.Add (lastVisited);
-				List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, TileManager.tileMousedOver, pathMap);
+				List<Floor> newPath = Pathfinding.ShortestPath (lastVisited, TileManager.floorTileMousedOver, pathMap);
 				newPath = newPath.Subset (1);
-				foreach (Tile t in newPath) {
+				foreach (Floor t in newPath) {
 					AddTileToPath (t);
 				}
 			}
@@ -98,15 +98,15 @@ public class DrawArrowPhase : GameControlPhase {
 
 	override public void OnLeaveControl () {
 		selectedCat = null;
-		TileManager.ClearAllShimmer ();
+		Floor.ClearAllShimmer ();
 	}
 
 	/// <summary>
 	/// Adds the tile to path and updates selectable tiles.
 	/// </summary>
-	private void AddTileToPath (Tile t) {
+	private void AddTileToPath (Floor t) {
 		//tilePath.LastElement ().characterConnectionPoint.Halfway (t.characterConnectionPoint);
-		Tile head = tilePath.LastElement ();
+		Floor head = tilePath.LastElement ();
 		GameObject tmp = GameObject.Instantiate (arrowSegment, arrowSegmentParent.transform);
 		tmp.transform.position = head.topCenterPoint.Halfway (t.topCenterPoint);
 		tmp.transform.rotation = Compass.DirectionToRotation (head.GetDirectionOfNeighbor (t));

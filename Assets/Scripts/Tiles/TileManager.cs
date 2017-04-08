@@ -14,6 +14,23 @@ public class TileManager : MonoBehaviour {
 	public static Tile tileMousedOver {
 		get{ return mousedOver; }
 	}
+	/// <summary>
+	/// The traversable floor tile the mouse cursor is currently hovering over, if any.
+	/// CONSIDER REWORKING WHEN YOU'RE NOT TIRED
+	/// </summary>
+	public static Floor floorTileMousedOver {
+		get {
+			if (mousedOver == null) {
+				return null;
+			}
+			else if (!mousedOver.traversable) {
+				return null;
+			}
+			else {
+				return mousedOver as Floor;
+			}
+		}
+	}
 
 	/// <summary>
 	/// Set of all tiles. Forgotten after start.
@@ -62,58 +79,20 @@ public class TileManager : MonoBehaviour {
 		}
 	}
 
-	private static HashSet<Tile> m_shimmering = new HashSet<Tile> ();
 	/// <summary>
-	/// A list of all shimmering tiles.
+	/// If the cursor is pointing to a tile with a character in it, this is it.
 	/// </summary>
-	public static Tile[] shimmeringTiles {
-		get { return m_shimmering.ToArray (); }
-	}
-
-	/// <summary>
-	/// Only called by Tile. Registers tile t as one of the shimmering tiles.
-	/// </summary>
-	public static void RegisterShimmer (Tile t) {
-		m_shimmering.Add (t);
-	}
-
-	/// <summary>
-	/// Only called by Tile. Removes tile t as one of the shimmering tiles.
-	/// </summary>
-	public static void UnregisterShimmer (Tile t) {
-		m_shimmering.Remove (t);
-	}
-
-	/// <summary>
-	/// Remove the shimmer effect from all tiles.
-	/// </summary>
-	public static void ClearAllShimmer () {
-		foreach (Tile t in m_shimmering) {
-			t.SetCosmeticShimmer (false);
-		}
-		m_shimmering = new HashSet<Tile> ();
-	}
-
-	/// <summary>
-	/// Sets these tiles to be the only ones shimmering. Unshimmers all others.
-	/// </summary>
-	public static void MassSetShimmer (ICollection<Tile> tiles) {
-		HashSet<Tile> oldTiles = m_shimmering.Clone ();
-		HashSet<Tile> newTiles = new HashSet<Tile> (tiles);
-
-		newTiles.ExceptWith (m_shimmering);
-		oldTiles.ExceptWith (tiles);
-
-		foreach (Tile t in newTiles) {
-			t.shimmer = true;
-		}
-		foreach (Tile t in oldTiles) {
-			t.shimmer = false;
+	public static GameCharacter characterUnderCursor {
+		get {
+			if (cursored == null || !cursored.traversable) {
+				return null;
+			}
+			return (cursored as Floor).occupant;
 		}
 	}
 
 	/// <summary>
-	/// Only to be called in Tile.OnMouseEnter().
+	/// Only to be called in TileGridUnitVisualizer.OnMouseEnter().
 	/// </summary>
 	public static void RegisterMouseEnter (Tile t) {
 		mousedOver = t;
@@ -205,15 +184,5 @@ public class TileManager : MonoBehaviour {
 		doubleClickMemory = t;
 		mouseClickPos = Input.mousePosition;
 		doubleClickTimeElapsed = 0f;
-	}
-
-	// ---STATIC METHODS
-
-	/// <summary>
-	/// WILL BE REMOVED IN REFACTOR.
-	/// Checks if a certain tile exists, is not obstructed, and is not a wall. Not related to paths or energy.
-	/// </summary>
-	public static bool IsValidMoveDestination (Tile tile) {
-		return (tile != null && tile.tileType != TileType.Wall && tile.occupant == null);
 	}
 }

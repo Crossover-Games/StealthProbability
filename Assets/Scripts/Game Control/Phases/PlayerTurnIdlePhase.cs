@@ -21,39 +21,55 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Moves cursor and displays overlays. Never null
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
-		if (TileManager.cursorTile != t) {
-			TileManager.cursorTile = t;
-			UIManager.masterInfoBox.ClearAllData ();
-			foreach (TileDangerData tdd in t.dangerData) {
-				UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
-			}
+		if (TileManager.cursorTile != t) {	// changed. now we only want it to do something on a floor
 
-			if (t.occupant != null) {
-				UIManager.masterInfoBox.headerText = t.occupant.name;
-				if (t.occupant.characterType == CharacterType.Cat && !t.occupant.grayedOut) {
-					TileManager.MassSetShimmer (t.AllTilesInRadius ((t.occupant as Cat).maxEnergy, true, false));
-				}
-				else if (t.occupant.characterType == CharacterType.Dog) {
-					HashSet<Tile> toShimmer = new HashSet<Tile> ();
-					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts((t.occupant as Dog))) {
-						PathingNode last = t.pathingNode;
-						PathingNode current = p;
-						while (current != null) {
-							toShimmer.Add (current.myTile);
-							PathingNode tempLast = current;
-							current = current.NextOnPath (last);
-							last = tempLast;
+			UIManager.masterInfoBox.ClearAllData ();
+
+			if (TileManager.cursorTile == null || TileManager.cursorTile.tileType == TileType.Wall) {
+				TileManager.cursorTile = null;
+			}
+			else {
+				TileManager.cursorTile = t;
+
+				if (t.traversable) {
+					
+					Floor clickedFloor = t as Floor;
+					foreach (TileDangerData tdd in clickedFloor.dangerData) {
+						UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
+					}
+
+					if (clickedFloor.occupant != null) {
+						UIManager.masterInfoBox.headerText = clickedFloor.occupant.name;
+						if (clickedFloor.occupant.characterType == CharacterType.Cat && !clickedFloor.occupant.grayedOut) {
+							clickedFloor.AllTilesInRadius ((clickedFloor.occupant as Cat).maxEnergy, true, false);
+							Floor.MassSetShimmer (null);
 						}
-						TileManager.MassSetShimmer (toShimmer);
+						else if (clickedFloor.occupant.characterType == CharacterType.Dog) {
+							HashSet<Floor> toShimmer = new HashSet<Floor> ();
+							foreach (PathingNode p in clickedFloor.pathingNode.AllPotentialPathStarts((clickedFloor.occupant as Dog))) {
+								PathingNode last = clickedFloor.pathingNode;
+								PathingNode current = p;
+								while (current != null) {
+									toShimmer.Add (current.myTile);
+									PathingNode tempLast = current;
+									current = current.NextOnPath (last);
+									last = tempLast;
+								}
+								Floor.MassSetShimmer (toShimmer);
+							}
+						}
+					}
+					else {
+						Floor.ClearAllShimmer ();
+						UIManager.masterInfoBox.headerText = "-FLOOR-";
 					}
 				}
 			}
-			else {
-				TileManager.ClearAllShimmer ();
-				UIManager.masterInfoBox.headerText = "-FLOOR-";
-			}
 		}
-		// once we have the holy grail info box working, we can put stuff like that in there too.
+
+
+
+
 	}
 
 	/// <summary>
@@ -67,7 +83,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Switches to the drag arrow phase.
 	/// </summary>
 	override public void TileDragEvent (Tile t) {
-		if (Input.GetMouseButton (0) && TileManager.cursorTile.occupant != null && TileManager.cursorTile.occupant.characterType == CharacterType.Cat && !TileManager.cursorTile.occupant.grayedOut) {
+		if (Input.GetMouseButton (0) && TileManager.characterUnderCursor != null && TileManager.characterUnderCursor.characterType == CharacterType.Cat && !TileManager.characterUnderCursor.grayedOut) {
 			ExitToDrawArrowPhase ();
 		}
 	}
@@ -94,7 +110,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	}
 
 	private void ExitToDrawArrowPhase () {
-		drawArrowPhase.selectedCat = TileManager.cursorTile.occupant as Cat;
+		drawArrowPhase.selectedCat = (TileManager.cursorTile as Floor).occupant as Cat;
 		drawArrowPhase.TakeControl ();
 	}
 }

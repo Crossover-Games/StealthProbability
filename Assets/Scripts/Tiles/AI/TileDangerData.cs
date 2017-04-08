@@ -16,11 +16,11 @@ public class TileDangerData {
 		get { return m_Danger; }
 	}
 
-	private Tile m_Tile;
+	private Floor m_Tile;
 	/// <summary>
 	/// The tile this pair is associated with.
 	/// </summary>
-	public Tile myTile {
+	public Floor myTile {
 		get { return m_Tile; }
 	}
 
@@ -43,7 +43,7 @@ public class TileDangerData {
 	/// <summary>
 	/// Constructs a new TileDangerData. These values cannot be changed.
 	/// </summary>
-	public TileDangerData (float dangerValue, Tile tile, Dog dog, Color color) {
+	public TileDangerData (float dangerValue, Floor tile, Dog dog, Color color) {
 		m_Danger = dangerValue;
 		m_Tile = tile;
 		m_Dog = dog;

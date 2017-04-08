@@ -9,11 +9,11 @@ public class PathingNode : MonoBehaviour {
 
 	public string message;
 
-	private Tile tile;
+	private Floor tile;
 	/// <summary>
 	/// The tile this PathingNode is associated with.
 	/// </summary>
-	public Tile myTile {
+	public Floor myTile {
 		get { return tile; }
 	}
 
@@ -41,13 +41,13 @@ public class PathingNode : MonoBehaviour {
 	}
 
 	void Awake () {
-		tile = GetComponent<Tile> ();
+		tile = GetComponent<Floor> ();
 	}
 	void Start () {
-		Tile northTile = myTile.GetNeighborInDirection (Compass.Direction.North);
-		Tile southTile = myTile.GetNeighborInDirection (Compass.Direction.South);
-		Tile eastTile = myTile.GetNeighborInDirection (Compass.Direction.East);
-		Tile westTile = myTile.GetNeighborInDirection (Compass.Direction.West);
+		Floor northTile = myTile.GetNeighborInDirection (Compass.Direction.North) as Floor;
+		Floor southTile = myTile.GetNeighborInDirection (Compass.Direction.South) as Floor;
+		Floor eastTile = myTile.GetNeighborInDirection (Compass.Direction.East) as Floor;
+		Floor westTile = myTile.GetNeighborInDirection (Compass.Direction.West) as Floor;
 
 		if (northConnection && northTile != null && northTile.pathingNode != null) {
 			myConnections.Add (northTile.pathingNode);

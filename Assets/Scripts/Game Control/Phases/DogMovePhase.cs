@@ -25,7 +25,7 @@ public class DogMovePhase : GameControlPhase {
 	/// <summary>
 	/// The dog will follow this path.
 	/// </summary>
-	private List<Tile> tilePath;
+	private List<Floor> tilePath;
 
 	/// <summary>
 	/// True only if the dog has not yet selected a path.
@@ -61,7 +61,7 @@ public class DogMovePhase : GameControlPhase {
 			}
 		}
 		else if (!selectedDog.myTile.pathingNode.isStoppingPoint) {
-			Tile next = selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile;
+			Floor next = selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile;
 			if (next.occupant == null) {
 				selectedDog.MoveTo (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile);
 			}

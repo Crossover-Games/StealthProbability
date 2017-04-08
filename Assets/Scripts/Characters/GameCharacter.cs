@@ -34,11 +34,11 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// <summary>
 	/// Encapsulated variable for myTile.
 	/// </summary>
-	private Tile associatedTile;
+	private Floor associatedTile;
 	/// <summary>
 	/// The tile this character is standing on.
 	/// </summary>
-	public Tile myTile {
+	public Floor myTile {
 		get{ return associatedTile; }
 		set {
 			associatedTile = value;
@@ -89,7 +89,7 @@ public abstract class GameCharacter : MonoBehaviour {
 		Vector3 rayOrigin = transform.position + Vector3.down * 100;
 
 		if (Physics.Raycast (rayOrigin, Vector3.up, out hit)) {
-			Tile tileTemp = hit.collider.gameObject.GetComponent<Tile> ();
+			Floor tileTemp = hit.collider.gameObject.GetComponent<Floor> ();
 			if (tileTemp != null) {
 				myTile = tileTemp;
 			}
@@ -99,9 +99,9 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// <summary>
 	/// Moves this character on top of the specified tile. This is intended to be used for neighboring tiles. There will be no animation if the destination is not a neighbor.
 	/// </summary>
-	virtual public void MoveTo (Tile destination) {	//don't forget that this changes the tile's occupant
-		if (TileManager.IsValidMoveDestination (destination)) {
-			Tile previous = myTile;
+	virtual public void MoveTo (Floor destination) {	//don't forget that this changes the tile's occupant
+		if (destination!= null && destination) {
+			Floor previous = myTile;
 			previous.SetOccupant (null);
 			myTile = destination;
 

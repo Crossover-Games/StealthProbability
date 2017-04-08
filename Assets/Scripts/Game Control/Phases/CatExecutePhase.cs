@@ -20,7 +20,7 @@ public class CatExecutePhase : GameControlPhase {
 	/// <summary>
 	/// The ordered path the cat will take.
 	/// </summary>
-	[HideInInspector] public List<Tile> tilePath;
+	[HideInInspector] public List<Floor> tilePath;
 
 
 	[SerializeField] private AudioSource purrSound;
