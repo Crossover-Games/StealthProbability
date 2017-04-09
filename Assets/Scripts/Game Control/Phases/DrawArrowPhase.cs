@@ -4,14 +4,24 @@ using UnityEngine;
 
 /// <summary>
 /// Game phase for when you're drawing the arrow to move a cat. Leads only into the CatContextMenuPhase.
+/// Exits: CatContextMenuPhase
 /// </summary>
 public class DrawArrowPhase : GameControlPhase {
-
 	/// <summary>
-	/// Exit node to cat context menu phase. Needs to know the target cat and the path.
+	/// Used for static TakeControl
 	/// </summary>
-	[SerializeField] private CatContextMenuPhase catContextMenuPhase;
-
+	private static DrawArrowPhase staticInstance;
+	/// <summary>
+	/// Puts the DrawArrowPhase in control
+	/// </summary>
+	public static void TakeControl (Cat selectedCat) {
+		staticInstance.selectedCat = selectedCat;
+		staticInstance.InstanceTakeControl ();
+	}
+	void Awake () {
+		lineSegments = m_lineSegments;
+		staticInstance = this;
+	}
 	/// <summary>
 	/// Pool of objects used to draw the arrow.
 	/// </summary>
@@ -30,10 +40,6 @@ public class DrawArrowPhase : GameControlPhase {
 		}
 		public Tile tile;
 		public GameObject line;
-	}
-
-	void Awake () {
-		lineSegments = m_lineSegments;
 	}
 
 	private List<TileAndLine> tileLinePath = new List<TileAndLine> ();
@@ -73,7 +79,6 @@ public class DrawArrowPhase : GameControlPhase {
 	override public void OnTakeControl () {
 		tileLinePath = new List<TileAndLine> ();
 		tileLinePath.Add (new TileAndLine (selectedCat.myTile, null));
-
 		UpdateAvailableTiles ();
 	}
 
@@ -99,9 +104,7 @@ public class DrawArrowPhase : GameControlPhase {
 				path.Add (tileLinePath[x].tile);
 			}
 
-			catContextMenuPhase.tilePath = path;
-			catContextMenuPhase.selectedCat = selectedCat;
-			catContextMenuPhase.TakeControl ();
+			CatContextMenuPhase.TakeControl (selectedCat, path);
 		}
 		else if (TileManager.tileMousedOver != endOfPath) {
 			if (availableTiles.Contains (TileManager.tileMousedOver)) {

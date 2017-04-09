@@ -4,18 +4,22 @@ using UnityEngine;
 
 /// <summary>
 /// This phase is when you're just looking around the map, planning out your turn. Leads into the DrawArrowPhase and dog turn.
+/// Exits: DrawArrowPhase, DogSelectorPhase
 /// </summary>
 public class PlayerTurnIdlePhase : GameControlPhase {
-	
 	/// <summary>
-	/// Exit node to draw arrow phase. Needs to know the target cat.
+	/// Used for static TakeControl
 	/// </summary>
-	[SerializeField] private DrawArrowPhase drawArrowPhase;
-
+	private static PlayerTurnIdlePhase staticInstance;
 	/// <summary>
-	/// Exit node to dog turn phase.
+	/// Puts the PlayerTurnIdlePhase in control
 	/// </summary>
-	[SerializeField] private DogSelectorPhase dogSelectorPhase;
+	public static void TakeControl () {
+		staticInstance.InstanceTakeControl ();
+	}
+	void Awake () {
+		staticInstance = this;
+	}
 
 	/// <summary>
 	/// Moves cursor and displays overlays. Never null
@@ -35,7 +39,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
 					HashSet<Tile> toShimmer = new HashSet<Tile> ();
-					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts((t.occupant as Dog))) {
+					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts ((t.occupant as Dog))) {
 						PathingNode last = t.pathingNode;
 						PathingNode current = p;
 						while (current != null) {
@@ -80,7 +84,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	}
 
 	override public void OnLeaveControl () {
-		UIManager.masterInfoBox.ClearAllData ();		// maybe not
+		UIManager.masterInfoBox.ClearAllData ();        // maybe not
 		CameraOverheadControl.dragControlAllowed = false;
 	}
 
@@ -89,12 +93,11 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// </summary>
 	override public void ControlUpdate () {
 		if (!GameBrain.catManager.anyAvailable) {
-			dogSelectorPhase.TakeControl ();
+			DogSelectorPhase.TakeControl ();
 		}
 	}
 
 	private void ExitToDrawArrowPhase () {
-		drawArrowPhase.selectedCat = TileManager.cursorTile.occupant as Cat;
-		drawArrowPhase.TakeControl ();
+		DrawArrowPhase.TakeControl (TileManager.cursorTile.occupant as Cat);
 	}
 }

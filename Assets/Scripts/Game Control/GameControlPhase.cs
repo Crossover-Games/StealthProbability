@@ -10,7 +10,7 @@ public abstract class GameControlPhase : MonoBehaviour {
 	/// <summary>
 	/// Puts this phase in control of the GameBrain. First, it calls the OnLeaveControl() of the previous phase, then calls this phase's OnTakeControl().
 	/// </summary>
-	public void TakeControl () {
+	public void InstanceTakeControl () {
 		GameBrain.AssignControl (this);
 	}
 

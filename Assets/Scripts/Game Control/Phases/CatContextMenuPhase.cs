@@ -4,30 +4,35 @@ using UnityEngine;
 
 /// <summary>
 /// During this phase, the player has already selected a path for a certain cat to move. This phase waits for the player to decide to rest, cancel, or use an action.
+/// Exits: PlayerTurnIdlePhase, CatExecutePhase, action targeting (not implemented)
 /// </summary>
 public class CatContextMenuPhase : GameControlPhase {
 	/// <summary>
-	/// Exit node to player turn idle phase.
+	/// Used for static TakeControl
 	/// </summary>
-	[SerializeField] private PlayerTurnIdlePhase playerTurnIdlePhase;
-
+	private static CatContextMenuPhase staticInstance;
 	/// <summary>
-	/// Exit node to cat execute phase. Needs to know the target cat and the path.
+	/// Puts the CatContextMenuPhase in control
 	/// </summary>
-	[SerializeField] private CatExecutePhase catExecutePhase;
-
-	// Should also have exit node to the action targeting phase
+	public static void TakeControl (Cat selectedCat, List<Tile> tilePath) {
+		staticInstance.selectedCat = selectedCat;
+		staticInstance.tilePath = tilePath;
+		staticInstance.InstanceTakeControl ();
+	}
+	void Awake () {
+		staticInstance = this;
+	}
 
 	/// <summary>
 	/// Target cat.
 	/// </summary>
-	[HideInInspector] public Cat selectedCat;
+	private Cat selectedCat;
 
 
 	/// <summary>
 	/// The ordered path the cat will take.
 	/// </summary>
-	[HideInInspector] public List<Tile> tilePath;
+	private List<Tile> tilePath;
 
 	override public void OnTakeControl () {
 		//UIManager.CenterPathEndMenuOnMouse ();
@@ -41,13 +46,11 @@ public class CatContextMenuPhase : GameControlPhase {
 	}
 
 	public override void UIRestButtonEvent () {
-		catExecutePhase.selectedCat = selectedCat;
-		catExecutePhase.tilePath = tilePath;
-		catExecutePhase.TakeControl ();
+		CatExecutePhase.TakeControl (selectedCat, tilePath);
 	}
 
 	override public void UICancelPathButtonEvent () {
-		playerTurnIdlePhase.TakeControl ();
+		PlayerTurnIdlePhase.TakeControl ();
 	}
 
 	override public void OnLeaveControl () {

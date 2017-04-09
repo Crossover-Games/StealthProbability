@@ -4,14 +4,22 @@ using UnityEngine;
 
 /// <summary>
 /// The first phase. Does some setup maintenanace and then passes on the turn to the player.
+/// Exits: PlayerTurnIdlePhase
 /// </summary>
 public class GameSetupPhase : GameControlPhase {
-
 	/// <summary>
-	/// Exit node to player turn idle phase.
+	/// Used for static TakeControl
 	/// </summary>
-	[SerializeField] private PlayerTurnIdlePhase playerTurnIdlePhase;
-
+	private static GameSetupPhase staticInstance;
+	/// <summary>
+	/// Puts the GameSetupPhase in control
+	/// </summary>
+	public static void TakeControl () {
+		staticInstance.InstanceTakeControl ();
+	}
+	void Awake () {
+		staticInstance = this;
+	}
 	/// <summary>
 	/// Displays dog vision patterns.
 	/// </summary>
@@ -25,6 +33,6 @@ public class GameSetupPhase : GameControlPhase {
 	}
 
 	public override void ControlUpdate () {
-		playerTurnIdlePhase.TakeControl ();
+		PlayerTurnIdlePhase.TakeControl ();
 	}
 }

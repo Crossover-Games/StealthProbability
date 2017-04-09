@@ -4,23 +4,28 @@ using UnityEngine;
 
 /// <summary>
 /// Dog equivalent to CatExecutePhase.
+/// Exits: DogSelectorPhase, PlayerTurnIdlePhase
 /// </summary>
 public class DogMovePhase : GameControlPhase {
-
 	/// <summary>
-	/// The dog selector phase. No info required.
+	/// Used for static TakeControl
 	/// </summary>
-	[SerializeField] private DogSelectorPhase dogSelectorPhase;
-
+	private static DogMovePhase staticInstance;
 	/// <summary>
-	/// The player turn idle phase.
+	/// Puts the DogMovePhase in control.
 	/// </summary>
-	[SerializeField] private PlayerTurnIdlePhase playerTurnIdlePhase;
+	public static void TakeControl (Dog selectedDog) {
+		staticInstance.selectedDog = selectedDog;
+		staticInstance.InstanceTakeControl ();
+	}
+	void Awake () {
+		staticInstance = this;
+	}
 
 	/// <summary>
 	/// The dog that will move.
 	/// </summary>
-	public Dog selectedDog;
+	private Dog selectedDog;
 
 	/// <summary>
 	/// The dog will follow this path.
@@ -97,11 +102,11 @@ public class DogMovePhase : GameControlPhase {
 			GameBrain.catManager.RejuvenateAll ();
 			UIManager.masterInfoBox.ClearAllData ();
 			UIManager.masterInfoBox.headerText = "";
-			playerTurnIdlePhase.TakeControl ();
+			PlayerTurnIdlePhase.TakeControl ();
 		}
 		else {
 			selectedDog.grayedOut = true;
-			dogSelectorPhase.TakeControl ();
+			DogSelectorPhase.TakeControl ();
 		}
 
 	}

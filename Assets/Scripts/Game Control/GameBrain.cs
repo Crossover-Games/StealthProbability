@@ -8,7 +8,8 @@ using UnityEngine;
 public class GameBrain : MonoBehaviour {
 
 	[Tooltip ("The first phase. Its OnTakeControl will be called.")]
-	[SerializeField] private GameControlPhase startingPhase;
+	[SerializeField]
+	private GameControlPhase startingPhase;
 
 	/// <summary>
 	/// The phase that is currently controlling the game.
@@ -36,10 +37,12 @@ public class GameBrain : MonoBehaviour {
 	// ---MONOBEHAVIOUR OVERRIDES
 
 	[Tooltip ("Parent of all cats in the scene.")]
-	[SerializeField] private GameObject catParent;
+	[SerializeField]
+	private GameObject catParent;
 
 	[Tooltip ("Parent of all dogs in the scene.")]
-	[SerializeField] private GameObject dogParent;
+	[SerializeField]
+	private GameObject dogParent;
 
 	void Awake () {
 		m_catManager = new TeamMananger<Cat> (new List<Cat> (catParent.GetComponentsInChildren<Cat> ()));
@@ -47,7 +50,7 @@ public class GameBrain : MonoBehaviour {
 	}
 
 	void Start () {
-		startingPhase.TakeControl ();
+		startingPhase.InstanceTakeControl ();
 	}
 
 	void Update () {
@@ -106,7 +109,7 @@ public class GameBrain : MonoBehaviour {
 			inControl.TileDragEvent (t);
 		}
 	}
-		
+
 	/// <summary>
 	/// Calls the operating GameControlPhase's UICancelPathButtonEvent().
 	/// </summary>

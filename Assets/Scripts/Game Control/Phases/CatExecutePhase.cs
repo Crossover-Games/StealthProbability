@@ -4,23 +4,33 @@ using UnityEngine;
 
 /// <summary>
 /// In this phase, the cat just carries out the orders it was given.
+/// Exits: PlayerTurnIdlePhase
 /// </summary>
 public class CatExecutePhase : GameControlPhase {
-
 	/// <summary>
-	/// Exit node to player turn idle phase.
+	/// Used for static TakeControl
 	/// </summary>
-	[SerializeField] private PlayerTurnIdlePhase playerTurnIdlePhase;
-
+	private static CatExecutePhase staticInstance;
+	/// <summary>
+	/// Puts the CatExecutePhase in control
+	/// </summary>
+	public static void TakeControl (Cat selectedCat, List<Tile> tilePath) {
+		staticInstance.selectedCat = selectedCat;
+		staticInstance.tilePath = tilePath;
+		staticInstance.InstanceTakeControl ();
+	}
+	void Awake () {
+		staticInstance = this;
+	}
 	/// <summary>
 	/// Target cat.
 	/// </summary>
-	[HideInInspector] public Cat selectedCat;
+	private Cat selectedCat;
 
 	/// <summary>
 	/// The ordered path the cat will take.
 	/// </summary>
-	[HideInInspector] public List<Tile> tilePath;
+	public List<Tile> tilePath;
 
 
 	[SerializeField] private AudioSource purrSound;
@@ -33,7 +43,7 @@ public class CatExecutePhase : GameControlPhase {
 
 	override public void ControlUpdate () {
 		if (tilePath.Count > 0) {
-			selectedCat.MoveTo (tilePath [0]);
+			selectedCat.MoveTo (tilePath[0]);
 			tilePath.RemoveAt (0);
 		}
 		else {
@@ -48,15 +58,15 @@ public class CatExecutePhase : GameControlPhase {
 
 		Dog[] tempDogs = selectedCat.dogsCrossed.ToArray ();
 		for (int x = 0; x < tempDogs.Length; x++) {
-			if (selectedCat.DetectionCheck (tempDogs [x])) {
+			if (selectedCat.DetectionCheck (tempDogs[x])) {
 				GameBrain.catManager.Remove (selectedCat);
 				// destroy the cat in some way
 			}
 			else {
-				selectedCat.ClearDangerByDog (tempDogs [x]);
+				selectedCat.ClearDangerByDog (tempDogs[x]);
 			}
 		}
-		playerTurnIdlePhase.TakeControl ();
+		PlayerTurnIdlePhase.TakeControl ();
 	}
 
 	override public void OnLeaveControl () {
