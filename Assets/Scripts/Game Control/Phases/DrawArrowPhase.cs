@@ -103,19 +103,31 @@ public class DrawArrowPhase : GameControlPhase {
 			catContextMenuPhase.selectedCat = selectedCat;
 			catContextMenuPhase.TakeControl ();
 		}
-		else if (TileManager.tileMousedOver != endOfPath && availableTiles.Contains (TileManager.tileMousedOver)) {
-			// simple solution: don't run the shortest path algorithm
-			if (TileManager.tileMousedOver.IsNeighbor (endOfPath)) {
-				AddTileToPath (TileManager.tileMousedOver);
+		else if (TileManager.tileMousedOver != endOfPath) {
+			if (availableTiles.Contains (TileManager.tileMousedOver)) {
+				// simple solution: don't run the shortest path algorithm
+				if (TileManager.tileMousedOver.IsNeighbor (endOfPath)) {
+					AddTileToPath (TileManager.tileMousedOver);
+				}
+				else {
+					List<Tile> pathMap = availableTiles.ToList ();
+					Tile lastVisited = endOfPath;
+					pathMap.Add (lastVisited);
+					List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, TileManager.tileMousedOver, pathMap);
+					newPath = newPath.Subset (1);
+					foreach (Tile t in newPath) {
+						AddTileToPath (t);
+					}
+				}
 			}
-			else {
-				List<Tile> pathMap = availableTiles.ToList ();
-				Tile lastVisited = endOfPath;
-				pathMap.Add (lastVisited);
-				List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, TileManager.tileMousedOver, pathMap);
-				newPath = newPath.Subset (1);
-				foreach (Tile t in newPath) {
-					AddTileToPath (t);
+			// Wind back the list
+			else if (tileLinePath.Exists ((TileAndLine tal) => tal.tile == TileManager.tileMousedOver)) {
+				int iterations = tileLinePath.Count - 1 - tileLinePath.FindLastIndex ((TileAndLine tal) => tal.tile == TileManager.tileMousedOver);
+				for (int x = 0; x < iterations; x++) {
+					int lastIndex = tileLinePath.Count - 1;
+					tileLinePath[lastIndex].line.SetActive (false);
+					tileLinePath.RemoveAt (lastIndex);
+					UpdateAvailableTiles ();
 				}
 			}
 		}
