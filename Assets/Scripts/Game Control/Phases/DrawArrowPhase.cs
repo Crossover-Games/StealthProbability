@@ -13,55 +13,73 @@ public class DrawArrowPhase : GameControlPhase {
 	[SerializeField] private CatContextMenuPhase catContextMenuPhase;
 
 	/// <summary>
-	/// The ordered path of all tiles for which the arrow follows.
+	/// Pool of objects used to draw the arrow.
 	/// </summary>
-	private List<Tile> tilePath;
+	public static GameObject[] lineSegments;
+	[SerializeField] private GameObject[] m_lineSegments;
 
 	/// <summary>
 	/// The cat selected to move.
 	/// </summary>
 	[HideInInspector] public Cat selectedCat;
 
-	[SerializeField] private GameObject arrowSegment;
-	private GameObject arrowSegmentParent;
+	private class TileAndLine {
+		public TileAndLine (Tile t, GameObject go) {
+			tile = t;
+			line = go;
+		}
+		public Tile tile;
+		public GameObject line;
+	}
 
+	void Awake () {
+		lineSegments = m_lineSegments;
+	}
+
+	private List<TileAndLine> tileLinePath = new List<TileAndLine> ();
 	private HashSet<Tile> availableTiles = new HashSet<Tile> ();
+	private Tile endOfPath {
+		get {
+			if (tileLinePath.Count == 0) {
+				return null;
+			}
+			else {
+				return tileLinePath.LastElement ().tile;
+			}
+		}
+	}
+
 	private void UpdateAvailableTiles () {
 		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (availableTiles);
 
 		availableTiles = new HashSet<Tile> ();
-		availableTiles.Add (tilePath.LastElement ());
+		availableTiles.Add (endOfPath);
 
-		for (int x = 0; x < selectedCat.maxEnergy + 1 - tilePath.Count; x++) {
+		for (int x = 0; x < selectedCat.maxEnergy + 1 - tileLinePath.Count; x++) {
 			HashSet<Tile> tempTiles = new HashSet<Tile> (availableTiles);
 			foreach (Tile t in tempTiles) {
 				foreach (Compass.Direction d in Compass.allDirections) {
 					Tile tmp = t.GetNeighborInDirection (d);
-					if (Tile.ValidStepDestination (tmp) && !tilePath.Contains (tmp)) {
+					if (Tile.ValidStepDestination (tmp) && !tileLinePath.Exists ((TileAndLine test) => test.tile == tmp)) {
 						availableTiles.Add (tmp);
 					}
 				}
 			}
 		}
-
-		availableTiles.Remove (tilePath.LastElement ());
-
+		availableTiles.Remove (endOfPath);
 		TileManager.MassSetShimmer (availableTiles);
 	}
 
 	override public void OnTakeControl () {
-		arrowSegmentParent = new GameObject ();
-		//UniversalTileManager.cursorTile = null;
-
-		tilePath = new List<Tile> ();
-		tilePath.Add (selectedCat.myTile);
+		tileLinePath = new List<TileAndLine> ();
+		tileLinePath.Add (new TileAndLine (selectedCat.myTile, null));
 
 		UpdateAvailableTiles ();
 	}
 
 	override public void MouseOverChangeEvent () {
 		// if the moused over tile is a valid step in the path
-		if (tilePath.Count <= selectedCat.maxEnergy && availableTiles.Contains (TileManager.tileMousedOver) && tilePath.LastElement ().IsNeighbor (TileManager.tileMousedOver)) {
+		if (tileLinePath.Count <= selectedCat.maxEnergy && availableTiles.Contains (TileManager.tileMousedOver) && tileLinePath.LastElement ().tile.IsNeighbor (TileManager.tileMousedOver)) {
 			AddTileToPath (TileManager.tileMousedOver);
 		}
 	}
@@ -73,19 +91,26 @@ public class DrawArrowPhase : GameControlPhase {
 		if (Input.GetMouseButton (0) == false) {
 			TileManager.cursorTile = null;
 
-			catContextMenuPhase.tilePath = tilePath;
+			List<Tile> path = new List<Tile> ();
+			for (int x = 0; x < tileLinePath.Count; x++) {
+				if (x != 0) {
+					tileLinePath[x].line.SetActive (false);
+				}
+				path.Add (tileLinePath[x].tile);
+			}
+
+			catContextMenuPhase.tilePath = path;
 			catContextMenuPhase.selectedCat = selectedCat;
-			catContextMenuPhase.arrowSegmentParent = arrowSegmentParent;
 			catContextMenuPhase.TakeControl ();
 		}
-		else if (TileManager.tileMousedOver != tilePath.LastElement () && availableTiles.Contains (TileManager.tileMousedOver)) {
+		else if (TileManager.tileMousedOver != endOfPath && availableTiles.Contains (TileManager.tileMousedOver)) {
 			// simple solution: don't run the shortest path algorithm
-			if (TileManager.tileMousedOver.IsNeighbor (tilePath.LastElement ())) {
+			if (TileManager.tileMousedOver.IsNeighbor (endOfPath)) {
 				AddTileToPath (TileManager.tileMousedOver);
 			}
 			else {
 				List<Tile> pathMap = availableTiles.ToList ();
-				Tile lastVisited = tilePath.LastElement ();
+				Tile lastVisited = endOfPath;
 				pathMap.Add (lastVisited);
 				List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, TileManager.tileMousedOver, pathMap);
 				newPath = newPath.Subset (1);
@@ -105,12 +130,13 @@ public class DrawArrowPhase : GameControlPhase {
 	/// Adds the tile to path and updates selectable tiles.
 	/// </summary>
 	private void AddTileToPath (Tile t) {
-		//tilePath.LastElement ().characterConnectionPoint.Halfway (t.characterConnectionPoint);
-		Tile head = tilePath.LastElement ();
-		GameObject tmp = GameObject.Instantiate (arrowSegment, arrowSegmentParent.transform);
-		tmp.transform.position = head.topCenterPoint.Halfway (t.topCenterPoint);
-		tmp.transform.rotation = Compass.DirectionToRotation (head.GetDirectionOfNeighbor (t));
-		tilePath.Add (t);
+		GameObject currentSegment = lineSegments[tileLinePath.Count - 1];
+		currentSegment.SetActive (true);
+
+		currentSegment.transform.position = endOfPath.topCenterPoint.HalfwayTo (t.topCenterPoint);
+		currentSegment.transform.rotation = Compass.DirectionToRotation (endOfPath.GetDirectionOfNeighbor (t));
+		tileLinePath.Add (new TileAndLine (t, currentSegment));
+
 		UpdateAvailableTiles ();
 	}
 }

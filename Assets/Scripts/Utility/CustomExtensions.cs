@@ -179,7 +179,7 @@ public static class CustomExtensions {
 	/// <summary>
 	/// Returns the midpoint between this vector and the other.
 	/// </summary>
-	public static Vector3 Halfway (this Vector3 vector, Vector3 other) {
+	public static Vector3 HalfwayTo (this Vector3 vector, Vector3 other) {
 		return Vector3.Lerp (vector, other, 0.5f);
 	}
 

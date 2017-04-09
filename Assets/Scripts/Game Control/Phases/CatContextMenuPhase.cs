@@ -22,10 +22,7 @@ public class CatContextMenuPhase : GameControlPhase {
 	/// Target cat.
 	/// </summary>
 	[HideInInspector] public Cat selectedCat;
-	/// <summary>
-	/// The arrow segment parent. Will be destroyed.
-	/// </summary>
-	[HideInInspector] public GameObject arrowSegmentParent;
+
 
 	/// <summary>
 	/// The ordered path the cat will take.
@@ -57,7 +54,10 @@ public class CatContextMenuPhase : GameControlPhase {
 		UIManager.pathEndMenuState = false;
 		TileManager.ClearAllShimmer ();
 		TileManager.cursorTile = null;
-		GameObject.Destroy (arrowSegmentParent);
+		foreach (GameObject g in DrawArrowPhase.lineSegments) {
+			g.SetActive (false);
+		}
+
 		CameraOverheadControl.dragControlAllowed = false;
 	}
 }
