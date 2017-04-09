@@ -71,6 +71,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
 		if (TileManager.cursorTile != t) {
+			if (t.occupant != null) {
+				t.occupant.PlaySound ();
+			}
 			UpdateAfterClick (t);
 		}
 		// once we have the holy grail info box working, we can put stuff like that in there too.

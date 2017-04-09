@@ -8,7 +8,12 @@ using System.Collections.Generic;
 public abstract class GameCharacter : MonoBehaviour {
 
 	[Tooltip ("This character's main sound")]
-	[SerializeField] private AudioSource mySound;
+	[SerializeField] private AudioClip mySound;
+
+	/// <summary>
+	/// Used to play my sound.
+	/// </summary>
+	private AudioSource soundPlayer;
 
 	/// <summary>
 	/// Collider used to calculate the elevation of top.
@@ -19,7 +24,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// Cat, dog, machine, or something else not thought of yet. It's safe to assume that a cat is implemented as a cat, and so on.
 	/// </summary>
 	virtual public CharacterType characterType {
-		get{ return CharacterType.Machine; }
+		get { return CharacterType.Machine; }
 	}
 
 	/// <summary>
@@ -39,7 +44,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// The tile this character is standing on.
 	/// </summary>
 	public Tile myTile {
-		get{ return associatedTile; }
+		get { return associatedTile; }
 		set {
 			associatedTile = value;
 			associatedTile.SetOccupant (this);
@@ -51,7 +56,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// </summary>
 	public void PlaySound () {
 		if (mySound != null) {
-			mySound.Play ();
+			soundPlayer.PlayOneShot (mySound);
 		}
 	}
 
@@ -62,7 +67,7 @@ public abstract class GameCharacter : MonoBehaviour {
 
 	protected Animator animator;
 
-	private Renderer[] myRenderers;
+	private Renderer [] myRenderers;
 	private Color myColor;
 
 	/// <summary>
@@ -75,6 +80,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	}
 
 	virtual protected void Awake () {
+		soundPlayer = GetComponent<AudioSource> ();
 		FindMyStartingTile ();
 		myRenderers = GetComponentsInChildren<Renderer> ();
 		myColor = myRenderers [0].material.color;
@@ -99,7 +105,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// <summary>
 	/// Moves this character on top of the specified tile. This is intended to be used for neighboring tiles. There will be no animation if the destination is not a neighbor.
 	/// </summary>
-	virtual public void MoveTo (Tile destination) {	//don't forget that this changes the tile's occupant
+	virtual public void MoveTo (Tile destination) { //don't forget that this changes the tile's occupant
 		if (Tile.ValidStepDestination (destination)) {
 			Tile previous = myTile;
 			previous.SetOccupant (null);
@@ -126,7 +132,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// Is the character grayed out?
 	/// </summary>
 	public bool grayedOut {
-		get{ return grayed; }
+		get { return grayed; }
 		set {
 			if (value != grayed) {
 				grayed = value;

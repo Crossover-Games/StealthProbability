@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 4041854434648068}
   - component: {fileID: 114096137034361474}
   - component: {fileID: 65105485324859798}
+  - component: {fileID: 82396742765997446}
   m_Layer: 2
   m_Name: Cat Example
   m_TagString: Cat
@@ -1360,6 +1361,86 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.44, z: 0.65}
   m_Center: {x: 0, y: 0.22, z: -0.04}
+--- !u!82 &82396742765997446
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1257381611334170}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95763421915811124
 Animator:
   serializedVersion: 3
@@ -1388,9 +1469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ba75c8a55183de4b9a29370f17b0513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mySound: {fileID: 8300000, guid: 463a92d417ad5c4408adfa46e4136f79, type: 3}
   myCollider: {fileID: 65105485324859798}
   orientation: 0
-  ableToMove: 1
   myMaxEnergy: 4
   livesRemaining: 2
 --- !u!137 &137832728629854744

@@ -8,12 +8,38 @@ using UnityEngine;
 /// Helpful extensions written by the king rat himself.
 /// </summary>
 public static class CustomExtensions {
+	// --GAMEOBJECT
+
+	/// <summary>
+	/// Moves the object and all children to the "Ignore Raycast" layer
+	/// </summary>
 	public static void MoveToIgnoreRaycastLayer (this GameObject go) {
 		int ignoreRaycastLayer = LayerMask.NameToLayer ("Ignore Raycast");
 		foreach (Transform t in go.GetComponentsInChildren<Transform> ()) {
 			t.gameObject.layer = ignoreRaycastLayer;
 		}
 	}
+
+	/// <summary>
+	/// Functions like GameObject.GetComponentInChildren, but also searches inactive objects
+	/// </summary>
+	public static T GetComponentInChildrenUnconditional<T> (this GameObject go) {
+		T component = go.GetComponent<T> ();
+
+		if (component != null) {
+			Transform root = go.transform;
+			int numChildren = root.childCount;
+			for (int childIndex = 0; childIndex < numChildren; childIndex++) {
+				component = root.GetChild (childIndex).gameObject.GetComponentInChildrenUnconditional<T> ();
+				if (component != null) {
+					return component;
+				}
+			}
+		}
+
+		return component;
+	}
+
 	/// <summary>
 	/// Moves the character to an absolute location in world space. Velocity is calculated normally.
 	/// </summary>
@@ -54,8 +80,8 @@ public static class CustomExtensions {
 	/// <summary>
 	/// Returns this set as an array in no particular order.
 	/// </summary>
-	public static T[] ToArray<T> (this HashSet<T> theSet) {
-		T[] tempArray = new T[theSet.Count];
+	public static T [] ToArray<T> (this HashSet<T> theSet) {
+		T [] tempArray = new T [theSet.Count];
 		theSet.CopyTo (tempArray);
 		return tempArray;
 	}
@@ -116,7 +142,7 @@ public static class CustomExtensions {
 	/// Returns the last element in the list.
 	/// </summary>
 	public static T LastElement<T> (this List<T> theList) {
-		return theList[theList.Count - 1];
+		return theList [theList.Count - 1];
 	}
 
 	/// <summary>
@@ -125,7 +151,7 @@ public static class CustomExtensions {
 	public static List<T> Clone<T> (this List<T> theList) {
 		List<T> tmp = new List<T> ();
 		for (int x = 0; x < theList.Count; x++) {
-			tmp.Add (theList[x]);
+			tmp.Add (theList [x]);
 		}
 		return tmp;
 	}
@@ -142,7 +168,7 @@ public static class CustomExtensions {
 			int newEnd = Mathf.Min (endIndex, theList.Count - 1);
 			List<T> tmp = new List<T> ();
 			for (int x = newStart; x <= newEnd; x++) {
-				tmp.Add (theList[x]);
+				tmp.Add (theList [x]);
 			}
 			return tmp;
 		}
@@ -162,15 +188,15 @@ public static class CustomExtensions {
 		RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider ();
 		int n = list.Count;
 		while (n > 1) {
-			byte[] box = new byte[1];
+			byte [] box = new byte [1];
 			do {
 				provider.GetBytes (box);
-			} while (!(box[0] < n * (Byte.MaxValue / n)));
-			int k = (box[0] % n);
+			} while (!(box [0] < n * (Byte.MaxValue / n)));
+			int k = (box [0] % n);
 			n--;
-			T value = list[k];
-			list[k] = list[n];
-			list[n] = value;
+			T value = list [k];
+			list [k] = list [n];
+			list [n] = value;
 		}
 	}
 

@@ -49,27 +49,6 @@ public class DrawArrowPhase : GameControlPhase {
 		}
 	}
 
-	private void UpdateAvailableTiles () {
-		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (availableTiles);
-
-		availableTiles = new HashSet<Tile> ();
-		availableTiles.Add (endOfPath);
-
-		for (int x = 0; x < selectedCat.maxEnergy + 1 - tilePath.Count; x++) {
-			HashSet<Tile> tempTiles = new HashSet<Tile> (availableTiles);
-			foreach (Tile t in tempTiles) {
-				foreach (Compass.Direction d in Compass.allDirections) {
-					Tile tmp = t.GetNeighborInDirection (d);
-					if (Tile.ValidStepDestination (tmp) && !tilePath.Contains (tmp)) {
-						availableTiles.Add (tmp);
-					}
-				}
-			}
-		}
-		availableTiles.Remove (endOfPath);
-		TileManager.MassSetShimmer (availableTiles);
-	}
-
 	override public void OnTakeControl () {
 		tilePath = new List<Tile> ();
 		tilePath.Add (selectedCat.myTile);
@@ -124,6 +103,7 @@ public class DrawArrowPhase : GameControlPhase {
 					pathArrow.lineSegments [lastIndex - 1].SetActive (false);
 					tilePath.RemoveAt (lastIndex);
 					UpdateAvailableTiles ();
+					UpdatePathColor ();
 				}
 			}
 		}
@@ -140,5 +120,46 @@ public class DrawArrowPhase : GameControlPhase {
 
 		tilePath.Add (t);
 		UpdateAvailableTiles ();
+		UpdatePathColor ();
+	}
+
+
+	/// <summary>
+	/// Update the list of tiles available to be drawn over.
+	/// </summary>
+	private void UpdateAvailableTiles () {
+		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (availableTiles);
+
+		availableTiles = new HashSet<Tile> ();
+		availableTiles.Add (endOfPath);
+
+		for (int x = 0; x < selectedCat.maxEnergy + 1 - tilePath.Count; x++) {
+			HashSet<Tile> tempTiles = new HashSet<Tile> (availableTiles);
+			foreach (Tile t in tempTiles) {
+				foreach (Compass.Direction d in Compass.allDirections) {
+					Tile tmp = t.GetNeighborInDirection (d);
+					if (Tile.ValidStepDestination (tmp) && !tilePath.Contains (tmp)) {
+						availableTiles.Add (tmp);
+					}
+				}
+			}
+		}
+		availableTiles.Remove (endOfPath);
+		TileManager.MassSetShimmer (availableTiles);
+	}
+
+	/// <summary>
+	/// Given the tile danger data of all tiles on path, pick the color of the most dangerous.
+	/// </summary>
+	private void UpdatePathColor () {
+		TileDangerData riskiest = new TileDangerData (Mathf.NegativeInfinity, null, null, Color.black);
+		foreach (Tile t in tilePath) {
+			foreach (TileDangerData tdd in t.dangerData) {
+				if (tdd.danger > riskiest.danger) {
+					riskiest = tdd;
+				}
+			}
+		}
+		pathArrow.color = riskiest.dangerColor;
 	}
 }

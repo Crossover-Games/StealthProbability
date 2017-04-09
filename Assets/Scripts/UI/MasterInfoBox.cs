@@ -22,7 +22,7 @@ public class MasterInfoBox : MonoBehaviour {
 	/// <summary>
 	/// All fields of text data. Assign in editor.
 	/// </summary>
-	[SerializeField] private Text[] dataFields;
+	[SerializeField] private Text [] dataFields;
 
 	/// <summary>
 	/// Adds one piece of text data.
@@ -48,8 +48,11 @@ public class MasterInfoBox : MonoBehaviour {
 	/// </summary>
 	public void ClearAllData () {
 		numberOfDataEnabled = 0;
+		int debug = 0;
 		foreach (Text t in dataFields) {
+			debug++;
 			dataFields [numberOfDataEnabled].gameObject.SetActive (false);
 		}
+		print (debug);
 	}
 }

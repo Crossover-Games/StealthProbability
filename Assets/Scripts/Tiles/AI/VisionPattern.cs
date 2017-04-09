@@ -81,7 +81,7 @@ public class VisionPattern {
 			foreach (Tile t in layer2) {
 				tmp.Add (new TileDangerData (0.25f, t, m_Owner, Color.green));
 			}
-			tmp.Add (new TileDangerData (1f, m_Owner.myTile, m_Owner, Color.white));
+			tmp.Add (new TileDangerData (1f, m_Owner.myTile, m_Owner, Color.gray));
 			return tmp;
 		}
 	}
