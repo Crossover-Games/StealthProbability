@@ -82,6 +82,14 @@ public abstract class Tile : MonoBehaviour {
 
 		RegisterNeighboringTiles ();
 		TileManager.RegisterTileSetup (this);
+		LateAwake ();
+	}
+
+	/// <summary>
+	/// Called at the end of awake, but still before start.
+	/// </summary>
+	protected virtual void LateAwake () {
+		// nothing by default
 	}
 
 	void Start () {

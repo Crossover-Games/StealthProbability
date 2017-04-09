@@ -191,4 +191,15 @@ public static class CustomExtensions {
 	public static Vector3 ToRGBVector (this Color color) {
 		return new Vector3 (color.r, color.g, color.b);
 	}
+
+	// ---RENDERER
+
+	/// <summary>
+	/// Changes the main material color. This will replace the material with a clone instance.
+	/// </summary>
+	public static void SetMainMaterialColor (this Renderer renderer, Color color) {
+		Material m = renderer.material;
+		m.color = color;
+		renderer.material = m;
+	}
 }

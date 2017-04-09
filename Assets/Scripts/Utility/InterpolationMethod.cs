@@ -3,7 +3,7 @@
 /// </summary>
 public enum InterpolationMethod {
 	/// <summary>
-	/// Equal 
+	/// Constant change from t = 0 to t = 1.
 	/// </summary>
 	Linear,
 	/// <summary>

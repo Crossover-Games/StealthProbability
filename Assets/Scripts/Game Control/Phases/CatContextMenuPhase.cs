@@ -35,7 +35,7 @@ public class CatContextMenuPhase : GameControlPhase {
 	private List<Tile> tilePath;
 
 	override public void OnTakeControl () {
-		//UIManager.CenterPathEndMenuOnMouse ();
+		TileManager.ClearAllShimmer ();
 		Tile last = tilePath.LastElement ();
 		UIManager.CenterPathEndMenuOnWorldPoint (last.topCenterPoint);
 		UIManager.pathEndMenuState = true;
@@ -57,9 +57,7 @@ public class CatContextMenuPhase : GameControlPhase {
 		UIManager.pathEndMenuState = false;
 		TileManager.ClearAllShimmer ();
 		TileManager.cursorTile = null;
-		foreach (GameObject g in DrawArrowPhase.lineSegments) {
-			g.SetActive (false);
-		}
+		DrawArrowPhase.ClearArrow ();
 
 		CameraOverheadControl.dragControlAllowed = false;
 	}

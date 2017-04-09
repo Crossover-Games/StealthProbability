@@ -47,26 +47,8 @@ public class CatExecutePhase : GameControlPhase {
 			tilePath.RemoveAt (0);
 		}
 		else {
-			EndMovement ();
+			CatTurnDetectionPhase.TakeControl (selectedCat);
 		}
-	}
-
-	/// <summary>
-	/// Ends the movement. Does detection checks.
-	/// </summary>
-	private void EndMovement () {
-
-		Dog[] tempDogs = selectedCat.dogsCrossed.ToArray ();
-		for (int x = 0; x < tempDogs.Length; x++) {
-			if (selectedCat.DetectionCheck (tempDogs[x])) {
-				GameBrain.catManager.Remove (selectedCat);
-				// destroy the cat in some way
-			}
-			else {
-				selectedCat.ClearDangerByDog (tempDogs[x]);
-			}
-		}
-		PlayerTurnIdlePhase.TakeControl ();
 	}
 
 	override public void OnLeaveControl () {

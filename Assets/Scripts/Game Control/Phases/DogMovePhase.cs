@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Dog equivalent to CatExecutePhase.
-/// Exits: DogSelectorPhase, PlayerTurnIdlePhase
+/// Exits: DogTurnCatDetectPhase
 /// </summary>
 public class DogMovePhase : GameControlPhase {
 	/// <summary>
@@ -71,43 +71,12 @@ public class DogMovePhase : GameControlPhase {
 				selectedDog.MoveTo (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile);
 			}
 			else {
-				EndDogMovement ();
+				DogTurnDetectionPhase.TakeControl (selectedDog);
 			}
 		}
 		else if (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited) == null) {
-			EndDogMovement ();
+			DogTurnDetectionPhase.TakeControl (selectedDog);
 		}
 	}
 
-	/// <summary>
-	/// Ends the dog movement and decides what to do next. Includes detection check and advancing the phase.
-	/// </summary>
-	private void EndDogMovement () {
-		Cat[] allCats = GameBrain.catManager.allCharacters;
-		foreach (Cat c in allCats) {
-			if (c.inDanger) {
-				if (c.DetectionCheck (selectedDog)) {
-					GameBrain.catManager.Remove (c);
-					// destroy cat
-				}
-				else {
-					c.ClearDangerByDog (selectedDog);
-				}
-			}
-		}
-
-		if (GameBrain.dogManager.availableCharacters.Length == 1) {
-			CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
-			GameBrain.dogManager.RejuvenateAll ();
-			GameBrain.catManager.RejuvenateAll ();
-			UIManager.masterInfoBox.ClearAllData ();
-			UIManager.masterInfoBox.headerText = "";
-			PlayerTurnIdlePhase.TakeControl ();
-		}
-		else {
-			selectedDog.grayedOut = true;
-			DogSelectorPhase.TakeControl ();
-		}
-
-	}
 }

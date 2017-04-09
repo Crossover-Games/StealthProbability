@@ -5,7 +5,7 @@ using UnityEngine;
 public class Cat : GameCharacter {
 
 	override public CharacterType characterType {
-		get{ return CharacterType.Cat; }
+		get { return CharacterType.Cat; }
 	}
 
 	override public float stepAnimationTime {
@@ -78,7 +78,7 @@ public class Cat : GameCharacter {
 	/// <summary>
 	/// Runs a detection check by the specified dog. Returns true if the dog spotted the cat. Always false if the cat did not interfere with the vision pattern of the dog.
 	/// </summary>
-	public bool DetectionCheck (Dog watcher) {
+	public bool SimulateDetectionCheck (Dog watcher) {
 		float maxDanger = -1f;
 		foreach (TileDangerData tdd in dangerData) {
 			if (tdd.watchingDog == watcher && tdd.danger > maxDanger) {
@@ -86,6 +86,23 @@ public class Cat : GameCharacter {
 			}
 		}
 		return Random.value < maxDanger;
+	}
+
+	/// <summary>
+	/// Runs a detection check, then conducts the removal. Returns result of check.
+	/// </summary>
+	public bool DetectionCheckAndRemove (Dog watcher) {
+		if (SimulateDetectionCheck (watcher)) {
+				GameBrain.catManager.Remove (this);
+				AnimationManager.AddAnimation (transform, new AnimationDestination (null, null, new Vector3Reference (Vector3.zero), 1f, InterpolationMethod.SquareRoot));
+				return true;
+			}
+			else {
+				ClearDangerByDog (watcher);
+				// just a dummy animation
+				AnimationManager.AddAnimation (transform, new AnimationDestination (null, null, null, 1f, InterpolationMethod.Linear));
+				return false;
+			}
 	}
 
 	override public void MoveTo (Tile destination) {

@@ -65,7 +65,10 @@ public class TeamMananger<T> where T : GameCharacter {
 	/// Remove the specified character from this team. Used when a cat is detected and removed from the board.
 	/// </summary>
 	public void Remove (T character) {
-		m_characters.Remove (character);
+		if (character != null && m_characters.Contains (character)) {
+			m_characters.Remove (character);
+			character.myTile.SetOccupant (null);
+		}
 	}
 
 	/// <summary>

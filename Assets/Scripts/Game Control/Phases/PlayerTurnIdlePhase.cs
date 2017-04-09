@@ -22,10 +22,18 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	}
 
 	/// <summary>
-	/// Moves cursor and displays overlays. Never null
+	/// Moves the cursor, updates UI and highlights. Does not trigger click events.
 	/// </summary>
-	override public void TileClickEvent (Tile t) {
-		if (TileManager.cursorTile != t) {
+	/// <param name="t"></param>
+	public static void SelectTile (Tile t) {
+		staticInstance.UpdateAfterClick (t);
+	}
+
+	/// <summary>
+	/// Moves the cursor, updates UI and highlights
+	/// </summary>
+	private void UpdateAfterClick (Tile t) {
+		if (t != null) {
 			TileManager.cursorTile = t;
 			UIManager.masterInfoBox.ClearAllData ();
 			foreach (TileDangerData tdd in t.dangerData) {
@@ -56,6 +64,14 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				TileManager.ClearAllShimmer ();
 				UIManager.masterInfoBox.headerText = "-FLOOR-";
 			}
+		}
+	}
+	/// <summary>
+	/// Moves cursor and displays overlays. Never null
+	/// </summary>
+	override public void TileClickEvent (Tile t) {
+		if (TileManager.cursorTile != t) {
+			UpdateAfterClick (t);
 		}
 		// once we have the holy grail info box working, we can put stuff like that in there too.
 	}
