@@ -37,7 +37,7 @@ public class DrawArrowPhase : GameControlPhase {
 			foreach (Tile t in tempTiles) {
 				foreach (Compass.Direction d in Compass.allDirections) {
 					Tile tmp = t.GetNeighborInDirection (d);
-					if (!tilePath.Contains (tmp) && TileManager.IsValidMoveDestination (tmp)) {
+					if (Tile.ValidStepDestination (tmp) && !tilePath.Contains (tmp)) {
 						availableTiles.Add (tmp);
 					}
 				}
@@ -48,7 +48,7 @@ public class DrawArrowPhase : GameControlPhase {
 
 		TileManager.MassSetShimmer (availableTiles);
 	}
-		
+
 	override public void OnTakeControl () {
 		arrowSegmentParent = new GameObject ();
 		//UniversalTileManager.cursorTile = null;
@@ -65,7 +65,7 @@ public class DrawArrowPhase : GameControlPhase {
 			AddTileToPath (TileManager.tileMousedOver);
 		}
 	}
-		
+
 	/// <summary>
 	/// If mouse is not held, go to next phase. If the mouse changes, update the path.
 	/// </summary>

@@ -303,4 +303,12 @@ public abstract class Tile : MonoBehaviour {
 		}
 		return all.ToList ();
 	}
+
+	/// <summary>
+	/// Not null and traversable
+	/// </summary>
+	public static bool ValidStepDestination (Tile t) {
+		return t != null && t.traversable;
+	}
+
 }

@@ -206,14 +206,4 @@ public class TileManager : MonoBehaviour {
 		mouseClickPos = Input.mousePosition;
 		doubleClickTimeElapsed = 0f;
 	}
-
-	// ---STATIC METHODS
-
-	/// <summary>
-	/// WILL BE REMOVED IN REFACTOR.
-	/// Checks if a certain tile exists, is not obstructed, and is not a wall. Not related to paths or energy.
-	/// </summary>
-	public static bool IsValidMoveDestination (Tile tile) {
-		return (tile != null && tile.tileType != TileType.Wall && tile.occupant == null);
-	}
 }
