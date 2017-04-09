@@ -12,7 +12,7 @@ public class TileManager : MonoBehaviour {
 	/// The tile the mouse cursor is currently hovering over.
 	/// </summary>
 	public static Tile tileMousedOver {
-		get{ return mousedOver; }
+		get { return mousedOver; }
 	}
 
 	/// <summary>
@@ -28,7 +28,7 @@ public class TileManager : MonoBehaviour {
 	/// All tiles in the level.
 	/// </summary>
 	public static Tile[] allTiles {
-		get{ return a_allTiles; }
+		get { return a_allTiles; }
 	}
 
 	/// <summary>
@@ -48,7 +48,7 @@ public class TileManager : MonoBehaviour {
 	/// </summary>
 	public static Tile cursorTile {
 		get { return cursored; }
-		set { 
+		set {
 			if (value == null) {
 				arrowCursor.SetActive (false);
 			}
@@ -88,10 +88,10 @@ public class TileManager : MonoBehaviour {
 	/// Remove the shimmer effect from all tiles.
 	/// </summary>
 	public static void ClearAllShimmer () {
-		foreach (Tile t in m_shimmering) {
-			t.SetCosmeticShimmer (false);
+		List<Tile> oldShimmer = m_shimmering.ToList ();
+		foreach (Tile t in oldShimmer) {
+			t.shimmer = false;
 		}
-		m_shimmering = new HashSet<Tile> ();
 	}
 
 	/// <summary>
@@ -143,7 +143,7 @@ public class TileManager : MonoBehaviour {
 	void Start () {
 		a_allTiles = s_allTiles.ToArray ();
 	}
-		
+
 	private static float DOUBLE_CLICK_WINDOW = 0.5F;
 	private static float doubleClickTimeElapsed = 0f;
 	private static Tile doubleClickMemory = null;

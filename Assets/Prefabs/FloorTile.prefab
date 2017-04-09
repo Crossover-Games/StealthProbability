@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4000012272812282}
-  - component: {fileID: 114000010072862452}
   - component: {fileID: 65578737545669952}
+  - component: {fileID: 114764180585178624}
   m_Layer: 0
   m_Name: FloorTile
   m_TagString: Untagged
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 33000010679772830}
   - component: {fileID: 23000010417531898}
   m_Layer: 0
-  m_Name: FloorPiece
+  m_Name: FloorMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,9 +89,9 @@ GameObject:
   - component: {fileID: 4126686854990560}
   - component: {fileID: 33969803938272036}
   - component: {fileID: 23786120340287834}
-  - component: {fileID: 114272074771609792}
+  - component: {fileID: 114984695245611760}
   m_Layer: 0
-  m_Name: DangerColor
+  m_Name: DangerVisualizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,10 +107,10 @@ GameObject:
   - component: {fileID: 4201215153903096}
   - component: {fileID: 33142355390628986}
   - component: {fileID: 23942772788345196}
-  - component: {fileID: 114394967958550116}
   - component: {fileID: 65275249055654692}
+  - component: {fileID: 114811976366962032}
   m_Layer: 0
-  m_Name: VisualizerGrid
+  m_Name: MouseUnit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,8 +150,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011137630582}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000012072264442}
@@ -404,7 +404,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114000010072862452
+--- !u!114 &114764180585178624
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -412,24 +412,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000011137630582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372ecb01b1fa32144b3b64ea6ebda9d3, type: 3}
+  m_Script: {fileID: 11500000, guid: abab47e3afc0fab4bbeb4be1682b5aa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visualizer: {fileID: 114394967958550116}
-  myTileType: 0
+  m_mouseUnit: {fileID: 114811976366962032}
+  m_dangerVisualizer: {fileID: 114984695245611760}
   shimmerObject: {fileID: 1881055548360762}
---- !u!114 &114272074771609792
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1455016740936654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fd51f0b7a16b64d9b5e1f6ec3356c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114394967958550116
+--- !u!114 &114811976366962032
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -437,12 +426,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1547988935541976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcdf19d8950612b41aea101ef79488ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 9045c0f66fb5f404f9f39b67611a7328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myTile: {fileID: 114764180585178624}
   mouseOverMaterial: {fileID: 2100000, guid: e049720649c798d4f97804ca491e6b4e, type: 2}
   mouseAwayMaterial: {fileID: 2100000, guid: 00737682c9b04b84ab36ca890da72572, type: 2}
-  dangerVisualizer: {fileID: 114272074771609792}
+--- !u!114 &114984695245611760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1455016740936654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bb80effa9064044aaa1599eb641647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &198467052467122434
 ParticleSystem:
   m_ObjectHideFlags: 1

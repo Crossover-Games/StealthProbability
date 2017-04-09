@@ -5,11 +5,7 @@ using System.Collections.Generic;
 /// <summary>
 /// The game board is made up of these! IMPORTANT: Heavily dependent on the convention that a tile is 1x1x1 units and spaced accordingly. Remember to hold CTRL while dragging an object in the editor.
 /// </summary>
-public class Tile : MonoBehaviour {
-
-	// visualization
-	[Tooltip ("Set a reference to its grid square visualizer object.")]
-	[SerializeField] private TileGridUnitVisualizer visualizer;
+public abstract class Tile : MonoBehaviour {
 
 	// neighboring tiles
 	private Tile northTile = null;
@@ -17,38 +13,50 @@ public class Tile : MonoBehaviour {
 	private Tile westTile = null;
 	private Tile eastTile = null;
 
-	private Collider myCollider;
+	private Collider m_collider;
 
-	[SerializeField] private TileType myTileType;
-	public TileType tileType {
-		get{ return myTileType; }
+	/// <summary>
+	/// What type of tile is this?
+	/// </summary>
+	public abstract TileType tileType { get; }
+
+	/// <summary>
+	/// Can this tile be stepped on?
+	/// </summary>
+	public abstract bool traversable { get; }
+
+	/// <summary>
+	/// Can a cat end its movement on this square?
+	/// </summary>
+	public bool validMoveEnd {
+		get { return traversable && occupant == null; }
 	}
-		
-	private GameCharacter myOccupant;
+
+	private GameCharacter m_occupant;
 	/// <summary>
 	/// The character currently standing on this tile. Automatically updated by movement of a GameCharacter.
 	/// </summary>
-	public GameCharacter occupant {
-		get{ return myOccupant; }
+	public virtual GameCharacter occupant {
+		get { return m_occupant; }
 	}
-		
+
 	/// <summary>
 	/// Should only be called by GameCharacter and its subtypes. Please don't tinker with this.
 	/// </summary>
 	public void SetOccupant (GameCharacter gc) {
-		myOccupant = gc;
+		m_occupant = gc;
 	}
 
 	/// <summary>
 	/// Returns the highest point on the tile where the arrow cursor will be. Will be either over a character's head or over simple ground.
 	/// </summary>
-	public Vector3 cursorConnectionPoint {
+	public virtual Vector3 cursorConnectionPoint {
 		get {
-			if (myOccupant == null) {
+			if (occupant == null) {
 				return topCenterPoint;
 			}
 			else {
-				return new Vector3 (transform.position.x, myOccupant.elevationOfTop, transform.position.z);
+				return new Vector3 (transform.position.x, m_occupant.elevationOfTop, transform.position.z);
 			}
 		}
 	}
@@ -58,24 +66,28 @@ public class Tile : MonoBehaviour {
 	/// The pathing node associated with this tile. Null for walls and tiles not intended to be traversed by dogs.
 	/// </summary>
 	public PathingNode pathingNode {
-		get{ return myPathingNode; }
+		get { return myPathingNode; }
 	}
 
 	/// <summary>
 	/// Returns the world space coordinate of center top of tile. This is where the occupying character will stand, where the cursor will point on an empty tile, etc.
 	/// </summary>
-	public Vector3 topCenterPoint {
-		get { return new Vector3 (transform.position.x, myCollider.bounds.max.y, transform.position.z); }
+	public virtual Vector3 topCenterPoint {
+		get { return new Vector3 (transform.position.x, m_collider.bounds.max.y, transform.position.z); }
 	}
 
 	void Awake () {
-		myCollider = GetComponent<Collider> ();
+		m_collider = GetComponent<Collider> ();
 		myPathingNode = GetComponent<PathingNode> ();
 
 		RegisterNeighboringTiles ();
-
-		visualizer.AssociateTile (this);
 		TileManager.RegisterTileSetup (this);
+	}
+
+	void Start () {
+		if (!allowMouseInteraction) {
+			gameObject.MoveToIgnoreRaycastLayer ();
+		}
 	}
 
 	private void RegisterNeighboringTiles () {
@@ -164,35 +176,14 @@ public class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Returns a list of all neighboring tiles that can currently be stepped on.
+	/// Can this tile be clicked and moused over?
 	/// </summary>
-	public List<Tile> allTraversableNeighbors {
-		get {
-			List<Tile> tmp = new List<Tile> ();
-			foreach (Compass.Direction direction in Compass.allDirections) {
-				Tile possibleNeighbor = GetNeighborInDirection (direction);
-				if (TileManager.IsValidMoveDestination (possibleNeighbor)) {
-					tmp.Add (possibleNeighbor);
-				}
-			}
-			return tmp;
-		}
-	}
+	public abstract bool allowMouseInteraction { get; }
 
 	/// <summary>
-	/// Checks if this tile is not obstructed and is not a wall. Not related to paths or energy.
+	/// State of the tile's mouse highlight.
 	/// </summary>
-	public bool IsValidMoveDestination {
-		get { return (tileType != TileType.Wall && occupant == null); }
-	}
-
-	/// <summary>
-	/// State of the tile's highlight. Encapsulates field for TileGridUnitVisualizer.
-	/// </summary>
-	public bool mouseOverVisualState {
-		get{ return visualizer.mouseOverVisualState; }
-		set{ visualizer.mouseOverVisualState = value; }
-	}
+	public abstract bool mouseOverVisualState { get; set; }
 
 	/// <summary>
 	/// Temporary and always-changing list of currently applied danger squares.
@@ -203,9 +194,9 @@ public class Tile : MonoBehaviour {
 	/// Adds one piece of tile danger data to this tile. Changes color, enables visualizer, registers to cat.
 	/// </summary>
 	public void AddDangerData (TileDangerData data) {
-		visualizer.dangerVisualizerEnabled = true;
-		if (myOccupant != null && myOccupant.characterType == CharacterType.Cat) {
-			(myOccupant as Cat).RegisterDangerData (data);
+		dangerVisualizerEnabled = true;
+		if (m_occupant != null && m_occupant.characterType == CharacterType.Cat) {
+			(m_occupant as Cat).RegisterDangerData (data);
 		}
 		visionInfo.Add (data);
 		UpdateDangerColor ();
@@ -222,7 +213,7 @@ public class Tile : MonoBehaviour {
 			}
 		}
 		if (visionInfo.Count == 0) {
-			visualizer.dangerVisualizerEnabled = false;
+			dangerVisualizerEnabled = false;
 		}
 		else {
 			UpdateDangerColor ();
@@ -234,7 +225,7 @@ public class Tile : MonoBehaviour {
 	/// Remove all tile danger data elements from this tile. Also removes the visualizer.
 	/// </summary>
 	public void ClearAllDangerData () {
-		visualizer.dangerVisualizerEnabled = false;
+		dangerVisualizerEnabled = false;
 		visionInfo = new List<TileDangerData> ();
 	}
 
@@ -250,7 +241,7 @@ public class Tile : MonoBehaviour {
 				currentColor = tdd.dangerColor;
 			}
 		}
-		visualizer.dangerColor = currentColor;
+		dangerColor = currentColor;
 	}
 
 	/// <summary>
@@ -263,28 +254,21 @@ public class Tile : MonoBehaviour {
 	/// <summary>
 	/// This tile's danger color. Changes according to the danger data on this tile.
 	/// </summary>
-	public Color dangerColor {
-		get{ return visualizer.dangerColor; }
-	}
+	public abstract Color dangerColor { get; set; }
 
 	/// <summary>
 	/// Is the danger visualizer active?
 	/// </summary>
-	public bool dangerVisualizerEnabled {
-		get{ return visualizer.dangerVisualizerEnabled; }
-		set{ visualizer.dangerVisualizerEnabled = value; }
-	}
+	public abstract bool dangerVisualizerEnabled { get; set; }
 
-	[SerializeField] private GameObject shimmerObject;
 	/// <summary>
-	/// Pretty much placeholder, but works anyway. 
 	/// A visual shimmer effect used for highlights other than danger squares.
 	/// </summary>
 	public bool shimmer {
-		get { return shimmerObject.activeSelf; }
-		set { 
-			if (value != shimmerObject.activeSelf) {
-				shimmerObject.SetActive (value);
+		get { return cosmeticShimmerState; }
+		set {
+			if (value != cosmeticShimmerState) {
+				cosmeticShimmerState = value;
 				if (value) {
 					TileManager.RegisterShimmer (this);
 				}
@@ -295,12 +279,7 @@ public class Tile : MonoBehaviour {
 		}
 	}
 
-	/// <summary>
-	/// Only called by UniversalTileManager. 
-	/// </summary>
-	public void SetCosmeticShimmer (bool state) {
-		shimmerObject.SetActive (state);
-	}
+	protected abstract bool cosmeticShimmerState { get; set; }
 
 	/// <summary>
 	/// All tiles in radius. Radius 0 is just this tile. TraversableOnly means that walls or filled squares won't be included.
@@ -311,21 +290,16 @@ public class Tile : MonoBehaviour {
 		for (int x = 0; x < radius; x++) {
 			HashSet<Tile> tempAll = all.Clone ();
 			foreach (Tile t in all) {
-				if (traversableOnly) {
-					foreach (Tile n in t.allTraversableNeighbors) {
+				foreach (Tile n in t.allNeighbors) {
+					if (t.traversable || !traversableOnly) {
 						tempAll.Add (n);
 					}
 				}
-				else {
-					foreach (Tile n in t.allNeighbors) {
-						tempAll.Add (n);
-					}
-				}
+				all = tempAll;
 			}
-			all = tempAll;
-		}
-		if (!includeSelf) {
-			all.Remove (this);
+			if (!includeSelf) {
+				all.Remove (this);
+			}
 		}
 		return all.ToList ();
 	}
