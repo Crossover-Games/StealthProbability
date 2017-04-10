@@ -70,7 +70,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Moves cursor and displays overlays. Never null
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
-		if (TileManager.cursorTile != t) {
+		if (TileManager.cursorTile != t) {	//if different
 			if (t.occupant != null) {
 				t.occupant.PlaySound ();
 			}

@@ -15,7 +15,7 @@ public class Timer {
 	/// How long is this timer active? Does not change.
 	/// </summary>
 	public float duration {
-		get{ return myDuration; }
+		get { return myDuration; }
 	}
 
 	/// <summary>
@@ -34,12 +34,19 @@ public class Timer {
 	}
 
 	/// <summary>
-	/// Ratio of completion this timer has run. 0 at start, 1 at completion.
+	/// Bring the timer back to its constructed max duration.
+	/// </summary>
+	public void Restart () {
+		elapsedTime = 0f;
+	}
+
+	/// <summary>
+	/// Ratio of completion this timer has run. 0 at start, 1 at completion. Duration 0 is always incomplete.
 	/// </summary>
 	public float ratio {
 		get {
 			if (myDuration == 0) {
-				return 1f;
+				return 0f;
 			}
 			else {
 				return Mathf.Clamp01 (elapsedTime / myDuration);
@@ -48,7 +55,7 @@ public class Timer {
 	}
 
 	/// <summary>
-	/// Cancel the timer.
+	/// Advance the timer to the end prematurely.
 	/// </summary>
 	public void Disable () {
 		elapsedTime = myDuration + 1;
@@ -58,6 +65,6 @@ public class Timer {
 	/// False when the timer is complete.
 	/// </summary>
 	public bool active {
-		get{ return elapsedTime <= myDuration; }
+		get { return elapsedTime <= myDuration; }
 	}
 }

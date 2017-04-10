@@ -209,6 +209,13 @@ public static class CustomExtensions {
 		return Vector3.Lerp (vector, other, 0.5f);
 	}
 
+	/// <summary>
+	/// Arithmetic mean of the x, y, and z components of the vector.
+	/// </summary>
+	public static float Average (this Vector3 vector) {
+		return (vector.x + vector.y + vector.z) / 3f;
+	}
+
 	// ---COLOR
 
 	/// <summary>
@@ -216,6 +223,15 @@ public static class CustomExtensions {
 	/// </summary>
 	public static Vector3 ToRGBVector (this Color color) {
 		return new Vector3 (color.r, color.g, color.b);
+	}
+
+	/// <summary>
+	/// Returns a copy of the color with value = 1.
+	/// </summary>
+	public static Color FullValue (this Color color) {
+		float h, s, v;
+		Color.RGBToHSV (color, out h, out s, out v);
+		return Color.HSVToRGB (h, s, 1f);
 	}
 
 	// ---RENDERER

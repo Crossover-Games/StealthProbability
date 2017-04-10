@@ -40,7 +40,7 @@ public class MasterInfoBox : MonoBehaviour {
 	/// Adds the data from tile danger data using a convention.
 	/// </summary>
 	public void AddDataFromTileDangerData (TileDangerData data) {
-		AddData ("* " + Mathf.FloorToInt (data.danger * 100).ToString () + "% from " + data.watchingDog.name, data.dangerColor);
+		AddData ("* " + Mathf.FloorToInt (data.danger * 100).ToString () + "% from " + data.watchingDog.name, data.dangerColor.FullValue ());
 	}
 
 	/// <summary>
@@ -48,11 +48,8 @@ public class MasterInfoBox : MonoBehaviour {
 	/// </summary>
 	public void ClearAllData () {
 		numberOfDataEnabled = 0;
-		int debug = 0;
-		foreach (Text t in dataFields) {
-			debug++;
-			dataFields [numberOfDataEnabled].gameObject.SetActive (false);
+		for (int x = 0; x < dataFields.Length; x++) {
+			dataFields [x].gameObject.SetActive (false);
 		}
-		print (debug);
 	}
 }
