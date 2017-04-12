@@ -11,6 +11,10 @@ public class TextDotDotDot : MonoBehaviour {
 	[SerializeField] private Text myText;
 	[SerializeField] private float cycleDuration;
 
+	[Tooltip ("If true, dots are placed at the front. If false, placed at back")]
+	[SerializeField]
+	private bool placeAtFront;
+
 	private string defaultText;
 	private Timer myTimer;
 
@@ -24,7 +28,12 @@ public class TextDotDotDot : MonoBehaviour {
 		for (int x = 0; x < Utility.Partition (myTimer.ratio, 1f, 4); x++) {
 			dots += ".";
 		}
-		myText.text = defaultText + dots;
+		if (placeAtFront) {
+			myText.text = dots + defaultText;
+		}
+		else {
+			myText.text = defaultText + dots;
+		}
 		myTimer.Tick ();
 		if (!myTimer.active) {
 			myTimer.Restart ();

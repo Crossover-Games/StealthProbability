@@ -25,6 +25,9 @@ public class VictoryTile : Floor {
 	/// </summary>
 	public static bool gameWon {
 		get {
+			if (allVictoryTiles.Count == 0) {
+				return false;
+			}
 			foreach (VictoryTile vt in allVictoryTiles) {
 				if (vt.occupant == null) {
 					return false;

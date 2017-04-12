@@ -17,28 +17,43 @@ public class PathingNode : MonoBehaviour {
 		get { return tile; }
 	}
 
-	[SerializeField] private bool northConnection;
-	[SerializeField] private bool southConnection;
-	[SerializeField] private bool eastConnection;
-	[SerializeField] private bool westConnection;
-
-	private HashSet<PathingNode> myConnections = new HashSet<PathingNode> ();
 	/// <summary>
-	/// All neighboring nodes in the guard's path.
+	/// SETUP ONLY. If true, establish a two way connection with the north tile on Awake.
 	/// </summary>
-	public PathingNode[] connections {
-		get {
-			return myConnections.ToArray ();
-		}
-	}
-		
-	[SerializeField] private bool stoppingPoint;
+	public bool northConnection;
+	/// <summary>
+	/// SETUP ONLY. If true, establish a two way connection with the south tile on Awake.
+	/// </summary>
+	public bool southConnection;
+	/// <summary>
+	/// SETUP ONLY. If true, establish a two way connection with the east tile on Awake.
+	/// </summary>
+	public bool eastConnection;
+	/// <summary>
+	/// SETUP ONLY. If true, establish a two way connection with the west tile on Awake.
+	/// </summary>
+	public bool westConnection;
+	/// <summary>
+	/// SETUP ONLY. If true, this tile is a stopping point.
+	/// </summary>
+	public bool stoppingPoint = false;
 	/// <summary>
 	/// If the tile is stopping point, the dog stops on this square for the end of its turn.
 	/// </summary>
 	public bool isStoppingPoint {
 		get { return stoppingPoint; }
 	}
+	private HashSet<PathingNode> myConnections = new HashSet<PathingNode> ();
+	/// <summary>
+	/// All neighboring nodes in the guard's path.
+	/// </summary>
+	public PathingNode [] connections {
+		get {
+			return myConnections.ToArray ();
+		}
+	}
+
+
 
 	void Awake () {
 		tile = GetComponent<Tile> ();

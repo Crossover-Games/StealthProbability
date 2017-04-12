@@ -8,6 +8,7 @@ TagManager:
   - DogParent
   - CatParent
   - Cat
+  - Dog
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Camera Plane
   - 2D
-  - 
+  - World
   - 
   - 
   - 

@@ -3,7 +3,7 @@ using UnityEngine;
 
 using System.Collections.Generic;
 
-// put this shit in a namespace please
+// put this shit in a partial class please
 
 public class LevelBuilderTool : EditorWindow {
 
@@ -15,10 +15,10 @@ public class LevelBuilderTool : EditorWindow {
 		public Compass.Direction direction;
 		public Point2D point;
 
-		public DogBlueprint (string n, Compass.Direction d, int x, int y) {
+		public DogBlueprint (string n, Compass.Direction d, int x, int z) {
 			name = n;
 			direction = d;
-			point = new Point2D (x, y);
+			point = new Point2D (x, z);
 		}
 	}
 
@@ -31,10 +31,10 @@ public class LevelBuilderTool : EditorWindow {
 	[MenuItem ("Stealth/Level Builder")]
 	public static void ShowWindow () {
 		//Show existing window instance. If one doesn't exist, make one.
-		EditorWindow.GetWindow (typeof(LevelBuilderTool));
+		EditorWindow.GetWindow (typeof (LevelBuilderTool));
 	}
 
-	private bool[,] fieldsArray = new bool[0, 0];
+	private bool [,] fieldsArray = new bool [0, 0];
 	private int length = 10;
 	private int width = 10;
 	private int lengthDisplay = 10;
@@ -59,6 +59,9 @@ public class LevelBuilderTool : EditorWindow {
 	private GameObject mapTilesParent;
 	private GameObject dogParent;
 
+	private Vector2 levelScrollPos;
+	private Vector2 dogScrollPos;
+
 	private bool startup = true;
 
 	/// <summary>
@@ -69,8 +72,10 @@ public class LevelBuilderTool : EditorWindow {
 			ExpandArray ();
 			startup = false;
 			dogList = new List<DogBlueprint> ();
+			levelScrollPos = Vector2.zero;
+			dogScrollPos = Vector2.zero;
 		}
-			
+
 		instructionsFoldout = EditorGUILayout.Foldout (instructionsFoldout, "INSTRUCTIONS", true);
 		if (instructionsFoldout) {
 			EditorGUILayout.LabelField (" * If you're making a level from scratch, delete the main camera placed in the scene by default.", EditorStyles.wordWrappedLabel);
@@ -89,17 +94,18 @@ public class LevelBuilderTool : EditorWindow {
 
 
 		GUILayout.Label ("Level Dimensions", EditorStyles.boldLabel);
-
-		lengthDisplay = Mathf.Clamp (EditorGUILayout.IntField (new GUIContent ("Length", "Z dimension size of the level, in tiles"), lengthDisplay), 1, 500);
 		widthDisplay = Mathf.Clamp (EditorGUILayout.IntField (new GUIContent ("Width", "X dimension size of the level, in tiles"), widthDisplay), 1, 500);
+		lengthDisplay = Mathf.Clamp (EditorGUILayout.IntField (new GUIContent ("Length", "Z dimension size of the level, in tiles"), lengthDisplay), 1, 500);
 		if (GUILayout.Button (new GUIContent ("Apply Dimension Changes", "Set the dimensions of the level to these values."))) {
 			ExpandArray ();
 		}
 
 		GUILayout.Label (new GUIContent ("Level Grid", "Checked is floor, unchecked is wall."), EditorStyles.boldLabel);
 
+		levelScrollPos = EditorGUILayout.BeginScrollView (levelScrollPos);
 		// Draws the array
-		ChangeGridWidthAndHeight ();
+		DrawFieldsArray ();
+		EditorGUILayout.EndScrollView ();
 
 		EditorGUILayout.BeginHorizontal ();
 		EditorGUILayout.Space ();
@@ -173,17 +179,20 @@ public class LevelBuilderTool : EditorWindow {
 		DogBlueprint deletThis = null;
 		dogListFoldout = EditorGUILayout.Foldout (dogListFoldout, new GUIContent ("Dogs", "Must build level to update dogs."), true);
 		if (dogListFoldout) {
+			dogScrollPos = EditorGUILayout.BeginScrollView (dogScrollPos);
 			foreach (DogBlueprint dbp in dogList) {
 				EditorGUILayout.BeginHorizontal ();
 				dbp.name = EditorGUILayout.TextField (dbp.name);
 				GUILayout.Label (new GUIContent ("Coordinates", "(X,Z) coordinates of the dog."));
 				dbp.point.x = EditorGUILayout.IntField (dbp.point.x);
 				dbp.point.y = EditorGUILayout.IntField (dbp.point.y);
+				dbp.direction = (Compass.Direction)EditorGUILayout.EnumPopup (dbp.direction);
 				if (GUILayout.Button (new GUIContent ("Delete", "Remove this dog."))) {
 					deletThis = dbp;
 				}
 				EditorGUILayout.EndHorizontal ();
 			}
+			EditorGUILayout.EndScrollView ();
 			if (GUILayout.Button (new GUIContent ("Add dog", "Add a new dog"))) {
 				dogList.Add (new DogBlueprint ("New Dog", Compass.Direction.North, 0, 0));
 			}
@@ -195,6 +204,12 @@ public class LevelBuilderTool : EditorWindow {
 
 		if (GUILayout.Button (new GUIContent ("Build / Update Level", "Please note that this will destroy the existing map. This will create a game controller if you don't have one, then place all the tiles according to the diagram."))) {
 			BuildLevel ();
+		}
+		if (GUILayout.Button (new GUIContent ("Scan Level", "Scan the existing level for editing."))) {
+			ScanLevel ();
+		}
+		if (GUILayout.Button (new GUIContent ("Create Pathing Nodes", "sketchy af rn tbh 100."))) {
+			CreatePathingNodes ();
 		}
 
 		tileImportExportFoldout = EditorGUILayout.Foldout (tileImportExportFoldout, "Tile Import/Export to text", true);
@@ -213,7 +228,8 @@ public class LevelBuilderTool : EditorWindow {
 		dogImportExportFoldout = EditorGUILayout.Foldout (dogImportExportFoldout, "Dog Import/Export to text", true);
 		if (dogImportExportFoldout) {
 			EditorStyles.textField.wordWrap = false;
-			dogMetaText = EditorGUILayout.TextArea (dogMetaText);
+			//dogMetaText = EditorGUILayout.TextArea (dogMetaText);
+			dogMetaText = EditorGUILayout.TextArea ("Not implemented yet.");
 
 			if (GUILayout.Button (new GUIContent ("Import", "Reads text area, fills out editor data."))) {
 				//
@@ -231,7 +247,7 @@ public class LevelBuilderTool : EditorWindow {
 		length = lengthDisplay;
 		width = widthDisplay;
 
-		bool[,] newArray = new bool[width, length];
+		bool [,] newArray = new bool [width, length];
 
 		// array defaults
 		for (int j = 0; j < newArray.GetLength (1); j++) {
@@ -253,7 +269,7 @@ public class LevelBuilderTool : EditorWindow {
 	/// <summary>
 	/// Updates the physical representation of the array.
 	/// </summary>
-	private void ChangeGridWidthAndHeight () {
+	private void DrawFieldsArray () {
 		for (int j = 0; j < length; j++) {
 			EditorGUILayout.BeginHorizontal ();
 			for (int i = 0; i < width; i++) {
@@ -280,11 +296,13 @@ public class LevelBuilderTool : EditorWindow {
 
 		for (int j = length - 1; j >= 0; j--) {
 			for (int i = 0; i < width; i++) {
+				Point2D g2w = GridToWorld (i, j);
+				Vector3 worldPos = new Vector3 (g2w.x, 0f, g2w.y);
 				if (fieldsArray [i, j]) {
-					InstantiateFloor (new Vector3 (i, 0, length - j - 1));
+					InstantiateFloor (worldPos);
 				}
 				else {
-					InstantiateWall (new Vector3 (i, 0, length - j - 1));
+					InstantiateWall (worldPos);
 				}
 			}
 		}
@@ -303,6 +321,7 @@ public class LevelBuilderTool : EditorWindow {
 				InstantiateDog (dbp);
 			}
 		}
+		ExportLevelTiles ();
 	}
 
 	private void InstantiateFloor (Vector3 pos) {
@@ -322,16 +341,16 @@ public class LevelBuilderTool : EditorWindow {
 		g.transform.SetParent (dogParent.transform);
 		g.GetComponent<Dog> ().orientation = dbp.direction;
 	}
-		
+
 	private void ExportLevelTiles () {
 		tileMetaText = "";
 		for (int j = 0; j < length; j++) {
 			for (int i = 0; i < width; i++) {
 				if (fieldsArray [i, j]) {
-					tileMetaText += "1";	//floor
+					tileMetaText += "1";    //floor
 				}
 				else {
-					tileMetaText += "0";	//wall
+					tileMetaText += "0";    //wall
 				}
 			}
 			tileMetaText += "\n";
@@ -346,7 +365,7 @@ public class LevelBuilderTool : EditorWindow {
 
 	private void ImportLevelTiles () {
 		List<string> lines = new List<string> ();
-		char[] metaChars = tileMetaText.ToCharArray ();
+		char [] metaChars = tileMetaText.ToCharArray ();
 
 		string curLine = "";
 
@@ -364,7 +383,7 @@ public class LevelBuilderTool : EditorWindow {
 		lengthDisplay = lines.Count;
 		widthDisplay = MaxLineLength (lines);
 		ExpandArray ();
-		ChangeGridWidthAndHeight ();
+		DrawFieldsArray ();
 
 		//then change the actual data
 
@@ -392,5 +411,159 @@ public class LevelBuilderTool : EditorWindow {
 
 	private char CharAt (string str, int index) {
 		return str.Substring (index, 1).ToCharArray () [0];
+	}
+
+	/// <summary>
+	/// Updates the level display based on the physical level.
+	/// </summary>
+	private void ScanLevel () {
+		List<Tile> allTiles = new List<Tile> (FindObjectsOfType<Tile> ());
+		int minX = 9999;
+		int maxX = -9999;
+		int minZ = 9999;
+		int maxZ = -9999;
+
+		foreach (Tile t in allTiles) {
+			if (Mathf.RoundToInt (t.transform.position.x) > maxX) {
+				maxX = Mathf.RoundToInt (t.transform.position.x);
+			}
+			if (Mathf.RoundToInt (t.transform.position.x) < minX) {
+				minX = Mathf.RoundToInt (t.transform.position.x);
+			}
+			if (Mathf.RoundToInt (t.transform.position.z) > maxZ) {
+				maxZ = Mathf.RoundToInt (t.transform.position.z);
+			}
+			if (Mathf.RoundToInt (t.transform.position.z) < minZ) {
+				minZ = Mathf.RoundToInt (t.transform.position.z);
+			}
+		}
+
+		widthDisplay = maxX - minX + 1;
+		lengthDisplay = maxZ - minZ + 1;
+		ExpandArray ();
+
+		for (int x = minX; x <= maxX; x++) {
+			for (int z = minZ; z <= maxZ; z++) {
+				Point2D gridPoint = GridToWorld (x - minX, z - minZ);
+				RaycastHit hit;
+				if (TileRaycastHelper (x, z, out hit)) {
+					Tile tileTemp = hit.collider.gameObject.GetComponent<Tile> ();
+					if (tileTemp != null) {
+						fieldsArray [gridPoint.x, gridPoint.y] = tileTemp.traversable;
+					}
+					else {
+						fieldsArray [gridPoint.x, gridPoint.y] = false;
+					}
+				}
+				else {
+					fieldsArray [gridPoint.x, gridPoint.y] = false;
+				}
+			}
+		}
+
+		dogList = new List<DogBlueprint> ();
+		foreach (Dog d in FindObjectsOfType<Dog> ()) {
+			dogList.Add (new DogBlueprint (d.name, d.orientation, Mathf.RoundToInt (d.transform.position.x), Mathf.RoundToInt (d.transform.position.z)));
+		}
+		DrawFieldsArray ();
+		ExportLevelTiles ();
+	}
+
+	private bool TileRaycastHelper (float x, float z, out RaycastHit hit) {
+		return Physics.Raycast (new Vector3 (x, -100f, z), Vector3.up, out hit);
+	}
+	private bool TileRaycastHelper (Vector3 rayOrigin, out RaycastHit hit) {
+		return Physics.Raycast (rayOrigin, Vector3.up, out hit);
+	}
+
+	/// <summary>
+	/// Build pathing nodes around structures. Uses some sketchy guesswork. Don't rely on this solely.
+	/// </summary>
+	private void CreatePathingNodes () {
+		List<Tile> allTiles = new List<Tile> (FindObjectsOfType<Tile> ());
+
+		foreach (Tile t in allTiles) {
+			if (!t.traversable) {
+				foreach (Tile neighbor in AllNeighbors (t, true)) {
+					if (neighbor.traversable && neighbor.GetComponent<PathingNode> () == null) {
+						neighbor.gameObject.AddComponent (typeof (PathingNode));
+					}
+				}
+			}
+		}
+		LinkPathingNodes ();
+	}
+
+	private void LinkPathingNodes () {
+		List<PathingNode> allNodes = new List<PathingNode> (FindObjectsOfType<PathingNode> ());
+		RaycastHit hit;
+		foreach (PathingNode pn in allNodes) {
+			int connectionCount = 0;
+			if (TileRaycastHelper (pn.transform.position + Vector3.forward + Vector3.down * 100, out hit)) {
+				if (hit.collider.gameObject.GetComponent<PathingNode> () != null) {
+					pn.northConnection = true;
+					connectionCount++;
+				}
+			}
+			if (TileRaycastHelper (pn.transform.position + Vector3.back + Vector3.down * 100, out hit)) {
+				if (hit.collider.gameObject.GetComponent<PathingNode> () != null) {
+					pn.southConnection = true;
+					connectionCount++;
+				}
+			}
+			if (TileRaycastHelper (pn.transform.position + Vector3.left + Vector3.down * 100, out hit)) {
+				if (hit.collider.gameObject.GetComponent<PathingNode> () != null) {
+					pn.westConnection = true;
+					connectionCount++;
+				}
+			}
+			if (TileRaycastHelper (pn.transform.position + Vector3.right + Vector3.down * 100, out hit)) {
+				if (hit.collider.gameObject.GetComponent<PathingNode> () != null) {
+					pn.eastConnection = true;
+					connectionCount++;
+				}
+			}
+			if (connectionCount >= 3) {
+				pn.stoppingPoint = true;
+			}
+		}
+		foreach (DogBlueprint dbp in dogList) {
+			if (TileRaycastHelper (dbp.point.x, dbp.point.y, out hit)) {
+				PathingNode tempNode = hit.collider.GetComponent<PathingNode> ();
+				if (tempNode != null) {
+					tempNode.stoppingPoint = true;
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Returns all neighbors.
+	/// </summary>
+	private List<Tile> AllNeighbors (Tile t, bool includeDiagonals) {
+		List<Tile> tempList = new List<Tile> ();
+		RaycastHit hit;
+		for (int x = -1; x <= 1; x++) {
+			for (int z = -1; z <= 1; z++) {
+				if (!(x == 0 && z == 0)) {
+					if (includeDiagonals || Utility.AbsInt (x) != Utility.AbsInt (z)) {
+						if (TileRaycastHelper (t.transform.position.x + x, t.transform.position.z + z, out hit)) {
+							Tile tileTemp = hit.collider.gameObject.GetComponent<Tile> ();
+							if (tileTemp != null) {
+								tempList.Add (tileTemp);
+							}
+						}
+					}
+				}
+			}
+		}
+		return tempList;
+	}
+
+	/// <summary>
+	/// Works both ways. Translates a grid point to a world point.
+	/// </summary>
+	private Point2D GridToWorld (int x, int z) {
+		return new Point2D (x, length - z - 1);
 	}
 }

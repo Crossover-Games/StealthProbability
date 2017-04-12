@@ -40,7 +40,7 @@ public class MasterInfoBox : MonoBehaviour {
 	/// Adds the data from tile danger data using a convention.
 	/// </summary>
 	public void AddDataFromTileDangerData (TileDangerData data) {
-		AddData ("* " + Mathf.FloorToInt (data.danger * 100).ToString () + "% from " + data.watchingDog.name, data.dangerColor.FullValue ());
+		AddData ("* " + Mathf.FloorToInt (data.danger * 100).ToString () + "% from " + data.watchingDog.name, data.dangerColor.OptimizedForText ());
 	}
 
 	/// <summary>

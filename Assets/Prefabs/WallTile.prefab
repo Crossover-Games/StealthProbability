@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4738583196428512}
   - component: {fileID: 33237499103088340}
   - component: {fileID: 23609431055341950}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WallMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4706363867811756}
   - component: {fileID: 65381704441568572}
   - component: {fileID: 114941483814217784}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WallTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4949171530585322}
   - component: {fileID: 33825207532955496}
   - component: {fileID: 23530525788672660}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WallMeshInner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

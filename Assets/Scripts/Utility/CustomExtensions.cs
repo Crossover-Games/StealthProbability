@@ -226,12 +226,12 @@ public static class CustomExtensions {
 	}
 
 	/// <summary>
-	/// Returns a copy of the color with value = 1.
+	/// Returns a copy of the color with full value and half saturation.
 	/// </summary>
-	public static Color FullValue (this Color color) {
+	public static Color OptimizedForText (this Color color) {
 		float h, s, v;
 		Color.RGBToHSV (color, out h, out s, out v);
-		return Color.HSVToRGB (h, s, 1f);
+		return Color.HSVToRGB (h, s / 2, 1f);
 	}
 
 	// ---RENDERER

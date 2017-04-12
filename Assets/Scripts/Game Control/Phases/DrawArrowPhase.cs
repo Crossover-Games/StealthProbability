@@ -103,7 +103,7 @@ public class DrawArrowPhase : GameControlPhase {
 					pathArrow.lineSegments [lastIndex - 1].SetActive (false);
 					tilePath.RemoveAt (lastIndex);
 					UpdateAvailableTiles ();
-					UpdatePathColor ();
+					UpdatePathDanger ();
 				}
 			}
 		}
@@ -120,7 +120,7 @@ public class DrawArrowPhase : GameControlPhase {
 
 		tilePath.Add (t);
 		UpdateAvailableTiles ();
-		UpdatePathColor ();
+		UpdatePathDanger ();
 	}
 
 
@@ -150,16 +150,33 @@ public class DrawArrowPhase : GameControlPhase {
 
 	/// <summary>
 	/// Given the tile danger data of all tiles on path, pick the color of the most dangerous.
+	/// Also updates the info box.
 	/// </summary>
-	private void UpdatePathColor () {
-		TileDangerData riskiest = new TileDangerData (Mathf.NegativeInfinity, null, null, Color.black);
+	private void UpdatePathDanger () {
+		UIManager.masterInfoBox.ClearAllData ();
+		Dictionary<Dog, TileDangerData> riskiestPerDog = new Dictionary<Dog, TileDangerData> ();
 		foreach (Tile t in tilePath) {
 			foreach (TileDangerData tdd in t.dangerData) {
-				if (tdd.danger > riskiest.danger) {
-					riskiest = tdd;
+				if (!riskiestPerDog.ContainsKey (tdd.watchingDog)) {
+					riskiestPerDog.Add (tdd.watchingDog, tdd);
+				}
+				else if (tdd.danger > riskiestPerDog [tdd.watchingDog].danger) {
+					riskiestPerDog [tdd.watchingDog] = tdd;
 				}
 			}
 		}
-		pathArrow.color = riskiest.dangerColor;
+		if (riskiestPerDog.Count == 0) {
+			pathArrow.color = Color.black;
+		}
+		else {
+			TileDangerData riskiest = new TileDangerData (Mathf.NegativeInfinity, null, null, Color.black);
+			foreach (KeyValuePair<Dog, TileDangerData> k in riskiestPerDog) {
+				UIManager.masterInfoBox.AddData (Mathf.FloorToInt (k.Value.danger * 100) + "% danger from " + k.Value.watchingDog.name + " on route", k.Value.dangerColor.OptimizedForText ());
+				if (k.Value.danger > riskiest.danger) {
+					riskiest = k.Value;
+				}
+			}
+			pathArrow.color = riskiest.dangerColor.OptimizedForText ();
+		}
 	}
 }

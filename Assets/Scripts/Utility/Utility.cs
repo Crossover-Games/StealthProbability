@@ -31,4 +31,11 @@ public static class Utility {
 		}
 		return 0;
 	}
+
+	/// <summary>
+	/// Absolute value of an integer.
+	/// </summary>
+	public static int AbsInt (int a) {
+		return Mathf.RoundToInt (Mathf.Abs (a));
+	}
 }
