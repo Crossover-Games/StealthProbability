@@ -46,19 +46,21 @@ public class CatContextMenuPhase : GameControlPhase {
 	}
 
 	public override void UIRestButtonEvent () {
+		TileManager.ClearAllShimmer ();
+		TileManager.cursorTile = null;
+
+		CameraOverheadControl.dragControlAllowed = false;
+
 		CatExecutePhase.TakeControl (selectedCat, tilePath);
 	}
 
 	override public void UICancelPathButtonEvent () {
+		PlayerTurnIdlePhase.SelectTile (selectedCat.myTile);
 		PlayerTurnIdlePhase.TakeControl ();
 	}
 
 	override public void OnLeaveControl () {
-		UIManager.pathEndMenuState = false;
-		TileManager.ClearAllShimmer ();
-		TileManager.cursorTile = null;
 		DrawArrowPhase.ClearArrow ();
-
-		CameraOverheadControl.dragControlAllowed = false;
+		UIManager.pathEndMenuState = false;
 	}
 }

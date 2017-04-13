@@ -43,6 +43,11 @@ public class MasterInfoBox : MonoBehaviour {
 		AddData ("* " + Mathf.FloorToInt (data.danger * 100).ToString () + "% from " + data.watchingDog.name, data.dangerColor.OptimizedForText ());
 	}
 
+	public void AddEnergyDataFromCat (int currentEnergy, Cat cat) {
+		Color color = Color.Lerp (Color.gray, new Color (0f, 1f, 1f), (currentEnergy * 1.0f) / cat.maxEnergy);
+		AddData ("Energy: " + currentEnergy + "/" + cat.maxEnergy, color);
+	}
+
 	/// <summary>
 	/// Clears all text data. Does not affect the header box.
 	/// </summary>

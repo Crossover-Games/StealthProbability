@@ -28,10 +28,6 @@ public class Wall : Tile {
 		get { return false; }
 		set { }
 	}
-	public override Color dangerColor {
-		get { return Color.clear; }
-		set { }
-	}
 	public override bool dangerVisualizerEnabled {
 		get { return false; }
 		set { }
@@ -40,4 +36,5 @@ public class Wall : Tile {
 		get { return false; }
 		set { }
 	}
+	protected override void UpdateDangerColor () { }	//lel does nothing
 }

@@ -234,6 +234,13 @@ public static class CustomExtensions {
 		return Color.HSVToRGB (h, s / 2, 1f);
 	}
 
+	/// <summary>
+	/// Returns a copy of the color a specified alpha value.
+	/// </summary>
+	public static Color AlphaDifferent (this Color color, float alpha) {
+		return new Color (color.r, color.g, color.b, alpha);
+	}
+
 	// ---RENDERER
 
 	/// <summary>

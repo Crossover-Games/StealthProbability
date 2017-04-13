@@ -214,7 +214,7 @@ public abstract class Tile : MonoBehaviour {
 	/// Remove the danger imposed by a specified dog.
 	/// </summary>
 	public void RemoveDangerDataByDog (Dog dog) {
-		TileDangerData[] allData = visionInfo.ToArray ();
+		TileDangerData [] allData = visionInfo.ToArray ();
 		foreach (TileDangerData tdd in allData) {
 			if (tdd.watchingDog == dog) {
 				visionInfo.Remove (tdd);
@@ -238,31 +238,16 @@ public abstract class Tile : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Temporary. Only overlays the highest color.
+	/// Called when danger is applied to determine the appearance of the danger tile.
 	/// </summary>
-	private void UpdateDangerColor () {
-		float maxDanger = Mathf.NegativeInfinity;
-		Color currentColor = Color.white;
-		foreach (TileDangerData tdd in visionInfo) {
-			if (tdd.danger > maxDanger) {
-				maxDanger = tdd.danger;
-				currentColor = tdd.dangerColor;
-			}
-		}
-		dangerColor = currentColor;
-	}
+	protected abstract void UpdateDangerColor ();
 
 	/// <summary>
 	/// All danger data for all dogs currently observing this tile.
 	/// </summary>
-	public TileDangerData[] dangerData {
+	public TileDangerData [] dangerData {
 		get { return visionInfo.ToArray (); }
 	}
-
-	/// <summary>
-	/// This tile's danger color. Changes according to the danger data on this tile.
-	/// </summary>
-	public abstract Color dangerColor { get; set; }
 
 	/// <summary>
 	/// Is the danger visualizer active?

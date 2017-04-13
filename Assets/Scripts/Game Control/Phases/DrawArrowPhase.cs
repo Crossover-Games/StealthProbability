@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Game phase for when you're drawing the arrow to move a cat. Leads only into the CatContextMenuPhase.
+/// Game phase for when you're drawing the arrow to move a cat.
 /// Exits: CatContextMenuPhase
 /// </summary>
 public class DrawArrowPhase : GameControlPhase {
@@ -154,6 +154,7 @@ public class DrawArrowPhase : GameControlPhase {
 	/// </summary>
 	private void UpdatePathDanger () {
 		UIManager.masterInfoBox.ClearAllData ();
+		UIManager.masterInfoBox.AddEnergyDataFromCat (selectedCat.maxEnergy + 1 - tilePath.Count, selectedCat);
 		Dictionary<Dog, TileDangerData> riskiestPerDog = new Dictionary<Dog, TileDangerData> ();
 		foreach (Tile t in tilePath) {
 			foreach (TileDangerData tdd in t.dangerData) {

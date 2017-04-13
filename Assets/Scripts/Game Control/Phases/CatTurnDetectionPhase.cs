@@ -42,7 +42,7 @@ public class CatTurnDetectionPhase : GameControlPhase {
 	}
 	override public void ControlUpdate () {
 		if (dogsWatching.Count > 0) {
-			Dog d = dogsWatching[0];
+			Dog d = dogsWatching [0];
 			//CameraOverheadControl.SetCamFocusPoint (d.myTile.topCenterPoint);
 			if (selectedCat.DetectionCheckAndRemove (d)) {
 				safe = false;
@@ -70,6 +70,7 @@ public class CatTurnDetectionPhase : GameControlPhase {
 		}
 		else {
 			PlayerTurnIdlePhase.TakeControl ();
+			CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.availableCharacters.RandomElement ().myTile.topCenterPoint);
 		}
 	}
 }

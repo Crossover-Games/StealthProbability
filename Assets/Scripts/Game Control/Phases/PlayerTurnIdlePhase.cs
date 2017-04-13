@@ -42,8 +42,17 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 
 			if (t.occupant != null) {
 				UIManager.masterInfoBox.headerText = t.occupant.name;
-				if (t.occupant.characterType == CharacterType.Cat && !t.occupant.grayedOut) {
-					TileManager.MassSetShimmer (t.AllTilesInRadius ((t.occupant as Cat).maxEnergy, true, false));
+				if (t.occupant.characterType == CharacterType.Cat) {
+					Cat thisCat = (t.occupant as Cat);
+					if (!t.occupant.grayedOut) {
+						TileManager.MassSetShimmer (t.AllTilesInRadius (thisCat.maxEnergy, true, false));
+						UIManager.masterInfoBox.AddEnergyDataFromCat (thisCat.maxEnergy, thisCat);
+						//UIManager.masterInfoBox.AddData ("Energy: " + thisCat.maxEnergy + "/" + thisCat.maxEnergy, new Color (0f, 1f, 1f));
+					}
+					else {
+						UIManager.masterInfoBox.AddEnergyDataFromCat (0, thisCat);
+						//UIManager.masterInfoBox.AddData ("Energy: 0/" + (t.occupant as Cat).maxEnergy, Color.HSVToRGB (0f, 0.75f, 1f));
+					}
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
 					HashSet<Tile> toShimmer = new HashSet<Tile> ();
@@ -70,7 +79,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Moves cursor and displays overlays. Never null
 	/// </summary>
 	override public void TileClickEvent (Tile t) {
-		if (TileManager.cursorTile != t) {	//if different
+		if (TileManager.cursorTile != t) {  //if different
 			if (t.occupant != null) {
 				t.occupant.PlaySound ();
 			}

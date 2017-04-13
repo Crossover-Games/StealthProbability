@@ -42,7 +42,8 @@ public class VictoryTile : Floor {
 	/// </summary>
 	public static bool gameLost {
 		get {
-			return GameBrain.catManager.allCharacters.Length < missionCriticalCatCount;
+			int catCount = GameBrain.catManager.allCharacters.Length;
+			return catCount < missionCriticalCatCount || catCount == 0;
 		}
 	}
 
