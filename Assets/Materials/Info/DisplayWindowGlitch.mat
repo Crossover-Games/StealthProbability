@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: DangerGlitch
+  m_Name: DisplayWindowGlitch
   m_Shader: {fileID: 4800000, guid: 4b845237b4f1ca74b83c21dd29e7dc94, type: 3}
   m_ShaderKeywords: _COLORGLITCHON_ON _DISPGLITCHON_ON _EMISSION _WRAPDISPCOORDS_ON
   m_LightmapFlags: 1
@@ -81,10 +81,10 @@ Material:
       second: 1
     - first:
         name: _ColorIntensity
-      second: 1
+      second: 0.04
     - first:
         name: _ColorProbability
-      second: 0.25
+      second: 0.02
     - first:
         name: _Cutoff
       second: 0.5
@@ -96,16 +96,16 @@ Material:
       second: 1
     - first:
         name: _DispIntensity
-      second: 1
+      second: 0.05
     - first:
         name: _DispProbability
-      second: 0.5
+      second: 0.05
     - first:
         name: _DstBlend
       second: 0
     - first:
         name: _GlitchInterval
-      second: 0.1
+      second: 0.2
     - first:
         name: _GlossMapScale
       second: 1

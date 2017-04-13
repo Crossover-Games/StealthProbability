@@ -167,7 +167,8 @@ public class DrawArrowPhase : GameControlPhase {
 			}
 		}
 		if (riskiestPerDog.Count == 0) {
-			pathArrow.color = Color.black;
+			//pathArrow.color = Color.black;
+			pathArrow.color = Color.white;
 		}
 		else {
 			TileDangerData riskiest = new TileDangerData (Mathf.NegativeInfinity, null, null, Color.black);

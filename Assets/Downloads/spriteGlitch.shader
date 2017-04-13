@@ -119,8 +119,8 @@ Shader "Sprites/Glitch"
 
 				//These values depend on time and the x/y translation of that sprite (top right and middle right value in the transformation matrix are translation)
 				//The transformation matrix values are included so sprites with differen x/y values don't glitch at the same time
-				float timePositionVal = intervalTime + UNITY_MATRIX_MV[0][3] + UNITY_MATRIX_MV[1][3];
-				float timePositionVal2 = intervalTime2 + UNITY_MATRIX_MV[0][3] + UNITY_MATRIX_MV[1][3];
+				float timePositionVal = intervalTime + UNITY_MATRIX_M[0][3] + UNITY_MATRIX_M[1][3];
+				float timePositionVal2 = intervalTime2 + UNITY_MATRIX_M[0][3] + UNITY_MATRIX_M[1][3];
 
 				//Random chance that the displacement glich or color glitch occur
 				float dispGlitchRandom = rand(timePositionVal, -timePositionVal);
