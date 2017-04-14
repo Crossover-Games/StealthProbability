@@ -71,7 +71,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 			}
 			else {
 				TileManager.ClearAllShimmer ();
-				UIManager.masterInfoBox.headerText = "-FLOOR-";
+				UIManager.masterInfoBox.headerText = t.tileName;
 			}
 		}
 	}

@@ -11,6 +11,10 @@ public class VictoryTile : Floor {
 		get { return TileType.Objective; }
 	}
 
+	public override string tileName {
+		get { return "-EXTRACTION POINT-"; }
+	}
+
 	private static List<VictoryTile> allVictoryTiles = new List<VictoryTile> ();
 
 	/// <summary>

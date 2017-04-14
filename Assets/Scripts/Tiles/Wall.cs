@@ -20,6 +20,10 @@ public class Wall : Tile {
 		get { return false; }
 	}
 
+	public override string tileName {
+		get { return "Wall. You shouldn't be seeing this."; }
+	}
+
 	public override bool allowMouseInteraction {
 		get { return false; }
 	}
@@ -36,5 +40,5 @@ public class Wall : Tile {
 		get { return false; }
 		set { }
 	}
-	protected override void UpdateDangerColor () { }	//lel does nothing
+	protected override void UpdateDangerColor () { }    //lel does nothing
 }

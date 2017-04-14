@@ -26,6 +26,11 @@ public abstract class Tile : MonoBehaviour {
 	public abstract bool traversable { get; }
 
 	/// <summary>
+	/// The name that will appear when this tile is selected.
+	/// </summary>
+	public abstract string tileName { get; }
+
+	/// <summary>
 	/// Can a cat end its movement on this square?
 	/// </summary>
 	public bool validMoveEnd {

@@ -15,6 +15,10 @@ public class Floor : Tile {
 		get { return true; }
 	}
 
+	public override string tileName {
+		get { return "-FLOOR-"; }
+	}
+
 	public override bool allowMouseInteraction {
 		get { return true; }
 	}
