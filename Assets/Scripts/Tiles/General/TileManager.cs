@@ -22,12 +22,12 @@ public class TileManager : MonoBehaviour {
 	/// <summary>
 	/// Array of all tiles. Encapsulated by allTiles. Exists for time efficiency.
 	/// </summary>
-	private static Tile[] a_allTiles;
+	private static Tile [] a_allTiles;
 
 	/// <summary>
 	/// All tiles in the level.
 	/// </summary>
-	public static Tile[] allTiles {
+	public static Tile [] allTiles {
 		get { return a_allTiles; }
 	}
 
@@ -66,7 +66,7 @@ public class TileManager : MonoBehaviour {
 	/// <summary>
 	/// A list of all shimmering tiles.
 	/// </summary>
-	public static Tile[] shimmeringTiles {
+	public static Tile [] shimmeringTiles {
 		get { return m_shimmering.ToArray (); }
 	}
 
@@ -179,6 +179,9 @@ public class TileManager : MonoBehaviour {
 					dragMemory = mousedOver;
 				}
 				RegisterFirstClick (mousedOver);
+			}
+			if (Input.GetMouseButtonUp (0)) {
+				dragMemory = null;
 			}
 		}
 

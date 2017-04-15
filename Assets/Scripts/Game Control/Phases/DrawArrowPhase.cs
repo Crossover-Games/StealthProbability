@@ -16,8 +16,26 @@ public class DrawArrowPhase : GameControlPhase {
 	/// </summary>
 	public static void TakeControl (Cat selectedCat) {
 		staticInstance.selectedCat = selectedCat;
+		staticInstance.tilePath = new List<Tile> ();
+		staticInstance.tilePath.Add (selectedCat.myTile);
+		staticInstance.UpdateAvailableTiles ();
+
 		staticInstance.InstanceTakeControl ();
 	}
+
+	/// <summary>
+	/// Takes control by drawing an automatic path.
+	/// </summary>
+	public static void TakeControlAutoPath (Cat selectedCat, Tile destination) {
+		staticInstance.selectedCat = selectedCat;
+		staticInstance.tilePath = new List<Tile> ();
+		staticInstance.tilePath.Add (selectedCat.myTile);
+		staticInstance.UpdateAvailableTiles ();
+
+		staticInstance.MakePathToTile (destination);
+		staticInstance.InstanceTakeControl ();
+	}
+
 	void Awake () {
 		staticInstance = this;
 	}
@@ -37,7 +55,6 @@ public class DrawArrowPhase : GameControlPhase {
 	[HideInInspector] public Cat selectedCat;
 
 	private List<Tile> tilePath = new List<Tile> ();
-	private HashSet<Tile> availableTiles = new HashSet<Tile> ();
 	private Tile endOfPath {
 		get {
 			if (tilePath.Count == 0) {
@@ -50,14 +67,14 @@ public class DrawArrowPhase : GameControlPhase {
 	}
 
 	override public void OnTakeControl () {
-		tilePath = new List<Tile> ();
-		tilePath.Add (selectedCat.myTile);
-		UpdateAvailableTiles ();
+		//tilePath = new List<Tile> ();
+		//tilePath.Add (selectedCat.myTile);
+		//UpdateAvailableTiles ();
 	}
 
 	override public void MouseOverChangeEvent () {
 		// if the moused over tile is a valid step in the path
-		if (tilePath.Count <= selectedCat.maxEnergy && availableTiles.Contains (TileManager.tileMousedOver) && tilePath.LastElement ().IsNeighbor (TileManager.tileMousedOver)) {
+		if (tilePath.Count <= selectedCat.maxEnergy && TileManager.tileMousedOver.shimmer && tilePath.LastElement ().IsNeighbor (TileManager.tileMousedOver)) {
 			AddTileToPath (TileManager.tileMousedOver);
 		}
 	}
@@ -79,20 +96,13 @@ public class DrawArrowPhase : GameControlPhase {
 			}
 		}
 		else if (TileManager.tileMousedOver != endOfPath) {
-			if (availableTiles.Contains (TileManager.tileMousedOver)) {
+			if (TileManager.tileMousedOver != null && TileManager.tileMousedOver.shimmer) {
 				// simple solution: don't run the shortest path algorithm
 				if (TileManager.tileMousedOver.IsNeighbor (endOfPath)) {
 					AddTileToPath (TileManager.tileMousedOver);
 				}
 				else {
-					List<Tile> pathMap = availableTiles.ToList ();
-					Tile lastVisited = endOfPath;
-					pathMap.Add (lastVisited);
-					List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, TileManager.tileMousedOver, pathMap);
-					newPath = newPath.Subset (1);
-					foreach (Tile t in newPath) {
-						AddTileToPath (t);
-					}
+					MakePathToTile (TileManager.tileMousedOver);
 				}
 			}
 			// Wind back the list
@@ -109,14 +119,25 @@ public class DrawArrowPhase : GameControlPhase {
 		}
 	}
 
+	private void MakePathToTile (Tile destination) {
+		List<Tile> pathMap = new List<Tile> (TileManager.shimmeringTiles);
+		Tile lastVisited = endOfPath;
+		pathMap.Add (lastVisited);
+		List<Tile> newPath = Pathfinding.ShortestPath (lastVisited, destination, pathMap);
+		newPath = newPath.Subset (1);
+		foreach (Tile t in newPath) {
+			AddTileToPath (t);
+		}
+	}
+
 	/// <summary>
 	/// Adds the tile to path and updates selectable tiles.
 	/// </summary>
 	private void AddTileToPath (Tile t) {
 		GameObject currentSegment = pathArrow.lineSegments [tilePath.Count - 1];
-		currentSegment.SetActive (true);
 		currentSegment.transform.position = endOfPath.topCenterPoint.HalfwayTo (t.topCenterPoint);
 		currentSegment.transform.rotation = Compass.DirectionToRotation (endOfPath.GetDirectionOfNeighbor (t));
+		currentSegment.SetActive (true);
 
 		tilePath.Add (t);
 		UpdateAvailableTiles ();
@@ -128,9 +149,9 @@ public class DrawArrowPhase : GameControlPhase {
 	/// Update the list of tiles available to be drawn over.
 	/// </summary>
 	private void UpdateAvailableTiles () {
-		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (availableTiles);
+		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (TileManager.shimmeringTiles);
 
-		availableTiles = new HashSet<Tile> ();
+		HashSet<Tile> availableTiles = new HashSet<Tile> ();
 		availableTiles.Add (endOfPath);
 
 		for (int x = 0; x < selectedCat.maxEnergy + 1 - tilePath.Count; x++) {
@@ -167,7 +188,6 @@ public class DrawArrowPhase : GameControlPhase {
 			}
 		}
 		if (riskiestPerDog.Count == 0) {
-			//pathArrow.color = Color.black;
 			pathArrow.color = Color.white;
 		}
 		else {

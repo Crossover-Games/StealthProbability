@@ -24,7 +24,6 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// <summary>
 	/// Moves the cursor, updates UI and highlights. Does not trigger click events.
 	/// </summary>
-	/// <param name="t"></param>
 	public static void SelectTile (Tile t) {
 		staticInstance.UpdateAfterClick (t);
 	}
@@ -33,9 +32,13 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Moves the cursor, updates UI and highlights
 	/// </summary>
 	private void UpdateAfterClick (Tile t) {
+		TileManager.cursorTile = t;
+		UIManager.masterInfoBox.ClearAllData ();
+		if (t == null) {
+			UIManager.masterInfoBox.headerText = "";
+			TileManager.ClearAllShimmer ();
+		}
 		if (t != null) {
-			TileManager.cursorTile = t;
-			UIManager.masterInfoBox.ClearAllData ();
 			foreach (TileDangerData tdd in t.dangerData) {
 				UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
 			}
@@ -75,17 +78,29 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 			}
 		}
 	}
+
 	/// <summary>
 	/// Moves cursor and displays overlays. Never null
 	/// </summary>
-	override public void TileClickEvent (Tile t) {
-		if (TileManager.cursorTile != t) {  //if different
-			if (t.occupant != null) {
-				t.occupant.PlaySound ();
+	//override public void TileClickEvent (Tile t) {
+	private void CustomTileClickEvent (Tile t) {
+		if (TileManager.cursorTile != t) {
+			if (t == null) {
+				UpdateAfterClick (t);
 			}
-			UpdateAfterClick (t);
+			else if (t.occupant != null) {
+				t.occupant.PlaySound ();
+				UpdateAfterClick (t);
+			}
+			else {
+				if (TileManager.cursorTile != null && TileManager.cursorTile.occupant != null && TileManager.cursorTile.occupant.characterType == CharacterType.Cat && t.shimmer) {
+					DrawArrowPhase.TakeControlAutoPath (TileManager.cursorTile.occupant as Cat, t);
+				}
+				else {
+					UpdateAfterClick (t);
+				}
+			}
 		}
-		// once we have the holy grail info box working, we can put stuff like that in there too.
 	}
 
 	/// <summary>
@@ -100,7 +115,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// </summary>
 	override public void TileDragEvent (Tile t) {
 		if (Input.GetMouseButton (0) && TileManager.cursorTile.occupant != null && TileManager.cursorTile.occupant.characterType == CharacterType.Cat && !TileManager.cursorTile.occupant.grayedOut) {
-			ExitToDrawArrowPhase ();
+			DrawArrowPhase.TakeControl (TileManager.cursorTile.occupant as Cat);
 		}
 	}
 
@@ -112,20 +127,18 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	}
 
 	override public void OnLeaveControl () {
-		UIManager.masterInfoBox.ClearAllData ();        // maybe not
 		CameraOverheadControl.dragControlAllowed = false;
 	}
 
 	/// <summary>
-	/// Switches to the dog turn if all cats did their move
+	/// Switches to the dog turn if all cats did their move. Also fakes the tile click event.
 	/// </summary>
 	override public void ControlUpdate () {
 		if (!GameBrain.catManager.anyAvailable) {
 			DogSelectorPhase.TakeControl ();
 		}
-	}
-
-	private void ExitToDrawArrowPhase () {
-		DrawArrowPhase.TakeControl (TileManager.cursorTile.occupant as Cat);
+		else if (Input.GetMouseButtonDown (0)) {
+			CustomTileClickEvent (TileManager.tileMousedOver);
+		}
 	}
 }

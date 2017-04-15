@@ -30,7 +30,7 @@ public class VisionPattern {
 	// y+ goes down
 	// x+ goes right
 	// (0,0): top left corner
-	private float[,] probabilities;
+	private float [,] probabilities;
 
 	private int originX;
 	private int originY;
@@ -81,7 +81,8 @@ public class VisionPattern {
 			foreach (Tile t in layer2) {
 				tmp.Add (new TileDangerData (0.25f, t, m_Owner, Color.green));
 			}
-			tmp.Add (new TileDangerData (1f, m_Owner.myTile, m_Owner, Color.gray));
+			//tmp.Add (new TileDangerData (1f, m_Owner.myTile, m_Owner, Color.gray));
+			tmp.Add (new TileDangerData (1f, m_Owner.myTile, m_Owner, Color.white));
 			return tmp;
 		}
 	}
@@ -128,7 +129,7 @@ public class VisionPattern {
 			return 0f;
 		}
 		else {
-			return probabilities[yIndex, xIndex];
+			return probabilities [yIndex, xIndex];
 		}
 	}
 }

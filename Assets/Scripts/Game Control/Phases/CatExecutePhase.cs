@@ -43,7 +43,7 @@ public class CatExecutePhase : GameControlPhase {
 
 	override public void ControlUpdate () {
 		if (tilePath.Count > 0) {
-			selectedCat.MoveTo (tilePath[0]);
+			selectedCat.MoveTo (tilePath [0]);
 			tilePath.RemoveAt (0);
 		}
 		else {
@@ -52,6 +52,8 @@ public class CatExecutePhase : GameControlPhase {
 	}
 
 	override public void OnLeaveControl () {
+		UIManager.masterInfoBox.headerText = "";
+		UIManager.masterInfoBox.ClearAllData ();
 		CameraOverheadControl.StopFollowing ();
 		purrSound.Stop ();
 		selectedCat.grayedOut = true;

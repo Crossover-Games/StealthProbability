@@ -70,7 +70,10 @@ public class CatTurnDetectionPhase : GameControlPhase {
 		}
 		else {
 			PlayerTurnIdlePhase.TakeControl ();
-			CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.availableCharacters.RandomElement ().myTile.topCenterPoint);
+			Cat [] availableCharacters = GameBrain.catManager.availableCharacters;
+			if (availableCharacters.Length > 0) {
+				CameraOverheadControl.SetCamFocusPoint (availableCharacters.RandomElement ().myTile.topCenterPoint);
+			}
 		}
 	}
 }

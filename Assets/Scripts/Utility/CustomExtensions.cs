@@ -8,6 +8,14 @@ using UnityEngine;
 /// Helpful extensions written by the king rat himself.
 /// </summary>
 public static class CustomExtensions {
+
+	/// <summary>
+	/// True if the array contains the specified element.
+	/// </summary>
+	public static bool Contains<T> (this T [] array, T element) {
+		return Array.IndexOf (array, element) > -1;
+	}
+
 	// --GAMEOBJECT
 
 	/// <summary>

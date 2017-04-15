@@ -33,13 +33,12 @@ public class Floor : Tile {
 				riskiest = tdd;
 			}
 		}
-		if (secondRiskiest.danger < 0f) {
-			m_dangerVisualizer.tileDangerColor = riskiest.dangerColor;
-			m_dangerVisualizer.hologramColor = riskiest.dangerColor;
+		m_dangerVisualizer.hologramColor = riskiest.dangerColor;
+		if (dangerData.Length > 1) {
+			m_dangerVisualizer.tileDangerColor = Color.black;
 		}
 		else {
 			m_dangerVisualizer.tileDangerColor = riskiest.dangerColor;
-			m_dangerVisualizer.hologramColor = secondRiskiest.dangerColor;
 		}
 	}
 
@@ -60,9 +59,19 @@ public class Floor : Tile {
 	}
 
 	[SerializeField] private GameObject shimmerObject;
-	protected override bool cosmeticShimmerState {
+	public override bool shimmer {
 		get { return shimmerObject.activeSelf; }
-		set { shimmerObject.SetActive (value); }
+		set {
+			if (value != shimmerObject.activeSelf) {
+				shimmerObject.SetActive (value);
+				if (value) {
+					TileManager.RegisterShimmer (this);
+				}
+				else {
+					TileManager.UnregisterShimmer (this);
+				}
+			}
+		}
 	}
 }
 

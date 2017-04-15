@@ -36,7 +36,7 @@ public class Wall : Tile {
 		get { return false; }
 		set { }
 	}
-	protected override bool cosmeticShimmerState {
+	public override bool shimmer {
 		get { return false; }
 		set { }
 	}

@@ -262,22 +262,7 @@ public abstract class Tile : MonoBehaviour {
 	/// <summary>
 	/// A visual shimmer effect used for highlights other than danger squares.
 	/// </summary>
-	public bool shimmer {
-		get { return cosmeticShimmerState; }
-		set {
-			if (value != cosmeticShimmerState) {
-				cosmeticShimmerState = value;
-				if (value) {
-					TileManager.RegisterShimmer (this);
-				}
-				else {
-					TileManager.UnregisterShimmer (this);
-				}
-			}
-		}
-	}
-
-	protected abstract bool cosmeticShimmerState { get; set; }
+	public abstract bool shimmer { get; set; }
 
 	/// <summary>
 	/// All tiles in radius. Radius 0 is just this tile. TraversableOnly means that walls or filled squares won't be included.
