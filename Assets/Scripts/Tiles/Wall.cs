@@ -32,6 +32,9 @@ public class Wall : Tile {
 		get { return false; }
 		set { }
 	}
+	public override StepNode stepNode {
+		get { return null; }
+	}
 	public override bool dangerVisualizerEnabled {
 		get { return false; }
 		set { }

@@ -68,8 +68,8 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 							current = current.NextOnPath (last);
 							last = tempLast;
 						}
-						TileManager.MassSetShimmer (toShimmer);
 					}
+					TileManager.MassSetShimmer (toShimmer);
 				}
 			}
 			else {

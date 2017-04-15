@@ -149,8 +149,6 @@ public class DrawArrowPhase : GameControlPhase {
 	/// Update the list of tiles available to be drawn over.
 	/// </summary>
 	private void UpdateAvailableTiles () {
-		HashSet<Tile> previouslyHighlighted = new HashSet<Tile> (TileManager.shimmeringTiles);
-
 		HashSet<Tile> availableTiles = new HashSet<Tile> ();
 		availableTiles.Add (endOfPath);
 

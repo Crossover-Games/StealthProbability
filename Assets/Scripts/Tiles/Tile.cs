@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
@@ -197,6 +196,11 @@ public abstract class Tile : MonoBehaviour {
 	/// State of the tile's mouse highlight.
 	/// </summary>
 	public abstract bool mouseOverVisualState { get; set; }
+
+	/// <summary>
+	/// The step node associated with this tile.
+	/// </summary>
+	public abstract StepNode stepNode { get; }
 
 	/// <summary>
 	/// Temporary and always-changing list of currently applied danger squares.

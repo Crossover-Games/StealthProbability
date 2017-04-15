@@ -7,6 +7,10 @@ using System;
 /// </summary>
 public class Floor : Tile {
 
+	protected override void LateAwake () {
+		m_stepNode = GetComponent<StepNode> ();
+	}
+
 	public override TileType tileType {
 		get { return TileType.Floor; }
 	}
@@ -26,10 +30,8 @@ public class Floor : Tile {
 	[SerializeField] private TileDangerVisualizer m_dangerVisualizer;
 	protected override void UpdateDangerColor () {
 		TileDangerData riskiest = new TileDangerData (Mathf.NegativeInfinity, null, null, default (Color));
-		TileDangerData secondRiskiest = riskiest;
 		foreach (TileDangerData tdd in dangerData) {
 			if (tdd.danger > riskiest.danger) {
-				secondRiskiest = riskiest;
 				riskiest = tdd;
 			}
 		}
@@ -48,7 +50,10 @@ public class Floor : Tile {
 		set { m_mouseUnit.mouseOverVisualState = value; }
 	}
 
-
+	private StepNode m_stepNode;
+	public override StepNode stepNode {
+		get { return m_stepNode; }
+	}
 	public override bool dangerVisualizerEnabled {
 		get { return m_dangerVisualizer.gameObject.activeSelf; }
 		set {
