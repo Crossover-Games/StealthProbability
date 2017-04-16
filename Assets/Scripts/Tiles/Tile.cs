@@ -65,14 +65,6 @@ public abstract class Tile : MonoBehaviour {
 		}
 	}
 
-	private PathingNode myPathingNode;
-	/// <summary>
-	/// The pathing node associated with this tile. Null for walls and tiles not intended to be traversed by dogs.
-	/// </summary>
-	public PathingNode pathingNode {
-		get { return myPathingNode; }
-	}
-
 	/// <summary>
 	/// Returns the world space coordinate of center top of tile. This is where the occupying character will stand, where the cursor will point on an empty tile, etc.
 	/// </summary>
@@ -82,7 +74,6 @@ public abstract class Tile : MonoBehaviour {
 
 	void Awake () {
 		m_collider = GetComponent<Collider> ();
-		myPathingNode = GetComponent<PathingNode> ();
 
 		RegisterNeighboringTiles ();
 		TileManager.RegisterTileSetup (this);

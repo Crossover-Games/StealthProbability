@@ -42,7 +42,6 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 			foreach (TileDangerData tdd in t.dangerData) {
 				UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
 			}
-
 			if (t.occupant != null) {
 				UIManager.masterInfoBox.headerText = t.occupant.name;
 				if (t.occupant.characterType == CharacterType.Cat) {
@@ -50,26 +49,13 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 					if (!t.occupant.grayedOut) {
 						TileManager.MassSetShimmer (t.AllTilesInRadius (thisCat.maxEnergy, true, false));
 						UIManager.masterInfoBox.AddEnergyDataFromCat (thisCat.maxEnergy, thisCat);
-						//UIManager.masterInfoBox.AddData ("Energy: " + thisCat.maxEnergy + "/" + thisCat.maxEnergy, new Color (0f, 1f, 1f));
 					}
 					else {
 						UIManager.masterInfoBox.AddEnergyDataFromCat (0, thisCat);
-						//UIManager.masterInfoBox.AddData ("Energy: 0/" + (t.occupant as Cat).maxEnergy, Color.HSVToRGB (0f, 0.75f, 1f));
 					}
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
-					HashSet<Tile> toShimmer = new HashSet<Tile> ();
-					foreach (PathingNode p in t.pathingNode.AllPotentialPathStarts ((t.occupant as Dog))) {
-						PathingNode last = t.pathingNode;
-						PathingNode current = p;
-						while (current != null) {
-							toShimmer.Add (current.myTile);
-							PathingNode tempLast = current;
-							current = current.NextOnPath (last);
-							last = tempLast;
-						}
-					}
-					TileManager.MassSetShimmer (toShimmer);
+					(t.occupant as Dog).route.visualState = true;	// something has to disable this later, mind you
 				}
 			}
 			else {

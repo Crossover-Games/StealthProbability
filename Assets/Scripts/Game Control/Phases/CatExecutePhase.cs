@@ -32,7 +32,6 @@ public class CatExecutePhase : GameControlPhase {
 	/// </summary>
 	public List<Tile> tilePath;
 
-
 	[SerializeField] private AudioSource purrSound;
 
 	override public void OnTakeControl () {

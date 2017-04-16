@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class Dog : GameCharacter {
 	override public CharacterType characterType {
-		get{ return CharacterType.Dog; }
+		get { return CharacterType.Dog; }
 	}
 
 	override public float stepAnimationTime {
@@ -18,22 +18,12 @@ public class Dog : GameCharacter {
 		get { return 0.3f; }
 	}
 
-	public PathingNode lastVisited = null;
-
-	private PathingNode m_firstTurnNode;
-	/// <summary>
-	/// The dog only moves forward on the first turn. Null after the dog makes its first move.
-	/// </summary>
-	public PathingNode firstTurnNode {
-		get { return m_firstTurnNode; }
-	}
-
 	private VisionPattern m_VisionPattern;
 	/// <summary>
 	/// This dog's vision pattern.
 	/// </summary>
 	public VisionPattern visionPattern {
-		get{ return m_VisionPattern; }
+		get { return m_VisionPattern; }
 	}
 
 	override protected void Awake () {
@@ -41,25 +31,23 @@ public class Dog : GameCharacter {
 		m_VisionPattern = new VisionPattern (this);
 	}
 
-	void Start () {
-		Tile tempTile = myTile.GetNeighborInDirection (orientation);
-		if (tempTile != null) {
-			m_firstTurnNode = tempTile.pathingNode;
-		}
+	/// <summary>
+	/// Editor only. Links the route to this dog.
+	/// </summary>
+	/// <param name="r"></param>
+	public void SetSerializedRoute (Route r) {
+		m_route = r;
+	}
+	[SerializeField] private Route m_route;
+	/// <summary>
+	/// The entire route this dog can take.
+	/// </summary>
+	public Route route {
+		get { return m_route; }
 	}
 
-	/// <summary>
-	/// Doggoveride. In addition to GameCharacter.MoveTo(Tile), this stores the pathing node of the last tile it visited.
-	/// that's not implemented yet.
-	/// </summary>
-	override public void MoveTo (Tile destination) {
-		if (Tile.ValidStepDestination (destination)) {
-			ClearVisionPattern ();
-			lastVisited = myTile.pathingNode;
-		}
-		m_firstTurnNode = null;
-		base.MoveTo (destination);
-		ApplyVisionPattern ();
+	void Start () {
+		m_route.SetGuaranteedPath (myTile.GetNeighborInDirection (orientation).stepNode.myPath);
 	}
 
 	/// <summary>
@@ -77,6 +65,17 @@ public class Dog : GameCharacter {
 	public void ClearVisionPattern () {
 		foreach (TileDangerData tdd in m_VisionPattern.allTilesAffected) {
 			tdd.myTile.RemoveDangerDataByDog (this);
+		}
+	}
+
+	/// <summary>
+	/// Doggoveride. In addition to GameCharacter.MoveTo(Tile), this applies the vision pattern.
+	/// </summary>
+	override public void MoveTo (Tile destination) {
+		if (Tile.ValidStepDestination (destination)) {
+			ClearVisionPattern ();
+			base.MoveTo (destination);
+			ApplyVisionPattern ();
 		}
 	}
 }

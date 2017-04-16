@@ -1,16 +1,25 @@
 fileFormatVersion: 2
 guid: 87db86fb0913b92459b24f75787540cb
-timeCreated: 1491338066
+timeCreated: 1492321668
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
+  - floorImage: {fileID: 2800000, guid: bbdfa2190ef868349b26b18b5c011904, type: 3}
+  - wallImage: {fileID: 2800000, guid: a283103f8edf97b4abb91cd193541d02, type: 3}
+  - normalNodeImage: {fileID: 2800000, guid: 8361b1a2063e1ee4292f1da88a57d2f4, type: 3}
+  - stopNodeImage: {fileID: 2800000, guid: bf5eb550fac6a9344a69f3e663b650aa, type: 3}
+  - dogOriginImage: {fileID: 2800000, guid: 4a7109a12606a0140befe2591480e669, type: 3}
   - floorTile: {fileID: 1000011137630582, guid: 63479e236ace6ce4abf1ae49161607fd,
       type: 2}
   - wallTile: {fileID: 1811600136781426, guid: 84255c901ae2a724094e384617812699, type: 2}
   - gameController: {fileID: 1133688171390954, guid: c0708eb52ee4c694c9f856d41efc5d0d,
       type: 2}
   - dogPrefab: {fileID: 1827825643503246, guid: 135e38f2d068c404b90f82d236ff27c3,
+      type: 2}
+  - pathPrefab: {fileID: 1768560781522662, guid: 465db73359eb9df46857ab2809af00ba,
+      type: 2}
+  - routePrefab: {fileID: 1720532974876516, guid: fc760d488bd25334297e85408c23f4a4,
       type: 2}
   executionOrder: 0
   icon: {instanceID: 0}

@@ -23,9 +23,17 @@ public class DogSelectorPhase : GameControlPhase {
 	override public void ControlUpdate () {
 		if (GameBrain.dogManager.anyAvailable) {
 			UIManager.masterInfoBox.ClearAllData ();
-			Dog nextDog = GameBrain.dogManager.availableCharacters[0];
+			Dog nextDog = GameBrain.dogManager.availableCharacters [0];
 			UIManager.masterInfoBox.headerText = nextDog.name;
-			DogMovePhase.TakeControl (nextDog);
+
+			DogMovePhase.TakeControl (nextDog, nextDog.route.SelectNextPath ());
+		}
+		else {
+			GameBrain.dogManager.RejuvenateAll ();
+
+			GameBrain.catManager.RejuvenateAll ();
+			CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
+			PlayerTurnIdlePhase.TakeControl ();
 		}
 	}
 }

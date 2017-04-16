@@ -4,7 +4,7 @@ using UnityEngine;
 
 /// <summary>
 /// Dog equivalent to CatExecutePhase.
-/// Exits: DogTurnCatDetectPhase
+/// Exits: DogTurnDetectionPhase
 /// </summary>
 public class DogMovePhase : GameControlPhase {
 	/// <summary>
@@ -14,8 +14,9 @@ public class DogMovePhase : GameControlPhase {
 	/// <summary>
 	/// Puts the DogMovePhase in control.
 	/// </summary>
-	public static void TakeControl (Dog selectedDog) {
+	public static void TakeControl (Dog selectedDog, List<Tile> tilePath) {
 		staticInstance.selectedDog = selectedDog;
+		staticInstance.tilePath = tilePath;
 		staticInstance.InstanceTakeControl ();
 	}
 	void Awake () {
@@ -28,55 +29,34 @@ public class DogMovePhase : GameControlPhase {
 	private Dog selectedDog;
 
 	/// <summary>
-	/// The dog will follow this path.
+	/// The ordered path the dog will take.
 	/// </summary>
 	private List<Tile> tilePath;
 
-	/// <summary>
-	/// True only if the dog has not yet selected a path.
-	/// </summary>
-	private bool selecting;
-
-	/// <summary>
-	/// Creates the path the dog will walk.
-	/// </summary>
-	private void BuildPath () {
-		PathingNode currentNode = selectedDog.myTile.pathingNode.SelectNextPathStart (selectedDog);
-		PathingNode prevNode = selectedDog.lastVisited;
-		while (!currentNode.isStoppingPoint) {
-			tilePath.Add (currentNode.myTile);
-			currentNode = currentNode.NextOnPath (prevNode);
-		}
-	}
+	//[SerializeField] private AudioSource purrSound;
 
 	override public void OnTakeControl () {
-		selecting = true;
 		CameraOverheadControl.SetCamFollowTarget (selectedDog.transform);
+		//purrSound.Play ();
+		//selectedCat.walkingAnimation = true;
 	}
 
 	override public void ControlUpdate () {
-		if (selecting) {
-			selecting = false;
-			PathingNode nextNode = selectedDog.myTile.pathingNode.SelectNextPathStart (selectedDog);
-			if (nextNode != null) {
-				selectedDog.MoveTo (nextNode.myTile);
-			}
-			else {
-				selectedDog.MoveTo (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile);
-			}
+		if (tilePath.Count > 0) {
+			selectedDog.MoveTo (tilePath [0]);
+			tilePath.RemoveAt (0);
 		}
-		else if (!selectedDog.myTile.pathingNode.isStoppingPoint) {
-			Tile next = selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile;
-			if (next.occupant == null) {
-				selectedDog.MoveTo (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited).myTile);
-			}
-			else {
-				DogTurnDetectionPhase.TakeControl (selectedDog);
-			}
-		}
-		else if (selectedDog.myTile.pathingNode.NextOnPath (selectedDog.lastVisited) == null) {
+		else {
 			DogTurnDetectionPhase.TakeControl (selectedDog);
 		}
 	}
 
+	override public void OnLeaveControl () {
+		UIManager.masterInfoBox.headerText = "";
+		UIManager.masterInfoBox.ClearAllData ();
+		CameraOverheadControl.StopFollowing ();
+		//purrSound.Stop ();
+		selectedDog.grayedOut = true;
+		//selectedCat.walkingAnimation = false;
+	}
 }

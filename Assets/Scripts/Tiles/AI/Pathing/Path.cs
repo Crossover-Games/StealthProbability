@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// NOT IMPLEMENTED
 /// A single route a dog can take in one turn.
+/// This is a MonoBehaviour so that it can be serialized before the scene runs
 /// </summary>
-public class Path {
-	private StepNode endpointA;
-	private StepNode immediateA;
-	private StepNode endpointB;
-	private StepNode immediateB;
+public class Path : MonoBehaviour {
+
+	/// <summary>
+	/// Creates the path given the two endpoints and the immediate next tile to each.
+	/// </summary>
+	public void DefinePath (StepNode endA, StepNode nextA, StepNode endB, StepNode nextB) {
+		endpointA = endA;
+		immediateA = nextA;
+		endpointB = endB;
+		immediateB = nextB;
+	}
+
+	// Serialized so that they are remembered and can be constructed on awake
+	[SerializeField] private StepNode endpointA;
+	[SerializeField] private StepNode immediateA;
+	[SerializeField] private StepNode endpointB;
+	[SerializeField] private StepNode immediateB;
 	/// <summary>
 	/// Given a starting point, return the list of steps it will take to get to the other end of the path. Null if invalid starting point.
 	/// </summary>
@@ -39,6 +51,7 @@ public class Path {
 	}
 
 	/// <summary>
+	/// Not implemented.
 	/// Visual state of this path. True if the dog has this as an immediate option. False if it is a future option.
 	/// </summary>
 	public bool immediateChoiceVisual {
