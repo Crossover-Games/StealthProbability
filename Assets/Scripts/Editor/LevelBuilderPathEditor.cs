@@ -35,6 +35,7 @@ namespace LevelBuilder {
 
 					if (GUILayout.Button (buttonImage)) {
 						dbp.nodeMap [i, j] = changeTo;
+						Debug.Log (dbp.name);
 					}
 					//fieldsArray [i, j] = EditorGUILayout.Toggle (fieldsArray [i, j], GUILayout.ExpandWidth (false), GUILayout.Width (15f));
 				}

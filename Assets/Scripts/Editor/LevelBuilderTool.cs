@@ -70,7 +70,7 @@ namespace LevelBuilder {
 			for (int j = 0; j < newFieldsArray.GetLength (1); j++) {
 				for (int i = 0; i < newFieldsArray.GetLength (0); i++) {
 					newFieldsArray [i, j] = expandedFloorDefault;
-					newPathArray [i, j] = expandedFloorDefault ? PathNodeState.Empty : PathNodeState.Wall;
+					//newPathArray [i, j] = expandedFloorDefault ? PathNodeState.Empty : PathNodeState.Wall;
 				}
 			}
 
@@ -82,12 +82,17 @@ namespace LevelBuilder {
 			}
 			// copies the path arrays
 			foreach (DogBlueprint dbp in dogList) {
+				for (int j = 0; j < newFieldsArray.GetLength (1); j++) {
+					for (int i = 0; i < newFieldsArray.GetLength (0); i++) {
+						newPathArray [i, j] = expandedFloorDefault ? PathNodeState.Empty : PathNodeState.Wall;
+					}
+				}
 				for (int j = 0; j < Mathf.Min (dbp.nodeMap.GetLength (1), length); j++) {
 					for (int i = 0; i < Mathf.Min (dbp.nodeMap.GetLength (0), width); i++) {
 						newPathArray [i, j] = dbp.nodeMap [i, j];
 					}
 				}
-				dbp.nodeMap = newPathArray;
+				dbp.nodeMap = newPathArray.Clone () as PathNodeState [,];
 			}
 			fieldsArray = newFieldsArray;
 		}
