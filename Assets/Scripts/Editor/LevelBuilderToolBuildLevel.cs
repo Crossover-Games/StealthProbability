@@ -185,6 +185,7 @@ namespace LevelBuilder {
 					if (!stopNodes.Contains (endpoint)) {
 						GameObject pathObject = GameObject.Instantiate (pathPrefab);
 						Path tempPath = pathObject.GetComponent<Path> ();
+						route.AddPath (tempPath);
 						pathObject.transform.SetParent (routeObject.transform);
 						foreach (StepNode toPath in registerToPath) {
 							toPath.SetSerializedPath (tempPath);

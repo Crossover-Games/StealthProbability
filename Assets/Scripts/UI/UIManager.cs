@@ -35,6 +35,25 @@ public class UIManager : MonoBehaviour {
 		get { return m_infoBox; }
 	}
 
+	private static Route m_currentlyDisplayed = null;
+	/// <summary>
+	/// The current route being displayed.
+	/// </summary>
+	public static Route routeCurrentlyDisplayed {
+		get { return m_currentlyDisplayed; }
+		set {
+			if (m_currentlyDisplayed != value) {
+				if (m_currentlyDisplayed != null) {
+					m_currentlyDisplayed.visualState = false;
+				}
+				m_currentlyDisplayed = value;
+				if (m_currentlyDisplayed != null) {
+					m_currentlyDisplayed.visualState = true;
+				}
+			}
+		}
+	}
+
 	void Awake () {
 		m_infoBox = infoBoxInstance;
 		canvas = canvasInstance;
@@ -75,8 +94,8 @@ public class UIManager : MonoBehaviour {
 	private static void PathEndMenuTracking () {
 		Vector2 viewportPosition = canvas.worldCamera.WorldToViewportPoint (followPoint.vector);
 		Vector2 WorldObject_ScreenPosition = new Vector2 (
-			                                     ((viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f)),
-			                                     ((viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f)));
+												 ((viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f)),
+												 ((viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f)));
 		pathEndMenu.anchoredPosition = WorldObject_ScreenPosition;
 	}
 }

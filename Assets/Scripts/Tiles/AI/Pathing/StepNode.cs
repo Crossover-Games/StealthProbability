@@ -79,7 +79,7 @@ public class StepNode : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	/// <summary>
 	/// Given the previous node in a dog's path, what is the next node the dog should take? Null if this node is a stopping point. Returns the previous node for dead ends.
 	/// </summary>

@@ -37,8 +37,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 		if (t == null) {
 			UIManager.masterInfoBox.headerText = "";
 			TileManager.ClearAllShimmer ();
+			UIManager.routeCurrentlyDisplayed = null;
 		}
-		if (t != null) {
+		else if (t != null) {
 			foreach (TileDangerData tdd in t.dangerData) {
 				UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
 			}
@@ -53,14 +54,16 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 					else {
 						UIManager.masterInfoBox.AddEnergyDataFromCat (0, thisCat);
 					}
+					UIManager.routeCurrentlyDisplayed = null;
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
-					(t.occupant as Dog).route.visualState = true;	// something has to disable this later, mind you
+					TileManager.ClearAllShimmer ();
+					UIManager.routeCurrentlyDisplayed = (t.occupant as Dog).route;
+					//(t.occupant as Dog).route.visualState = true;   // something has to disable this later, mind you
 				}
 			}
 			else {
-				TileManager.ClearAllShimmer ();
-				UIManager.masterInfoBox.headerText = t.tileName;
+				UIManager.routeCurrentlyDisplayed = null;
 			}
 		}
 	}

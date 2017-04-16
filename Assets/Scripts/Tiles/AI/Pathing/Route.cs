@@ -6,7 +6,14 @@ using UnityEngine;
 /// </summary>
 public class Route : MonoBehaviour {
 
-	//public List<Path> allPaths; // only for visualization
+	/// <summary>
+	/// Registers a path to this route. Setup only. For visualizer.
+	/// </summary>
+	public void AddPath (Path p) {
+		p.SetSerializedRoute (this);
+		allPaths.Add (p);
+	}
+	[SerializeField] private List<Path> allPaths; // only for visualization
 
 	/// <summary>
 	/// Editor only. Do not call at runtime.
@@ -62,13 +69,31 @@ public class Route : MonoBehaviour {
 		}
 	}
 
-	[SerializeField] private GameObject visualizer;
+	/// <summary>
+	/// The parent to all path visualizers on this route.
+	/// </summary>
+	public GameObject visualizerParent;
 	/// <summary>
 	/// Display this route?
 	/// </summary>
 	public bool visualState {
-		get { return visualizer.activeSelf; }
-		set { visualizer.SetActive (value); }
+		get { return visualizerParent.activeSelf; }
+		set {
+			if (value != visualizerParent.activeSelf) {
+				visualizerParent.SetActive (value);
+				if (value) {
+					List<Path> tempChoices = immediateChoicesForDog;
+					foreach (Path p in allPaths) {
+						if (tempChoices.Contains (p)) {
+							p.immediateChoiceVisual = true;
+						}
+						else {
+							p.immediateChoiceVisual = false;
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/// <summary>
@@ -76,6 +101,7 @@ public class Route : MonoBehaviour {
 	/// </summary>
 	public List<Tile> SelectNextPath () {
 		Path path = immediateChoicesForDog.RandomElement ();
+		pathLastTaken = path;
 		List<Tile> steps = path.DirectionalPath (m_dog.myTile.stepNode);
 		firstPath = null;
 		return steps;

@@ -51,6 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240b3e156a16bda48846372d8d69208b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  immediateChoiceMaterial: {fileID: 2100000, guid: a370fa9bf9a0c9f4a864ccdea9736d4a,
+    type: 2}
+  futureChoiceMaterial: {fileID: 2100000, guid: 62714903194b47347828520533834d87,
+    type: 2}
+  arrowPrefab: {fileID: 1599078247045914, guid: b5f4572047131834ba5de5b1dabc8c42,
+    type: 2}
+  m_route: {fileID: 0}
   endpointA: {fileID: 0}
   immediateA: {fileID: 0}
   endpointB: {fileID: 0}
