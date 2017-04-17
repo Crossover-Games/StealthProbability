@@ -16,6 +16,8 @@
 /// 
 /// 
 
+using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,7 +45,13 @@ public class VisionPattern {
 		get { return m_Owner; }
 	}
 
-	public VisionPattern (Dog theOwner) {
+	public VisionPattern (Dog theOwner, string patternFile) {
+		using (StreamReader sw = new StreamReader(patternFile))
+		{
+			string patternJSON = sw.ReadToEnd();
+			Pattern pattern = JsonUtility.FromJson<Pattern>(patternJSON);
+			this.probabilities = pattern.probabilities;
+		}
 		m_Owner = theOwner;
 	}
 
