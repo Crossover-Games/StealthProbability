@@ -6,13 +6,14 @@ using System.Collections.Generic;
 namespace LevelBuilder {
 	public partial class LevelBuilderTool : EditorWindow {
 
-		public GameObject debugMarkerPrefab;
-
 		public Texture floorImage;
 		public Texture wallImage;
 		public Texture normalNodeImage;
 		public Texture stopNodeImage;
-		public Texture dogOriginImage;
+		public Texture dogNorthImage;
+		public Texture dogSouthImage;
+		public Texture dogEastImage;
+		public Texture dogWestImage;
 
 		public GameObject floorTile;
 		public GameObject wallTile;
@@ -185,8 +186,6 @@ namespace LevelBuilder {
 					}
 				}
 			}
-
-			GameObject debugParent = new GameObject ();
 
 			dogList = new List<DogBlueprint> ();
 			foreach (Dog d in FindObjectsOfType<Dog> ()) {

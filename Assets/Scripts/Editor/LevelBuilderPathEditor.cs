@@ -13,8 +13,21 @@ namespace LevelBuilder {
 					PathNodeState changeTo = PathNodeState.Empty;
 
 					if (dbp.point.x == i && dbp.point.y == j) { // dog's location
-						buttonImage = dogOriginImage;
 						changeTo = PathNodeState.DogOrigin;
+						switch (dbp.direction) {
+							case Compass.Direction.North:
+								buttonImage = dogNorthImage;
+								break;
+							case Compass.Direction.South:
+								buttonImage = dogSouthImage;
+								break;
+							case Compass.Direction.East:
+								buttonImage = dogEastImage;
+								break;
+							case Compass.Direction.West:
+								buttonImage = dogWestImage;
+								break;
+						}
 					}
 					else if (!fieldsArray [i, j]) {  // wall
 						buttonImage = wallImage;

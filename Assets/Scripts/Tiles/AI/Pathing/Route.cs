@@ -87,14 +87,14 @@ public class Route : MonoBehaviour {
 				if (value) {
 					List<Path> tempChoices = immediateChoicesForDog;
 					foreach (Path p in allPaths) {
-						if (tempChoices.Contains (p)) {
-							p.immediateChoiceVisual = true;
-							p.SetEndpointVisualStates (true);
-						}
-						else {
+						if (!tempChoices.Contains (p)) {
 							p.immediateChoiceVisual = false;
 							p.SetEndpointVisualStates (false);
 						}
+					}
+					foreach (Path p in tempChoices) {
+						p.immediateChoiceVisual = true;
+						p.SetEndpointVisualStates (true);
 					}
 				}
 				else {

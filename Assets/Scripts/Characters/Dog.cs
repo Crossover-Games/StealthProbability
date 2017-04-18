@@ -28,7 +28,7 @@ public class Dog : GameCharacter {
 
 	override protected void Awake () {
 		base.Awake ();
-		m_VisionPattern = new VisionPattern (this);
+		m_VisionPattern = new VisionPattern (this, "FAKE");
 	}
 
 	[SerializeField] private Route m_route;

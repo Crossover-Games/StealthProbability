@@ -1,17 +1,18 @@
 fileFormatVersion: 2
 guid: 87db86fb0913b92459b24f75787540cb
-timeCreated: 1492501598
+timeCreated: 1492505445
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - debugMarkerPrefab: {fileID: 1995455739923510, guid: bdcca1bac2811ef43bea5e47efd8f3a4,
-      type: 2}
   - floorImage: {fileID: 2800000, guid: bbdfa2190ef868349b26b18b5c011904, type: 3}
   - wallImage: {fileID: 2800000, guid: a283103f8edf97b4abb91cd193541d02, type: 3}
   - normalNodeImage: {fileID: 2800000, guid: 8361b1a2063e1ee4292f1da88a57d2f4, type: 3}
   - stopNodeImage: {fileID: 2800000, guid: bf5eb550fac6a9344a69f3e663b650aa, type: 3}
-  - dogOriginImage: {fileID: 2800000, guid: 4a7109a12606a0140befe2591480e669, type: 3}
+  - dogNorthImage: {fileID: 2800000, guid: 19d0e821c0c003b48b0cedbad7a4b0ac, type: 3}
+  - dogSouthImage: {fileID: 2800000, guid: 9c5dc0c332b1ff74b9ca3ef616027aa9, type: 3}
+  - dogEastImage: {fileID: 2800000, guid: 87ebbb386ad5bf04081c18c822d83122, type: 3}
+  - dogWestImage: {fileID: 2800000, guid: cbfbee2b1ab6be44da70925c675c2183, type: 3}
   - floorTile: {fileID: 1000011137630582, guid: 63479e236ace6ce4abf1ae49161607fd,
       type: 2}
   - wallTile: {fileID: 1811600136781426, guid: 84255c901ae2a724094e384617812699, type: 2}

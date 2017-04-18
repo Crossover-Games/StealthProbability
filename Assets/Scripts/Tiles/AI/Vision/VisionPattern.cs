@@ -46,11 +46,12 @@ public class VisionPattern {
 	}
 
 	public VisionPattern (Dog theOwner, string patternFile) {
-		using (StreamReader sw = new StreamReader(patternFile))
-		{
-			string patternJSON = sw.ReadToEnd();
-			Pattern pattern = JsonUtility.FromJson<Pattern>(patternJSON);
-			this.probabilities = pattern.probabilities;
+		if (!patternFile.Equals ("FAKE")) {
+			using (StreamReader sw = new StreamReader (patternFile)) {
+				string patternJSON = sw.ReadToEnd ();
+				Pattern pattern = JsonUtility.FromJson<Pattern> (patternJSON);
+				this.probabilities = pattern.probabilities;
+			}
 		}
 		m_Owner = theOwner;
 	}

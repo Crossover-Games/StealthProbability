@@ -2416,6 +2416,7 @@ GameObject:
   - component: {fileID: 304730131}
   - component: {fileID: 304730130}
   - component: {fileID: 304730129}
+  - component: {fileID: 304730132}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -2499,6 +2500,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f947a04158c80cb409c5568cccd4d546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &304730132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 304730126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1904ef7dee6df9f4ca41e4831f3480cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dogJson: '{"vocabulary" : ["Abandoned","Ability","Activity","Adoption","Affect","Affection","Affectionate","Aggressive","Agility","AKC
+    (American Kennel Club)","Allergy","Alpha","Approach","Assistance","Attack","Average","Awareness","Balance","Bay","Behavior","Biscuit","Blissful","Bluff","Bone","Brand","Breed","Breeder","Calm
+    claw","Canine","Care","Castration","Caution","Cautious","Characteristics","Checkup","Chewing","Chow","Claws","Clipping","Coat","Command","Communication","Companionship","Compassion","Competition","Confinement","Connection","Consume","Continuing
+    care","Control","Cropping","Crossbred","Croup","Cruelty","Dam","Dangerous","Defense","Dependable","Destructive","Detection","Devotion","Dewclaw","Diet","Disciplined","Disease","Distemper","Docile","Dock","Dog
+    lover","Dominant","Down","Effective","Endurance","Energetic","Entertainment","Environment","Euthanasia","Exasperating","Exercise","Expense","Experience","Exuberance","Fang","Feature","Fetch","Fidelity","Fido","Finicky","Fitness","Fleas","Food","Foreleg","Formula","Four-legged
+    friend","Friendly","Fur","Games","Gentle","Gnaw","Greeting","Grooming","Grow","Guard","Guardian","Guide
+    dog","Handling","Harness","Haul","Heal","Healthy","Heart","Heart worm","Heel","Herd","Hide","Hind
+    quarters","Hock","Homeless","Hound","Housebreaking","Howl","Humane","Hurt","Incentive","Infection","Inflammation","Inherited","Inhumane","Injury","Insecure","Instinct","Intelligence","Intrude","Intuition","Irrepressible","Irritation","Jerk","Jog","Joint","Judge","Kennel","Kindness","Learning","Leash","Leftovers","Licensing","Life-span","Litter","Love","Loving","Loyalty","Lunge","Malady","Marking","Mate","Maturity","Mayhem","Menace","Mimicking","Miniature","Misbehavior","Mistreat","Mixed
+    breed","Mongrel","Muscular","Mutt","Muzzle","Nature","Neuter","Normal","Nutrient","Nutrition","Obedient","Odor","Outdoors","Outrageous","Overdo","Pack
+    animal","Pad","Panting","Parasite","Pastern","Patient","Paw","Pawing","Pedigree","People-person","Personality","Pet","Pet-friendly","Placid","Playful","Plunder","Pooch","Popularity","Pounds","Practice","Praise","Prevention","Proportion","Puppy","Puppy-hood","Purebred","Quick","Quiet","Rabid","Rabies","Range","Rawhide","Registration","Regulation","Relationship","Relief","Rescue","Respect","Response","Responsibility","Retrieve","Reward","Roaming","Rock-solid","Rump","Safety","Scent","Sedate","Senses","Sensitivity","Service","Shelter","Shiny","Shots","Signal","Sire","Sit","Size","Snarl","Socialize","Spay","SPCA","Special","Specialty","Split-personality","Sporting
+    dog","Standard","Stare","Starvation","Stay","Stereotype","Stray","Stroking","Structure","Submissive","Sweet","Sweet-nature","Swift","Temperament","Tendency","Terrier","Territorial","Threaten","Tick","Toleration","Toys","Training","Treatment","Treats","Trouble","Type","Unconditional","Undercoat","Understanding","Unique","Unsanitary","Unusual","Unwanted","Vaccination","Variety","Veterinarian","Vicious","Vigor","Voice","Wag","Walking","Wary","Washing","Water","Weight","Welcome","Welfare","Whelp","Whining","Whiskers","Wise","Working
+    dog","Worthy","Yank","Yard","Yelp","Zeal"]}'
 --- !u!1 &316958532
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,34 +2805,6 @@ Transform:
   - {fileID: 119431837}
   m_Father: {fileID: 2020320099}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &375483033
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 375483034}
-  m_Layer: 0
-  m_Name: New Game Object
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &375483034
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 375483033}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &376491063
 GameObject:
