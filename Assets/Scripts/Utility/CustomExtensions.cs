@@ -3,11 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEditor;
 
 /// <summary>
 /// Helpful extensions written by the king rat himself.
 /// </summary>
 public static class CustomExtensions {
+
+	// -- WHAT
+
+	/// <summary>
+	/// Returns the value of a serialized property of a specified name.
+	/// </summary>
+	public static T GetSerializedReferenceProperty<T> (this UnityEngine.Object obj, string propertyName)
+	where T : UnityEngine.Object {
+		SerializedObject serializedObject = new UnityEditor.SerializedObject (obj);
+		SerializedProperty property = serializedObject.FindProperty (propertyName);
+		return property.objectReferenceValue as T;
+	}
+
+	/// <summary>
+	/// Assigns a serialized property of a specified name to the specified reference.
+	/// </summary>
+	public static void SetSerializedReferenceProperty (this UnityEngine.Object obj, string propertyName, UnityEngine.Object reference) {
+		SerializedObject serializedObject = new UnityEditor.SerializedObject (obj);
+		SerializedProperty property = serializedObject.FindProperty (propertyName);
+		property.objectReferenceValue = reference;
+		serializedObject.ApplyModifiedProperties ();
+	}
 
 	// --ARRAY
 

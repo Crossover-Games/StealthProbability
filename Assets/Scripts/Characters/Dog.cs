@@ -31,13 +31,6 @@ public class Dog : GameCharacter {
 		m_VisionPattern = new VisionPattern (this);
 	}
 
-	/// <summary>
-	/// Editor only. Links the route to this dog.
-	/// </summary>
-	/// <param name="r"></param>
-	public void SetSerializedRoute (Route r) {
-		m_route = r;
-	}
 	[SerializeField] private Route m_route;
 	/// <summary>
 	/// The entire route this dog can take.

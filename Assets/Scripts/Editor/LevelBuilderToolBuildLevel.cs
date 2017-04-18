@@ -138,7 +138,8 @@ namespace LevelBuilder {
 
 			Route route = routeObject.GetComponent<Route> ();
 			route.SetSerializedDog (dbp.myDog);
-			dbp.myDog.SetSerializedRoute (route);
+
+			dbp.myDog.SetSerializedReferenceProperty ("m_route", route);
 
 			routeObject.name = dbp.myDog.name + "'s Route";
 
@@ -188,7 +189,7 @@ namespace LevelBuilder {
 						route.AddPath (tempPath);
 						pathObject.transform.SetParent (routeObject.transform);
 						foreach (StepNode toPath in registerToPath) {
-							toPath.SetSerializedPath (tempPath);
+							toPath.SetSerializedReferenceProperty ("m_path", tempPath);
 						}
 						tempPath.DefinePath (start, secondOnPath, endpoint, beforeEndpoint);
 					}

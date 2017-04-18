@@ -30,7 +30,7 @@ public class AnimationQueue {
 	/// Null if inactive.
 	/// </summary>
 	private AnimationDestination currentAnimation {
-		get { 
+		get {
 			if (queuedAnimations.Count == 0) {
 				return null;
 			}
@@ -77,13 +77,13 @@ public class AnimationQueue {
 	public void AnimationUpdate () {
 		currentTimer.Tick ();
 		if (currentAnimation.position != null) {
-			objectTransform.position = Interpolation.Interpolate (initialValues.position.vector, currentAnimation.position.vector, currentTimer.ratio, currentAnimation.interpolationMethod);
+			objectTransform.position = Interpolation.Interpolate (initialValues.position.GetValueOrDefault (), currentAnimation.position.GetValueOrDefault (), currentTimer.ratio, currentAnimation.interpolationMethod);
 		}
 		if (currentAnimation.localScale != null) {
-			objectTransform.localScale = Interpolation.Interpolate (initialValues.localScale.vector, currentAnimation.localScale.vector, currentTimer.ratio, currentAnimation.interpolationMethod);
+			objectTransform.localScale = Interpolation.Interpolate (initialValues.localScale.GetValueOrDefault (), currentAnimation.localScale.GetValueOrDefault (), currentTimer.ratio, currentAnimation.interpolationMethod);
 		}
 		if (currentAnimation.rotation != null) {
-			objectTransform.rotation = Interpolation.Interpolate (initialValues.rotation.quaternion, currentAnimation.rotation.quaternion, currentTimer.ratio, currentAnimation.interpolationMethod);
+			objectTransform.rotation = Interpolation.Interpolate (initialValues.rotation.GetValueOrDefault (), currentAnimation.rotation.GetValueOrDefault (), currentTimer.ratio, currentAnimation.interpolationMethod);
 		}
 
 		if (!currentTimer.active) {
@@ -99,13 +99,13 @@ public class AnimationQueue {
 
 		//snap
 		if (currentAnimation.position != null) {
-			objectTransform.position = currentAnimation.position.vector;
+			objectTransform.position = currentAnimation.position.GetValueOrDefault ();
 		}
 		if (currentAnimation.localScale != null) {
-			objectTransform.localScale = currentAnimation.localScale.vector;
+			objectTransform.localScale = currentAnimation.localScale.GetValueOrDefault ();
 		}
 		if (currentAnimation.rotation != null) {
-			objectTransform.rotation = currentAnimation.rotation.quaternion;
+			objectTransform.rotation = currentAnimation.rotation.GetValueOrDefault ();
 		}
 
 		queuedAnimations.RemoveAt (0);

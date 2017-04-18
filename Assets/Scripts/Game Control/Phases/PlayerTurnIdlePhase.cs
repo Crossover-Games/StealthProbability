@@ -52,6 +52,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 						UIManager.masterInfoBox.AddEnergyDataFromCat (thisCat.maxEnergy, thisCat);
 					}
 					else {
+						TileManager.ClearAllShimmer ();
 						UIManager.masterInfoBox.AddEnergyDataFromCat (0, thisCat);
 					}
 					UIManager.routeCurrentlyDisplayed = null;
@@ -63,6 +64,8 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				}
 			}
 			else {
+				TileManager.ClearAllShimmer ();
+				UIManager.masterInfoBox.headerText = t.tileName;
 				UIManager.routeCurrentlyDisplayed = null;
 			}
 		}

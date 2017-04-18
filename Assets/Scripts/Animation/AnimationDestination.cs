@@ -9,17 +9,17 @@ public class AnimationDestination {
 	/// <summary>
 	/// Destination world position.
 	/// </summary>
-	public Vector3Reference position;
+	public Vector3? position;
 
 	/// <summary>
 	/// Destination rotation.
 	/// </summary>
-	public QuaternionReference rotation;
+	public Quaternion? rotation;
 
 	/// <summary>
 	/// Destination local scale.
 	/// </summary>
-	public Vector3Reference localScale;
+	public Vector3? localScale;
 
 	/// <summary>
 	/// Animation duration.
@@ -34,7 +34,7 @@ public class AnimationDestination {
 	/// <summary>
 	/// Builds an AnimationDestination from scratch. Leave any of the transform values null to keep them from animating.
 	/// </summary>
-	public AnimationDestination (Vector3Reference position, QuaternionReference rotation, Vector3Reference localScale, float duration, InterpolationMethod interpolationMethod) {
+	public AnimationDestination (Vector3? position, Quaternion? rotation, Vector3? localScale, float duration, InterpolationMethod interpolationMethod) {
 		this.position = position;
 		this.rotation = rotation;
 		this.localScale = localScale;
@@ -46,9 +46,9 @@ public class AnimationDestination {
 	/// Builds a AnimationDestination from the values in an actual transform.
 	/// </summary>
 	public AnimationDestination (Transform t, float duration, InterpolationMethod interpolationMethod) {
-		position = new Vector3Reference (t.position);
-		rotation = new QuaternionReference (t.rotation);
-		localScale = new Vector3Reference (t.localScale);
+		position = t.position;
+		rotation = t.rotation;
+		localScale = t.localScale;
 		this.duration = duration;
 		this.interpolationMethod = interpolationMethod;
 	}

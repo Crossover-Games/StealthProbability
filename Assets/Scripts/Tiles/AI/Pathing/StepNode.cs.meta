@@ -1,10 +1,17 @@
 fileFormatVersion: 2
 guid: 89a24fc0a21e8284999468ae85b3a408
-timeCreated: 1492288660
+timeCreated: 1492492614
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - stopNodeObjectPrefab: {fileID: 1278638610487374, guid: 9b3097e981afc014a9e99c9c5966e184,
+      type: 2}
+  - futureChoiceMaterial: {fileID: 2100000, guid: 62714903194b47347828520533834d87,
+      type: 2}
+  - immediateChoiceMaterial: {fileID: 2100000, guid: a370fa9bf9a0c9f4a864ccdea9736d4a,
+      type: 2}
+  - m_path: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

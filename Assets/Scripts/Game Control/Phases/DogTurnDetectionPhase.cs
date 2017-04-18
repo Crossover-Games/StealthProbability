@@ -46,7 +46,7 @@ public class DogTurnDetectionPhase : GameControlPhase {
 	}
 	override public void ControlUpdate () {
 		if (catsInDanger.Count > 0) {
-			Cat c = catsInDanger[0];
+			Cat c = catsInDanger [0];
 			CameraOverheadControl.SetCamFocusPoint (c.myTile.topCenterPoint);
 			if (c.DetectionCheckAndRemove (selectedDog)) {
 				catsToDisable.Add (c);
@@ -65,22 +65,6 @@ public class DogTurnDetectionPhase : GameControlPhase {
 		foreach (Cat c in catsToDisable) {
 			c.gameObject.SetActive (false);
 		}
-		if (GameBrain.dogManager.availableCharacters.Length == 1) {
-			GameBrain.dogManager.RejuvenateAll ();
-			GameBrain.catManager.RejuvenateAll ();
-			UIManager.masterInfoBox.ClearAllData ();
-			UIManager.masterInfoBox.headerText = "";
-			if (VictoryTile.gameLost) {
-				LosePhase.TakeControl ();
-			}
-			else {
-				CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
-				PlayerTurnIdlePhase.TakeControl ();
-			}
-		}
-		else {
-			selectedDog.grayedOut = true;
-			DogSelectorPhase.TakeControl ();
-		}
+		DogSelectorPhase.TakeControl ();
 	}
 }

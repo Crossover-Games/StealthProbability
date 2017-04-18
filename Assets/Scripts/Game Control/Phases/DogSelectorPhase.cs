@@ -30,7 +30,6 @@ public class DogSelectorPhase : GameControlPhase {
 		}
 		else {
 			GameBrain.dogManager.RejuvenateAll ();
-
 			GameBrain.catManager.RejuvenateAll ();
 			CameraOverheadControl.SetCamFocusPoint (GameBrain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
 			PlayerTurnIdlePhase.TakeControl ();

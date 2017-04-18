@@ -20,6 +20,12 @@ public class StepNode : MonoBehaviour {
 	void Awake () {
 		m_tile = GetComponent<Tile> ();
 		a_connections = m_connections.ToArray ();
+		if (m_stoppingPoint) {
+			stopNodeObject = GameObject.Instantiate (stopNodeObjectPrefab, Vector3.up * 0.5f, Quaternion.identity);
+			stopNodeRenderer = stopNodeObject.GetComponent<Renderer> ();
+			stopNodeObject.transform.SetParent (this.transform, false);
+			stopNodeObject.SetActive (false);
+		}
 	}
 
 	/// <summary>
@@ -59,12 +65,44 @@ public class StepNode : MonoBehaviour {
 	}
 
 
+	[SerializeField] private GameObject stopNodeObjectPrefab;
+	[SerializeField] private Material futureChoiceMaterial;
+	[SerializeField] private Material immediateChoiceMaterial;
 	/// <summary>
-	/// Editor only. Do not call game.
+	/// Object that visualizes the dog's stopping point.
 	/// </summary>
-	public void SetSerializedPath (Path p) {
-		m_path = p;
+	private GameObject stopNodeObject;
+	/// <summary>
+	/// Renderer for stopNodeObject, stored for efficiency reasons.
+	/// </summary>
+	private Renderer stopNodeRenderer;
+	private bool? m_stopVisualizer = null;
+	/// <summary>
+	/// True if on immediate path, false if future, null if disabled.
+	/// NOT IMPLEMENTED
+	/// </summary>
+	public bool? stopNodeImmediateVisualizer {
+		get { return m_stopVisualizer; }
+		set {
+			if (value != m_stopVisualizer) {
+				if (value == null) {
+					stopNodeObject.SetActive (false);
+				}
+				else if (m_stopVisualizer == null) {
+					stopNodeObject.SetActive (true);
+				}
+
+				if (value.GetValueOrDefault ()) {
+					stopNodeRenderer.material = immediateChoiceMaterial;
+				}
+				else {
+					stopNodeRenderer.material = futureChoiceMaterial;
+				}
+				m_stopVisualizer = value;
+			}
+		}
 	}
+
 	[SerializeField] private Path m_path;
 	/// <summary>
 	/// Null for stopping points.
@@ -79,7 +117,7 @@ public class StepNode : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	/// <summary>
 	/// Given the previous node in a dog's path, what is the next node the dog should take? Null if this node is a stopping point. Returns the previous node for dead ends.
 	/// </summary>
@@ -105,7 +143,6 @@ public class StepNode : MonoBehaviour {
 			}
 		}
 	}
-
 
 	void OnDrawGizmos () {
 		// this is the top center point of the tile

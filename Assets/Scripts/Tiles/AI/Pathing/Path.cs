@@ -12,12 +12,6 @@ public class Path : MonoBehaviour {
 	[SerializeField] private Material futureChoiceMaterial;
 	[SerializeField] private GameObject arrowPrefab;
 
-	/// <summary>
-	/// Editor only.
-	/// </summary>
-	public void SetSerializedRoute (Route r) {
-		m_route = r;
-	}
 	[SerializeField] private Route m_route;
 	/// <summary>
 	/// The route this path is a part of.
@@ -113,5 +107,13 @@ public class Path : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	/// <summary>
+	/// Null disables. True for immediate, false for future.
+	/// </summary>
+	public void SetEndpointVisualStates (bool? value) {
+		endpointA.stopNodeImmediateVisualizer = value;
+		endpointB.stopNodeImmediateVisualizer = value;
 	}
 }

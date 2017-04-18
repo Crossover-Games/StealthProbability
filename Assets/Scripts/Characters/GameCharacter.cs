@@ -117,9 +117,9 @@ public abstract class GameCharacter : MonoBehaviour {
 				if (orientation != nextDirection) {
 					orientation = nextDirection;
 					moveTime = stepAnimationTime - stepAnimationTime * stepRotationFraction;
-					AnimationManager.AddAnimation (transform, new AnimationDestination (null, new QuaternionReference (Compass.DirectionToRotation (nextDirection)), null, stepAnimationTime * stepRotationFraction, InterpolationMethod.Sinusoidal));
+					AnimationManager.AddAnimation (transform, new AnimationDestination (null, Compass.DirectionToRotation (nextDirection), null, stepAnimationTime * stepRotationFraction, InterpolationMethod.Sinusoidal));
 				}
-				AnimationManager.AddAnimation (transform, new AnimationDestination (new Vector3Reference (myTile.topCenterPoint), null, null, moveTime, InterpolationMethod.Sinusoidal));
+				AnimationManager.AddAnimation (transform, new AnimationDestination (myTile.topCenterPoint, null, null, moveTime, InterpolationMethod.Sinusoidal));
 			}
 			else {
 				transform.position = myTile.topCenterPoint;

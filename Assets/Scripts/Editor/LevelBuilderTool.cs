@@ -6,6 +6,8 @@ using System.Collections.Generic;
 namespace LevelBuilder {
 	public partial class LevelBuilderTool : EditorWindow {
 
+		public GameObject debugMarkerPrefab;
+
 		public Texture floorImage;
 		public Texture wallImage;
 		public Texture normalNodeImage;
@@ -129,6 +131,7 @@ namespace LevelBuilder {
 			g.transform.position = new Vector3 (g2w.x, 0.5f, g2w.y);
 			g.transform.rotation = Compass.DirectionToRotation (dbp.direction);
 			g.transform.SetParent (dogParent.transform);
+			g.name = dbp.name;
 			Dog temp = g.GetComponent<Dog> ();
 			temp.orientation = dbp.direction;
 			dbp.myDog = temp;
@@ -138,7 +141,8 @@ namespace LevelBuilder {
 		/// Updates the level display based on the physical level.
 		/// </summary>
 		private void ScanLevel () {
-			List<Tile> allTiles = new List<Tile> (FindObjectsOfType<Tile> ());
+			mapTilesParent = GameObject.FindGameObjectWithTag ("MapTilesParent");
+			List<Tile> allTiles = new List<Tile> (mapTilesParent.GetComponentsInChildren<Tile> ());
 			int minX = 9999;
 			int maxX = -9999;
 			int minZ = 9999;
@@ -182,10 +186,36 @@ namespace LevelBuilder {
 				}
 			}
 
+			GameObject debugParent = new GameObject ();
+
 			dogList = new List<DogBlueprint> ();
 			foreach (Dog d in FindObjectsOfType<Dog> ()) {
-				dogList.Add (new DogBlueprint (d.name, d.orientation, Mathf.RoundToInt (d.transform.position.x), Mathf.RoundToInt (d.transform.position.z)));
+				Point2D g2w = GridToWorld (d.transform);
+				DogBlueprint newlyCreatedBP = new DogBlueprint (d.name, d.orientation, g2w.x, g2w.y);
+				dogList.Add (newlyCreatedBP);
+				ExpandArray ();
+				newlyCreatedBP.nodeMap [g2w.x, g2w.y] = PathNodeState.DogOrigin;
+				Route r = d.GetSerializedReferenceProperty<Route> ("m_route");
+				SerializedProperty allPathsProperty = new UnityEditor.SerializedObject (r).FindProperty ("allPaths");
+				int allPathsMax = allPathsProperty.arraySize;
+				for (int x = 0; x < allPathsMax; x++) {
+					//iterate through each path
+					Path p = allPathsProperty.GetArrayElementAtIndex (x).objectReferenceValue as Path;
+					StepNode endpoint = p.GetSerializedReferenceProperty<StepNode> ("endpointA");
+					g2w = GridToWorld (endpoint.transform);
+					newlyCreatedBP.nodeMap [g2w.x, g2w.y] = PathNodeState.StopNode;
+					endpoint = p.GetSerializedReferenceProperty<StepNode> ("endpointB");
+					g2w = GridToWorld (endpoint.transform);
+					newlyCreatedBP.nodeMap [g2w.x, g2w.y] = PathNodeState.StopNode;
+					foreach (StepNode sn in mapTilesParent.GetComponentsInChildren<StepNode> ()) {
+						if (sn.myPath == p) {
+							g2w = GridToWorld (sn.transform);
+							newlyCreatedBP.nodeMap [g2w.x, g2w.y] = PathNodeState.NormalNode;
+						}
+					}
+				}
 			}
+
 			DrawFieldsArray ();
 			ExportLevelTiles ();
 		}
@@ -238,6 +268,13 @@ namespace LevelBuilder {
 		/// </summary>
 		private Point2D GridToWorld (int x, int z) {
 			return new Point2D (x, length - z - 1);
+		}
+
+		/// <summary>
+		/// Works both ways. Translates a transform XZ point to a world point.
+		/// </summary>
+		private Point2D GridToWorld (Transform t) {
+			return new Point2D (Mathf.RoundToInt (t.position.x), Mathf.RoundToInt (length - t.position.z - 1));
 		}
 	}
 }

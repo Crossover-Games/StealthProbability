@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 /// <summary>
 /// One whole path a dog can move along, segmented into individual routes.
@@ -10,7 +11,7 @@ public class Route : MonoBehaviour {
 	/// Registers a path to this route. Setup only. For visualizer.
 	/// </summary>
 	public void AddPath (Path p) {
-		p.SetSerializedRoute (this);
+		p.SetSerializedReferenceProperty ("m_route", this);
 		allPaths.Add (p);
 	}
 	[SerializeField] private List<Path> allPaths; // only for visualization
@@ -57,14 +58,16 @@ public class Route : MonoBehaviour {
 				return temp;
 			}
 			else {
-				HashSet<Path> temp = new HashSet<Path> ();
+				HashSet<Path> validPaths = new HashSet<Path> ();
 				foreach (StepNode sn in m_dog.myTile.stepNode.connections) {
 					if (sn.myPath != pathLastTaken) {
-						temp.Add (sn.myPath);
+						validPaths.Add (sn.myPath);
 					}
 				}
-
-				return temp.ToList ();
+				if (validPaths.Count < 1) {
+					validPaths.Add (pathLastTaken);
+				}
+				return validPaths.ToList ();
 			}
 		}
 	}
@@ -86,10 +89,17 @@ public class Route : MonoBehaviour {
 					foreach (Path p in allPaths) {
 						if (tempChoices.Contains (p)) {
 							p.immediateChoiceVisual = true;
+							p.SetEndpointVisualStates (true);
 						}
 						else {
 							p.immediateChoiceVisual = false;
+							p.SetEndpointVisualStates (false);
 						}
+					}
+				}
+				else {
+					foreach (Path p in allPaths) {
+						p.SetEndpointVisualStates (null);
 					}
 				}
 			}

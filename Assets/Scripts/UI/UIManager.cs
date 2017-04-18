@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour {
 	/// </summary>
 	private static RectTransform pathEndMenu;
 
-	private static Vector3Reference followPoint = null;
+	private static Vector3? followPoint = null;
 
 
 	[SerializeField] private MasterInfoBox infoBoxInstance;
@@ -88,11 +88,11 @@ public class UIManager : MonoBehaviour {
 	/// Centers the path end menu on a specific world point. 
 	/// </summary>
 	public static void CenterPathEndMenuOnWorldPoint (Vector3 point) {
-		followPoint = new Vector3Reference (point);
+		followPoint = point;
 	}
 
 	private static void PathEndMenuTracking () {
-		Vector2 viewportPosition = canvas.worldCamera.WorldToViewportPoint (followPoint.vector);
+		Vector2 viewportPosition = canvas.worldCamera.WorldToViewportPoint (followPoint.GetValueOrDefault ());
 		Vector2 WorldObject_ScreenPosition = new Vector2 (
 												 ((viewportPosition.x * canvasRect.sizeDelta.x) - (canvasRect.sizeDelta.x * 0.5f)),
 												 ((viewportPosition.y * canvasRect.sizeDelta.y) - (canvasRect.sizeDelta.y * 0.5f)));

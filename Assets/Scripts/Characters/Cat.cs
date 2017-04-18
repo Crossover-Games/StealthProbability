@@ -108,7 +108,7 @@ public class Cat : GameCharacter {
 	public bool DetectionCheckAndRemove (Dog watcher) {
 		if (SimulateDetectionCheck (watcher)) {
 			GameBrain.catManager.Remove (this);
-			AnimationManager.AddAnimation (transform, new AnimationDestination (null, null, new Vector3Reference (Vector3.zero), 1f, InterpolationMethod.SquareRoot));
+			AnimationManager.AddAnimation (transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
 			return true;
 		}
 		else {
