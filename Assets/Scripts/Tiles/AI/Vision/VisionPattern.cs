@@ -52,9 +52,13 @@ public class VisionPattern {
 				Pattern pattern = JsonUtility.FromJson<Pattern> (patternJSON);
 				this.probabilities = pattern.probabilities;
 			}
-		}
+      } else {
+        this.probabilities = new float[,] {{0f, 0.5f, 0f},
+                                           {0.25f, 1f, 0.25f},
+                                           {0f, 0.25f, 0f}};
+    }
 		m_Owner = theOwner;
-	}
+		}
 
 	/// <summary>
 	/// NOT IMPLEMENTED CURRENTLY FAKING
@@ -64,35 +68,28 @@ public class VisionPattern {
 	/// <value>All tiles affected.</value>
 	public List<TileDangerData> allTilesAffected {
 		get {
-			HashSet<Tile> layer1 = new HashSet<Tile> ();
-			HashSet<Tile> layer2 = new HashSet<Tile> ();
-			foreach (Tile t in m_Owner.myTile.AllTilesInRadius (2, false, false)) {
-				if (t.traversable) {
-					layer2.Add (t);
-				}
-			}
-			foreach (Tile t in m_Owner.myTile.AllTilesInRadius (1, false, false)) {
-				if (t.traversable) {
-					layer1.Add (t);
-				}
-			}
-			layer2.ExceptWith (layer1);
-
-			List<TileDangerData> tmp = new List<TileDangerData> ();
-			foreach (Tile t in layer1) {
-				if (t == m_Owner.myTile.GetNeighborInDirection (m_Owner.orientation)) {
-					tmp.Add (new TileDangerData (0.75f, t, m_Owner, Color.red));
-				}
-				else {
-					tmp.Add (new TileDangerData (0.5f, t, m_Owner, Color.yellow));
-				}
-			}
-			foreach (Tile t in layer2) {
-				tmp.Add (new TileDangerData (0.25f, t, m_Owner, Color.green));
-			}
-			//tmp.Add (new TileDangerData (1f, m_Owner.myTile, m_Owner, Color.gray));
-			tmp.Add (new TileDangerData (1f, m_Owner.myTile, m_Owner, Color.white));
-			return tmp;
+        int radius = (probabilities.GetLength(0) - 1) / 2;
+        Tile[,] tiles = adjustTileMatrix(getTilesInRadius(radius));
+        List<TileDangerData> dangerList = new List<TileDangerData> ();
+        for(int xIdx = 0; xIdx < radius*2 - 1; xIdx++) {
+            for(int yIdx = 0; yIdx < radius*2 - 1; yIdx++) {
+                Color color;
+                float probability = probabilities[xIdx, yIdx];
+                if(probability - 0.25 < 0.01) {
+                    color = Color.green; 
+                } else if(probability - 0.5 < 0.01){
+                    color = Color.yellow;
+                } else if(probability - 0.75 < 0.01){
+                    color = Color.red;
+                } else if(probability - 1 < 0.01){
+                    color = Color.black;
+                } else {
+                    color = Color.blue;
+                }
+                dangerList.Add(new TileDangerData(probabilities[xIdx, yIdx], tiles[xIdx, yIdx], m_Owner, color));
+            }
+        }
+        return dangerList;
 		}
 	}
 
@@ -141,4 +138,86 @@ public class VisionPattern {
 			return probabilities [yIndex, xIndex];
 		}
 	}
+
+  /// <summary>
+  /// Get a matrix of surronding tiles.
+  /// </summary>
+  private Tile[,] getTilesInRadius(int radius) {
+      Tile[,] tileMatrix = new Tile[radius*2 + 1, radius*2 + 1];
+      Queue<Tile> tileQueue = new Queue<Tile>();
+      Queue<matIdx> idxQueue = new Queue<matIdx>();
+
+      tileQueue.Enqueue(m_Owner.myTile);
+      idxQueue.Enqueue(new matIdx(radius + 1, radius +1));
+
+      while(tileQueue.Count > 0) {
+          Tile currentTile = tileQueue.Dequeue();
+          matIdx currentIdx = idxQueue.Dequeue();
+
+          tileMatrix[currentIdx.x, currentIdx.y] = currentTile;
+          if(currentIdx.y > 0 && tileMatrix[currentIdx.x, currentIdx.y - 1] == null) {
+              Tile northTile = currentTile.GetNeighborInDirection(Compass.Direction.North);
+              matIdx northIdx = new matIdx(currentIdx.x, currentIdx.y - 1);
+              tileQueue.Enqueue(northTile);
+              idxQueue.Enqueue(northIdx);
+          }
+          if(currentIdx.y < radius*2 - 1 && tileMatrix[currentIdx.x, currentIdx.y + 1] == null) {
+              Tile southTile = currentTile.GetNeighborInDirection(Compass.Direction.South);
+              matIdx southIdx = new matIdx(currentIdx.x, currentIdx.y + 1);
+              tileQueue.Enqueue(southTile);
+              idxQueue.Enqueue(southIdx);
+          }
+          if(currentIdx.x > 0 && tileMatrix[currentIdx.x - 1, currentIdx.y] == null) {
+              Tile westTile = currentTile.GetNeighborInDirection(Compass.Direction.West);
+              matIdx westIdx = new matIdx(currentIdx.x - 1, currentIdx.y);
+              tileQueue.Enqueue(westTile);
+              idxQueue.Enqueue(westIdx);
+          }
+          if(currentIdx.x < radius*2 - 1 && tileMatrix[currentIdx.x + 1, currentIdx.y] == null) {
+              Tile eastTile = currentTile.GetNeighborInDirection(Compass.Direction.East);
+              matIdx eastIdx = new matIdx(currentIdx.x + 1, currentIdx.y);
+              tileQueue.Enqueue(eastTile);
+              idxQueue.Enqueue(eastIdx);
+          }
+
+      }
+      return tileMatrix;
+  }
+
+  private Tile[,] adjustTileMatrix(Tile[,] matrix) {
+      int xLen = matrix.GetLength(0);
+      int yLen = matrix.GetLength(1);
+      Tile[,] adjustedMatrix = new Tile[xLen, yLen];
+      if(m_Owner.orientation == Compass.Direction.South){
+          for(int xIdx = 0; xIdx < xLen; xIdx++){
+              for(int yIdx = 0; yIdx < yLen; yIdx++) {
+                  adjustedMatrix[xIdx, yIdx] = matrix[xLen - 1 - xIdx, yLen - 1 - yIdx];
+              }
+          }
+      } else if(m_Owner.orientation == Compass.Direction.East) {
+          for(int xIdx = 0; xIdx < xLen; xIdx++){
+              for(int yIdx = 0; yIdx < yLen; yIdx++) {
+                  adjustedMatrix[xIdx, yIdx] = matrix[yIdx, xLen - 1 - xIdx];
+              }
+          }
+      } else if(m_Owner.orientation == Compass.Direction.West) {
+          for(int xIdx = 0; xIdx < xLen; xIdx++){
+              for(int yIdx = 0; yIdx < yLen; yIdx++) {
+                  adjustedMatrix[xIdx, yIdx] = matrix[yLen - 1 - yIdx, xIdx];
+              }
+          }
+      } else {
+          adjustedMatrix = matrix;
+      }
+      return adjustedMatrix;
+  }
+}
+
+struct matIdx {
+    public int x, y;
+
+    public matIdx(int p1, int p2) {
+        x = p1;
+        y = p2;
+    }
 }
