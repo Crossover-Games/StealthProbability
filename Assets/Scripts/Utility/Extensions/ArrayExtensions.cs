@@ -83,4 +83,49 @@ public static class ArrayExtension {
 		}
 		return arrayNew;
 	}
+
+	/// <summary>
+	/// Returns a copy of the array with the specified dimensions. New spaces are filled with a default value.
+	/// </summary>
+	public static T [,] ChangedDimensions<T> (this T [,] array, int newDim0, int newDim1, T defaultValue = default (T)) {
+		T [,] arrayNew = new T [newDim0, newDim1];
+		for (int i = 0; i < Mathf.Max (array.GetLength (0), newDim0); i++) {
+			for (int j = 0; j < Mathf.Max (array.GetLength (1), newDim1); j++) {
+				if (i >= array.GetLength (0) || j >= array.GetLength (1)) {
+					arrayNew [i, j] = defaultValue;
+				}
+				else {
+					arrayNew [i, j] = array [i, j];
+				}
+			}
+		}
+		return arrayNew;
+	}
+
+	/// <summary>
+	/// Returns a 1d array that is a flattened 2d array. Rows of dimension 0 are kept together.
+	/// </summary>
+	public static T [] Flattened<T> (this T [,] array) {
+		Queue<T> temp = new Queue<T> ();
+		for (int j = 0; j < array.GetLength (1); j++) {
+			for (int i = 0; i < array.GetLength (0); i++) {
+				temp.Enqueue (array [i, j]);
+			}
+		}
+		return temp.ToArray ();
+	}
+
+	/// <summary>
+	/// Returns a 2d array that is a 1d array broken into rows of a specified length.
+	/// </summary>
+	public static T [,] Flattened<T> (this T [] array, int rowLength) {
+		int rows = array.Length / rowLength;
+		T [,] arrayNew = new T [rowLength, rows];
+		for (int j = 0; j < rows; j++) {
+			for (int i = 0; i < rowLength; i++) {
+				arrayNew [i, j] = array [j * rowLength + i];
+			}
+		}
+		return arrayNew;
+	}
 }
