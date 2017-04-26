@@ -128,8 +128,8 @@ namespace LevelBuilder {
 		/// </summary>
 		private void InstantiateDog (DogBlueprint dbp) {
 			GameObject g = PrefabUtility.InstantiatePrefab (dogPrefab) as GameObject;
-			Point2D g2w = GridToWorld (dbp.point.x, dbp.point.y);
-			g.transform.position = new Vector3 (g2w.x, 0.5f, g2w.y);
+			Point2D g2w = GridToWorld (dbp.point.x, dbp.point.z);
+			g.transform.position = new Vector3 (g2w.x, 0.5f, g2w.z);
 			g.transform.rotation = Compass.DirectionToRotation (dbp.direction);
 			g.transform.SetParent (dogParent.transform);
 			g.name = dbp.name;
@@ -175,14 +175,14 @@ namespace LevelBuilder {
 					if (TileRaycastHelper (x, z, out hit)) {
 						Tile tileTemp = hit.collider.gameObject.GetComponent<Tile> ();
 						if (tileTemp != null) {
-							fieldsArray [gridPoint.x, gridPoint.y] = tileTemp.traversable;
+							fieldsArray [gridPoint.x, gridPoint.z] = tileTemp.traversable;
 						}
 						else {
-							fieldsArray [gridPoint.x, gridPoint.y] = false;
+							fieldsArray [gridPoint.x, gridPoint.z] = false;
 						}
 					}
 					else {
-						fieldsArray [gridPoint.x, gridPoint.y] = false;
+						fieldsArray [gridPoint.x, gridPoint.z] = false;
 					}
 				}
 			}
@@ -190,10 +190,10 @@ namespace LevelBuilder {
 			dogList = new List<DogBlueprint> ();
 			foreach (Dog d in FindObjectsOfType<Dog> ()) {
 				Point2D g2w = GridToWorld (d.transform);
-				DogBlueprint newlyCreatedBP = new DogBlueprint (d.name, d.orientation, g2w.x, g2w.y);
+				DogBlueprint newlyCreatedBP = new DogBlueprint (d.name, d.orientation, g2w.x, g2w.z);
 				dogList.Add (newlyCreatedBP);
 				ExpandArray ();
-				newlyCreatedBP.nodeMap [g2w.x, g2w.y] = PathNodeState.DogOrigin;
+				newlyCreatedBP.nodeMap [g2w.x, g2w.z] = PathNodeState.DogOrigin;
 				Route r = d.GetSerializedReferenceProperty<Route> ("m_route");
 				SerializedProperty allPathsProperty = new UnityEditor.SerializedObject (r).FindProperty ("allPaths");
 				int allPathsMax = allPathsProperty.arraySize;
@@ -202,14 +202,14 @@ namespace LevelBuilder {
 					Path p = allPathsProperty.GetArrayElementAtIndex (x).objectReferenceValue as Path;
 					StepNode endpoint = p.GetSerializedReferenceProperty<StepNode> ("endpointA");
 					g2w = GridToWorld (endpoint.transform);
-					newlyCreatedBP.nodeMap [g2w.x, g2w.y] = PathNodeState.StopNode;
+					newlyCreatedBP.nodeMap [g2w.x, g2w.z] = PathNodeState.StopNode;
 					endpoint = p.GetSerializedReferenceProperty<StepNode> ("endpointB");
 					g2w = GridToWorld (endpoint.transform);
-					newlyCreatedBP.nodeMap [g2w.x, g2w.y] = PathNodeState.StopNode;
+					newlyCreatedBP.nodeMap [g2w.x, g2w.z] = PathNodeState.StopNode;
 					foreach (StepNode sn in mapTilesParent.GetComponentsInChildren<StepNode> ()) {
 						if (sn.myPath == p) {
 							g2w = GridToWorld (sn.transform);
-							newlyCreatedBP.nodeMap [g2w.x, g2w.y] = PathNodeState.NormalNode;
+							newlyCreatedBP.nodeMap [g2w.x, g2w.z] = PathNodeState.NormalNode;
 						}
 					}
 				}

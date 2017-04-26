@@ -8,7 +8,7 @@ using UnityEditor;
 /// <summary>
 /// Helpful extensions written by the king rat himself.
 /// </summary>
-public static class CustomExtensions {
+public static class MiscExtensions {
 
 	// -- WHAT
 
@@ -30,31 +30,6 @@ public static class CustomExtensions {
 		SerializedProperty property = serializedObject.FindProperty (propertyName);
 		property.objectReferenceValue = reference;
 		serializedObject.ApplyModifiedProperties ();
-	}
-
-	// --ARRAY
-
-	/// <summary>
-	/// True if the array contains the specified element.
-	/// </summary>
-	public static bool Contains<T> (this T [] array, T element) {
-		return Array.IndexOf (array, element) > -1;
-	}
-
-	/// <summary>
-	/// Returns a random element in the array.
-	/// </summary>
-	public static T RandomElement<T> (this T [] collection) {
-		int current = 0;
-		int magicIndex = UnityEngine.Random.Range (0, collection.Length);
-		foreach (T t in collection) {
-			if (current == magicIndex) {
-				return t;
-			}
-			current++;
-		}
-		//this shouldn't fire, but who knows
-		return default (T);
 	}
 
 	// --GAMEOBJECT

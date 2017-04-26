@@ -12,7 +12,7 @@ namespace LevelBuilder {
 					Texture buttonImage = wallImage;
 					PathNodeState changeTo = PathNodeState.Empty;
 
-					if (dbp.point.x == i && dbp.point.y == j) { // dog's location
+					if (dbp.point.x == i && dbp.point.z == j) { // dog's location
 						changeTo = PathNodeState.DogOrigin;
 						switch (dbp.direction) {
 							case Compass.Direction.North:

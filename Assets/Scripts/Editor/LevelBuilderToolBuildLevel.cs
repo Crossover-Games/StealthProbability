@@ -23,7 +23,7 @@ namespace LevelBuilder {
 			for (int j = length - 1; j >= 0; j--) {
 				for (int i = 0; i < width; i++) {
 					Point2D g2w = GridToWorld (i, j);
-					Vector3 worldPos = new Vector3 (g2w.x, 0f, g2w.y);
+					Vector3 worldPos = new Vector3 (g2w.x, 0f, g2w.z);
 					if (fieldsArray [i, j]) {
 						InstantiateFloor (worldPos);
 					}
@@ -146,10 +146,10 @@ namespace LevelBuilder {
 			//Add nodes
 			for (int j = length - 1; j >= 0; j--) {
 				for (int i = 0; i < width; i++) {
-					if ((dbp.point.x == i && dbp.point.y == j) || dbp.nodeMap [i, j] == PathNodeState.NormalNode || dbp.nodeMap [i, j] == PathNodeState.StopNode) {
+					if ((dbp.point.x == i && dbp.point.z == j) || dbp.nodeMap [i, j] == PathNodeState.NormalNode || dbp.nodeMap [i, j] == PathNodeState.StopNode) {
 						Point2D g2w = GridToWorld (i, j);
 						RaycastHit hit;
-						if (TileRaycastHelper (g2w.x, g2w.y, out hit)) {
+						if (TileRaycastHelper (g2w.x, g2w.z, out hit)) {
 							StepNode existingNode = hit.collider.GetComponent<StepNode> ();
 							if (existingNode != null) {
 								DestroyImmediate (existingNode);
@@ -157,7 +157,7 @@ namespace LevelBuilder {
 							StepNode newNode = hit.collider.gameObject.AddComponent<StepNode> ();
 
 							allNodes.Add (newNode);
-							if ((dbp.point.x == i && dbp.point.y == j) || dbp.nodeMap [i, j] == PathNodeState.StopNode) {
+							if ((dbp.point.x == i && dbp.point.z == j) || dbp.nodeMap [i, j] == PathNodeState.StopNode) {
 								stopNodes.Add (newNode);
 								newNode.SetStoppingPoint (true);
 							}

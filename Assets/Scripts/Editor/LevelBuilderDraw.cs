@@ -42,35 +42,17 @@ namespace LevelBuilder {
 			EditorGUILayout.BeginHorizontal ();
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add Top", "Adds one row on top, shifts everything down."))) {
+				fieldsArray = fieldsArray.RowInsertedAtZero (expandedFloorDefault);
+				foreach (DogBlueprint dbp in dogList) {
+					dbp.nodeMap = dbp.nodeMap.RowInsertedAtZero (expandedFloorDefault ? PathNodeState.Empty : PathNodeState.Wall);
+				}
 				lengthDisplay++;
 				ExpandArray ();
-				for (int i = 0; i < width; i++) {
-					for (int j = length - 2; j > 0; j--) {
-						fieldsArray [i, j] = fieldsArray [i, j - 1];
-					}
-					fieldsArray [i, 0] = expandedFloorDefault;
-				}
-				foreach (DogBlueprint dbp in dogList) {
-					for (int i = 0; i < width; i++) {
-						for (int j = length - 2; j > 0; j--) {
-							dbp.nodeMap [i, j] = dbp.nodeMap [i, j - 1];
-						}
-						dbp.nodeMap [i, 0] = expandedFloorDefault ? PathNodeState.Empty : PathNodeState.Wall;
-					}
-				}
 			}
 			if (GUILayout.Button (new GUIContent ("Delete Top", "Delete uppermost row, shift everything up."))) {
-				for (int i = 0; i < width; i++) {
-					for (int j = 0; j < length - 1; j++) {
-						fieldsArray [i, j] = fieldsArray [i, j + 1];
-					}
-				}
+				fieldsArray = fieldsArray.RowRemovedAtZero ();
 				foreach (DogBlueprint dbp in dogList) {
-					for (int i = 0; i < width; i++) {
-						for (int j = 0; j < length - 1; j++) {
-							dbp.nodeMap [i, j] = dbp.nodeMap [i, j + 1];
-						}
-					}
+					dbp.nodeMap = dbp.nodeMap.RowRemovedAtZero ();
 				}
 				lengthDisplay--;
 				ExpandArray ();
@@ -80,35 +62,17 @@ namespace LevelBuilder {
 			EditorGUILayout.Space ();
 			EditorGUILayout.BeginHorizontal ();
 			if (GUILayout.Button (new GUIContent ("Add Left", "Adds one column to left, shifts everything right."))) {
+				fieldsArray = fieldsArray.ColumnInsertedAtZero (expandedFloorDefault);
+				foreach (DogBlueprint dbp in dogList) {
+					dbp.nodeMap = dbp.nodeMap.ColumnInsertedAtZero (expandedFloorDefault ? PathNodeState.Empty : PathNodeState.Wall);
+				}
 				widthDisplay++;
 				ExpandArray ();
-				for (int j = 0; j < length; j++) {
-					for (int i = width - 2; i > 0; i--) {
-						fieldsArray [i, j] = fieldsArray [i - 1, j];
-					}
-					fieldsArray [0, j] = expandedFloorDefault;
-				}
-				foreach (DogBlueprint dbp in dogList) {
-					for (int j = 0; j < length; j++) {
-						for (int i = width - 2; i > 0; i--) {
-							dbp.nodeMap [i, j] = dbp.nodeMap [i - 1, j];
-						}
-						dbp.nodeMap [0, j] = expandedFloorDefault ? PathNodeState.Empty : PathNodeState.Wall;
-					}
-				}
 			}
 			if (GUILayout.Button (new GUIContent ("Delete Left", "Delete leftmost column, shift everything left."))) {
-				for (int i = 0; i < width - 1; i++) {
-					for (int j = 0; j < length; j++) {
-						fieldsArray [i, j] = fieldsArray [i + 1, j];
-					}
-				}
+				fieldsArray = fieldsArray.ColumnRemovedAtZero ();
 				foreach (DogBlueprint dbp in dogList) {
-					for (int i = 0; i < width - 1; i++) {
-						for (int j = 0; j < length; j++) {
-							dbp.nodeMap [i, j] = dbp.nodeMap [i + 1, j];
-						}
-					}
+					dbp.nodeMap = dbp.nodeMap.ColumnRemovedAtZero ();
 				}
 				widthDisplay--;
 				ExpandArray ();
@@ -156,7 +120,7 @@ namespace LevelBuilder {
 					dbp.name = EditorGUILayout.TextField (dbp.name);
 					GUILayout.Label (new GUIContent ("Coordinates", "(X,Z) coordinates of the dog."));
 					dbp.point.x = EditorGUILayout.IntField (dbp.point.x);
-					dbp.point.y = EditorGUILayout.IntField (dbp.point.y);
+					dbp.point.z = EditorGUILayout.IntField (dbp.point.z);
 					dbp.direction = (Compass.Direction)EditorGUILayout.EnumPopup (dbp.direction);
 					if (GUILayout.Button (new GUIContent ("Delete", "Remove this dog."))) {
 						deletThis = dbp;
