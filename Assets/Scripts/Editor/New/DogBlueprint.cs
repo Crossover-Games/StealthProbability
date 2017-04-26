@@ -19,6 +19,9 @@ namespace LevelBuilderRemake {
 			return dbp;
 		}
 
+		/// <summary>
+		/// Draws the fields of this dog in the editor. True if this is to be deleted.
+		/// </summary>
 		public override bool DrawData () {
 			throw new NotImplementedException ();
 		}
