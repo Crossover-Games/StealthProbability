@@ -18,7 +18,26 @@ public class VisionPatternEditor : EditorWindow {
 		EditorWindow.GetWindow<VisionPatternEditor> ();
 	}
 
+	private Color DangerToColor (float danger) {
+		if (danger > 0.98f) {
+			return Color.gray;
+		}
+		else if (danger > 0.66f) {
+			return Color.red;
+		}
+		else if (danger > 0.33f) {
+			return Color.yellow;
+		}
+		else if (danger > 0.01f) {
+			return Color.green;
+		}
+		else {
+			return Color.white;
+		}
+	}
+
 	public void OnGUI () {
+		GUI.backgroundColor = Color.white;
 		patternName = EditorGUILayout.TextField (patternName);
 		EditorGUILayout.BeginHorizontal ();
 		if (GUILayout.Button (new GUIContent ("Load", "Load the pattern with this name."))) {
@@ -43,6 +62,7 @@ public class VisionPatternEditor : EditorWindow {
 		for (int i = 0; i < currentPattern.GetLength (0); i++) {
 			EditorGUILayout.BeginHorizontal ();
 			for (int j = 0; j < currentPattern.GetLength (1); j++) {
+				GUI.backgroundColor = DangerToColor (currentPattern [i, j]);
 				currentPattern [i, j] = EditorGUILayout.FloatField (currentPattern [i, j]);
 			}
 			EditorGUILayout.EndHorizontal ();
