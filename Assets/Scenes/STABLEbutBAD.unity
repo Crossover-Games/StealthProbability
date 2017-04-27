@@ -19352,6 +19352,11 @@ Prefab:
       propertyPath: m_Name
       value: BARK
       objectReference: {fileID: 0}
+    - target: {fileID: 114359533627727766, guid: 135e38f2d068c404b90f82d236ff27c3,
+        type: 2}
+      propertyPath: visionType
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 135e38f2d068c404b90f82d236ff27c3, type: 2}
   m_IsPrefabParent: 0

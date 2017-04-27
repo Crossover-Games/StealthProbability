@@ -15,9 +15,9 @@ namespace LevelBuilder {
 		public Texture dogEastImage;
 		public Texture dogWestImage;
 
-		public GameObject floorTile;
-		public GameObject wallTile;
-		public GameObject gameController;
+		public GameObject floorTilePrefab;
+		public GameObject wallTilePrefab;
+		public GameObject gameControllerPrefab;
 		public GameObject dogPrefab;
 
 		public GameObject pathPrefab;
@@ -114,12 +114,12 @@ namespace LevelBuilder {
 		}
 
 		private void InstantiateFloor (Vector3 pos) {
-			GameObject g = PrefabUtility.InstantiatePrefab (floorTile) as GameObject;
+			GameObject g = PrefabUtility.InstantiatePrefab (floorTilePrefab) as GameObject;
 			g.transform.position = pos;
 			g.transform.SetParent (mapTilesParent.transform);
 		}
 		private void InstantiateWall (Vector3 pos) {
-			GameObject g = PrefabUtility.InstantiatePrefab (wallTile) as GameObject;
+			GameObject g = PrefabUtility.InstantiatePrefab (wallTilePrefab) as GameObject;
 			g.transform.position = pos;
 			g.transform.SetParent (mapTilesParent.transform);
 		}

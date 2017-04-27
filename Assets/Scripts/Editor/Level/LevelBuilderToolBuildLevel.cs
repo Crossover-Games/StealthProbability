@@ -8,7 +8,7 @@ namespace LevelBuilder {
 		private void BuildLevel () {
 			GameObject found = GameObject.FindGameObjectWithTag ("GameController");
 			if (found == null) {
-				GameObject g = PrefabUtility.InstantiatePrefab (gameController) as GameObject;
+				GameObject g = PrefabUtility.InstantiatePrefab (gameControllerPrefab) as GameObject;
 				g.name = "GameController";
 			}
 

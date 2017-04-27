@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DogNames : MonoBehaviour {
+	public bool applyOnAwake = false;
+	
 	[TextArea (0, 300)]
 	public string dogJson;
 	private string [] dogWords;
@@ -13,6 +15,13 @@ public class DogNames : MonoBehaviour {
 	}
 
 	void Awake () {
+		if (applyOnAwake) {
+			ApplyNames ();
+		}
+	}
+
+	[ContextMenu ("Apply Names")]
+	private void ApplyNames () {
 		dogWords = JsonUtility.FromJson<WordHolder> (dogJson).vocabulary;
 		foreach (Dog d in FindObjectsOfType<Dog> ()) {
 			d.name = CreateDogName ();

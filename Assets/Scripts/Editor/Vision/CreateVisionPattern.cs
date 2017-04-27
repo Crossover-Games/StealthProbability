@@ -41,11 +41,10 @@ public class VisionPatternEditor : EditorWindow {
 		patternName = EditorGUILayout.TextField (patternName);
 		EditorGUILayout.BeginHorizontal ();
 		if (GUILayout.Button (new GUIContent ("Load", "Load the pattern with this name."))) {
-			TextAsset ta = Resources.Load<TextAsset> ("VisionPatterns/" + patternName);
-			Debug.Log (ta.text);
-			currentPattern = JsonUtility.FromJson<ProbabilityGrid> (ta.text);
+			currentPattern = ProbabilityGrid.LoadFromResources (patternName);
 			Debug.Log (currentPattern.Length);
-			radiusDisplay = currentPattern.GetLength (0);
+			radiusDisplay = (currentPattern.GetLength (0) - 1) / 2;
+			currentPattern [radiusDisplay, radiusDisplay] = 1f;
 		}
 		if (GUILayout.Button (new GUIContent ("Save", "Save pattern to Assets/Resources/VisionPatterns."))) {
 			File.WriteAllText ("Assets/Resources/VisionPatterns/" + patternName + ".txt", JsonUtility.ToJson (currentPattern));
@@ -57,6 +56,7 @@ public class VisionPatternEditor : EditorWindow {
 		radiusDisplay = EditorGUILayout.IntField (new GUIContent ("Radius", "Radius of dog vision"), radiusDisplay);
 		if (GUILayout.Button (new GUIContent ("Apply size change", "."))) {
 			currentPattern.Set2DShallow (new float [radiusDisplay * 2 + 1, radiusDisplay * 2 + 1]);
+			currentPattern [radiusDisplay, radiusDisplay] = 1f;
 		}
 		EditorGUILayout.EndHorizontal ();
 		for (int i = 0; i < currentPattern.GetLength (0); i++) {

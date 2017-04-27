@@ -33,13 +33,12 @@ public class VisionPattern {
 		get { return m_Owner; }
 	}
 
-	public VisionPattern (Dog theOwner, string patternFile) {
-		if (!patternFile.Equals ("FAKE")) {
-			using (StreamReader sw = new StreamReader (patternFile)) {
-				string patternJSON = sw.ReadToEnd ();
-				Pattern pattern = JsonUtility.FromJson<Pattern> (patternJSON);
-				this.probabilities = pattern.probabilities;
-			}
+	/// <summary>
+	/// Creates a vision pattern from a ProbabilityGrid in Resources/VisionPatterns. FileName has no extension and path.
+	/// </summary>
+	public VisionPattern (Dog theOwner, string fileName) {
+		if (!fileName.Equals ("FAKE")) {
+			this.probabilities = ProbabilityGrid.LoadFromResources (fileName).Get2DShallow ();
 		}
 		else {
 			this.probabilities = new float [,] {{0.5f, 0.75f, 0.5f},
@@ -67,25 +66,9 @@ public class VisionPattern {
 			List<TileDangerData> dangerList = new List<TileDangerData> ();
 			for (int xIdx = 0; xIdx < probabilities.GetLength (0); xIdx++) {
 				for (int yIdx = 0; yIdx < probabilities.GetLength (1); yIdx++) {
-					Color color;
 					float probability = probabilities [yIdx, xIdx];
-					if (Math.Abs (probability - 0.25) < 0.01 && tiles [yIdx, xIdx] != null) {
-						color = Color.green;
-					}
-					else if (Math.Abs (probability - 0.5) < 0.01 && tiles [yIdx, xIdx] != null) {
-						color = Color.yellow;
-					}
-					else if (Math.Abs (probability - 0.75) < 0.01 && tiles [yIdx, xIdx] != null) {
-						color = Color.red;
-					}
-					else if (Math.Abs (probability - 1) < 0.01 && tiles [yIdx, xIdx] != null) {
-						color = Color.black;
-					}
-					else {
-						color = Color.blue;
-					}
-					if (color != Color.blue) {
-						dangerList.Add (new TileDangerData (probabilities [yIdx, xIdx], tiles [yIdx, xIdx], m_Owner, color));
+					if (tiles [yIdx, xIdx] != null && probability > 0.01f) {
+						dangerList.Add (new TileDangerData (probability, tiles [yIdx, xIdx], m_Owner));
 					}
 				}
 			}
@@ -180,6 +163,12 @@ public class VisionPattern {
 
 	public static VisionPattern VisionPatternFromType (Dog theOwner, DogVisionPatternType type) {
 		switch (type) {
+			case DogVisionPatternType.Hound:
+				return new VisionPattern (theOwner, "Hound");
+			case DogVisionPatternType.Chih:
+				return new VisionPattern (theOwner, "Chih");
+			case DogVisionPatternType.Cyclops:
+				return new VisionPattern (theOwner, "Cyclops");
 			case DogVisionPatternType.Default:
 				return new VisionPattern (theOwner, "FAKE");
 			default:

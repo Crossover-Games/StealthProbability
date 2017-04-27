@@ -49,4 +49,35 @@ public class TileDangerData {
 		m_Dog = dog;
 		m_Color = color;
 	}
+
+	/// <summary>
+	/// Constructs a new TileDangerData. These values cannot be changed. Color is calculated by danger.
+	/// </summary>
+	public TileDangerData (float dangerValue, Tile tile, Dog dog) {
+		m_Danger = dangerValue;
+		m_Tile = tile;
+		m_Dog = dog;
+		m_Color = DangerToColor (dangerValue);
+	}
+
+	/// <summary>
+	/// Returns a color for the tile based on its danger value.
+	/// </summary>
+	public static Color DangerToColor (float danger) {
+		if (danger > 0.98f) {
+			return Color.white;
+		}
+		else if (danger > 0.66f) {
+			return Color.red;
+		}
+		else if (danger > 0.33f) {
+			return Color.yellow;
+		}
+		else if (danger > 0.01f) {
+			return Color.green;
+		}
+		else {
+			return Color.magenta;   // to show something is amiss
+		}
+	}
 }

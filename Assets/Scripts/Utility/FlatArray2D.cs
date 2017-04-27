@@ -54,6 +54,14 @@ public class FlatArray2D<T> : IEnumerable<T> {
 		rowLength = newValue.GetLength (0);
 	}
 
+	/// <summary>
+	/// Change the dimensions of the array, leaving existing elements unchanged.
+	/// </summary>
+	public void SetDimensions (int len0, int len1, T defaultValue = default (T)) {
+		array = array.Unflattened (rowLength).ChangedDimensions (len0, len1, defaultValue).Flattened ();
+		rowLength = len0;
+	}
+
 	public IEnumerator<T> GetEnumerator () {
 		foreach (T t in array) {
 			yield return t;

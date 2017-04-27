@@ -18,6 +18,8 @@ public class Dog : GameCharacter {
 		get { return 0.3f; }
 	}
 
+	public DogVisionPatternType visionType;
+
 	private VisionPattern m_VisionPattern;
 	/// <summary>
 	/// This dog's vision pattern.
@@ -28,7 +30,8 @@ public class Dog : GameCharacter {
 
 	override protected void Awake () {
 		base.Awake ();
-		m_VisionPattern = new VisionPattern (this, "FAKE");
+		m_VisionPattern = VisionPattern.VisionPatternFromType (this, visionType);
+		//m_VisionPattern = new VisionPattern (this, "FAKE");
 	}
 
 	[SerializeField] private Route m_route;
