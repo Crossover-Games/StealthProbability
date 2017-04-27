@@ -42,50 +42,50 @@ public class VisionPattern {
 			}
 		}
 		else {
-			this.probabilities = new float [,] {{0f, 0.5f, 0f},
-										   {0.75f, 1f, 0.25f},
+			this.probabilities = new float [,] {{0.5f, 0.75f, 0.5f},
+										   {0.25f, 1f, 0.25f},
 										   {0f, 0.25f, 0f}};
 		}
-    if(probabilities.GetLength(0) != probabilities.GetLength(1)){
-        throw new System.ArgumentException("Vision Pattern isn't square. See Pattern.cs.");
-    } else if(probabilities.GetLength(0) % 2 == 0) {
-        throw new System.ArgumentException("Vision Pattern has even side. See Pattern.cs");
-    }
+		if (probabilities.GetLength (0) != probabilities.GetLength (1)) {
+			throw new System.ArgumentException ("Vision Pattern isn't square. See Pattern.cs.");
+		}
+		else if (probabilities.GetLength (0) % 2 == 0) {
+			throw new System.ArgumentException ("Vision Pattern has even side. See Pattern.cs");
+		}
 		m_Owner = theOwner;
 	}
 
 	/// <summary>
-	/// NOT IMPLEMENTED CURRENTLY FAKING
 	/// All floor tiles affected by this vision pattern's sight, and the danger value associated with each.
 	/// This will change depending on the orientation and position of the dog.
 	/// </summary>
-	/// <value>All tiles affected.</value>
 	public List<TileDangerData> allTilesAffected {
 		get {
 			int radius = (probabilities.GetLength (0) - 1) / 2;
 			Tile [,] tiles = adjustTileMatrix (getTilesInRadius (radius));
 			//Tile [,] tiles = getTilesInRadius (radius);
 			List<TileDangerData> dangerList = new List<TileDangerData> ();
-			for (int xIdx = 0; xIdx < probabilities.GetLength(0); xIdx++) {
-        for (int yIdx = 0; yIdx < probabilities.GetLength(1); yIdx++) {
+			for (int xIdx = 0; xIdx < probabilities.GetLength (0); xIdx++) {
+				for (int yIdx = 0; yIdx < probabilities.GetLength (1); yIdx++) {
 					Color color;
 					float probability = probabilities [yIdx, xIdx];
-					if (Math.Abs(probability - 0.25) < 0.01 && tiles[yIdx, xIdx] != null) {
+					if (Math.Abs (probability - 0.25) < 0.01 && tiles [yIdx, xIdx] != null) {
 						color = Color.green;
 					}
-					else if (Math.Abs(probability - 0.5) < 0.01 && tiles[yIdx, xIdx] != null) {
+					else if (Math.Abs (probability - 0.5) < 0.01 && tiles [yIdx, xIdx] != null) {
 						color = Color.yellow;
 					}
-					else if (Math.Abs(probability - 0.75) < 0.01 && tiles[yIdx, xIdx] != null) {
+					else if (Math.Abs (probability - 0.75) < 0.01 && tiles [yIdx, xIdx] != null) {
 						color = Color.red;
 					}
-					else if (Math.Abs(probability - 1) < 0.01 && tiles[yIdx, xIdx] != null) {
+					else if (Math.Abs (probability - 1) < 0.01 && tiles [yIdx, xIdx] != null) {
 						color = Color.black;
-          } else {
-              color = Color.blue;
-          }
-					if(color != Color.blue) {
-              dangerList.Add (new TileDangerData (probabilities [yIdx, xIdx], tiles [yIdx, xIdx], m_Owner, color));
+					}
+					else {
+						color = Color.blue;
+					}
+					if (color != Color.blue) {
+						dangerList.Add (new TileDangerData (probabilities [yIdx, xIdx], tiles [yIdx, xIdx], m_Owner, color));
 					}
 				}
 			}
@@ -104,44 +104,44 @@ public class VisionPattern {
 		tileQueue.Enqueue (m_Owner.myTile);
 		idxQueue.Enqueue (new matIdx (radius, radius));
 
-    int count = 0;
+		int count = 0;
 		while (tileQueue.Count > 0) {
-      count++;
+			count++;
 			Tile currentTile = tileQueue.Dequeue ();
 			matIdx currentIdx = idxQueue.Dequeue ();
 
 			tileMatrix [currentIdx.y, currentIdx.x] = currentTile;
 			if (currentIdx.y > 0 && tileMatrix [currentIdx.y - 1, currentIdx.x] == null) {
-        Tile northTile = currentTile.GetNeighborInDirection (Compass.Direction.North);
+				Tile northTile = currentTile.GetNeighborInDirection (Compass.Direction.North);
 				matIdx northIdx = new matIdx (currentIdx.x, currentIdx.y - 1);
-        if(northTile != null){
-          tileQueue.Enqueue (northTile);
-          idxQueue.Enqueue (northIdx);
-        }
+				if (northTile != null) {
+					tileQueue.Enqueue (northTile);
+					idxQueue.Enqueue (northIdx);
+				}
 			}
 			if (currentIdx.y < radius * 2 && tileMatrix [currentIdx.y + 1, currentIdx.x] == null) {
 				Tile southTile = currentTile.GetNeighborInDirection (Compass.Direction.South);
 				matIdx southIdx = new matIdx (currentIdx.x, currentIdx.y + 1);
-        if(southTile != null){
-            tileQueue.Enqueue (southTile);
-            idxQueue.Enqueue (southIdx);
-        }
+				if (southTile != null) {
+					tileQueue.Enqueue (southTile);
+					idxQueue.Enqueue (southIdx);
+				}
 			}
 			if (currentIdx.x > 0 && tileMatrix [currentIdx.y, currentIdx.x - 1] == null) {
 				Tile westTile = currentTile.GetNeighborInDirection (Compass.Direction.West);
 				matIdx westIdx = new matIdx (currentIdx.x - 1, currentIdx.y);
-        if(westTile != null){
-            tileQueue.Enqueue (westTile);
-            idxQueue.Enqueue (westIdx);
-        }
+				if (westTile != null) {
+					tileQueue.Enqueue (westTile);
+					idxQueue.Enqueue (westIdx);
+				}
 			}
 			if (currentIdx.x < radius * 2 && tileMatrix [currentIdx.y, currentIdx.x + 1] == null) {
 				Tile eastTile = currentTile.GetNeighborInDirection (Compass.Direction.East);
 				matIdx eastIdx = new matIdx (currentIdx.x + 1, currentIdx.y);
-        if(eastTile != null){
-            tileQueue.Enqueue (eastTile);
-            idxQueue.Enqueue (eastIdx);
-        }
+				if (eastTile != null) {
+					tileQueue.Enqueue (eastTile);
+					idxQueue.Enqueue (eastIdx);
+				}
 			}
 		}
 		return tileMatrix;
@@ -176,6 +176,15 @@ public class VisionPattern {
 			adjustedMatrix = matrix;
 		}
 		return adjustedMatrix;
+	}
+
+	public static VisionPattern VisionPatternFromType (Dog theOwner, DogVisionPatternType type) {
+		switch (type) {
+			case DogVisionPatternType.Default:
+				return new VisionPattern (theOwner, "FAKE");
+			default:
+				return new VisionPattern (theOwner, "FAKE");
+		}
 	}
 }
 

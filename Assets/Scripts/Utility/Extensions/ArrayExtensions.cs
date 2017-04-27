@@ -118,7 +118,7 @@ public static class ArrayExtension {
 	/// <summary>
 	/// Returns a 2d array that is a 1d array broken into rows of a specified length.
 	/// </summary>
-	public static T [,] Flattened<T> (this T [] array, int rowLength) {
+	public static T [,] Unflattened<T> (this T [] array, int rowLength) {
 		int rows = array.Length / rowLength;
 		T [,] arrayNew = new T [rowLength, rows];
 		for (int j = 0; j < rows; j++) {
