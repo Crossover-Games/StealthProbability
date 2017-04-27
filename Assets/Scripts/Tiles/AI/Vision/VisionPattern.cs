@@ -46,6 +46,11 @@ public class VisionPattern {
 										   {0.75f, 1f, 0.25f},
 										   {0f, 0.25f, 0f}};
 		}
+    if(probabilities.GetLength(0) != probabilities.GetLength(1)){
+        throw new System.ArgumentException("Vision Pattern isn't square. See Pattern.cs.");
+    } else if(probabilities.GetLength(0) % 2 == 0) {
+        throw new System.ArgumentException("Vision Pattern has even side. See Pattern.cs");
+    }
 		m_Owner = theOwner;
 	}
 
