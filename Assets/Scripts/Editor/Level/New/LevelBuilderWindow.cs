@@ -6,7 +6,7 @@ using UnityEditor;
 namespace LevelBuilderRemake {
 	public class LevelBuilderWindow : EditorWindow {
 		// Add menu item to the upper bar
-		[MenuItem ("Stealth/Level Builder Remake")]
+		[MenuItem ("Stealth/Level Builder (4-29)")]
 		public static void ShowWindow () {
 			//Show existing window instance. If one doesn't exist, make one.
 			EditorWindow.GetWindow (typeof (LevelBuilderWindow));

@@ -89,13 +89,13 @@ public static class ArrayExtension {
 	/// </summary>
 	public static T [,] ChangedDimensions<T> (this T [,] array, int newDim0, int newDim1, T defaultValue = default (T)) {
 		T [,] arrayNew = new T [newDim0, newDim1];
-		for (int i = 0; i < Mathf.Max (array.GetLength (0), newDim0); i++) {
-			for (int j = 0; j < Mathf.Max (array.GetLength (1), newDim1); j++) {
-				if (i >= array.GetLength (0) || j >= array.GetLength (1)) {
-					arrayNew [i, j] = defaultValue;
+		for (int i = 0; i < newDim0; i++) {
+			for (int j = 0; j < newDim1; j++) {
+				if (i < array.GetLength (0) && j < array.GetLength (1)) {
+					arrayNew [i, j] = array [i, j];
 				}
 				else {
-					arrayNew [i, j] = array [i, j];
+					arrayNew [i, j] = defaultValue;
 				}
 			}
 		}

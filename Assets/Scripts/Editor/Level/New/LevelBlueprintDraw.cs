@@ -65,16 +65,16 @@ namespace LevelBuilderRemake {
 			EditorGUILayout.BeginHorizontal ();
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add Top", "Adds one row on top, shifts everything down."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().RowInsertedAtZero (true));
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0), levelBP.tiles.GetLength (1) + 1, true));
 				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().RowInsertedAtZero (PathNodeState.Empty));
+					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0), dbp.nodeMap.GetLength (1) + 1, PathNodeState.Empty));
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
 			if (GUILayout.Button (new GUIContent ("Delete Top", "Delete uppermost row, shift everything up."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().RowRemovedAtZero ());
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0), levelBP.tiles.GetLength (1) - 1));
 				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().RowRemovedAtZero ());
+					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0), dbp.nodeMap.GetLength (1) - 1));
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
@@ -98,9 +98,9 @@ namespace LevelBuilderRemake {
 			}
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add Right", "Adds one column to the right of everything."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0) + 1, levelBP.tiles.GetLength (1)));
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0) + 1, levelBP.tiles.GetLength (1), true));
 				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0) + 1, dbp.nodeMap.GetLength (1)));
+					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0) + 1, dbp.nodeMap.GetLength (1), PathNodeState.Empty));
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
@@ -116,16 +116,16 @@ namespace LevelBuilderRemake {
 			EditorGUILayout.BeginHorizontal ();
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add Bottom", "Adds one row below everything."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0), levelBP.tiles.GetLength (1) + 1));
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().RowInsertedAtZero (true));
 				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0), dbp.nodeMap.GetLength (1) + 1));
+					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().RowInsertedAtZero (PathNodeState.Empty));
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
 			if (GUILayout.Button (new GUIContent ("Delete Bottom", "Delete lowest row."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0), levelBP.tiles.GetLength (1) - 1));
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().RowRemovedAtZero ());
 				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0), dbp.nodeMap.GetLength (1) - 1));
+					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().RowRemovedAtZero ());
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}

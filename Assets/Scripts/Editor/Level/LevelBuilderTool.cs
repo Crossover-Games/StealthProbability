@@ -15,7 +15,7 @@ namespace LevelBuilder {
 		public GameObject routePrefab;
 
 		// Add menu item to the upper bar
-		[MenuItem ("Stealth/Level Builder")]
+		//[MenuItem ("Stealth/Level Builder")]
 		public static void ShowWindow () {
 			//Show existing window instance. If one doesn't exist, make one.
 			EditorWindow.GetWindow (typeof (LevelBuilderTool));
