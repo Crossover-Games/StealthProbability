@@ -85,6 +85,7 @@ public class Path : MonoBehaviour {
 		List<Tile> steps = new List<Tile> ();
 		steps.Add (endpointA.myTile);
 		while (current != null) {
+			print ("oh");
 			steps.Add (current.myTile);
 			StepNode tempPrevious = current;
 			current = current.NextOnPath (previous);
@@ -115,5 +116,28 @@ public class Path : MonoBehaviour {
 	public void SetEndpointVisualStates (bool? value) {
 		endpointA.stopNodeImmediateVisualizer = value;
 		endpointB.stopNodeImmediateVisualizer = value;
+	}
+
+	/// <summary>
+	/// True if both paths represent the same path.
+	/// </summary>
+	public bool Equivalent (Path other) {
+		if (endpointA == endpointB && other.endpointA == other.endpointB) {
+			List<StepNode> checks = new List<StepNode> (2);
+			checks.Add (endpointA);
+			checks.Add (endpointB);
+			checks.Remove (other.endpointA);
+			checks.Remove (other.endpointB);
+			return checks.Count == 0;
+		}
+		if (endpointA == other.endpointA && endpointB == other.endpointB) {
+			return immediateA == other.immediateA && immediateB == other.immediateB;
+		}
+		else if (endpointA == other.endpointB && endpointB == other.endpointA) {
+			return immediateA == other.immediateB && immediateB == other.immediateA;
+		}
+		else {
+			return false;
+		}
 	}
 }

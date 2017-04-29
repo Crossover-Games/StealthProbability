@@ -16,12 +16,12 @@ public class Cat : GameCharacter {
 		get { return 0.3f; }
 	}
 
-	[SerializeField] private int myMaxEnergy;
+	[SerializeField] private int m_maxEnergy;
 	/// <summary>
 	/// The measure for how much a cat can do in a turn. Converts to movement, actions, and extra stealth.
 	/// </summary>
 	public int maxEnergy {
-		get { return myMaxEnergy; }
+		get { return m_maxEnergy; }
 	}
 
 	/// <summary>

@@ -32,6 +32,16 @@ public static class MiscExtensions {
 		serializedObject.ApplyModifiedProperties ();
 	}
 
+	/// <summary>
+	/// Assigns a serialized property of a specified name to the specified integer value.
+	/// </summary>
+	public static void SetSerializedIntProperty (this UnityEngine.Object obj, string propertyName, int value) {
+		SerializedObject serializedObject = new UnityEditor.SerializedObject (obj);
+		SerializedProperty property = serializedObject.FindProperty (propertyName);
+		property.intValue = value;
+		serializedObject.ApplyModifiedProperties ();
+	}
+
 	// --GAMEOBJECT
 
 	/// <summary>

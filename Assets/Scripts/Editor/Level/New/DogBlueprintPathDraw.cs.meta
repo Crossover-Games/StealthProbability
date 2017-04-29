@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 6ee96d1108868fc43bbb89cfa30a36e8
+timeCreated: 1493441481
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - floorImage: {fileID: 2800000, guid: bbdfa2190ef868349b26b18b5c011904, type: 3}
+  - wallImage: {fileID: 2800000, guid: a283103f8edf97b4abb91cd193541d02, type: 3}
+  - normalNodeImage: {fileID: 2800000, guid: 8361b1a2063e1ee4292f1da88a57d2f4, type: 3}
+  - stopNodeImage: {fileID: 2800000, guid: bf5eb550fac6a9344a69f3e663b650aa, type: 3}
+  - dogNorthImage: {fileID: 2800000, guid: 19d0e821c0c003b48b0cedbad7a4b0ac, type: 3}
+  - dogSouthImage: {fileID: 2800000, guid: 9c5dc0c332b1ff74b9ca3ef616027aa9, type: 3}
+  - dogEastImage: {fileID: 2800000, guid: 87ebbb386ad5bf04081c18c822d83122, type: 3}
+  - dogWestImage: {fileID: 2800000, guid: cbfbee2b1ab6be44da70925c675c2183, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

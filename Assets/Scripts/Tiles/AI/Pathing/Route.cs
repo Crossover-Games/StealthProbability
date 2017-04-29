@@ -16,12 +16,6 @@ public class Route : MonoBehaviour {
 	}
 	[SerializeField] private List<Path> allPaths; // only for visualization
 
-	/// <summary>
-	/// Editor only. Do not call at runtime.
-	/// </summary>
-	public void SetSerializedDog (Dog d) {
-		m_dog = d;
-	}
 	[SerializeField] private Dog m_dog;
 	/// <summary>
 	/// The dog who uses this path.

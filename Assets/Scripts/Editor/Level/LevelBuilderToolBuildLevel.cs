@@ -41,7 +41,6 @@ namespace LevelBuilder {
 			}
 			dogChildren.ForEach (child => DestroyImmediate (child));
 
-
 			found = GameObject.FindGameObjectWithTag ("RouteParent");
 			if (found != null) {
 				DestroyImmediate (found);
@@ -98,6 +97,8 @@ namespace LevelBuilder {
 			return connections;
 		}
 
+		
+
 		/// <summary>
 		/// Registers the serialized connections to all neighbors, given a set of valid nodes.
 		/// </summary>
@@ -137,7 +138,7 @@ namespace LevelBuilder {
 			routeObject.transform.SetParent (routeParent.transform);
 
 			Route route = routeObject.GetComponent<Route> ();
-			route.SetSerializedDog (dbp.myDog);
+			route.SetSerializedReferenceProperty ("m_dog", dbp.myDog);
 
 			dbp.myDog.SetSerializedReferenceProperty ("m_route", route);
 

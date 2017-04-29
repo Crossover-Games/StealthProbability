@@ -27,7 +27,12 @@ public class FlatArray2D<T> : IEnumerable<T> {
 			return rowLength;
 		}
 		else if (dimension == 1) {
-			return Length / rowLength;
+			if (rowLength == 0) {
+				return 0;
+			}
+			else {
+				return Length / rowLength;
+			}
 		}
 		else {
 			throw new ArgumentException ("This structure only has dimensions 0 and 1.");

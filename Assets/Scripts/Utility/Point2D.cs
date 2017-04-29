@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Like a Vector2, but with integer components.
 /// </summary>
+[System.Serializable]
 public struct Point2D {
 	/// <summary>
 	/// X coordinate.

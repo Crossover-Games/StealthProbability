@@ -41,10 +41,5 @@ namespace LevelBuilderRemake {
 			gc.orientation = orientation;
 			return gc;
 		}
-
-		/// <summary>
-		/// Draws the fields of this character in the editor. True if this is to be deleted.
-		/// </summary>
-		public abstract bool DrawData ();
 	}
 }

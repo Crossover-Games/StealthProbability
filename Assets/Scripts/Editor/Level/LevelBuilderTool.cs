@@ -6,15 +6,6 @@ using System.Collections.Generic;
 namespace LevelBuilder {
 	public partial class LevelBuilderTool : EditorWindow {
 
-		public Texture floorImage;
-		public Texture wallImage;
-		public Texture normalNodeImage;
-		public Texture stopNodeImage;
-		public Texture dogNorthImage;
-		public Texture dogSouthImage;
-		public Texture dogEastImage;
-		public Texture dogWestImage;
-
 		public GameObject floorTilePrefab;
 		public GameObject wallTilePrefab;
 		public GameObject gameControllerPrefab;

@@ -5,6 +5,15 @@ using System.Collections.Generic;
 
 namespace LevelBuilder {
 	public partial class LevelBuilderTool : EditorWindow {
+
+		public Texture floorImage;
+		public Texture wallImage;
+		public Texture normalNodeImage;
+		public Texture stopNodeImage;
+		public Texture dogNorthImage;
+		public Texture dogSouthImage;
+		public Texture dogEastImage;
+		public Texture dogWestImage;
 		private void DrawPathControl (DogBlueprint dbp) {
 			for (int j = 0; j < length; j++) {
 				EditorGUILayout.BeginHorizontal ();
