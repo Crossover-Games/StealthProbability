@@ -13,23 +13,16 @@ public class CatTurnDetectionPhase : GameControlPhase {
 	/// <summary>
 	/// Puts the CatTurnDetectionPhase in control.
 	/// </summary>
-	public static void TakeControl (Cat selectedCat) {
-		staticInstance.selectedCat = selectedCat;
+	public static void TakeControl () {
 		staticInstance.InstanceTakeControl ();
 	}
 	void Awake () {
 		staticInstance = this;
 	}
 
-	/// <summary>
-	/// The cat to be checked.
-	/// </summary>
 	private Cat selectedCat;
 
-	/// <summary>
-	/// All dogs observing this cat.
-	/// </summary>
-	private List<Dog> dogsWatching;
+	private Queue<DetectionMatchup> allChecks;
 
 	/// <summary>
 	/// Was the cat caught after all the checks?
@@ -38,16 +31,22 @@ public class CatTurnDetectionPhase : GameControlPhase {
 
 	override public void OnTakeControl () {
 		safe = true;
-		dogsWatching = selectedCat.dogsCrossed.ToList ();
+		allChecks = DetectionManager.AllChecks ();
 	}
 	override public void ControlUpdate () {
-		if (dogsWatching.Count > 0) {
-			Dog d = dogsWatching [0];
-			//CameraOverheadControl.SetCamFocusPoint (d.myTile.topCenterPoint);
-			if (selectedCat.DetectionCheckAndRemove (d)) {
+		if (allChecks.Count > 0) {
+			DetectionMatchup currentCheck = allChecks.Dequeue ();
+			selectedCat = currentCheck.catInDanger;
+			currentCheck.CameraHalfway ();
+			DetectionManager.SetConflictHighlight (currentCheck);
+			if (currentCheck.SimulateDetectionCheck ()) {
+				AnimationManager.AddAnimation (currentCheck.catInDanger.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
+				GameBrain.catManager.Remove (currentCheck.catInDanger);
 				safe = false;
 			}
-			dogsWatching.RemoveAt (0);
+			else {
+				AnimationManager.DummyTime (1f);
+			}
 		}
 		else {
 			EndChecking ();

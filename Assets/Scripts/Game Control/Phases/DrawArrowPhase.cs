@@ -66,11 +66,6 @@ public class DrawArrowPhase : GameControlPhase {
 		}
 	}
 
-	override public void OnTakeControl () {
-		//tilePath = new List<Tile> ();
-		//tilePath.Add (selectedCat.myTile);
-		//UpdateAvailableTiles ();
-	}
 
 	override public void MouseOverChangeEvent () {
 		// if the moused over tile is a valid step in the path
@@ -87,6 +82,7 @@ public class DrawArrowPhase : GameControlPhase {
 			if (endOfPath.validMoveEnd) {
 				TileManager.cursorTile = null;
 
+				tilePath.RemoveAt (0);
 				CatContextMenuPhase.TakeControl (selectedCat, tilePath);
 			}
 			else {
@@ -175,8 +171,9 @@ public class DrawArrowPhase : GameControlPhase {
 		UIManager.masterInfoBox.ClearAllData ();
 		UIManager.masterInfoBox.AddEnergyDataFromCat (selectedCat.maxEnergy + 1 - tilePath.Count, selectedCat);
 		Dictionary<Dog, TileDangerData> riskiestPerDog = new Dictionary<Dog, TileDangerData> ();
-		foreach (Tile t in tilePath) {
-			foreach (TileDangerData tdd in t.dangerData) {
+		//foreach (Tile t in tilePath) {
+		for (int c = 1; c < tilePath.Count; c++) {
+			foreach (TileDangerData tdd in tilePath [c].dangerData) {
 				if (!riskiestPerDog.ContainsKey (tdd.watchingDog)) {
 					riskiestPerDog.Add (tdd.watchingDog, tdd);
 				}

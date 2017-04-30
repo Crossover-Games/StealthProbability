@@ -8,7 +8,8 @@ using System.Collections.Generic;
 public abstract class GameCharacter : MonoBehaviour {
 
 	[Tooltip ("This character's main sound")]
-	[SerializeField] private AudioClip mySound;
+	[SerializeField]
+	private AudioClip mySound;
 
 	/// <summary>
 	/// Used to play my sound.
@@ -103,7 +104,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Moves this character on top of the specified tile. This is intended to be used for neighboring tiles. There will be no animation if the destination is not a neighbor.
+	/// Moves this character on top of the specified tile. True if move was valid. This is intended to be used for neighboring tiles. There will be no animation if the destination is not a neighbor.
 	/// </summary>
 	virtual public void MoveTo (Tile destination) { //don't forget that this changes the tile's occupant
 		if (Tile.ValidStepDestination (destination)) {

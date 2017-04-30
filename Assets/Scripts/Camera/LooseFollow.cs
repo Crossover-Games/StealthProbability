@@ -10,7 +10,7 @@ public class LooseFollow : MonoBehaviour {
 	/// The object will move toward this position. Set to null to disable following.
 	/// </summary>
 	[HideInInspector] public Transform target;
-		
+
 	/// <summary>
 	/// faster at high numbers, none at zero 
 	/// </summary>
@@ -20,5 +20,12 @@ public class LooseFollow : MonoBehaviour {
 		if (target != null) {
 			transform.position = Vector3.Lerp (transform.position, target.position, Time.deltaTime * followSpeed);
 		}
+	}
+
+	/// <summary>
+	/// Immediately advance to the target.
+	/// </summary>
+	public void JumpToEnd () {
+		transform.position = target.position;
 	}
 }

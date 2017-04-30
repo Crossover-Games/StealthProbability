@@ -170,6 +170,15 @@ public static class MiscExtensions {
 		return default (T);
 	}
 
+	/// <summary>
+	/// Enqueues a whole collection of items.
+	/// </summary>
+	public static void EnqueueRange<T> (this Queue<T> q, IEnumerable<T> addThese) {
+		foreach (T t in addThese) {
+			q.Enqueue (t);
+		}
+	}
+
 	// ---LIST
 
 	/// <summary>

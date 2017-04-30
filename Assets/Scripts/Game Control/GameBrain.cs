@@ -57,6 +57,7 @@ public class GameBrain : MonoBehaviour {
 		if (inControl != null && !AnimationManager.active) {
 			inControl.ControlUpdate ();
 		}
+		inControl.StandardUpdate ();
 	}
 
 	// ---METHODS

@@ -7,28 +7,32 @@ using UnityEngine;
 /// </summary>
 public class CameraOverheadControl : MonoBehaviour {
 	[Tooltip ("Assign the main camera to this.")]
-	[SerializeField] private Transform cameraRotationInstance;
+	[SerializeField]
+	private Transform cameraRotationInstance;
 	/// <summary>
 	/// Transform that reads the pure rotation of the camera.
 	/// </summary>
 	private static Transform cameraRotation;
 
 	[Tooltip ("Assign the main camera offset to this.")]
-	[SerializeField] private LooseFollow cameraContraptionInstance;
+	[SerializeField]
+	private LooseFollow cameraContraptionInstance;
 	/// <summary>
 	/// Loose follow control for the camera.
 	/// </summary>
 	private static LooseFollow cameraContraption;
 
 	[Tooltip ("Link to the pointer")]
-	[SerializeField] private TransformLink pointerInstance;
+	[SerializeField]
+	private TransformLink pointerInstance;
 	/// <summary>
 	/// The pointer's link to the current target.
 	/// </summary>
 	private static TransformLink pointer;
 
 	[Tooltip ("Link to the pointer")]
-	[SerializeField] private DragCameraFollowPoint dragControlInstance;
+	[SerializeField]
+	private DragCameraFollowPoint dragControlInstance;
 	/// <summary>
 	/// Enables/disables user control of camera.
 	/// </summary>
@@ -77,6 +81,20 @@ public class CameraOverheadControl : MonoBehaviour {
 
 		pointer.target = null;
 		pointer.transform.position = hit.point + cameraOffset;
+	}
+
+	/// <summary>
+	/// The camera will jump this static point. Ideally only used in setup.
+	/// </summary>
+	public static void SetCamInstantPoint (Vector3 location) {
+		RaycastHit hit;
+
+		// raycasts from the target on the floor upwards to the ceiling
+		Physics.Raycast (location, directionToCeiling, out hit, Mathf.Infinity, cameraPlaneLayer);
+
+		pointer.target = null;
+		pointer.transform.position = hit.point + cameraOffset;
+		cameraContraption.JumpToEnd ();
 	}
 
 	/// <summary>

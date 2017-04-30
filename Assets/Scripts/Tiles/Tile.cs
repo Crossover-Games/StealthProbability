@@ -203,9 +203,6 @@ public abstract class Tile : MonoBehaviour {
 	/// </summary>
 	public void AddDangerData (TileDangerData data) {
 		dangerVisualizerEnabled = true;
-		if (m_occupant != null && m_occupant.characterType == CharacterType.Cat) {
-			(m_occupant as Cat).RegisterDangerData (data);
-		}
 		visionInfo.Add (data);
 		UpdateDangerColor ();
 	}

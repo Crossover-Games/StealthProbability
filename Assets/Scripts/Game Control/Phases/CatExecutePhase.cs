@@ -40,17 +40,24 @@ public class CatExecutePhase : GameControlPhase {
 		selectedCat.walkingAnimation = true;
 	}
 
+	override public void StandardUpdate () {
+		if (Input.GetMouseButtonDown (0)) {
+			Time.timeScale = 100f;
+		}
+	}
+
 	override public void ControlUpdate () {
 		if (tilePath.Count > 0) {
 			selectedCat.MoveTo (tilePath [0]);
 			tilePath.RemoveAt (0);
 		}
 		else {
-			CatTurnDetectionPhase.TakeControl (selectedCat);
+			CatTurnDetectionPhase.TakeControl ();
 		}
 	}
 
 	override public void OnLeaveControl () {
+		Time.timeScale = 1f;
 		UIManager.masterInfoBox.headerText = "";
 		UIManager.masterInfoBox.ClearAllData ();
 		CameraOverheadControl.StopFollowing ();

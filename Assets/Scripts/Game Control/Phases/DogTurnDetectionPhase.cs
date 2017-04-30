@@ -13,8 +13,7 @@ public class DogTurnDetectionPhase : GameControlPhase {
 	/// <summary>
 	/// Puts the DogTurnDetectionPhase in control.
 	/// </summary>
-	public static void TakeControl (Dog selectedDog) {
-		staticInstance.selectedDog = selectedDog;
+	public static void TakeControl () {
 		staticInstance.InstanceTakeControl ();
 	}
 	void Awake () {
@@ -22,36 +21,28 @@ public class DogTurnDetectionPhase : GameControlPhase {
 	}
 
 	/// <summary>
-	/// The dog to perform the check.
-	/// </summary>
-	private Dog selectedDog;
-
-	/// <summary>
-	/// All cats in danger.
-	/// </summary>
-	private List<Cat> catsInDanger;
-	/// <summary>
 	/// Rekt cats will be disabled.
 	/// </summary>
 	private List<Cat> catsToDisable;
 
+	private Queue<DetectionMatchup> allChecks;
+
 	override public void OnTakeControl () {
-		catsInDanger = new List<Cat> ();
 		catsToDisable = new List<Cat> ();
-		foreach (Cat c in GameBrain.catManager.allCharacters) {
-			if (c.inDanger) {
-				catsInDanger.Add (c);
-			}
-		}
+		allChecks = DetectionManager.AllChecks ();
 	}
 	override public void ControlUpdate () {
-		if (catsInDanger.Count > 0) {
-			Cat c = catsInDanger [0];
-			CameraOverheadControl.SetCamFocusPoint (c.myTile.topCenterPoint);
-			if (c.DetectionCheckAndRemove (selectedDog)) {
-				catsToDisable.Add (c);
+		if (allChecks.Count > 0) {
+			DetectionMatchup currentCheck = allChecks.Dequeue ();
+			currentCheck.CameraHalfway ();
+			DetectionManager.SetConflictHighlight (currentCheck);
+			if (currentCheck.SimulateDetectionCheck ()) {
+				AnimationManager.AddAnimation (currentCheck.catInDanger.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
+				GameBrain.catManager.Remove (currentCheck.catInDanger);
 			}
-			catsInDanger.RemoveAt (0);
+			else {
+				AnimationManager.DummyTime (1f);
+			}
 		}
 		else {
 			EndChecking ();
@@ -62,9 +53,17 @@ public class DogTurnDetectionPhase : GameControlPhase {
 	/// Advances the phase when there are no more cats to check.
 	/// </summary>
 	private void EndChecking () {
-		foreach (Cat c in catsToDisable) {
-			c.gameObject.SetActive (false);
+		if (VictoryTile.gameWon) {
+			VictoryPhase.TakeControl ();
 		}
-		DogSelectorPhase.TakeControl ();
+		else if (VictoryTile.gameLost) {
+			LosePhase.TakeControl ();
+		}
+		else {
+			foreach (Cat c in catsToDisable) {
+				c.gameObject.SetActive (false);
+			}
+			DogSelectorPhase.TakeControl ();
+		}
 	}
 }

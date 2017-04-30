@@ -40,9 +40,6 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 			UIManager.routeCurrentlyDisplayed = null;
 		}
 		else if (t != null) {
-			foreach (TileDangerData tdd in t.dangerData) {
-				UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
-			}
 			if (t.occupant != null) {
 				UIManager.masterInfoBox.headerText = t.occupant.name;
 				if (t.occupant.characterType == CharacterType.Cat) {
@@ -64,6 +61,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				}
 			}
 			else {
+				foreach (TileDangerData tdd in t.dangerData) {
+					UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
+				}
 				TileManager.ClearAllShimmer ();
 				UIManager.masterInfoBox.headerText = t.tileName;
 				UIManager.routeCurrentlyDisplayed = null;

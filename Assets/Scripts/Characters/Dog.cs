@@ -52,6 +52,9 @@ public class Dog : GameCharacter {
 	public void ApplyVisionPattern () {
 		foreach (TileDangerData tdd in m_VisionPattern.allTilesAffected) {
 			tdd.myTile.AddDangerData (tdd);
+			if (tdd.myTile.occupant != null && tdd.myTile.occupant.characterType == CharacterType.Cat) {
+				DetectionManager.AddDanger (tdd.myTile.occupant as Cat, tdd);
+			}
 		}
 	}
 
@@ -72,6 +75,7 @@ public class Dog : GameCharacter {
 			ClearVisionPattern ();
 			base.MoveTo (destination);
 			ApplyVisionPattern ();
+			//DetectionManager.GatherDanger ();
 		}
 	}
 }

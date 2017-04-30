@@ -85,7 +85,6 @@ public class Path : MonoBehaviour {
 		List<Tile> steps = new List<Tile> ();
 		steps.Add (endpointA.myTile);
 		while (current != null) {
-			print ("oh");
 			steps.Add (current.myTile);
 			StepNode tempPrevious = current;
 			current = current.NextOnPath (previous);

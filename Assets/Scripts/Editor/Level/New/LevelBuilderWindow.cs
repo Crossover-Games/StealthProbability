@@ -13,7 +13,7 @@ namespace LevelBuilderRemake {
 		}
 
 		[SerializeField] private LevelBlueprint levelBP = null;
-		//
+		[SerializeField] private bool expandedGridDefault = true;
 
 		private bool dimensionsFoldout = false;
 		private bool catFoldout = false;
@@ -30,8 +30,9 @@ namespace LevelBuilderRemake {
 			levelBP.DrawTilesEditor ();
 			dimensionsFoldout = EditorGUILayout.Foldout (dimensionsFoldout, new GUIContent ("Dimensions", "Length and width"), true);
 			if (dimensionsFoldout) {
-				levelBP.DrawMapDimensionsDirectControl ();
-				levelBP.DrawMapDimensionsButtons ();
+				expandedGridDefault = EditorGUILayout.ToggleLeft (new GUIContent ("Expanded Grid Default", "When new floors are created due to the grid being expanded, are they floors or walls?"), expandedGridDefault);
+				levelBP.DrawMapDimensionsDirectControl (expandedGridDefault);
+				levelBP.DrawMapDimensionsButtons (expandedGridDefault);
 			}
 			victoryFolout = EditorGUILayout.Foldout (victoryFolout, new GUIContent ("Victory Tiles", "These will be built instead of actual walls/floors in the locations you specify."), true);
 			if (victoryFolout) {

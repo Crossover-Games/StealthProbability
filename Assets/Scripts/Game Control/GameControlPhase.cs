@@ -29,9 +29,16 @@ public abstract class GameControlPhase : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Like MonoBehaviour.Update(), but is only called when in control of the GameBrain.
+	/// Like MonoBehaviour.Update(), but is only called when in control of the GameBrain. Animation halts this.
 	/// </summary>
 	virtual public void ControlUpdate () {
+		// by default, do nothing
+	}
+
+	/// <summary>
+	/// Like MonoBehaviour.Update(), but is only called when in control of the GameBrain. Not halted by animation.
+	/// </summary>
+	virtual public void StandardUpdate () {
 		// by default, do nothing
 	}
 

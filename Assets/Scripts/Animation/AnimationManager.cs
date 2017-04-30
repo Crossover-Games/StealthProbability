@@ -21,7 +21,7 @@ public class AnimationManager : MonoBehaviour {
 	/// </summary>
 	void Update () {
 		if (allObjects.Count > 0) {
-			AnimationQueue[] currentObjects = allObjects.ToArray ();
+			AnimationQueue [] currentObjects = allObjects.ToArray ();
 			foreach (AnimationQueue anim in currentObjects) {
 				anim.AnimationUpdate ();
 				if (!anim.active) {
@@ -51,5 +51,12 @@ public class AnimationManager : MonoBehaviour {
 				allObjects.Add (newQueue);
 			}
 		}
+	}
+
+	/// <summary>
+	/// Terrible. Adds delay time without animating anything.
+	/// </summary>
+	public static void DummyTime (float time) {
+		AddAnimation (new GameObject ("DUMMY").transform, new AnimationDestination (null, null, null, time, InterpolationMethod.Linear));
 	}
 }

@@ -27,9 +27,7 @@ public class GameSetupPhase : GameControlPhase {
 		foreach (Dog dog in GameBrain.dogManager.allCharacters) {
 			dog.ApplyVisionPattern ();
 		}
-		foreach (Cat cat in GameBrain.catManager.allCharacters) {
-			cat.ClearDangerData ();
-		}
+		CameraOverheadControl.SetCamInstantPoint (GameBrain.catManager.allCharacters.RandomElement ().myTile.topCenterPoint);
 	}
 
 	public override void ControlUpdate () {

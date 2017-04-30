@@ -17,15 +17,16 @@ namespace LevelBuilderRemake {
 				EditorGUILayout.BeginHorizontal ();
 				for (int i = 0; i < levelBP.tiles.GetLength (0); i++) {
 					Point2D point = new Point2D (i, j);
-					if (levelBP.dogs.Exists ((DogBlueprint dbp) => dbp.location == point)) {
+					if (levelBP.dogs.Exists ((DogBlueprint chara) => chara.location == point)) {
 						GUI.color = Color.red;
 					}
 					else if (levelBP.cats.Exists ((CatBlueprint cbp) => cbp.location == point)) {
 						GUI.color = new Color (0.5f, 0f, 1f);
 					}
-					EditorGUI.BeginDisabledGroup (levelBP.victoryTiles.Contains (point));
+					else if (levelBP.victoryTiles.Contains (point)) {
+						GUI.color = Color.yellow;
+					}
 					levelBP.tiles [i, j] = EditorGUILayout.Toggle (levelBP.tiles [i, j], GUILayout.ExpandWidth (false), GUILayout.Width (15f));
-					EditorGUI.EndDisabledGroup ();
 					GUI.color = Color.white;
 				}
 				EditorGUILayout.EndHorizontal ();
@@ -36,7 +37,7 @@ namespace LevelBuilderRemake {
 		/// <summary>
 		/// Draws the controls for changing map dimensions directly.
 		/// </summary>
-		public static void DrawMapDimensionsDirectControl (this LevelBlueprint levelBP) {
+		public static void DrawMapDimensionsDirectControl (this LevelBlueprint levelBP, bool expandedDefault) {
 			if (levelBP.widthDisplay != levelBP.tiles.GetLength (0)) {
 				GUI.color = Color.cyan;
 			}
@@ -51,9 +52,9 @@ namespace LevelBuilderRemake {
 			levelBP.lengthDisplay = Mathf.Clamp (EditorGUILayout.IntField (new GUIContent ("Length", "Z dimension size of the level, in tiles"), levelBP.lengthDisplay), 1, 500);
 			GUI.color = Color.white;
 			if (GUILayout.Button (new GUIContent ("Apply Dimension Changes", "Set the dimensions of the level to these values."))) {
-				levelBP.tiles.SetDimensions (levelBP.widthDisplay, levelBP.lengthDisplay, true);
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.SetDimensions (levelBP.widthDisplay, levelBP.lengthDisplay, PathNodeState.Empty);
+				levelBP.tiles.SetDimensions (levelBP.widthDisplay, levelBP.lengthDisplay, expandedDefault);
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.SetDimensions (levelBP.widthDisplay, levelBP.lengthDisplay, PathNodeState.Empty);
 				}
 			}
 		}
@@ -61,20 +62,20 @@ namespace LevelBuilderRemake {
 		/// <summary>
 		/// Draws a set of buttons for increasing / decreasing the borders of the level by one.
 		/// </summary>
-		public static void DrawMapDimensionsButtons (this LevelBlueprint levelBP) {
+		public static void DrawMapDimensionsButtons (this LevelBlueprint levelBP, bool expandedDefault) {
 			EditorGUILayout.BeginHorizontal ();
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add Top", "Adds one row on top, shifts everything down."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0), levelBP.tiles.GetLength (1) + 1, true));
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0), dbp.nodeMap.GetLength (1) + 1, PathNodeState.Empty));
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0), levelBP.tiles.GetLength (1) + 1, expandedDefault));
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.Set2DShallow (chara.nodeMap.Get2DShallow ().ChangedDimensions (chara.nodeMap.GetLength (0), chara.nodeMap.GetLength (1) + 1, PathNodeState.Empty));
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
 			if (GUILayout.Button (new GUIContent ("Delete Top", "Delete uppermost row, shift everything up."))) {
 				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0), levelBP.tiles.GetLength (1) - 1));
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0), dbp.nodeMap.GetLength (1) - 1));
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.Set2DShallow (chara.nodeMap.Get2DShallow ().ChangedDimensions (chara.nodeMap.GetLength (0), chara.nodeMap.GetLength (1) - 1));
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
@@ -83,31 +84,45 @@ namespace LevelBuilderRemake {
 			EditorGUILayout.Space ();
 			EditorGUILayout.BeginHorizontal ();
 			if (GUILayout.Button (new GUIContent ("Add Left", "Adds one column to left, shifts everything right."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ColumnInsertedAtZero (true));
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ColumnInsertedAtZero (PathNodeState.Empty));
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ColumnInsertedAtZero (expandedDefault));
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.Set2DShallow (chara.nodeMap.Get2DShallow ().ColumnInsertedAtZero (PathNodeState.Empty));
+					chara.location = new Point2D (chara.location.x + 1, chara.location.z);
+				}
+				foreach (CatBlueprint chara in levelBP.cats) {
+					chara.location = new Point2D (chara.location.x + 1, chara.location.z);
+				}
+				for (int c = 0; c < levelBP.victoryTiles.Count; c++) {
+					levelBP.victoryTiles [c] = new Point2D (levelBP.victoryTiles [c].x + 1, levelBP.victoryTiles [c].z);
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
 			if (GUILayout.Button (new GUIContent ("Delete Left", "Delete leftmost column, shift everything left."))) {
 				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ColumnRemovedAtZero ());
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ColumnRemovedAtZero ());
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.Set2DShallow (chara.nodeMap.Get2DShallow ().ColumnRemovedAtZero ());
+					chara.location = new Point2D (chara.location.x - 1, chara.location.z);
+				}
+				foreach (CatBlueprint chara in levelBP.cats) {
+					chara.location = new Point2D (chara.location.x - 1, chara.location.z);
+				}
+				for (int c = 0; c < levelBP.victoryTiles.Count; c++) {
+					levelBP.victoryTiles [c] = new Point2D (levelBP.victoryTiles [c].x - 1, levelBP.victoryTiles [c].z);
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add Right", "Adds one column to the right of everything."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0) + 1, levelBP.tiles.GetLength (1), true));
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0) + 1, dbp.nodeMap.GetLength (1), PathNodeState.Empty));
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0) + 1, levelBP.tiles.GetLength (1), expandedDefault));
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.Set2DShallow (chara.nodeMap.Get2DShallow ().ChangedDimensions (chara.nodeMap.GetLength (0) + 1, chara.nodeMap.GetLength (1), PathNodeState.Empty));
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
 			if (GUILayout.Button (new GUIContent ("Delete Right", "Delete rightmost column."))) {
 				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().ChangedDimensions (levelBP.tiles.GetLength (0) - 1, levelBP.tiles.GetLength (1)));
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().ChangedDimensions (dbp.nodeMap.GetLength (0) - 1, dbp.nodeMap.GetLength (1)));
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.Set2DShallow (chara.nodeMap.Get2DShallow ().ChangedDimensions (chara.nodeMap.GetLength (0) - 1, chara.nodeMap.GetLength (1)));
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
@@ -116,16 +131,30 @@ namespace LevelBuilderRemake {
 			EditorGUILayout.BeginHorizontal ();
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add Bottom", "Adds one row below everything."))) {
-				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().RowInsertedAtZero (true));
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().RowInsertedAtZero (PathNodeState.Empty));
+				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().RowInsertedAtZero (expandedDefault));
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.Set2DShallow (chara.nodeMap.Get2DShallow ().RowInsertedAtZero (PathNodeState.Empty));
+					chara.location = new Point2D (chara.location.x, chara.location.z + 1);
+				}
+				foreach (CatBlueprint chara in levelBP.cats) {
+					chara.location = new Point2D (chara.location.x, chara.location.z + 1);
+				}
+				for (int c = 0; c < levelBP.victoryTiles.Count; c++) {
+					levelBP.victoryTiles [c] = new Point2D (levelBP.victoryTiles [c].x, levelBP.victoryTiles [c].z + 1);
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
 			if (GUILayout.Button (new GUIContent ("Delete Bottom", "Delete lowest row."))) {
 				levelBP.tiles.Set2DShallow (levelBP.tiles.Get2DShallow ().RowRemovedAtZero ());
-				foreach (DogBlueprint dbp in levelBP.dogs) {
-					dbp.nodeMap.Set2DShallow (dbp.nodeMap.Get2DShallow ().RowRemovedAtZero ());
+				foreach (DogBlueprint chara in levelBP.dogs) {
+					chara.nodeMap.Set2DShallow (chara.nodeMap.Get2DShallow ().RowRemovedAtZero ());
+					chara.location = new Point2D (chara.location.x, chara.location.z - 1);
+				}
+				foreach (CatBlueprint chara in levelBP.cats) {
+					chara.location = new Point2D (chara.location.x, chara.location.z - 1);
+				}
+				for (int c = 0; c < levelBP.victoryTiles.Count; c++) {
+					levelBP.victoryTiles [c] = new Point2D (levelBP.victoryTiles [c].x, levelBP.victoryTiles [c].z - 1);
 				}
 				levelBP.RefreshDimensionDisplay ();
 			}
