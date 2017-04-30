@@ -42,7 +42,7 @@ public class DogMovePhase : GameControlPhase {
 	}
 
 	override public void StandardUpdate () {
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetKey (KeyCode.Space)) {
 			Time.timeScale = 100f;
 		}
 	}

@@ -12,7 +12,7 @@ public class CatExecutePhase : GameControlPhase {
 	/// </summary>
 	private static CatExecutePhase staticInstance;
 	/// <summary>
-	/// Puts the CatExecutePhase in control
+	/// Puts the CatExecutePhase in control.
 	/// </summary>
 	public static void TakeControl (Cat selectedCat, List<Tile> tilePath) {
 		staticInstance.selectedCat = selectedCat;
@@ -30,7 +30,12 @@ public class CatExecutePhase : GameControlPhase {
 	/// <summary>
 	/// The ordered path the cat will take.
 	/// </summary>
-	public List<Tile> tilePath;
+	private List<Tile> tilePath;
+
+	/// <summary>
+	/// The cats that were stepped over and will have to have their tiles re-registered.
+	/// </summary>
+	public static Stack<GameCharacter> charactersCrossed = new Stack<GameCharacter> ();
 
 	[SerializeField] private AudioSource purrSound;
 
@@ -41,7 +46,7 @@ public class CatExecutePhase : GameControlPhase {
 	}
 
 	override public void StandardUpdate () {
-		if (Input.GetMouseButtonDown (0)) {
+		if (Input.GetKey (KeyCode.Space)) {
 			Time.timeScale = 100f;
 		}
 	}
@@ -52,6 +57,9 @@ public class CatExecutePhase : GameControlPhase {
 			tilePath.RemoveAt (0);
 		}
 		else {
+			while (charactersCrossed.Count > 0) {
+				charactersCrossed.Pop ().FindMyTile ();
+			}
 			CatTurnDetectionPhase.TakeControl ();
 		}
 	}

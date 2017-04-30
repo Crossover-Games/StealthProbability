@@ -82,7 +82,7 @@ public abstract class GameCharacter : MonoBehaviour {
 
 	virtual protected void Awake () {
 		soundPlayer = GetComponent<AudioSource> ();
-		FindMyStartingTile ();
+		FindMyTile ();
 		myRenderers = GetComponentsInChildren<Renderer> ();
 		myColor = myRenderers [0].material.color;
 		animator = GetComponentInChildren<Animator> ();
@@ -91,7 +91,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	/// <summary>
 	/// Uses physics to determine what tile this character is standing on.
 	/// </summary>
-	private void FindMyStartingTile () {
+	public void FindMyTile () {
 		RaycastHit hit;
 		Vector3 rayOrigin = transform.position + Vector3.down * 100;
 

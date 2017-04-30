@@ -33,9 +33,14 @@ public class Cat : GameCharacter {
 	/// Moves and gathers danger.
 	/// </summary>
 	override public void MoveTo (Tile destination) {
+		bool valid = Tile.ValidStepDestination (destination);
+		if (valid) {
+			if (destination.occupant != null) {
+				CatExecutePhase.charactersCrossed.Push (destination.occupant);
+			}
+		}
 		base.MoveTo (destination);
-
-		if (Tile.ValidStepDestination (destination)) {
+		if (valid) {
 			TileDangerData [] dangerArray = myTile.dangerData;
 			if (dangerArray.Length > 0) {
 				DetectionManager.AddDanger (this, dangerArray);
