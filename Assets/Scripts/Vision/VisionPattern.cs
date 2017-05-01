@@ -41,9 +41,11 @@ public class VisionPattern {
 			this.probabilities = ProbabilityGrid.LoadFromResources (fileName).Get2DShallow ();
 		}
 		else {
-			this.probabilities = new float [,] {{0.5f, 0.75f, 0.5f},
-										   {0.25f, 1f, 0.25f},
-										   {0f, 0.25f, 0f}};
+			this.probabilities = new float [,] {{0.75f, 0f, 0f, 0f, 0.75f},
+										   {0f, 0.5f, 0f, 0.5f, 0f},
+										   {0f, 0f, 0.25f, 0f, 0f},
+										   {0f, 0.5f, 0f, 0.5f, 0f},
+										   {0.75f, 0f, 0f, 0f, 0.75f}};
 		}
 		if (probabilities.GetLength (0) != probabilities.GetLength (1)) {
 			throw new System.ArgumentException ("Vision Pattern isn't square. See Pattern.cs.");
@@ -162,17 +164,11 @@ public class VisionPattern {
 	}
 
 	public static VisionPattern VisionPatternFromType (Dog theOwner, DogVisionPatternType type) {
-		switch (type) {
-			case DogVisionPatternType.Hound:
-				return new VisionPattern (theOwner, "Hound");
-			case DogVisionPatternType.Chih:
-				return new VisionPattern (theOwner, "Chih");
-			case DogVisionPatternType.Cyclops:
-				return new VisionPattern (theOwner, "Cyclops");
-			case DogVisionPatternType.Default:
-				return new VisionPattern (theOwner, "FAKE");
-			default:
-				return new VisionPattern (theOwner, "FAKE");
+		try {
+			return new VisionPattern (theOwner, type.ToString ());
+		}
+		catch {
+			return new VisionPattern (theOwner, "FAKE");
 		}
 	}
 }

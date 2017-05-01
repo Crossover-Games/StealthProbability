@@ -73,15 +73,12 @@ namespace VisionPatternEditor {
 			instructionsFoldout = EditorGUILayout.Foldout (instructionsFoldout, new GUIContent ("Instructions", "what ye need to know."), true);
 			if (instructionsFoldout) {
 				EditorStyles.label.wordWrap = true;
-				EditorGUILayout.LabelField ("First, make and save your vision pattern. Then create an entry in the enum in DogVisionPatternType for it. Then make a new switch statement in VisionPattern.VisionPatternFromType that maps your file name (without extension) to the enum entry you made for it.");
+				EditorGUILayout.LabelField ("First, make and save your vision pattern. Then create an entry in the enum in DogVisionPatternType with EXACTLY the same name.");
 			}
 			folderFoldout = EditorGUILayout.Foldout (folderFoldout, new GUIContent ("Files", "Important files related to vision."), true);
 			if (folderFoldout) {
 				if (GUILayout.Button (new GUIContent ("Navigate to DogVisionPatternType.cs", "Enum entry required for each dog pattern."))) {
 					EditorGUIUtility.PingObject (VisionFilePaths.visionEnumScript);
-				}
-				if (GUILayout.Button (new GUIContent ("Navigate to VisionPattern.cs", "Switch required for DogVisionPatternType."))) {
-					EditorGUIUtility.PingObject (VisionFilePaths.visionPatternScript);
 				}
 				if (GUILayout.Button (new GUIContent ("Pattern File Folder", "Folder containing all vision pattern files."))) {
 					File.WriteAllText ("Assets/Resources/VisionPatterns/dummy.txt", JsonUtility.ToJson (currentPattern));

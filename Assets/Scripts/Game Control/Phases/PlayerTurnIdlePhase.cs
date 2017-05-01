@@ -61,14 +61,14 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 						tdd.myTile.shimmer = true;
 					}
 					UIManager.routeCurrentlyDisplayed = (t.occupant as Dog).route;
-					//(t.occupant as Dog).route.visualState = true;   // something has to disable this later, mind you
 				}
 			}
 			else {
+				TileManager.ClearAllShimmer ();
 				foreach (TileDangerData tdd in t.dangerData) {
 					UIManager.masterInfoBox.AddDataFromTileDangerData (tdd);
+					tdd.watchingDog.myTile.shimmer = true;
 				}
-				TileManager.ClearAllShimmer ();
 				UIManager.masterInfoBox.headerText = t.tileName;
 				UIManager.routeCurrentlyDisplayed = null;
 			}
@@ -76,9 +76,8 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	}
 
 	/// <summary>
-	/// Moves cursor and displays overlays. Never null
+	/// Moves cursor and displays overlays. Can be null.
 	/// </summary>
-	//override public void TileClickEvent (Tile t) {
 	private void CustomTileClickEvent (Tile t) {
 		if (TileManager.cursorTile != t) {
 			if (t == null) {
