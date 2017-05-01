@@ -62,6 +62,12 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 					}
 					UIManager.routeCurrentlyDisplayed = (t.occupant as Dog).route;
 				}
+				else if (t.occupant.characterType == CharacterType.Machine) {
+					TileManager.ClearAllShimmer ();
+					foreach (TileDangerData tdd in (t.occupant as Dog).visionPattern.allTilesAffected) {
+						tdd.myTile.shimmer = true;
+					}
+				}
 			}
 			else {
 				TileManager.ClearAllShimmer ();

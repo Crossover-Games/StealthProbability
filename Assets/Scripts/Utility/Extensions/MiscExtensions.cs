@@ -121,9 +121,9 @@ public static class MiscExtensions {
 	}
 
 	/// <summary>
-	/// Returns this set as a list in no particular order.
+	/// Returns this enumerable as a list in no particular order.
 	/// </summary>
-	public static List<T> ToList<T> (this HashSet<T> theSet) {
+	public static List<T> ToList<T> (this IEnumerable<T> theSet) {
 		List<T> tmp = new List<T> ();
 		foreach (T t in theSet) {
 			tmp.Add (t);

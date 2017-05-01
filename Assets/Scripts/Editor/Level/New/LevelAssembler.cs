@@ -387,7 +387,7 @@ namespace LevelBuilderRemake {
 			blueprint.cats = new List<CatBlueprint> ();
 			foreach (Cat c in FindObjectsOfType<Cat> ()) {
 				Point2D point = Point2D.FromTransformXZ (c.transform);
-				CatBlueprint newlyCreatedBP = CatBlueprint.CreateCatBlueprint (c.name, c.orientation, point);
+				CatBlueprint newlyCreatedBP = CatBlueprint.CreateCatBlueprint (c.name, c.orientation, point, c.maxEnergy);
 				blueprint.cats.Add (newlyCreatedBP);
 			}
 			return blueprint;

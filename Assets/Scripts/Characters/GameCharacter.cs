@@ -7,6 +7,11 @@ using System.Collections.Generic;
 /// </summary>
 public abstract class GameCharacter : MonoBehaviour {
 
+	[ContextMenu ("Apply Orientation Rotation")]
+	protected void ApplyOrientationRotation () {
+		transform.rotation = Compass.DirectionToRotation (orientation);
+	}
+
 	[Tooltip ("This character's main sound")]
 	[SerializeField]
 	private AudioClip mySound;
@@ -86,6 +91,13 @@ public abstract class GameCharacter : MonoBehaviour {
 	}
 
 	virtual protected void Awake () {
+		SetUpReferencesOnAwake ();
+	}
+
+	/// <summary>
+	/// Establish all important references for this character.
+	/// </summary>
+	protected void SetUpReferencesOnAwake () {
 		soundPlayer = GetComponent<AudioSource> ();
 		FindMyTile ();
 		myRenderers = GetComponentsInChildren<Renderer> ();

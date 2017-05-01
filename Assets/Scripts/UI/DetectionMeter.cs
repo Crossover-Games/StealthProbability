@@ -9,7 +9,7 @@ public class DetectionMeter : MonoBehaviour {
 
 	private static DetectionMeter staticInstance;
 
-	private static float fadeTime { get { return 0.33f; } }
+	private static float fadeTime { get { return 0.25f; } }
 	private static float rollCycleRate { get { return 0.2f; } }
 
 	[SerializeField] private Transform dangerBar;
@@ -19,6 +19,7 @@ public class DetectionMeter : MonoBehaviour {
 
 	[SerializeField] private Renderer dangerBarRenderer;
 	[SerializeField] private SpriteRenderer holoSpriteRenderer;
+	[SerializeField] private Renderer pointerRenderer;
 
 
 	void Awake () {
@@ -34,6 +35,8 @@ public class DetectionMeter : MonoBehaviour {
 	/// </summary>
 	public static void AnimateRoll (float danger, float rolledChance, bool failed) {
 		Color dangerColor = TileDangerData.DangerToColor (danger);
+		new ChangeRendererEmissionColor (staticInstance.pointerRenderer, Color.black).Execute ();
+
 		staticInstance.dangerBarRenderer.material.color = dangerColor;
 		staticInstance.holoSpriteRenderer.color = dangerColor;
 		staticInstance.pointerTransform.localPosition = Vector3.zero;
@@ -69,11 +72,22 @@ public class DetectionMeter : MonoBehaviour {
 		else {
 			finalLandTimeCoeff = rolledChance;
 		}
+
+		IActionCommand colorChangeCommand = null;
+		if (failed) {
+			colorChangeCommand = new ChangeRendererEmissionColor (staticInstance.pointerRenderer, dangerColor);
+		}
+
 		// Land on probability
-		AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance), null, null, finalLandTimeCoeff * rollCycleRate, InterpolationMethod.Quadratic, true), true);
+		AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance), null, null, finalLandTimeCoeff * rollCycleRate, InterpolationMethod.Linear, true, colorChangeCommand), true);
 		AnimationManager.AddStallTime (staticInstance.transform, finalLandTimeCoeff * rollCycleRate, true);
 
 		if (failed) {
+			// take it in.
+			AnimationManager.AddStallTime (staticInstance.pointerTransform, rollCycleRate, true);
+			AnimationManager.AddStallTime (staticInstance.transform, rollCycleRate, true);
+
+			// jump
 			AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance) + Vector3.up * 0.1f, null, null, rollCycleRate * 0.5f, InterpolationMethod.Quadratic, true), true);
 			AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance), null, null, rollCycleRate * 0.5f, InterpolationMethod.Quadratic, true), true);
 			AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance) + Vector3.up * 0.1f, null, null, rollCycleRate * 0.5f, InterpolationMethod.Quadratic, true), true);

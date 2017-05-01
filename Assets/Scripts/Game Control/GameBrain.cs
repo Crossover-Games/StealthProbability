@@ -34,6 +34,14 @@ public class GameBrain : MonoBehaviour {
 		get { return m_dogManager; }
 	}
 
+	private static TeamMananger<Dog> m_machineManager;
+	/// <summary>
+	/// Has knowledge of all dog-aligned machines.
+	/// </summary>
+	public static TeamMananger<Dog> machineManager {
+		get { return m_machineManager; }
+	}
+
 	// ---MONOBEHAVIOUR OVERRIDES
 
 	[Tooltip ("Parent of all cats in the scene.")]
@@ -44,9 +52,14 @@ public class GameBrain : MonoBehaviour {
 	[SerializeField]
 	private GameObject dogParent;
 
+	[Tooltip ("Parent of all machines in the scene.")]
+	[SerializeField]
+	private GameObject machineParent;
+
 	void Awake () {
 		m_catManager = new TeamMananger<Cat> (new List<Cat> (catParent.GetComponentsInChildren<Cat> ()));
 		m_dogManager = new TeamMananger<Dog> (new List<Dog> (dogParent.GetComponentsInChildren<Dog> ()));
+		m_machineManager = new TeamMananger<Dog> (new List<Dog> (machineParent.GetComponentsInChildren<Dog> ()));
 	}
 
 	void Start () {

@@ -37,26 +37,33 @@ public class AnimationDestination {
 	public bool local;
 
 	/// <summary>
+	/// Execute this action when the animation completes.
+	/// </summary>
+	public IActionCommand onAnimationComplete;
+
+	/// <summary>
 	/// Builds an AnimationDestination from scratch. Leave any of the transform values null to keep them from animating.
 	/// </summary>
-	public AnimationDestination (Vector3? position, Quaternion? rotation, Vector3? localScale, float duration, InterpolationMethod interpolationMethod, bool local = false) {
+	public AnimationDestination (Vector3? position, Quaternion? rotation, Vector3? localScale, float duration, InterpolationMethod interpolationMethod, bool local = false, IActionCommand onAnimationComplete = null) {
 		this.position = position;
 		this.rotation = rotation;
 		this.localScale = localScale;
 		this.duration = duration;
 		this.interpolationMethod = interpolationMethod;
 		this.local = local;
+		this.onAnimationComplete = onAnimationComplete;
 	}
 
 	/// <summary>
 	/// Builds a AnimationDestination from the values in an actual transform.
 	/// </summary>
-	public AnimationDestination (Transform t, float duration, InterpolationMethod interpolationMethod) {
+	public AnimationDestination (Transform t, float duration, InterpolationMethod interpolationMethod, IActionCommand onAnimationComplete = null) {
 		position = t.position;
 		rotation = t.rotation;
 		localScale = t.localScale;
 		this.duration = duration;
 		this.interpolationMethod = interpolationMethod;
+		this.onAnimationComplete = onAnimationComplete;
 	}
 
 	/// <summary>

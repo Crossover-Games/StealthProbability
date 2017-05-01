@@ -230,7 +230,7 @@ namespace LevelBuilderRemake {
 			EditorGUILayout.BeginHorizontal ();
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add cat", "Add a new cat."))) {
-				levelBP.cats.Add (CatBlueprint.CreateCatBlueprint ("cat", Compass.Direction.North, new Point2D (0, 0)));
+				levelBP.cats.Add (CatBlueprint.CreateCatBlueprint ("cat", Compass.Direction.North, new Point2D (0, 0), 4));
 			}
 			EditorGUILayout.Space ();
 			EditorGUILayout.EndHorizontal ();

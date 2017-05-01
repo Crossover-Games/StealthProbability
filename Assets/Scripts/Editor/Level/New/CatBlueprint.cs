@@ -13,11 +13,12 @@ namespace LevelBuilderRemake {
 		/// <summary>
 		/// Construct a new CatBlueprint.
 		/// </summary>
-		public static CatBlueprint CreateCatBlueprint (string name, Compass.Direction orientation, Point2D location) {
+		public static CatBlueprint CreateCatBlueprint (string name, Compass.Direction orientation, Point2D location, int energy) {
 			CatBlueprint cbp = ScriptableObject.CreateInstance<CatBlueprint> () as CatBlueprint;
 			cbp.characterName = name;
 			cbp.orientation = orientation;
 			cbp.location = location;
+			cbp.energy = energy;
 			return cbp;
 		}
 

@@ -24,7 +24,7 @@ public class Dog : GameCharacter {
 
 	public DogVisionPatternType visionType;
 
-	private VisionPattern m_VisionPattern;
+	protected VisionPattern m_VisionPattern;
 	/// <summary>
 	/// This dog's vision pattern.
 	/// </summary>
@@ -33,7 +33,7 @@ public class Dog : GameCharacter {
 	}
 
 	override protected void Awake () {
-		base.Awake ();
+		SetUpReferencesOnAwake ();
 		m_VisionPattern = VisionPattern.VisionPatternFromType (this, visionType);
 		//m_VisionPattern = new VisionPattern (this, "FAKE");
 	}
@@ -46,7 +46,7 @@ public class Dog : GameCharacter {
 		get { return m_route; }
 	}
 
-	void Start () {
+	virtual protected void Start () {
 		m_route.SetGuaranteedPath (myTile.GetNeighborInDirection (orientation).stepNode.myPath);
 	}
 
@@ -54,7 +54,7 @@ public class Dog : GameCharacter {
 	/// Applies the vision pattern to the ground. If any tile is under a cat, register to that cat.
 	/// </summary>
 	public void ApplyVisionPattern () {
-		foreach (TileDangerData tdd in m_VisionPattern.allTilesAffected) {
+		foreach (TileDangerData tdd in visionPattern.allTilesAffected) {
 			tdd.myTile.AddDangerData (tdd);
 			if (tdd.myTile.occupant != null && tdd.myTile.occupant.characterType == CharacterType.Cat) {
 				DetectionManager.AddDanger (tdd.myTile.occupant as Cat, tdd);
@@ -66,7 +66,7 @@ public class Dog : GameCharacter {
 	/// Lifts this dog's vision pattern from the ground.
 	/// </summary>
 	public void ClearVisionPattern () {
-		foreach (TileDangerData tdd in m_VisionPattern.allTilesAffected) {
+		foreach (TileDangerData tdd in visionPattern.allTilesAffected) {
 			tdd.myTile.RemoveDangerDataByDog (this);
 		}
 	}
