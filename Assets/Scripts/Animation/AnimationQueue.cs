@@ -67,7 +67,12 @@ public class AnimationQueue {
 	/// If there is nothing currently animating, slot in the first thing from the queue.
 	/// </summary>
 	private void BeginAnimation () {
-		initialValues = AnimationDestination.CreateOrigin (objectTransform);
+		if (currentAnimation.local) {
+			initialValues = new AnimationDestination (objectTransform.localPosition, objectTransform.localRotation, objectTransform.localScale, 0f, InterpolationMethod.Linear);
+		}
+		else {
+			initialValues = AnimationDestination.CreateOrigin (objectTransform);
+		}
 		currentTimer = new Timer (currentAnimation.duration);
 	}
 
@@ -76,6 +81,19 @@ public class AnimationQueue {
 	/// </summary>
 	public void AnimationUpdate () {
 		currentTimer.Tick ();
+		if (currentAnimation.local) {
+			LocalSpaceUpdate ();
+		}
+		else {
+			WorldSpaceUpdate ();
+		}
+
+		if (!currentTimer.active) {
+			EndCurrentAnimation ();
+		}
+	}
+
+	private void WorldSpaceUpdate () {
 		if (currentAnimation.position != null) {
 			objectTransform.position = Interpolation.Interpolate (initialValues.position.GetValueOrDefault (), currentAnimation.position.GetValueOrDefault (), currentTimer.ratio, currentAnimation.interpolationMethod);
 		}
@@ -85,9 +103,17 @@ public class AnimationQueue {
 		if (currentAnimation.rotation != null) {
 			objectTransform.rotation = Interpolation.Interpolate (initialValues.rotation.GetValueOrDefault (), currentAnimation.rotation.GetValueOrDefault (), currentTimer.ratio, currentAnimation.interpolationMethod);
 		}
+	}
 
-		if (!currentTimer.active) {
-			EndCurrentAnimation ();
+	private void LocalSpaceUpdate () {
+		if (currentAnimation.position != null) {
+			objectTransform.localPosition = Interpolation.Interpolate (initialValues.position.GetValueOrDefault (), currentAnimation.position.GetValueOrDefault (), currentTimer.ratio, currentAnimation.interpolationMethod);
+		}
+		if (currentAnimation.localScale != null) {
+			objectTransform.localScale = Interpolation.Interpolate (initialValues.localScale.GetValueOrDefault (), currentAnimation.localScale.GetValueOrDefault (), currentTimer.ratio, currentAnimation.interpolationMethod);
+		}
+		if (currentAnimation.rotation != null) {
+			objectTransform.localRotation = Interpolation.Interpolate (initialValues.rotation.GetValueOrDefault (), currentAnimation.rotation.GetValueOrDefault (), currentTimer.ratio, currentAnimation.interpolationMethod);
 		}
 	}
 
@@ -97,7 +123,20 @@ public class AnimationQueue {
 	public void EndCurrentAnimation () {
 		currentTimer.Disable ();
 
-		//snap
+		if (currentAnimation.local) {
+			LocalSpaceSnap ();
+		}
+		else {
+			WorldSpaceSnap ();
+		}
+
+		queuedAnimations.RemoveAt (0);
+		if (active) {
+			BeginAnimation ();
+		}
+	}
+
+	private void WorldSpaceSnap () {
 		if (currentAnimation.position != null) {
 			objectTransform.position = currentAnimation.position.GetValueOrDefault ();
 		}
@@ -107,10 +146,17 @@ public class AnimationQueue {
 		if (currentAnimation.rotation != null) {
 			objectTransform.rotation = currentAnimation.rotation.GetValueOrDefault ();
 		}
+	}
 
-		queuedAnimations.RemoveAt (0);
-		if (active) {
-			BeginAnimation ();
+	private void LocalSpaceSnap () {
+		if (currentAnimation.position != null) {
+			objectTransform.localPosition = currentAnimation.position.GetValueOrDefault ();
+		}
+		if (currentAnimation.localScale != null) {
+			objectTransform.localScale = currentAnimation.localScale.GetValueOrDefault ();
+		}
+		if (currentAnimation.rotation != null) {
+			objectTransform.localRotation = currentAnimation.rotation.GetValueOrDefault ();
 		}
 	}
 

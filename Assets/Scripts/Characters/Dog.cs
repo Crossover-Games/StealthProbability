@@ -18,6 +18,10 @@ public class Dog : GameCharacter {
 		get { return 0.3f; }
 	}
 
+	public override string flavorText {
+		get { return "here i come, ruffer than the rest of them"; }
+	}
+
 	public DogVisionPatternType visionType;
 
 	private VisionPattern m_VisionPattern;

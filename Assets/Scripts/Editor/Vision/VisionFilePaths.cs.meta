@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 38212503bfd43ab47849b8937537d0c1
+timeCreated: 1493607220
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - visionEnumScriptSerialized: {fileID: 11500000, guid: 3c1f70911358dc14897be546120ec1fd,
+      type: 3}
+  - visionPatternScriptSerialized: {fileID: 11500000, guid: 49dcced27c471474b984cfe5fdaa831e,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

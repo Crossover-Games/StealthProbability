@@ -32,14 +32,20 @@ public class AnimationDestination {
 	public InterpolationMethod interpolationMethod;
 
 	/// <summary>
+	/// Operate in local space?
+	/// </summary>
+	public bool local;
+
+	/// <summary>
 	/// Builds an AnimationDestination from scratch. Leave any of the transform values null to keep them from animating.
 	/// </summary>
-	public AnimationDestination (Vector3? position, Quaternion? rotation, Vector3? localScale, float duration, InterpolationMethod interpolationMethod) {
+	public AnimationDestination (Vector3? position, Quaternion? rotation, Vector3? localScale, float duration, InterpolationMethod interpolationMethod, bool local = false) {
 		this.position = position;
 		this.rotation = rotation;
 		this.localScale = localScale;
 		this.duration = duration;
 		this.interpolationMethod = interpolationMethod;
+		this.local = local;
 	}
 
 	/// <summary>

@@ -20,17 +20,21 @@ public class CatTurnDetectionPhase : GameControlPhase {
 		staticInstance = this;
 	}
 
+	/// <summary>
+	/// since there's only going to be one cat, this might as well be it
+	/// </summary>
 	private Cat selectedCat;
+	private float lastRolledChance;
 
 	private Queue<DetectionMatchup> allChecks;
 
 	/// <summary>
 	/// Was the cat caught after all the checks?
 	/// </summary>
-	private bool safe;
+	private bool rekt;
 
 	override public void OnTakeControl () {
-		safe = true;
+		rekt = false;
 		allChecks = DetectionManager.AllChecks ();
 	}
 	override public void ControlUpdate () {
@@ -39,14 +43,14 @@ public class CatTurnDetectionPhase : GameControlPhase {
 			selectedCat = currentCheck.catInDanger;
 			currentCheck.CameraHalfway ();
 			DetectionManager.SetConflictHighlight (currentCheck);
-			if (currentCheck.SimulateDetectionCheck ()) {
-				AnimationManager.AddAnimation (currentCheck.catInDanger.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
-				GameBrain.catManager.Remove (currentCheck.catInDanger);
-				safe = false;
-			}
-			else {
-				AnimationManager.DummyTime (1f);
-			}
+			bool checkResult = currentCheck.SimulateDetectionCheck (out lastRolledChance);
+			rekt = rekt || checkResult;
+			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult);
+		}
+		else if (rekt) {
+			AnimationManager.AddAnimation (selectedCat.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
+			GameBrain.catManager.Remove (selectedCat);
+			rekt = false;
 		}
 		else {
 			EndChecking ();
@@ -57,7 +61,7 @@ public class CatTurnDetectionPhase : GameControlPhase {
 	/// Advances the phase when there are no more dogs to check against.
 	/// </summary>
 	private void EndChecking () {
-		if (!safe) {
+		if (rekt) {
 			selectedCat.gameObject.SetActive (false);
 		}
 

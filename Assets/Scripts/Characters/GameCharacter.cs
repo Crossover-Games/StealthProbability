@@ -28,6 +28,8 @@ public abstract class GameCharacter : MonoBehaviour {
 		get { return CharacterType.Machine; }
 	}
 
+	public abstract string flavorText { get; }
+
 	/// <summary>
 	/// The amount of time it takes to step from one tile to the next.
 	/// </summary>
@@ -70,6 +72,9 @@ public abstract class GameCharacter : MonoBehaviour {
 
 	private Renderer [] myRenderers;
 	private Color myColor;
+	public Color defaultColor {
+		get { return myColor; }
+	}
 
 	/// <summary>
 	/// Elevation of the top of the character's head in world space. Used for aligning the cursor.

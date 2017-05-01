@@ -41,6 +41,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 		}
 		else if (t != null) {
 			if (t.occupant != null) {
+				UIManager.masterInfoBox.AddData (t.occupant.flavorText, t.occupant.defaultColor.OptimizedForText ());
 				UIManager.masterInfoBox.headerText = t.occupant.name;
 				if (t.occupant.characterType == CharacterType.Cat) {
 					Cat thisCat = (t.occupant as Cat);
@@ -56,6 +57,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				}
 				else if (t.occupant.characterType == CharacterType.Dog) {
 					TileManager.ClearAllShimmer ();
+					foreach (TileDangerData tdd in (t.occupant as Dog).visionPattern.allTilesAffected) {
+						tdd.myTile.shimmer = true;
+					}
 					UIManager.routeCurrentlyDisplayed = (t.occupant as Dog).route;
 					//(t.occupant as Dog).route.visualState = true;   // something has to disable this later, mind you
 				}

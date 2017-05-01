@@ -25,24 +25,31 @@ public class DogTurnDetectionPhase : GameControlPhase {
 	/// </summary>
 	private List<Cat> catsToDisable;
 
+	private float lastRolledChance;
+	private Cat lastCatRekt;
+
 	private Queue<DetectionMatchup> allChecks;
 
 	override public void OnTakeControl () {
+		lastCatRekt = null;
 		catsToDisable = new List<Cat> ();
 		allChecks = DetectionManager.AllChecks ();
 	}
 	override public void ControlUpdate () {
-		if (allChecks.Count > 0) {
+		if (lastCatRekt != null) {
+			AnimationManager.AddAnimation (lastCatRekt.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
+			GameBrain.catManager.Remove (lastCatRekt);
+			lastCatRekt = null;
+		}
+		else if (allChecks.Count > 0) {
 			DetectionMatchup currentCheck = allChecks.Dequeue ();
 			currentCheck.CameraHalfway ();
 			DetectionManager.SetConflictHighlight (currentCheck);
-			if (currentCheck.SimulateDetectionCheck ()) {
-				AnimationManager.AddAnimation (currentCheck.catInDanger.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
-				GameBrain.catManager.Remove (currentCheck.catInDanger);
+			bool checkResult = currentCheck.SimulateDetectionCheck (out lastRolledChance);
+			if (checkResult) {
+				lastCatRekt = currentCheck.catInDanger;
 			}
-			else {
-				AnimationManager.DummyTime (1f);
-			}
+			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult);
 		}
 		else {
 			EndChecking ();

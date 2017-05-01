@@ -16,6 +16,10 @@ public class Cat : GameCharacter {
 		get { return 0.3f; }
 	}
 
+	public override string flavorText {
+		get { return "Grunt unit of the international fashion police."; }
+	}
+
 	[SerializeField] private int m_maxEnergy;
 	/// <summary>
 	/// The measure for how much a cat can do in a turn. Converts to movement, actions, and extra stealth.

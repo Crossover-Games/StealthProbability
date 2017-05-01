@@ -39,6 +39,9 @@ public class AnimationManager : MonoBehaviour {
 
 		if (!queue) {
 			allObjects.RemoveAll ((AnimationQueue obj) => obj.animatingObject == animatingObject);
+			AnimationQueue newQueue = new AnimationQueue (animatingObject);
+			newQueue.QueueAnimation (destination);
+			allObjects.Add (newQueue);
 		}
 		else {
 			int existingIndex = allObjects.FindIndex ((AnimationQueue obj) => obj.animatingObject == animatingObject);
@@ -51,6 +54,13 @@ public class AnimationManager : MonoBehaviour {
 				allObjects.Add (newQueue);
 			}
 		}
+	}
+
+	/// <summary>
+	/// Stall an animation for a set amount of time.
+	/// </summary>
+	public static void AddStallTime (Transform t, float time, bool queue = true) {
+		AddAnimation (t, new AnimationDestination (null, null, null, time, InterpolationMethod.Linear), queue);
 	}
 
 	/// <summary>
