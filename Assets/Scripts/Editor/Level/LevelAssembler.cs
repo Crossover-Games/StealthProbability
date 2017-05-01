@@ -47,33 +47,37 @@ namespace LevelBuilderRemake {
 				}
 			}
 
-			// finds the actual cat parent, then destroys all existing cats
-			GameObject catParent = GameObject.FindGameObjectWithTag ("CatParent");
+			// Find CharactersParent
+			GameObject charactersParent = GameObject.FindGameObjectWithTag ("CharactersParent");
+			if (charactersParent != null) {
+				DestroyImmediate (charactersParent);
+			}
+			charactersParent = new GameObject ("Characters");
+			charactersParent.tag = "CharactersParent";
+
+			// destroy all existing children
 			List<GameObject> forgottenChildren = new List<GameObject> ();
-			foreach (Transform child in catParent.transform) {
+			foreach (Transform child in charactersParent.transform) {
 				forgottenChildren.Add (child.gameObject);
 			}
 			forgottenChildren.ForEach (child => DestroyImmediate (child));
+
+			GameObject catParent = new GameObject ("Cat Parent");
+			GameObject dogParent = new GameObject ("Dog Parent");
+			GameObject machineParent = new GameObject ("Machine Parent");
+
+			catParent.transform.SetParent (charactersParent.transform);
+			dogParent.transform.SetParent (charactersParent.transform);
+			machineParent.transform.SetParent (charactersParent.transform);
 
 			foreach (CatBlueprint chara in blueprint.cats) {
-				GameObject g = PrefabUtility.InstantiatePrefab (assembler.catPrefab) as GameObject;
-				g.transform.position = chara.location.ToVector3XZ () + Vector3.up * 0.5f;
-				g.transform.rotation = Compass.DirectionToRotation (chara.orientation);
-				g.name = chara.characterName;
-				g.transform.SetParent (catParent.transform, true);
-
-				Cat c = g.GetComponent<Cat> ();
-				c.orientation = chara.orientation;
+				Cat c = chara.InstantiateSelf (catParent.transform) as Cat;
 				c.SetSerializedIntProperty ("m_maxEnergy", chara.energy);
 			}
-
-			// finds the actual dog parent, then destroys all existing dogs
-			GameObject dogParent = GameObject.FindGameObjectWithTag ("DogParent");
-			forgottenChildren = new List<GameObject> ();
-			foreach (Transform child in dogParent.transform) {
-				forgottenChildren.Add (child.gameObject);
+			foreach (LaserBlueprint chara in blueprint.lasers) {
+				Laser d = chara.InstantiateSelf (machineParent.transform) as Laser;
+				d.SetSerializedFloatProperty ("m_probability", chara.probability);
 			}
-			forgottenChildren.ForEach (child => DestroyImmediate (child));
 
 			found = GameObject.FindGameObjectWithTag ("RouteParent");
 			if (found != null) {
@@ -83,15 +87,8 @@ namespace LevelBuilderRemake {
 			routeParent.tag = "RouteParent";
 
 			foreach (DogBlueprint chara in blueprint.dogs) {
-				GameObject g = PrefabUtility.InstantiatePrefab (assembler.dogPrefab) as GameObject;
-				g.transform.position = chara.location.ToVector3XZ () + Vector3.up * 0.5f;
-				g.transform.rotation = Compass.DirectionToRotation (chara.orientation);
-				g.name = chara.characterName;
-				g.transform.SetParent (dogParent.transform, true);
-
-				Dog d = g.GetComponent<Dog> ();
+				Dog d = chara.InstantiateSelf (dogParent.transform) as Dog;
 				d.visionType = chara.visionType;
-				d.orientation = chara.orientation;
 				assembler.ConstructPath (chara, d, routeParent);
 			}
 		}
@@ -359,28 +356,35 @@ namespace LevelBuilderRemake {
 
 			blueprint.dogs = new List<DogBlueprint> ();
 			foreach (Dog d in FindObjectsOfType<Dog> ()) {
-				Point2D point = Point2D.FromTransformXZ (d.transform);
-				DogBlueprint newlyCreatedBP = DogBlueprint.CreateDogBlueprint (d.name, d.orientation, point, d.visionType, blueprint);
-				blueprint.dogs.Add (newlyCreatedBP);
+				if (d.characterType == CharacterType.Dog) {
+					Point2D point = Point2D.FromTransformXZ (d.transform);
+					DogBlueprint newlyCreatedBP = DogBlueprint.CreateDogBlueprint (d.name, d.orientation, point, d.visionType, blueprint);
+					blueprint.dogs.Add (newlyCreatedBP);
 
-				Route r = d.GetSerializedReferenceProperty<Route> ("m_route");
-				SerializedProperty allPathsProperty = new UnityEditor.SerializedObject (r).FindProperty ("allPaths");
-				int allPathsMax = allPathsProperty.arraySize;
-				for (int x = 0; x < allPathsMax; x++) {
-					//iterate through each path
-					Path p = allPathsProperty.GetArrayElementAtIndex (x).objectReferenceValue as Path;
-					StepNode endpoint = p.GetSerializedReferenceProperty<StepNode> ("endpointA");
-					point = Point2D.FromTransformXZ (endpoint.transform);
-					newlyCreatedBP.nodeMap [point.x, point.z] = PathNodeState.StopNode;
-					endpoint = p.GetSerializedReferenceProperty<StepNode> ("endpointB");
-					point = Point2D.FromTransformXZ (endpoint.transform);
-					newlyCreatedBP.nodeMap [point.x, point.z] = PathNodeState.StopNode;
-					foreach (StepNode sn in mapTilesParent.GetComponentsInChildren<StepNode> ()) {
-						if (sn.myPath == p) {
-							point = Point2D.FromTransformXZ (sn.transform);
-							newlyCreatedBP.nodeMap [point.x, point.z] = PathNodeState.NormalNode;
+					Route r = d.GetSerializedReferenceProperty<Route> ("m_route");
+					SerializedProperty allPathsProperty = new UnityEditor.SerializedObject (r).FindProperty ("allPaths");
+					int allPathsMax = allPathsProperty.arraySize;
+					for (int x = 0; x < allPathsMax; x++) {
+						//iterate through each path
+						Path p = allPathsProperty.GetArrayElementAtIndex (x).objectReferenceValue as Path;
+						StepNode endpoint = p.GetSerializedReferenceProperty<StepNode> ("endpointA");
+						point = Point2D.FromTransformXZ (endpoint.transform);
+						newlyCreatedBP.nodeMap [point.x, point.z] = PathNodeState.StopNode;
+						endpoint = p.GetSerializedReferenceProperty<StepNode> ("endpointB");
+						point = Point2D.FromTransformXZ (endpoint.transform);
+						newlyCreatedBP.nodeMap [point.x, point.z] = PathNodeState.StopNode;
+						foreach (StepNode sn in mapTilesParent.GetComponentsInChildren<StepNode> ()) {
+							if (sn.myPath == p) {
+								point = Point2D.FromTransformXZ (sn.transform);
+								newlyCreatedBP.nodeMap [point.x, point.z] = PathNodeState.NormalNode;
+							}
 						}
 					}
+				}
+				else if (d.characterType == CharacterType.Machine) {
+					Point2D point = Point2D.FromTransformXZ (d.transform);
+					LaserBlueprint newlyCreatedBP = LaserBlueprint.CreateLaserBlueprint (d.name, d.orientation, point, (d as Laser).probability);
+					blueprint.lasers.Add (newlyCreatedBP);
 				}
 			}
 

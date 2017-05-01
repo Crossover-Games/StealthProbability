@@ -165,4 +165,11 @@ public abstract class GameCharacter : MonoBehaviour {
 			}
 		}
 	}
+
+	/// <summary>
+	/// Spoof the gray value without actually changing the cosmetic.
+	/// </summary>
+	public void SetPseudoGray (bool value) {
+		grayed = value;
+	}
 }

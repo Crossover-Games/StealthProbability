@@ -18,6 +18,7 @@ namespace LevelBuilderRemake {
 		private bool dimensionsFoldout = false;
 		private bool catFoldout = false;
 		private bool dogFoldout = false;
+		private bool laserFoldout = false;
 		private bool victoryFolout = false;
 		private bool metaFoldout = false;
 		private bool buildFoldout = false;
@@ -41,6 +42,10 @@ namespace LevelBuilderRemake {
 			catFoldout = EditorGUILayout.Foldout (catFoldout, new GUIContent ("Cats", "generally better than dogs."), true);
 			if (catFoldout) {
 				levelBP.DrawCatsEditor ();
+			}
+			laserFoldout = EditorGUILayout.Foldout (laserFoldout, new GUIContent ("Lasers", "don't shine that in someone's eye."), true);
+			if (laserFoldout) {
+				levelBP.DrawLasersEditor ();
 			}
 			dogFoldout = EditorGUILayout.Foldout (dogFoldout, new GUIContent ("Dogs", "they bark."), true);
 			if (dogFoldout) {

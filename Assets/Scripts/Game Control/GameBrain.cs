@@ -42,24 +42,12 @@ public class GameBrain : MonoBehaviour {
 		get { return m_machineManager; }
 	}
 
-	// ---MONOBEHAVIOUR OVERRIDES
-
-	[Tooltip ("Parent of all cats in the scene.")]
-	[SerializeField]
-	private GameObject catParent;
-
-	[Tooltip ("Parent of all dogs in the scene.")]
-	[SerializeField]
-	private GameObject dogParent;
-
-	[Tooltip ("Parent of all machines in the scene.")]
-	[SerializeField]
-	private GameObject machineParent;
 
 	void Awake () {
-		m_catManager = new TeamMananger<Cat> (new List<Cat> (catParent.GetComponentsInChildren<Cat> ()));
-		m_dogManager = new TeamMananger<Dog> (new List<Dog> (dogParent.GetComponentsInChildren<Dog> ()));
-		m_machineManager = new TeamMananger<Dog> (new List<Dog> (machineParent.GetComponentsInChildren<Dog> ()));
+		Transform charactersParent = GameObject.FindGameObjectWithTag ("CharactersParent").transform;
+		m_catManager = new TeamMananger<Cat> (new List<Cat> (charactersParent.Find ("Cat Parent").GetComponentsInChildren<Cat> ()));
+		m_dogManager = new TeamMananger<Dog> (new List<Dog> (charactersParent.Find ("Dog Parent").GetComponentsInChildren<Dog> ()));
+		m_machineManager = new TeamMananger<Dog> (new List<Dog> (charactersParent.Find ("Machine Parent").GetComponentsInChildren<Dog> ()));
 	}
 
 	void Start () {

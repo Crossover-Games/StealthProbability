@@ -32,11 +32,12 @@ namespace LevelBuilderRemake {
 		/// <summary>
 		/// Instantiates the character at its board location with its given name in its starting orientation. Returns the character component.
 		/// </summary>
-		public GameCharacter Instantiate () {
+		public GameCharacter InstantiateSelf (Transform parent) {
 			GameObject go = (PrefabUtility.InstantiatePrefab (characterPrefab) as GameObject);
 			go.name = characterName;
 			go.transform.position = location.ToVector3XZ (0.5f);
 			go.transform.rotation = Compass.DirectionToRotation (orientation);
+			go.transform.SetParent (parent, true);
 			GameCharacter gc = go.GetComponent<GameCharacter> ();
 			gc.orientation = orientation;
 			return gc;

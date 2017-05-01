@@ -17,7 +17,7 @@ namespace LevelBuilderRemake {
 				EditorGUILayout.BeginHorizontal ();
 				for (int i = 0; i < levelBP.tiles.GetLength (0); i++) {
 					Point2D point = new Point2D (i, j);
-					if (levelBP.dogs.Exists ((DogBlueprint chara) => chara.location == point)) {
+					if (levelBP.dogs.Exists ((DogBlueprint chara) => chara.location == point) || levelBP.lasers.Exists ((LaserBlueprint chara) => chara.location == point)) {
 						GUI.color = Color.red;
 					}
 					else if (levelBP.cats.Exists ((CatBlueprint cbp) => cbp.location == point)) {
@@ -231,6 +231,28 @@ namespace LevelBuilderRemake {
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add cat", "Add a new cat."))) {
 				levelBP.cats.Add (CatBlueprint.CreateCatBlueprint ("cat", Compass.Direction.North, new Point2D (0, 0), 4));
+			}
+			EditorGUILayout.Space ();
+			EditorGUILayout.EndHorizontal ();
+		}
+
+		/// <summary>
+		/// all lasers
+		/// </summary>
+		public static void DrawLasersEditor (this LevelBlueprint levelBP) {
+			LaserBlueprint deleteThis = null;
+			foreach (LaserBlueprint chara in levelBP.lasers) {
+				if (chara.DrawData ()) {
+					deleteThis = chara;
+				}
+			}
+			if (deleteThis != null) {
+				levelBP.lasers.Remove (deleteThis);
+			}
+			EditorGUILayout.BeginHorizontal ();
+			EditorGUILayout.Space ();
+			if (GUILayout.Button (new GUIContent ("Add laser", "Add a new laser."))) {
+				levelBP.lasers.Add (LaserBlueprint.CreateLaserBlueprint ("LASER", Compass.Direction.North, new Point2D (0, 0), 0.5f));
 			}
 			EditorGUILayout.Space ();
 			EditorGUILayout.EndHorizontal ();

@@ -33,12 +33,12 @@ public class DetectionMeter : MonoBehaviour {
 	/// <summary>
 	/// Animates the visualizer.
 	/// </summary>
-	public static void AnimateRoll (float danger, float rolledChance, bool failed) {
+	public static void AnimateRoll (float danger, float rolledChance, bool failed, Vector3 catTileLocation) {
 		Color dangerColor = TileDangerData.DangerToColor (danger);
 		new ChangeRendererEmissionColor (staticInstance.pointerRenderer, Color.black).Execute ();
 
-		staticInstance.dangerBarRenderer.material.color = dangerColor;
-		staticInstance.holoSpriteRenderer.color = dangerColor;
+		staticInstance.dangerBarRenderer.material.color = dangerColor.AlphaDifferent (0.5f);
+		staticInstance.holoSpriteRenderer.color = dangerColor.AlphaDifferent (0.5f);
 		staticInstance.pointerTransform.localPosition = Vector3.zero;
 		staticInstance.dangerBar.localScale = new Vector3 (-danger, 1f, 1f);
 		staticInstance.safeBar.localScale = new Vector3 (1f - danger, 1f, 1f);
@@ -87,7 +87,7 @@ public class DetectionMeter : MonoBehaviour {
 			AnimationManager.AddStallTime (staticInstance.pointerTransform, rollCycleRate, true);
 			AnimationManager.AddStallTime (staticInstance.transform, rollCycleRate, true);
 
-			// jump
+			// bounce
 			AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance) + Vector3.up * 0.1f, null, null, rollCycleRate * 0.5f, InterpolationMethod.Quadratic, true), true);
 			AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance), null, null, rollCycleRate * 0.5f, InterpolationMethod.Quadratic, true), true);
 			AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance) + Vector3.up * 0.1f, null, null, rollCycleRate * 0.5f, InterpolationMethod.Quadratic, true), true);
@@ -97,7 +97,7 @@ public class DetectionMeter : MonoBehaviour {
 
 		// look at prob
 		AnimationManager.AddStallTime (staticInstance.pointerTransform, rollCycleRate, true);
-		AnimationManager.AddStallTime (staticInstance.transform, rollCycleRate, true);
+		AnimationManager.AddStallTime (staticInstance.transform, rollCycleRate, true, new PointCameraCommand (catTileLocation));
 
 		// Fade out
 		AnimationManager.AddAnimation (staticInstance.transform, new AnimationDestination (null, null, Vector3.zero, fadeTime, InterpolationMethod.SquareRoot), true);

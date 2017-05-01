@@ -37,6 +37,7 @@ public class DogTurnDetectionPhase : GameControlPhase {
 	}
 	override public void ControlUpdate () {
 		if (lastCatRekt != null) {
+			CameraOverheadControl.SetCamFocusPoint (lastCatRekt.myTile.topCenterPoint);
 			AnimationManager.AddAnimation (lastCatRekt.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
 			GameBrain.catManager.Remove (lastCatRekt);
 			lastCatRekt = null;
@@ -49,7 +50,7 @@ public class DogTurnDetectionPhase : GameControlPhase {
 			if (checkResult) {
 				lastCatRekt = currentCheck.catInDanger;
 			}
-			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult);
+			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult, currentCheck.catInDanger.myTile.topCenterPoint);
 		}
 		else {
 			EndChecking ();

@@ -16,6 +16,7 @@ namespace LevelBuilderRemake {
 		public List<Point2D> victoryTiles = new List<Point2D> ();
 		public List<DogBlueprint> dogs = new List<DogBlueprint> ();
 		public List<CatBlueprint> cats = new List<CatBlueprint> ();
+		public List<LaserBlueprint> lasers = new List<LaserBlueprint> ();
 
 		public int widthDisplay = 0;
 		public int lengthDisplay = 0;

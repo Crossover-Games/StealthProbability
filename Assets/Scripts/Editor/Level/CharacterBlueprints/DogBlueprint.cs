@@ -18,7 +18,7 @@ namespace LevelBuilderRemake {
 		/// Construct a new DogBlueprint.
 		/// </summary>
 		public static DogBlueprint CreateDogBlueprint (string name, Compass.Direction orientation, Point2D location, DogVisionPatternType visionType, LevelBlueprint lbp) {
-			DogBlueprint dbp = ScriptableObject.CreateInstance<DogBlueprint> () as DogBlueprint;
+			DogBlueprint dbp = ScriptableObject.CreateInstance<DogBlueprint> ();
 			dbp.characterName = name;
 			dbp.orientation = orientation;
 			dbp.location = location;
