@@ -24,7 +24,9 @@ public class PathArrow : MonoBehaviour {
 		get { return allRenderers [0].material.color; }
 		set {
 			Material m = new Material (arrowMaterial);
+			m.EnableKeyword ("_EMISSION");
 			m.color = value;
+			m.SetColor ("_EmissionColor", value);
 			foreach (Renderer r in allRenderers) {
 				//r.SetMainMaterialColor (value);
 				r.material = m;

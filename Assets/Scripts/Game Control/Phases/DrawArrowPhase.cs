@@ -194,7 +194,8 @@ public class DrawArrowPhase : GameControlPhase {
 				}
 			}
 			if (riskiest.danger < 0.99f) {
-				pathArrow.color = riskiest.dangerColor.OptimizedForText ();
+				//pathArrow.color = riskiest.dangerColor.OptimizedForText ();
+				pathArrow.color = riskiest.dangerColor;
 			}
 			else {
 				pathArrow.color = Color.black;
