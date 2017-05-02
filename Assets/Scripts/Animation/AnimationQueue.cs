@@ -130,6 +130,10 @@ public class AnimationQueue {
 			WorldSpaceSnap ();
 		}
 
+		if (currentAnimation.onAnimationComplete != null) {
+			currentAnimation.onAnimationComplete.Execute ();
+		}
+
 		queuedAnimations.RemoveAt (0);
 		if (active) {
 			BeginAnimation ();

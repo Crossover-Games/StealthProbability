@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LevelBuilder {
+namespace LevelBuilderRemake {
 	public enum PathNodeState {
-		Empty, Wall, NormalNode, StopNode, DogOrigin
+		Empty, NormalNode, StopNode
 	}
 }

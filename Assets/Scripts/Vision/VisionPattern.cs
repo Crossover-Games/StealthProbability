@@ -34,6 +34,13 @@ public class VisionPattern {
 	}
 
 	/// <summary>
+	/// Only for lasers.
+	/// </summary>
+	public VisionPattern (Dog theOwner) {
+		m_Owner = theOwner;
+	}
+
+	/// <summary>
 	/// Creates a vision pattern from a ProbabilityGrid in Resources/VisionPatterns. FileName has no extension and path.
 	/// </summary>
 	public VisionPattern (Dog theOwner, string fileName) {
@@ -60,21 +67,21 @@ public class VisionPattern {
 	/// All floor tiles affected by this vision pattern's sight, and the danger value associated with each.
 	/// This will change depending on the orientation and position of the dog.
 	/// </summary>
-	public List<TileDangerData> allTilesAffected {
+	public virtual List<TileDangerData> allTilesAffected {
 		get {
 			int radius = (probabilities.GetLength (0) - 1) / 2;
 			Tile [,] tiles = adjustTileMatrix (getTilesInRadius (radius));
 			//Tile [,] tiles = getTilesInRadius (radius);
-			List<TileDangerData> dangerList = new List<TileDangerData> ();
+			Stack<TileDangerData> dangerStack = new Stack<TileDangerData> ();
 			for (int xIdx = 0; xIdx < probabilities.GetLength (0); xIdx++) {
 				for (int yIdx = 0; yIdx < probabilities.GetLength (1); yIdx++) {
 					float probability = probabilities [yIdx, xIdx];
 					if (tiles [yIdx, xIdx] != null && probability > 0.01f) {
-						dangerList.Add (new TileDangerData (probability, tiles [yIdx, xIdx], m_Owner));
+						dangerStack.Push (new TileDangerData (probability, tiles [yIdx, xIdx], m_Owner));
 					}
 				}
 			}
-			return dangerList;
+			return dangerStack.ToList ();
 		}
 	}
 

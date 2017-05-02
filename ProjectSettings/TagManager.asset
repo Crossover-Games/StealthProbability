@@ -5,11 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - MapTilesParent
-  - DogParent
-  - CatParent
   - Cat
   - Dog
   - RouteParent
+  - CharactersParent
   layers:
   - Default
   - TransparentFX

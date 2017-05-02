@@ -42,6 +42,16 @@ public static class MiscExtensions {
 		serializedObject.ApplyModifiedProperties ();
 	}
 
+	/// <summary>
+	/// Assigns a serialized property of a specified name to the specified integer value.
+	/// </summary>
+	public static void SetSerializedFloatProperty (this UnityEngine.Object obj, string propertyName, float value) {
+		SerializedObject serializedObject = new UnityEditor.SerializedObject (obj);
+		SerializedProperty property = serializedObject.FindProperty (propertyName);
+		property.floatValue = value;
+		serializedObject.ApplyModifiedProperties ();
+	}
+
 	// --GAMEOBJECT
 
 	/// <summary>
@@ -121,9 +131,9 @@ public static class MiscExtensions {
 	}
 
 	/// <summary>
-	/// Returns this set as a list in no particular order.
+	/// Returns this enumerable as a list in no particular order.
 	/// </summary>
-	public static List<T> ToList<T> (this HashSet<T> theSet) {
+	public static List<T> ToList<T> (this IEnumerable<T> theSet) {
 		List<T> tmp = new List<T> ();
 		foreach (T t in theSet) {
 			tmp.Add (t);

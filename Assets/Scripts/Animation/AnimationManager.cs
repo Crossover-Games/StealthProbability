@@ -57,16 +57,9 @@ public class AnimationManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Stall an animation for a set amount of time.
+	/// Stall a transform from animating for a set amount of time.
 	/// </summary>
-	public static void AddStallTime (Transform t, float time, bool queue = true) {
-		AddAnimation (t, new AnimationDestination (null, null, null, time, InterpolationMethod.Linear), queue);
-	}
-
-	/// <summary>
-	/// Terrible. Adds delay time without animating anything.
-	/// </summary>
-	public static void DummyTime (float time) {
-		AddAnimation (new GameObject ("DUMMY").transform, new AnimationDestination (null, null, null, time, InterpolationMethod.Linear));
+	public static void AddStallTime (Transform t, float time, bool queue = true, IActionCommand onComplete = null) {
+		AddAnimation (t, new AnimationDestination (null, null, null, time, InterpolationMethod.Linear, false, onComplete), queue);
 	}
 }

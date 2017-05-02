@@ -70,7 +70,13 @@ public class CatExecutePhase : GameControlPhase {
 		UIManager.masterInfoBox.ClearAllData ();
 		CameraOverheadControl.StopFollowing ();
 		purrSound.Stop ();
-		selectedCat.grayedOut = true;
+		if (GameBrain.dogManager.allCharacters.Length == 0 && GameBrain.catManager.availableCharacters.Length == 1) {
+			selectedCat.SetPseudoGray (true);
+		}
+		else {
+			selectedCat.grayedOut = true;
+		}
+
 		selectedCat.walkingAnimation = false;
 	}
 }

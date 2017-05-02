@@ -45,7 +45,7 @@ public class CatTurnDetectionPhase : GameControlPhase {
 			DetectionManager.SetConflictHighlight (currentCheck);
 			bool checkResult = currentCheck.SimulateDetectionCheck (out lastRolledChance);
 			rekt = rekt || checkResult;
-			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult);
+			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult, selectedCat.myTile.topCenterPoint);
 		}
 		else if (rekt) {
 			AnimationManager.AddAnimation (selectedCat.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
