@@ -45,11 +45,17 @@ public class CatTurnDetectionPhase : GameControlPhase {
 			DetectionManager.SetConflictHighlight (currentCheck);
 			bool checkResult = currentCheck.SimulateDetectionCheck (out lastRolledChance);
 			rekt = rekt || checkResult;
-			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult, selectedCat.myTile.topCenterPoint);
+			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult, selectedCat);
 		}
 		else if (rekt) {
-			AnimationManager.AddAnimation (selectedCat.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
-			GameBrain.catManager.Remove (selectedCat);
+			if (selectedCat.hasWildCard) {
+				OneShotProjectile.LaunchAtPosition (selectedCat.myTile.topCenterPoint);
+				selectedCat.hasWildCard = false;
+			}
+			else {
+				AnimationManager.AddAnimation (selectedCat.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
+				GameBrain.catManager.Remove (selectedCat);
+			}
 			rekt = false;
 		}
 		else {

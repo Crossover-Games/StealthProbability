@@ -10,6 +10,7 @@ public class DetectionMeter : MonoBehaviour {
 	private static DetectionMeter staticInstance;
 
 	private static float fadeTime { get { return 0.25f; } }
+	private static float waitTime { get { return 0.5f; } }
 	private static float rollCycleRate { get { return 0.2f; } }
 
 	[SerializeField] private Transform dangerBar;
@@ -20,6 +21,21 @@ public class DetectionMeter : MonoBehaviour {
 	[SerializeField] private Renderer dangerBarRenderer;
 	[SerializeField] private SpriteRenderer holoSpriteRenderer;
 	[SerializeField] private Renderer pointerRenderer;
+
+	[SerializeField] private TextMesh percentText;
+	[SerializeField] private TextMesh percentTextShadow;
+	[SerializeField] private TextMesh wildCardText;
+	[SerializeField] private TextMesh wildCardTextShadow;
+
+	private static string percentHack {
+		get { return "<size=80> o/o</size>"; }
+	}
+	private static string wildCardReady {
+		get { return "<i>WILD CARD READY</i>"; }
+	}
+	private static string wildCardDepleted {
+		get { return "Wild card depleted"; }
+	}
 
 
 	void Awake () {
@@ -33,9 +49,25 @@ public class DetectionMeter : MonoBehaviour {
 	/// <summary>
 	/// Animates the visualizer.
 	/// </summary>
-	public static void AnimateRoll (float danger, float rolledChance, bool failed, Vector3 catTileLocation) {
+	public static void AnimateRoll (float danger, float rolledChance, bool failed, Cat cat) {
 		Color dangerColor = TileDangerData.DangerToColor (danger);
 		new ChangeRendererEmissionColor (staticInstance.pointerRenderer, Color.black).Execute ();
+
+		string pctxt = Mathf.FloorToInt (danger * 100).ToString () + percentHack; ;
+		staticInstance.percentText.text = pctxt;
+		staticInstance.percentTextShadow.text = pctxt;
+		staticInstance.percentText.color = dangerColor;
+
+		if (cat.hasWildCard) {
+			staticInstance.wildCardText.color = Color.white;
+			staticInstance.wildCardText.text = wildCardReady;
+			staticInstance.wildCardTextShadow.text = wildCardReady;
+		}
+		else {
+			staticInstance.wildCardText.color = Color.gray;
+			staticInstance.wildCardText.text = wildCardDepleted;
+			staticInstance.wildCardTextShadow.text = wildCardDepleted;
+		}
 
 		staticInstance.dangerBarRenderer.material.color = dangerColor.AlphaDifferent (0.5f);
 		staticInstance.holoSpriteRenderer.color = dangerColor.AlphaDifferent (0.5f);
@@ -44,10 +76,8 @@ public class DetectionMeter : MonoBehaviour {
 		staticInstance.safeBar.localScale = new Vector3 (1f - danger, 1f, 1f);
 
 		// fade in
-		AnimationManager.AddAnimation (staticInstance.transform, new AnimationDestination (null, null, Vector3.one, fadeTime, InterpolationMethod.SquareRoot), false);
-		AnimationManager.AddStallTime (staticInstance.transform, fadeTime * 0.5f, true);
-
-		AnimationManager.AddStallTime (staticInstance.pointerTransform, fadeTime * 1.5f, false);
+		AnimationManager.AddAnimation (staticInstance.transform, new AnimationDestination (null, null, Vector3.one, fadeTime, InterpolationMethod.Quadratic), false);
+		AnimationManager.AddStallTime (staticInstance.pointerTransform, fadeTime, false);
 
 		// back and forth
 		bool cycle = true;
@@ -96,8 +126,8 @@ public class DetectionMeter : MonoBehaviour {
 		}
 
 		// look at prob
-		AnimationManager.AddStallTime (staticInstance.pointerTransform, rollCycleRate, true);
-		AnimationManager.AddStallTime (staticInstance.transform, rollCycleRate, true, new PointCameraCommand (catTileLocation));
+		AnimationManager.AddStallTime (staticInstance.pointerTransform, waitTime, true);
+		AnimationManager.AddStallTime (staticInstance.transform, waitTime, true, new PointCameraCommand (cat.myTile.topCenterPoint));
 
 		// Fade out
 		AnimationManager.AddAnimation (staticInstance.transform, new AnimationDestination (null, null, Vector3.zero, fadeTime, InterpolationMethod.SquareRoot), true);

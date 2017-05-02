@@ -45,6 +45,13 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				UIManager.masterInfoBox.headerText = t.occupant.name;
 				if (t.occupant.characterType == CharacterType.Cat) {
 					Cat thisCat = (t.occupant as Cat);
+					if (thisCat.hasWildCard) {
+						UIManager.masterInfoBox.AddData ("Wild card ready", Color.white);
+					}
+					else {
+						UIManager.masterInfoBox.AddData ("Wild card depleted", Color.gray);
+					}
+
 					if (!t.occupant.grayedOut) {
 						TileManager.MassSetShimmer (t.AllTilesInRadius (thisCat.maxEnergy, true, false));
 						UIManager.masterInfoBox.AddEnergyDataFromCat (thisCat.maxEnergy, thisCat);

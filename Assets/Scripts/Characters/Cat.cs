@@ -29,9 +29,9 @@ public class Cat : GameCharacter {
 	}
 
 	/// <summary>
-	/// Decreased by one on detection. If this hits zero, this cat is GONE
+	/// Evade detection once.
 	/// </summary>
-	public int livesRemaining = 2;
+	public bool hasWildCard = true;
 
 	/// <summary>
 	/// Moves and gathers danger.
