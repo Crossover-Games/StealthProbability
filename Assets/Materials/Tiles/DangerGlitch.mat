@@ -30,12 +30,12 @@ Material:
     - <noninit>: 0
     - PixelSnap: 0
     - _ColorGlitchOn: 1
-    - _ColorIntensity: 0.07
-    - _ColorProbability: 0.02
+    - _ColorIntensity: 0.5
+    - _ColorProbability: 0.12
     - _DispGlitchOn: 1
-    - _DispIntensity: 0.09
-    - _DispProbability: 0.022
-    - _GlitchInterval: 0.16
+    - _DispIntensity: 0.75
+    - _DispProbability: 0.5
+    - _GlitchInterval: 0.1
     - _WrapDispCoords: 1
     m_Colors:
     - <noninit>: {r: 0, g: 8.516397e-35, b: 0, a: 8.51636e-35}

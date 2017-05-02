@@ -39,6 +39,9 @@ public class DetectionMeter : MonoBehaviour {
 	private static string deployingWildCard {
 		get { return "<i>Deploying wild card...</i>"; }
 	}
+	private static string rektText {
+		get { return "<i>EMERGENCY EXIT!!!</i>"; }
+	}
 
 
 	void Awake () {
@@ -110,8 +113,14 @@ public class DetectionMeter : MonoBehaviour {
 		if (failed) {
 			Stack<IActionCommand> failCommands = new Stack<IActionCommand> ();
 			failCommands.Push (new ChangeRendererEmissionColor (staticInstance.pointerRenderer, dangerColor));
-			failCommands.Push (new ChangeTextMeshCommand (staticInstance.wildCardText, deployingWildCard, Color.cyan));
-			failCommands.Push (new ChangeTextMeshCommand (staticInstance.wildCardTextShadow, deployingWildCard));
+			if (cat.hasWildCard) {
+				failCommands.Push (new ChangeTextMeshCommand (staticInstance.wildCardText, deployingWildCard, Color.cyan));
+				failCommands.Push (new ChangeTextMeshCommand (staticInstance.wildCardTextShadow, deployingWildCard));
+			}
+			else {
+				failCommands.Push (new ChangeTextMeshCommand (staticInstance.wildCardText, rektText, Color.red));
+				failCommands.Push (new ChangeTextMeshCommand (staticInstance.wildCardTextShadow, rektText));
+			}
 			allFailCommands = new ExecuteMultipleCommands (failCommands);
 		}
 
