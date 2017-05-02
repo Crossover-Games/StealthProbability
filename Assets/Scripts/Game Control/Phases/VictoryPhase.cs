@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// The phase indicating that you won the game.
@@ -22,9 +23,11 @@ public class VictoryPhase : GameControlPhase {
 	}
 
 	[SerializeField] private GameObject winEffect;
+	[SerializeField] private GameObject winButton;
 
 	public override void OnTakeControl () {
 		winEffect.SetActive (true);
+		winButton.SetActive (true);
 		print ("did it");
 	}
 }

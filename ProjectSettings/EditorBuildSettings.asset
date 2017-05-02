@@ -8,6 +8,24 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ClassDemoTest.unity
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/LoadingScreenLevel2Screen1.unity
+  - enabled: 0
+    path: Assets/Scenes/Loading Screens/LoadingScreenLevel2Screen1.unity
     guid: 5551efb81b5404446b861789e74d2a84
+  - enabled: 1
+    path: Assets/Scenes/William/Level1William.unity
+    guid: 1c7f7bbea33f11b42ba292dd990b8ec5
+  - enabled: 1
+    path: Assets/Scenes/William/Level2William.unity
+    guid: 5f42e3617336c6f418d55a17dc41409d
+  - enabled: 0
+    path: Assets/Scenes/William/Level3William.unity
+    guid: ed0cbdefe7954f44d9f376ca5152c0a3
+  - enabled: 0
+    path: Assets/Scenes/Main Menu.unity
+    guid: 7b15da8a229c0144698fbed053bf24b9
+  - enabled: 0
+    path: Assets/Scenes/Loading Screens/LoadingScreenLevel1Screen2.unity
+    guid: 22506b039d866ed41831f041c5a40ea9
+  - enabled: 0
+    path: Assets/Scenes/Loading Screens/LoadingScreenLevel3Screen1.unity
+    guid: 2d82881b59335dd4fa5ff125e16796e7
