@@ -19,7 +19,7 @@ public class Dog : GameCharacter {
 	}
 
 	public override string flavorText {
-		get { return "here i come, ruffer than the rest of them"; }
+		get { return visionType.ToString () + " type dog"; }
 	}
 
 	public DogVisionPatternType visionType;
