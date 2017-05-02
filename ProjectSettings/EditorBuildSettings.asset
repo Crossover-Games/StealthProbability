@@ -7,3 +7,7 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/Scenes/ClassDemoTest.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/LoadingScreenLevel2Screen1.unity
+    guid: 5551efb81b5404446b861789e74d2a84

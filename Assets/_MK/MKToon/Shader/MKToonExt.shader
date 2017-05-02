@@ -1,4 +1,6 @@
-﻿Shader "Hidden/MKToon/Ext" 
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "Hidden/MKToon/Ext" 
 {
 	SubShader 
 	{ 
@@ -35,7 +37,7 @@
 				Output o;
 
 				i.vertex.xyz += normalize(i.normal) * _OutlineSize;
-				o.pos = mul(UNITY_MATRIX_MVP, i.vertex);
+				o.pos = UnityObjectToClipPos(i.vertex);
 				o.color = _OutlineColor;
 				return o;
 			}
@@ -80,7 +82,7 @@
 				Output o;
 
 				i.vertex.xyz += normalize(i.normal) * _OutlineSize;
-				o.pos = mul(UNITY_MATRIX_MVP, i.vertex);
+				o.pos = UnityObjectToClipPos(i.vertex);
 				o.color = _OutlineColor;
 				return o;
 			}

@@ -1,4 +1,6 @@
-﻿ Shader "Rat/Cutout" {
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+ Shader "Rat/Cutout" {
    Properties {
     _Color ("Main Color", Color) = (1,1,1,1)
     _MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
@@ -29,7 +31,7 @@
       vertexOutput output;
  
       output.tex = input.texcoord;
-      output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
+      output.pos = UnityObjectToClipPos(input.vertex);
       return output;
      }
      float4 frag(vertexOutput input) : COLOR {
