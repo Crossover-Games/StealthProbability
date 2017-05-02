@@ -1732,6 +1732,7 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 4000012272812282, guid: 63479e236ace6ce4abf1ae49161607fd,
     type: 2}
+<<<<<<< HEAD:Assets/Scenes/William/Level3Hacks.unity
   m_PrefabInternal: {fileID: 171573664}
 --- !u!1001 &179067439
 Prefab:
@@ -1781,6 +1782,10 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 179067439}
 --- !u!1001 &182160789
+=======
+  m_PrefabInternal: {fileID: 196515881}
+--- !u!1001 &221441083
+>>>>>>> 523451c6c6a3353642d7f153d170bff38ea3f8dd:Assets/Scenes/William/Level3RatPatrol.unity
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -5315,8 +5320,78 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 4000012272812282, guid: 63479e236ace6ce4abf1ae49161607fd,
     type: 2}
+<<<<<<< HEAD:Assets/Scenes/William/Level3Hacks.unity
   m_PrefabInternal: {fileID: 586568579}
 --- !u!1001 &606584540
+=======
+  m_PrefabInternal: {fileID: 537543071}
+--- !u!1001 &554746955
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1935243270}
+    m_Modifications:
+    - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 51.912613
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -11.63852
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -6.957544
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[0]
+      value: This next floor is a tough one. One operative must get to the end of
+        one corridor,
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[1]
+      value: ' while the other must endure the horrors of being wet to fool the lasers
+        in the bottom corridor to get through safely.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[2]
+      value: ' The top cat will then need to open a passage for the lower operative
+        to get to the next elevator.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[3]
+      value: End Transmission
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &580973373
+>>>>>>> 523451c6c6a3353642d7f153d170bff38ea3f8dd:Assets/Scenes/William/Level3RatPatrol.unity
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -14326,10 +14401,100 @@ Prefab:
       propertyPath: m_RootOrder
       value: 130
       objectReference: {fileID: 0}
+    - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 137.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -95
+      objectReference: {fileID: 0}
+    - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 235
+      objectReference: {fileID: 0}
+    - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 137.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -196
+      objectReference: {fileID: 0}
+    - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 235
+      objectReference: {fileID: 0}
+    - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 224597049839826336, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 232
+      objectReference: {fileID: 0}
+    - target: {fileID: 114247054021342300, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+        type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84255c901ae2a724094e384617812699, type: 2}
   m_IsPrefabParent: 0
+<<<<<<< HEAD:Assets/Scenes/William/Level3Hacks.unity
 --- !u!4 &1685768168 stripped
+=======
+--- !u!1 &1646939152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1646939153}
+  - component: {fileID: 1646939154}
+  m_Layer: 0
+  m_Name: Path(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1646939153
+>>>>>>> 523451c6c6a3353642d7f153d170bff38ea3f8dd:Assets/Scenes/William/Level3RatPatrol.unity
 Transform:
   m_PrefabParentObject: {fileID: 4706363867811756, guid: 84255c901ae2a724094e384617812699,
     type: 2}
@@ -16431,8 +16596,18 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 4000012272812282, guid: 63479e236ace6ce4abf1ae49161607fd,
     type: 2}
+<<<<<<< HEAD:Assets/Scenes/William/Level3Hacks.unity
   m_PrefabInternal: {fileID: 2007622636}
 --- !u!1001 &2011533549
+=======
+  m_PrefabInternal: {fileID: 1934734620}
+--- !u!224 &1935243270 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224597049839826336, guid: c0708eb52ee4c694c9f856d41efc5d0d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1614451679}
+--- !u!1001 &1936373703
+>>>>>>> 523451c6c6a3353642d7f153d170bff38ea3f8dd:Assets/Scenes/William/Level3RatPatrol.unity
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
