@@ -10,10 +10,17 @@ public class TutorialTextHolder : MonoBehaviour {
 	[SerializeField]
 	private string [] m_messages;
 
-	private static TutorialTextHolder staticInstance;
+	private static TutorialTextHolder staticInstance = null;
 
 	public static string [] messages {
-		get { return staticInstance.m_messages; }
+		get {
+			if (staticInstance == null) {
+				return null;
+			}
+			else {
+				return staticInstance.m_messages;
+			}
+		}
 	}
 
 	void Awake () {

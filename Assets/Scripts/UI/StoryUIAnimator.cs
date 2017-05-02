@@ -80,6 +80,12 @@ public class StoryUIAnimator : MonoBehaviour {
 		myTimer = new Timer (fadeTime);
 	}
 
+	void Start () {
+		if (TutorialTextHolder.messages == null) {
+			gameObject.SetActive (false);
+		}
+	}
+
 	void Update () {
 		switch (animState) {
 			case AnimationState.FadeIn:

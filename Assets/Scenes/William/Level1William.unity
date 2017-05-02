@@ -3581,6 +3581,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1439510812694872, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[1]
+      value: Left Click on a cat to select it. Drag from your cat's square to the
+        square you want to move to then select Rest Here.
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
   m_IsPrefabParent: 0
@@ -12121,7 +12131,7 @@ Prefab:
     - target: {fileID: 224376053087091410, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0708eb52ee4c694c9f856d41efc5d0d, type: 2}
