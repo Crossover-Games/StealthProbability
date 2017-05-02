@@ -106,7 +106,7 @@ public class StoryUIAnimator : MonoBehaviour {
 				myTimer.Tick ();
 				rectTransform.anchoredPosition3D = Interpolation.Interpolate (rectTransform.anchoredPosition3D, offscreenPos, myTimer.ratio, InterpolationMethod.SquareRoot);
 				if (!myTimer.active) {
-					animState = AnimationState.TextScroll;
+					animState = AnimationState.Idle;
 				}
 				break;
 		}

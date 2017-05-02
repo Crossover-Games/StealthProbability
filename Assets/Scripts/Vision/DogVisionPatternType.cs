@@ -13,5 +13,6 @@ public enum DogVisionPatternType {
 	/// <summary>
 	/// Chihuahua. Very small. Truncated to prevent spelling errors.
 	/// </summary>
-	Chih
+	Chih,
+	Beacon
 }

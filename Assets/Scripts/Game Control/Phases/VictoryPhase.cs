@@ -25,5 +25,6 @@ public class VictoryPhase : GameControlPhase {
 
 	public override void OnTakeControl () {
 		winEffect.SetActive (true);
+		print ("did it");
 	}
 }
