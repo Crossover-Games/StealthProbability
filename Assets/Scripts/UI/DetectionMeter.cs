@@ -36,6 +36,9 @@ public class DetectionMeter : MonoBehaviour {
 	private static string wildCardDepleted {
 		get { return "Wild card depleted"; }
 	}
+	private static string deployingWildCard {
+		get { return "<i>Deploying wild card...</i>"; }
+	}
 
 
 	void Awake () {
@@ -103,13 +106,17 @@ public class DetectionMeter : MonoBehaviour {
 			finalLandTimeCoeff = rolledChance;
 		}
 
-		IActionCommand colorChangeCommand = null;
+		IActionCommand allFailCommands = null;
 		if (failed) {
-			colorChangeCommand = new ChangeRendererEmissionColor (staticInstance.pointerRenderer, dangerColor);
+			Stack<IActionCommand> failCommands = new Stack<IActionCommand> ();
+			failCommands.Push (new ChangeRendererEmissionColor (staticInstance.pointerRenderer, dangerColor));
+			failCommands.Push (new ChangeTextMeshCommand (staticInstance.wildCardText, deployingWildCard, Color.cyan));
+			failCommands.Push (new ChangeTextMeshCommand (staticInstance.wildCardTextShadow, deployingWildCard));
+			allFailCommands = new ExecuteMultipleCommands (failCommands);
 		}
 
 		// Land on probability
-		AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance), null, null, finalLandTimeCoeff * rollCycleRate, InterpolationMethod.Linear, true, colorChangeCommand), true);
+		AnimationManager.AddAnimation (staticInstance.pointerTransform, new AnimationDestination (LandHere (rolledChance), null, null, finalLandTimeCoeff * rollCycleRate, InterpolationMethod.Linear, true, allFailCommands), true);
 		AnimationManager.AddStallTime (staticInstance.transform, finalLandTimeCoeff * rollCycleRate, true);
 
 		if (failed) {
