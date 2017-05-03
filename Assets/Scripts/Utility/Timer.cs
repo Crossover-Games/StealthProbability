@@ -58,7 +58,7 @@ public class Timer {
 	/// Advance the timer to the end prematurely.
 	/// </summary>
 	public void Disable () {
-		elapsedTime = myDuration + 1;
+		elapsedTime = myDuration + 1f;
 	}
 
 	/// <summary>

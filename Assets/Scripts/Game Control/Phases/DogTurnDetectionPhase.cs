@@ -20,11 +20,6 @@ public class DogTurnDetectionPhase : GameControlPhase {
 		staticInstance = this;
 	}
 
-	/// <summary>
-	/// Rekt cats will be disabled.
-	/// </summary>
-	private List<Cat> catsToDisable;
-
 	private float lastRolledChance;
 	private Cat lastCatRekt;
 
@@ -32,7 +27,6 @@ public class DogTurnDetectionPhase : GameControlPhase {
 
 	override public void OnTakeControl () {
 		lastCatRekt = null;
-		catsToDisable = new List<Cat> ();
 		allChecks = DetectionManager.AllChecks ();
 	}
 	override public void ControlUpdate () {
@@ -73,9 +67,6 @@ public class DogTurnDetectionPhase : GameControlPhase {
 			LosePhase.TakeControl ();
 		}
 		else {
-			foreach (Cat c in catsToDisable) {
-				c.gameObject.SetActive (false);
-			}
 			DogSelectorPhase.TakeControl ();
 		}
 	}

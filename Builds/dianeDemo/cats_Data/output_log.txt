@@ -1,0 +1,2960 @@
+Mono path[0] = 'C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/dianeDemo/cats_Data/Managed'
+Mono path[1] = 'C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/dianeDemo/cats_Data/Mono'
+Mono config path = 'C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/dianeDemo/cats_Data/Mono/etc'
+PlayerConnection initialized from C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/dianeDemo/cats_Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55234
+Multi-casting "[IP] 152.23.54.161 [Port] 55234 [Flags] 2 [Guid] 3725721568 [EditorId] 765640703 [Version] 1048832 [Id] WindowsPlayer(UNC-MP07L862) [Debug] 0" to [225.0.0.222:54997]...
+Started listening to [0.0.0.0:55234]
+PlayerConnection already initialized - listening to [0.0.0.0:55234]
+Player data archive not found at `C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/dianeDemo/cats_Data/data.unity3d`, using local filesystemInitialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 5500 (ID=0x1616)
+    Vendor:   Intel
+    VRAM:     2087 MB
+    Driver:   20.19.15.4531
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.024 seconds
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\dianeDemo\cats_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+WARNING: Shader Unsupported: 'Unlit/Color Transparent' - Pass '' has no vertex shader
+UnloadTime: 2.718097 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1e58 -> priority: 1 
+  Thread -> id: 2c10 -> priority: 1 
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.ControlUpdate () [0x000d3] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:101 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.ControlUpdate () [0x000c1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:98 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.ControlUpdate () [0x000c1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:98 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.ControlUpdate () [0x000d3] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:101 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.ControlUpdate () [0x000c1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:98 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.ControlUpdate () [0x000c1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:98 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.ControlUpdate () [0x000c1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:98 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.ControlUpdate () [0x000c1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:98 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.ControlUpdate () [0x00152] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:112 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x000f1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:186 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x001f3] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:197 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MakePathToTile (.Tile destination) [0x00044] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:125 
+  at DrawArrowPhase.TakeControlAutoPath (.Cat selectedCat, .Tile destination) [0x00040] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:35 
+  at PlayerTurnIdlePhase.CustomTileClickEvent (.Tile t) [0x000ac] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:105 
+  at PlayerTurnIdlePhase.ControlUpdate () [0x0002e] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\PlayerTurnIdlePhase.cs:149 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x001f3] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:197 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.ControlUpdate () [0x000c1] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:98 
+  at GameBrain.Update () [0x00021] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:59 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x001f3] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:197 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PathArrow.set_color (Color value) [0x00041] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\Infographics\PathArrow.cs:32 
+  at DrawArrowPhase.UpdatePathDanger () [0x001f3] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:197 
+  at DrawArrowPhase.AddTileToPath (.Tile t) [0x00072] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:140 
+  at DrawArrowPhase.MouseOverChangeEvent () [0x0004c] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\Phases\DrawArrowPhase.cs:73 
+  at GameBrain.RaiseMouseOverChangeEvent () [0x00017] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Game Control\GameBrain.cs:102 
+  at TileManager.Update () [0x00027] in C:\Users\Public\Documents\Unity Projects\StealthProbability\Assets\Scripts\Tiles\General\TileManager.cs:168 
+ 
+(Filename: C:/Users/Public/Documents/Unity Projects/StealthProbability/Assets/Scripts/Tiles/Infographics/PathArrow.cs Line: 32)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename: C:/buildslave/unity/build/Runtime/ParticleSystem/ParticleSystem.cpp Line: 2702)
+

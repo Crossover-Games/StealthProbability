@@ -23,11 +23,11 @@ public class VictoryPhase : GameControlPhase {
 	}
 
 	[SerializeField] private GameObject winEffect;
-	[SerializeField] private GameObject winButton;
+	[SerializeField] private NextLevelButton winButton;
 
 	public override void OnTakeControl () {
+		LoadLoadingScreen.PrimeNextLoadingScreen ();
 		winEffect.SetActive (true);
-		winButton.SetActive (true);
-		print ("did it");
+		winButton.BeginFadeIn ();
 	}
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 /// <summary>
 /// One whole path a dog can move along, segmented into individual routes.
@@ -11,7 +10,8 @@ public class Route : MonoBehaviour {
 	/// Registers a path to this route. Setup only. For visualizer.
 	/// </summary>
 	public void AddPath (Path p) {
-		p.SetSerializedReferenceProperty ("m_route", this);
+		//p.SetSerializedReferenceProperty ("m_route", this);
+		p.m_route = this;
 		allPaths.Add (p);
 	}
 	[SerializeField] private List<Path> allPaths; // only for visualization

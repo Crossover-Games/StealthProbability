@@ -12,7 +12,8 @@ public class Path : MonoBehaviour {
 	[SerializeField] private Material futureChoiceMaterial;
 	[SerializeField] private GameObject arrowPrefab;
 
-	[SerializeField] private Route m_route;
+	//[SerializeField] private Route m_route;
+	public Route m_route;
 	/// <summary>
 	/// The route this path is a part of.
 	/// </summary>

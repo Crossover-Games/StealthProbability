@@ -87,10 +87,18 @@ public abstract class Tile : MonoBehaviour {
 		// nothing by default
 	}
 
+	/// <summary>
+	/// Called at the end of start.
+	/// </summary>
+	protected virtual void LateStart () {
+		// nothing by default
+	}
+
 	void Start () {
 		if (!allowMouseInteraction) {
 			gameObject.MoveToIgnoreRaycastLayer ();
 		}
+		LateStart ();
 	}
 
 	private void RegisterNeighboringTiles () {

@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public class StoryUIAnimator : MonoBehaviour {
 
 	private enum ButtonConfigState {
-		NextOnly, PrevAndNext, PrevAndEnd
+		NextOnly, PrevAndNext, PrevAndEnd, EndOnly
 	}
 
 	private enum AnimationState {
@@ -27,21 +27,31 @@ public class StoryUIAnimator : MonoBehaviour {
 				switch (value) {
 					case ButtonConfigState.NextOnly:
 						nextBig.SetActive (true);
+						endBig.SetActive (false);
 						nextSmall.SetActive (false);
 						prevSmall.SetActive (false);
 						endSmall.SetActive (false);
 						break;
 					case ButtonConfigState.PrevAndNext:
 						nextBig.SetActive (false);
+						endBig.SetActive (false);
 						nextSmall.SetActive (true);
 						prevSmall.SetActive (true);
 						endSmall.SetActive (false);
 						break;
 					case ButtonConfigState.PrevAndEnd:
 						nextBig.SetActive (false);
+						endBig.SetActive (false);
 						nextSmall.SetActive (false);
 						prevSmall.SetActive (true);
 						endSmall.SetActive (true);
+						break;
+					case ButtonConfigState.EndOnly:
+						nextBig.SetActive (false);
+						endBig.SetActive (true);
+						nextSmall.SetActive (false);
+						prevSmall.SetActive (false);
+						endSmall.SetActive (false);
 						break;
 				}
 			}
@@ -49,6 +59,7 @@ public class StoryUIAnimator : MonoBehaviour {
 	}
 
 	[SerializeField] private GameObject nextBig;
+	[SerializeField] private GameObject endBig;
 	[SerializeField] private GameObject nextSmall;
 	[SerializeField] private GameObject prevSmall;
 	[SerializeField] private GameObject endSmall;
@@ -78,6 +89,7 @@ public class StoryUIAnimator : MonoBehaviour {
 		offscreenPos = rectTransform.anchoredPosition3D + Vector3.right * 500f;
 		rectTransform.anchoredPosition3D = offscreenPos;
 		myTimer = new Timer (fadeTime);
+		CalculateButtonState ();
 	}
 
 	void Start () {
@@ -146,7 +158,10 @@ public class StoryUIAnimator : MonoBehaviour {
 	}
 
 	private void CalculateButtonState () {
-		if (messageIndex == 0) {
+		if (TutorialTextHolder.messages.Length == 1) {
+			buttonState = ButtonConfigState.EndOnly;
+		}
+		else if (messageIndex == 0) {
 			buttonState = ButtonConfigState.NextOnly;
 		}
 		else if (messageIndex == TutorialTextHolder.messages.Length - 1) {

@@ -70,7 +70,6 @@ public class CatTurnDetectionPhase : GameControlPhase {
 		if (rekt) {
 			selectedCat.gameObject.SetActive (false);
 		}
-
 		if (VictoryTile.gameWon) {
 			VictoryPhase.TakeControl ();
 		}

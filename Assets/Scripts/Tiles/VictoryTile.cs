@@ -52,6 +52,10 @@ public class VictoryTile : Floor {
 	}
 
 	protected override void LateAwake () {
+		allVictoryTiles = new List<VictoryTile> ();
+	}
+
+	protected override void LateStart () {
 		allVictoryTiles.Add (this);
 	}
 }

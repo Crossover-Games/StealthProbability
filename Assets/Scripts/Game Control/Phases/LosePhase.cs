@@ -22,8 +22,11 @@ public class LosePhase : GameControlPhase {
 	}
 
 	[SerializeField] private GameObject loseEffect;
+	[SerializeField] private RestartButton restartButton;
 
 	public override void OnTakeControl () {
 		loseEffect.SetActive (true);
+		restartButton.BeginFadeIn ();
+		LoadLoadingScreen.PrimeRestartLoadingScreen ();
 	}
 }
