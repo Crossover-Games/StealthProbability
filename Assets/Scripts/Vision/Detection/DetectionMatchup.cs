@@ -28,6 +28,9 @@ public class DetectionMatchup {
 	/// </summary>
 	public bool SimulateDetectionCheck (out float rolledChance) {
 		rolledChance = Random.value;
+    if(catInDanger.isWet){
+        rolledChance = 1 - rolledChance;
+    }
 		return rolledChance < danger;
 	}
 	/// <summary>
