@@ -33,6 +33,28 @@ public class Cat : GameCharacter {
 	/// </summary>
 	public bool hasWildCard = true;
 
+    [SerializeField] private bool m_wetness;
+    /// <summary>
+    ///   Inverts the probabilities
+    /// </summary>
+  public bool isWet {
+      get {return m_wetness;}
+      set {m_wetness = value;}
+  }
+
+    [SerializeField] private int m_wetTurns;
+    /// <summary>
+    /// Turns the cat remains wt
+    /// </summary>
+    public int wetTurns {
+        get {return m_wetTurns;}
+    }
+
+    public void decrementWetTurns() {
+        if(isWet && m_wetTurns > 0){
+            m_wetTurns--;
+        }
+    }
 	/// <summary>
 	/// Moves and gathers danger.
 	/// </summary>
