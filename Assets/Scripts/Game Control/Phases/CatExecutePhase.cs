@@ -70,7 +70,7 @@ public class CatExecutePhase : GameControlPhase {
 		UIManager.masterInfoBox.ClearAllData ();
 		CameraOverheadControl.StopFollowing ();
 		purrSound.Stop ();
-    selectedCat.decrementWetTurns();
+		selectedCat.DecrementWetTurns ();
 		if (GameBrain.dogManager.allCharacters.Length == 0 && GameBrain.catManager.availableCharacters.Length == 1) {
 			selectedCat.SetPseudoGray (true);
 		}

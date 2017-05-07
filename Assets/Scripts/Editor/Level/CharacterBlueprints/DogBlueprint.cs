@@ -11,13 +11,13 @@ namespace LevelBuilderRemake {
 		[System.Serializable]
 		public class FlatArray2DPathing : FlatArray2D<PathNodeState> { }
 		public FlatArray2DPathing nodeMap;
-		public DogVisionPatternType visionType;
+		public VisionPattern.PatternType visionType;
 		private bool pathFoldout = false;
 
 		/// <summary>
 		/// Construct a new DogBlueprint.
 		/// </summary>
-		public static DogBlueprint CreateDogBlueprint (string name, Compass.Direction orientation, Point2D location, DogVisionPatternType visionType, LevelBlueprint lbp) {
+		public static DogBlueprint CreateDogBlueprint (string name, Compass.Direction orientation, Point2D location, VisionPattern.PatternType visionType, LevelBlueprint lbp) {
 			DogBlueprint dbp = ScriptableObject.CreateInstance<DogBlueprint> ();
 			dbp.characterName = name;
 			dbp.orientation = orientation;
@@ -40,7 +40,7 @@ namespace LevelBuilderRemake {
 			newPoint.z = EditorGUILayout.IntField (newPoint.z);
 			location = newPoint;
 			orientation = (Compass.Direction)EditorGUILayout.EnumPopup (orientation);
-			visionType = (DogVisionPatternType)EditorGUILayout.EnumPopup (visionType);
+			visionType = (VisionPattern.PatternType)EditorGUILayout.EnumPopup (visionType);
 			bool deletThis = GUILayout.Button (new GUIContent ("Delete", "Delete this dog."));
 			EditorGUILayout.EndHorizontal ();
 			EditorGUILayout.BeginHorizontal ();

@@ -95,7 +95,7 @@ public class StoryUIAnimator : MonoBehaviour {
 		if (TutorialTextHolder.messages == null) {
 			gameObject.SetActive (false);
 		}
-		else{
+		else {
 			CalculateButtonState ();
 		}
 	}

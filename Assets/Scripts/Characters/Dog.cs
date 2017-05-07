@@ -19,10 +19,10 @@ public class Dog : GameCharacter {
 	}
 
 	public override string flavorText {
-		get { return visionType.ToString () + " type dog"; }
+		get { return VisionPattern.PatternTypeDescription (visionType); }
 	}
 
-	public DogVisionPatternType visionType;
+	public VisionPattern.PatternType visionType;
 
 	protected VisionPattern m_VisionPattern;
 	/// <summary>

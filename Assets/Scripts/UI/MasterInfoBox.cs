@@ -29,7 +29,7 @@ public class MasterInfoBox : MonoBehaviour {
 	/// </summary>
 	public void AddData (string info, Color color) {
 		if (numberOfDataEnabled < dataFields.Length) {
-			dataFields [numberOfDataEnabled].text = info;
+			dataFields [numberOfDataEnabled].text = " * " + info;
 			dataFields [numberOfDataEnabled].color = color;
 			dataFields [numberOfDataEnabled].gameObject.SetActive (true);
 			numberOfDataEnabled++;
@@ -40,7 +40,7 @@ public class MasterInfoBox : MonoBehaviour {
 	/// Adds the data from tile danger data using a convention.
 	/// </summary>
 	public void AddDataFromTileDangerData (TileDangerData data) {
-		AddData ("* " + Mathf.FloorToInt (data.danger * 100).ToString () + "% from " + data.watchingDog.name, data.dangerColor.OptimizedForText ());
+		AddData (Mathf.FloorToInt (data.danger * 100).ToString () + "% from " + data.watchingDog.name, data.dangerColor.OptimizedForText ());
 	}
 
 	public void AddEnergyDataFromCat (int currentEnergy, Cat cat) {

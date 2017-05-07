@@ -170,12 +170,43 @@ public class VisionPattern {
 		return adjustedMatrix;
 	}
 
-	public static VisionPattern VisionPatternFromType (Dog theOwner, DogVisionPatternType type) {
+	public static VisionPattern VisionPatternFromType (Dog theOwner, PatternType type) {
 		try {
 			return new VisionPattern (theOwner, type.ToString ());
 		}
 		catch {
 			return new VisionPattern (theOwner, "FAKE");
+		}
+	}
+
+	/// <summary>
+	/// All different types of dog vision patterns.
+	/// </summary>
+	public enum PatternType {
+		/// <summary>
+		/// Grunts introduced early on.
+		/// </summary>
+		Hound,
+		/// <summary>
+		/// Chihuahua. Very small. Truncated to prevent spelling errors.
+		/// </summary>
+		Chih,
+		Beacon
+	}
+
+	/// <summary>
+	/// Returns a description of each type of dog by vision pattern.
+	/// </summary>
+	public static string PatternTypeDescription (PatternType type) {
+		switch (type) {
+			case PatternType.Hound:
+				return "Hound type dog: Sharper senses than the average dog";
+			case PatternType.Chih:
+				return "Chihuahua type dog: Has more bark than bite, except in large numbers";
+			case PatternType.Beacon:
+				return "Beacon: Immobile anti-cat security equipment";
+			default:
+				return "Unique: An unpredictable unit in canine security";
 		}
 	}
 }

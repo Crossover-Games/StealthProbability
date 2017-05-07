@@ -45,11 +45,14 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				UIManager.masterInfoBox.headerText = t.occupant.name;
 				if (t.occupant.characterType == CharacterType.Cat) {
 					Cat thisCat = (t.occupant as Cat);
+					if (thisCat.isWet) {
+						UIManager.masterInfoBox.AddData ("SOAKED! Dry after " + thisCat.wetTurnsRemaining + " turns", WetFloor.waterColor);
+					}
 					if (thisCat.hasWildCard) {
-						UIManager.masterInfoBox.AddData ("Wild card ready", Color.white);
+						UIManager.masterInfoBox.AddData ("Second chance ready", Color.white);
 					}
 					else {
-						UIManager.masterInfoBox.AddData ("Wild card depleted", Color.gray);
+						UIManager.masterInfoBox.AddData ("Second chance depleted", Color.gray);
 					}
 
 					if (!t.occupant.grayedOut) {
@@ -83,6 +86,9 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 					tdd.watchingDog.myTile.shimmer = true;
 				}
 				UIManager.masterInfoBox.headerText = t.tileName;
+				if (t.tileType == TileType.WetFloor && (t as WetFloor).flooded) {
+					UIManager.masterInfoBox.AddData ("Wet cats have negated responses to risk probabilities.", WetFloor.waterColor);
+				}
 				UIManager.routeCurrentlyDisplayed = null;
 			}
 		}

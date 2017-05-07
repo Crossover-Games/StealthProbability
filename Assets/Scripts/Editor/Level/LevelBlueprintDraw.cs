@@ -208,7 +208,7 @@ namespace LevelBuilderRemake {
 			EditorGUILayout.BeginHorizontal ();
 			EditorGUILayout.Space ();
 			if (GUILayout.Button (new GUIContent ("Add dog", "Add a new dog."))) {
-				levelBP.dogs.Add (DogBlueprint.CreateDogBlueprint ("dog", Compass.Direction.North, new Point2D (0, 0), DogVisionPatternType.Hound, levelBP));
+				levelBP.dogs.Add (DogBlueprint.CreateDogBlueprint ("dog", Compass.Direction.North, new Point2D (0, 0), VisionPattern.PatternType.Hound, levelBP));
 			}
 			EditorGUILayout.Space ();
 			EditorGUILayout.EndHorizontal ();

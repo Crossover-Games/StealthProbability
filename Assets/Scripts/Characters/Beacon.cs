@@ -10,7 +10,7 @@ public class Beacon : Dog {
 
 	override protected void Awake () {
 		SetUpReferencesOnAwake ();
-		m_VisionPattern = VisionPattern.VisionPatternFromType (this, DogVisionPatternType.Beacon);
+		m_VisionPattern = VisionPattern.VisionPatternFromType (this, VisionPattern.PatternType.Beacon);
 	}
 
 	override protected void Start () { }

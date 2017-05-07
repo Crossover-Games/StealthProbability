@@ -19,7 +19,8 @@ public class Laser : Dog {
 
 	override protected void Start () { }
 
-	public override string flavorText { get { return "Light Amplification by Stimulated Emission of Radiation"; } }
+	//public override string flavorText { get { return "Light Amplification by Stimulated Emission of Radiation"; } }
+	public override string flavorText { get { return "Security laser: Immobile cat infiltration countermeasure"; } }
 
 	public override float stepAnimationTime { get { return 0f; } }
 

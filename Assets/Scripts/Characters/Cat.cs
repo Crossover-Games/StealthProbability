@@ -17,12 +17,12 @@ public class Cat : GameCharacter {
 	}
 
 	public override string flavorText {
-		get { return "Grunt unit of the international fashion police."; }
+		get { return "Cat: Grunt unit of the international fashion police"; }
 	}
 
 	[SerializeField] private int m_maxEnergy;
 	/// <summary>
-	/// The measure for how much a cat can do in a turn. Converts to movement, actions, and extra stealth.
+	/// The measure for how much a cat can do in a turn. Converts to movement and extra stealth.
 	/// </summary>
 	public int maxEnergy {
 		get { return m_maxEnergy; }
@@ -33,28 +33,36 @@ public class Cat : GameCharacter {
 	/// </summary>
 	public bool hasWildCard = true;
 
-    [SerializeField] private bool m_wetness;
-    /// <summary>
-    ///   Inverts the probabilities
-    /// </summary>
-  public bool isWet {
-      get {return m_wetness;}
-      set {m_wetness = value;}
-  }
+	public void Soak () {
+		m_wetTurns = maxWetTurns;
+	}
 
-    [SerializeField] private int m_wetTurns;
-    /// <summary>
-    /// Turns the cat remains wt
-    /// </summary>
-    public int wetTurns {
-        get {return m_wetTurns;}
-    }
+	/// <summary>
+	/// Inverts the probabilities
+	/// </summary>
+	public bool isWet {
+		get { return m_wetTurns > 0; }
+	}
 
-    public void decrementWetTurns() {
-        if(isWet && m_wetTurns > 0){
-            m_wetTurns--;
-        }
-    }
+	/// <summary>
+	/// Total number of turns a soaked cat is wet. Effectively, it will be one lower than this.
+	/// </summary>
+	private static int maxWetTurns {
+		get { return 4; }
+	}
+	[SerializeField] private int m_wetTurns = 0;
+	/// <summary>
+	/// Turns the cat remains wet
+	/// </summary>
+	public int wetTurnsRemaining {
+		get { return m_wetTurns; }
+	}
+
+	public void DecrementWetTurns () {
+		if (isWet) {
+			m_wetTurns--;
+		}
+	}
 	/// <summary>
 	/// Moves and gathers danger.
 	/// </summary>
@@ -70,6 +78,9 @@ public class Cat : GameCharacter {
 			TileDangerData [] dangerArray = myTile.dangerData;
 			if (dangerArray.Length > 0) {
 				DetectionManager.AddDanger (this, dangerArray);
+			}
+			if (destination.tileType == TileType.WetFloor && (destination as WetFloor).flooded) {
+				Soak ();
 			}
 		}
 	}
