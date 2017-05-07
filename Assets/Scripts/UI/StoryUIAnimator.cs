@@ -89,12 +89,14 @@ public class StoryUIAnimator : MonoBehaviour {
 		offscreenPos = rectTransform.anchoredPosition3D + Vector3.right * 500f;
 		rectTransform.anchoredPosition3D = offscreenPos;
 		myTimer = new Timer (fadeTime);
-		CalculateButtonState ();
 	}
 
 	void Start () {
 		if (TutorialTextHolder.messages == null) {
 			gameObject.SetActive (false);
+		}
+		else{
+			CalculateButtonState ();
 		}
 	}
 
