@@ -12146,7 +12146,7 @@ Prefab:
     - target: {fileID: 224376053087091410, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -12166,7 +12166,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -95
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -12176,7 +12176,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -12196,7 +12196,7 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -195.30055
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -12206,12 +12206,12 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30.601093
       objectReference: {fileID: 0}
     - target: {fileID: 224597049839826336, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 230.60109
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0708eb52ee4c694c9f856d41efc5d0d, type: 2}
@@ -24312,13 +24312,23 @@ Prefab:
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[1]
+<<<<<<< HEAD
       value: Now, you need to get your two cat to the pressure pads at the same time
         to unlock the elevator. If either is caught, the mission is failed!
+=======
+      value: Now, you need to get your two operatives to the elevators at the same
+        time. You can use the pressure pads to get past some of the guards!
+>>>>>>> d231788a4edfafcf4e099677c8b1f3cb34b83f52
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[2]
+<<<<<<< HEAD
       value: 
+=======
+      value: You will have to activate both pads for the gates to open. If either
+        agent is caught, the mission is failed! Good Luck Operative!
+>>>>>>> d231788a4edfafcf4e099677c8b1f3cb34b83f52
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}

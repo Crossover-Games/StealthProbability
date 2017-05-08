@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.22506478, g: 0.2516193, b: 0.3227109, a: 1}
+  m_IndirectSpecularColor: {r: 0.22510481, g: 0.25166202, b: 0.32264084, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2605,7 +2605,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -95
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -2615,7 +2615,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -2635,7 +2635,7 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -195.30055
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -2645,12 +2645,12 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30.601093
       objectReference: {fileID: 0}
     - target: {fileID: 224597049839826336, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 230.60109
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0708eb52ee4c694c9f856d41efc5d0d, type: 2}
@@ -3703,7 +3703,11 @@ Prefab:
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.size
+<<<<<<< HEAD
       value: 1
+=======
+      value: 4
+>>>>>>> d231788a4edfafcf4e099677c8b1f3cb34b83f52
       objectReference: {fileID: 0}
     - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3750,6 +3754,19 @@ Prefab:
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[3]
+      value: 'If you do not use your full movement, it will give you a bonus to not
+        get caught: each point of energy you save increases your stealth by 10%! Good
+        Luck Operative!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[2]
+      value: If you walk through a space a dog sees, they roll to notice you. If a
+        dog moves and sees you, they also roll to notice you!
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[4]
       value: End Transmission
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
