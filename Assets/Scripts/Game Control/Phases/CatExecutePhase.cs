@@ -25,7 +25,7 @@ public class CatExecutePhase : GameControlPhase {
 
 	private static bool? triggerPressurePlatesThisTurn;
 	private static ButtonTileOnePress buttonThisTurn;
-	private static bool immediateFail;
+	private static bool? immediateFail;
 
 	void Awake () {
 		staticInstance = this;
@@ -62,8 +62,21 @@ public class CatExecutePhase : GameControlPhase {
 		}
 	}
 
+	private void RemoveCat () {
+		AnimationManager.AddAnimation (selectedCat.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
+		GameBrain.catManager.Remove (selectedCat);
+	}
+
 	override public void ControlUpdate () {
-		if (tilePath.Count > 0) {
+		if (immediateFail == true) {
+			purrSound.Stop ();
+			RemoveCat ();
+			immediateFail = null;
+		}
+		else if (immediateFail == null) {
+			LosePhase.TakeControl ();
+		}
+		else if (tilePath.Count > 0) {
 			if (tilePath [0] is ButtonTileOnePress) {
 				buttonThisTurn = tilePath [0] as ButtonTileOnePress;
 			}
@@ -117,7 +130,7 @@ public class CatExecutePhase : GameControlPhase {
 			triggerPressurePlatesThisTurn = false;
 		}
 		else {
-			CatTurnDetectionPhase.TakeControl (selectedCat, immediateFail);
+			CatTurnDetectionPhase.TakeControl (selectedCat, false);
 		}
 	}
 

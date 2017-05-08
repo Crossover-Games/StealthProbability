@@ -3435,7 +3435,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4762980525661144, guid: e640d673687981e4f8c7ed0ed2416a8b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4762980525661144, guid: e640d673687981e4f8c7ed0ed2416a8b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -7774,7 +7774,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012272812282, guid: 63479e236ace6ce4abf1ae49161607fd, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4000012272812282, guid: 63479e236ace6ce4abf1ae49161607fd, type: 2}
       propertyPath: m_LocalRotation.x
@@ -14574,7 +14574,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4762980525661144, guid: e640d673687981e4f8c7ed0ed2416a8b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4762980525661144, guid: e640d673687981e4f8c7ed0ed2416a8b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -24265,7 +24265,7 @@ Prefab:
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
       propertyPath: m_LocalPosition.x
@@ -24312,13 +24312,13 @@ Prefab:
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[1]
-      value: Now, you need to get your two operatives to the pressure pads at the
-        same time
+      value: Now, you need to get your two cat to the pressure pads at the same time
+        to unlock the elevator. If either is caught, the mission is failed!
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[2]
-      value: ' to unlock the elevator. If either is caught, the mission is failed!'
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
@@ -29532,7 +29532,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012272812282, guid: 63479e236ace6ce4abf1ae49161607fd, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4000012272812282, guid: 63479e236ace6ce4abf1ae49161607fd, type: 2}
       propertyPath: m_LocalRotation.x

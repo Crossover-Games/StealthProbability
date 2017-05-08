@@ -17,7 +17,8 @@ public class Cat : GameCharacter {
 	}
 
 	public override string flavorText {
-		get { return "Cat: Grunt unit of the international fashion police"; }
+		//get { return "Cat: Grunt unit of the international fashion police"; }
+		get { return "Cat: Feline freedom fighter"; }
 	}
 
 	[SerializeField] private GameObject wetEffect;
@@ -28,6 +29,25 @@ public class Cat : GameCharacter {
 	/// </summary>
 	public int maxEnergy {
 		get { return m_maxEnergy; }
+	}
+
+	private static string defaultColorJson {
+		get { return "{\"r\":0.5,\"g\":0.0,\"b\":1.0,\"a\":1.0}"; }
+	}
+
+	override protected void Awake () {
+		base.Awake ();
+		try {
+			defaultColor = JsonUtility.FromJson<Color> (PlayerPrefs.GetString ("FavColor", defaultColorJson));
+		}
+		catch {
+			defaultColor = JsonUtility.FromJson<Color> (defaultColorJson);
+		}
+	}
+
+	void Start () {
+		grayedOut = true;
+		grayedOut = false;
 	}
 
 	public int stealthStacks = 0;

@@ -76,10 +76,7 @@ public abstract class GameCharacter : MonoBehaviour {
 	protected Animator animator;
 
 	private Renderer [] myRenderers;
-	private Color myColor;
-	public Color defaultColor {
-		get { return myColor; }
-	}
+	public Color defaultColor;
 
 	/// <summary>
 	/// Elevation of the top of the character's head in world space. Used for aligning the cursor.
@@ -101,7 +98,7 @@ public abstract class GameCharacter : MonoBehaviour {
 		soundPlayer = GetComponent<AudioSource> ();
 		FindMyTile ();
 		myRenderers = GetComponentsInChildren<Renderer> ();
-		myColor = myRenderers [0].material.color;
+		defaultColor = myRenderers [0].material.color;
 		animator = GetComponentInChildren<Animator> ();
 	}
 
@@ -159,7 +156,7 @@ public abstract class GameCharacter : MonoBehaviour {
 						r.material.color = Color.gray;
 					}
 					else {
-						r.material.color = myColor;
+						r.material.color = defaultColor;
 					}
 				}
 			}

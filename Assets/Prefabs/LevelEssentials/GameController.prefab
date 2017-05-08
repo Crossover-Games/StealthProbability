@@ -43,7 +43,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1004289047616382
 GameObject:
   m_ObjectHideFlags: 1
@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 114876928454067304}
   - component: {fileID: 114859027272064552}
   - component: {fileID: 114940013264892088}
+  - component: {fileID: 114418542972459778}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -402,7 +403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1184825765669936
 GameObject:
   m_ObjectHideFlags: 1
@@ -676,7 +677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1311559510492884
 GameObject:
   m_ObjectHideFlags: 1
@@ -965,7 +966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1417693673885716
 GameObject:
   m_ObjectHideFlags: 1
@@ -1102,7 +1103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1470138884342812
 GameObject:
   m_ObjectHideFlags: 1
@@ -1152,7 +1153,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1489973435926700
 GameObject:
   m_ObjectHideFlags: 1
@@ -1234,7 +1235,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1555290208182806
 GameObject:
   m_ObjectHideFlags: 1
@@ -1538,7 +1539,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1740593511927988
 GameObject:
   m_ObjectHideFlags: 1
@@ -2132,7 +2133,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1967028914340874
 GameObject:
   m_ObjectHideFlags: 1
@@ -2233,7 +2234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4008969293991866
 Transform:
   m_ObjectHideFlags: 1
@@ -6211,6 +6212,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114418542972459778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1133688171390954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0263c05393bc87149a3c98e4a755950c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114428822941245132
 MonoBehaviour:
   m_ObjectHideFlags: 1

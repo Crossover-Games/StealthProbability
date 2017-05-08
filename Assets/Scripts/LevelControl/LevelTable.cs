@@ -8,12 +8,14 @@ public class LevelTable {
 	/// </summary>
 	public static int LevelNumberToSceneIndex (int levelNumber) {
 		switch (levelNumber) {
-			case 1:
+			case 0:
 				return 1;
-			case 2:
+			case 1:
 				return 2;
-			case 3:
+			case 2:
 				return 3;
+			case 3:
+				return 4;
 			default:
 				return mainMenuBuildIndex;
 		}
@@ -24,12 +26,14 @@ public class LevelTable {
 	/// </summary>
 	public static int LevelNumberToLoadingSceneIndex (int levelNumber) {
 		switch (levelNumber) {
-			case 1:
-				return 4;
-			case 2:
+			case 0:
 				return 5;
-			case 3:
+			case 1:
 				return 6;
+			case 2:
+				return 7;
+			case 3:
+				return 8;
 			default:
 				return mainMenuBuildIndex;
 		}

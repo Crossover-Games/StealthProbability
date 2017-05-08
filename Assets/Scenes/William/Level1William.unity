@@ -3700,6 +3700,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 51.912613
@@ -3746,6 +3751,24 @@ Prefab:
         type: 2}
       propertyPath: m_messages.Array.data[3]
       value: End Transmission
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[0]
+      value: "Alright Operative, you will need to infiltrate this facility. There
+        are only two dogs on patrol, so this should be a cakewalk.\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
+        type: 2}
+      propertyPath: m_messages.Array.data[2]
+      value: "The FitnessGram Pacer Test is a multistage aerobic capacity test that
+        progressively gets more difficult as it continues. The 20 meter pacer test
+        will begin in 30 seconds. Line up at the start. The running speed starts slowly
+        but gets faster each minute after you hear this signal bodeboop. A sing lap
+        should be completed every time you hear this sound. ding Remember to run in
+        a straight line and run as long as possible. The second time you fail to complete
+        a lap before the sound, your test is over. The test will begin on the word
+        start. On your mark. Get ready!\u2026 Start."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
