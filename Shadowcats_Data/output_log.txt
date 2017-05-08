@@ -1,0 +1,47 @@
+Initialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 960M (ID=0x139b)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   21.21.13.7878
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.173 seconds
+Platform assembly: C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\ES\Documents\MEITE Spring\Serious games\StealthProbability\Shadowcats_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.612641 ms
+Setting up 4 worker threads for Enlighten.
+  Thread -> id: 320c -> priority: 1 
+  Thread -> id: 1d78 -> priority: 1 
+  Thread -> id: 2850 -> priority: 1 
+  Thread -> id: 11e8 -> priority: 1 
+Unloading 8 Unused Serialized files (Serialized files now loaded: 0)
+WARNING: Shader Unsupported: 'Unlit/Color Transparent' - Pass '' has no vertex shader
+UnloadTime: 12.293526 ms
+
+Unloading 197 unused Assets to reduce memory usage. Loaded Objects now: 15364.
+Total: 12.929971 ms (FindLiveObjects: 0.609975 ms CreateObjectMapping: 0.152098 ms MarkObjects: 5.290664 ms  DeleteObjects: 6.877231 ms)
+
+Unloading 7 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 7.517231 ms
+
+Unloading 111 unused Assets to reduce memory usage. Loaded Objects now: 15364.
+Total: 6.502713 ms (FindLiveObjects: 0.702814 ms CreateObjectMapping: 0.125234 ms MarkObjects: 5.526121 ms  DeleteObjects: 0.148148 ms)
+
