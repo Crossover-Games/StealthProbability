@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 4236206075520596}
   - component: {fileID: 65875977070829000}
   - component: {fileID: 114963938110047758}
-  - component: {fileID: 114358699361591668}
   m_Layer: 10
   m_Name: ButtonTile
   m_TagString: Untagged
@@ -171,6 +170,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4815554220504100}
+  - component: {fileID: 114078773195039744}
   m_Layer: 10
   m_Name: Plates
   m_TagString: Untagged
@@ -267,7 +267,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1199684608416210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 2}
+  m_LocalPosition: {x: 6, y: 0, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4890613401338490}
@@ -814,6 +814,20 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114078773195039744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1552742729716986}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a036553979f557146aa788699b51295d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cycleLength: 5
+  elevationDifference: 0
+  reverseDirection: 1
 --- !u!114 &114215963934696820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -826,20 +840,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SpriteRenderer: {fileID: 212212013936307044}
---- !u!114 &114358699361591668
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1199684608416210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a036553979f557146aa788699b51295d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cycleLength: 5
-  elevationDifference: 0
-  reverseDirection: 1
 --- !u!114 &114933132550856932
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -871,6 +871,7 @@ MonoBehaviour:
   activatedObject: {fileID: 1615711466462604}
   activatedMaterial: {fileID: 2100000, guid: 0a98ac2bbbdc0e945a764d50c057ec36, type: 2}
   buttonParent: {fileID: 1552742729716986}
+  spinEffect: {fileID: 114078773195039744}
   dependentTiles: []
 --- !u!198 &198835559836168924
 ParticleSystem:

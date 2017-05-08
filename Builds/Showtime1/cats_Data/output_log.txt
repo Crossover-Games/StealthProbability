@@ -1,0 +1,57 @@
+Mono path[0] = 'C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/Showtime1/cats_Data/Managed'
+Mono path[1] = 'C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/Showtime1/cats_Data/Mono'
+Mono config path = 'C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/Showtime1/cats_Data/Mono/etc'
+PlayerConnection initialized from C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/Showtime1/cats_Data (debug = 0)
+PlayerConnection initialized network socket : 0.0.0.0 55005
+Multi-casting "[IP] 152.23.54.161 [Port] 55005 [Flags] 2 [Guid] 1354505458 [EditorId] 1383752380 [Version] 1048832 [Id] WindowsPlayer(UNC-MP07L862) [Debug] 0" to [225.0.0.222:54997]...
+Started listening to [0.0.0.0:55005]
+PlayerConnection already initialized - listening to [0.0.0.0:55005]
+Player data archive not found at `C:/Users/Public/Documents/Unity Projects/StealthProbability/Builds/Showtime1/cats_Data/data.unity3d`, using local filesystemInitialize engine version: 5.6.0f3 (497a0f351392)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 5500 (ID=0x1616)
+    Vendor:   Intel
+    VRAM:     2087 MB
+    Driver:   20.19.15.4531
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.032 seconds
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Public\Documents\Unity Projects\StealthProbability\Builds\Showtime1\cats_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.573470 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: a78 -> priority: 1 
+  Thread -> id: f78 -> priority: 1 
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 12.877379 ms
+System memory in use before: 55.1 MB.
+System memory in use after: 20.1 MB.
+
+Unloading 208 unused Assets to reduce memory usage. Loaded Objects now: 847.
+Total: 7.015466 ms (FindLiveObjects: 0.073630 ms CreateObjectMapping: 0.058012 ms MarkObjects: 0.287830 ms  DeleteObjects: 6.594654 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+WARNING: Shader Unsupported: 'Unlit/Color Transparent' - Pass '' has no vertex shader
+UnloadTime: 3.029578 ms
+System memory in use before: 63.8 MB.
+System memory in use after: 63.8 MB.
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 5428.
+Total: 4.856517 ms (FindLiveObjects: 0.332454 ms CreateObjectMapping: 0.097728 ms MarkObjects: 3.472256 ms  DeleteObjects: 0.951847 ms)
+

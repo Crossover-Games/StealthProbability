@@ -192,6 +192,7 @@ public class VisionPattern {
 		/// </summary>
 		Chih,
 		Pug,
+		TrainingBot,
 		Beacon
 	}
 
@@ -208,6 +209,8 @@ public class VisionPattern {
 				return "Beacon: Immobile anti-cat security equipment";
 			case PatternType.Pug:
 				return "Pug: Adorable pug eyes make for better lateral vision at the cost of having poor forward vision.";
+			case PatternType.TrainingBot:
+				return "Training bot dog: A weak mockery of our enemy used for instructional purposes.";
 			default:
 				return "Unique: An unpredictable unit in canine security";
 		}

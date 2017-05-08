@@ -4,28 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/ClassDemoTest.unity
-    guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/Main Menu 2.unity
-    guid: 653f901bff6e7fc49b7b2d58f43198db
-  - enabled: 1
-    path: Assets/Scenes/Loading Screens/LoadingScreenLevel1Screen2.unity
-    guid: 22506b039d866ed41831f041c5a40ea9
-  - enabled: 1
-    path: Assets/Scenes/William/Level1William.unity
-    guid: 1c7f7bbea33f11b42ba292dd990b8ec5
-  - enabled: 1
-    path: Assets/Scenes/Loading Screens/LoadingScreenLevel2Screen1.unity
-    guid: 5551efb81b5404446b861789e74d2a84
-  - enabled: 1
-    path: Assets/Scenes/William/Level2William.unity
-    guid: 5f42e3617336c6f418d55a17dc41409d
-  - enabled: 1
-    path: Assets/Scenes/Loading Screens/LoadingScreenLevel3Screen1.unity
-    guid: 2d82881b59335dd4fa5ff125e16796e7
-  - enabled: 1
-    path: Assets/Scenes/William/Level3Hacks.unity
-    guid: 62b64b35f3bb49b499811944e67a6bdd
+  m_Scenes: []

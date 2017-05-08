@@ -28,7 +28,6 @@ public class PathArrow : MonoBehaviour {
 			m.color = value;
 			m.SetColor ("_EmissionColor", value);
 			foreach (Renderer r in allRenderers) {
-				//r.SetMainMaterialColor (value);
 				r.material = m;
 			}
 		}
@@ -36,7 +35,13 @@ public class PathArrow : MonoBehaviour {
 	void Awake () {
 		allRenderers = new Renderer [lineSegments.Length];
 		for (int x = 0; x < allRenderers.Length; x++) {
-			allRenderers [x] = lineSegments [x].GetComponentInChildrenUnconditional<Renderer> ();
+			allRenderers [x] = lineSegments [x].GetComponentInChildren<Renderer> ();
+		}
+	}
+
+	void Start () {
+		foreach (GameObject g in lineSegments) {
+			g.SetActive (false);
 		}
 	}
 

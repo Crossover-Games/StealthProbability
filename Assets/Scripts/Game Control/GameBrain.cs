@@ -59,6 +59,9 @@ public class GameBrain : MonoBehaviour {
 			inControl.ControlUpdate ();
 		}
 		inControl.StandardUpdate ();
+		if (Input.GetKeyDown (KeyCode.LeftShift) && Input.GetKey (KeyCode.Escape) || Input.GetKeyDown (KeyCode.Escape) && Input.GetKey (KeyCode.LeftShift)) {
+			MainMenuShortcut.ToMainMenu ();
+		}
 	}
 
 	// ---METHODS

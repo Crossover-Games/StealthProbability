@@ -16,7 +16,7 @@ public class Gate : ActionTile {
 		get { return active ? "-GATE (LIFTED)-" : "-GATE-"; }
 	}
 	public override string infoText {
-		get { return active ? "" : "All pressure plates in the level must be simultaneously pressed to lift the gate."; }
+		get { return active ? "" : "This gate requires cat input to be lifted."; }
 	}
 
 	public override Vector3 cursorConnectionPoint {
