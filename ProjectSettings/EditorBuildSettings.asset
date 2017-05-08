@@ -4,4 +4,31 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu 2.unity
+    guid: 653f901bff6e7fc49b7b2d58f43198db
+  - enabled: 1
+    path: Assets/Scenes/William/Tutorial0.unity
+    guid: 3e10bd9096264d548ad58354158c2642
+  - enabled: 1
+    path: Assets/Scenes/William/Level1William.unity
+    guid: 3acac0ac6a7942947b7cec2df8c99920
+  - enabled: 1
+    path: Assets/Scenes/William/Level2William.unity
+    guid: 25c7cd574520feb499db0fdac5af57ca
+  - enabled: 1
+    path: Assets/Scenes/William/Level3Hacks.unity
+    guid: 62b64b35f3bb49b499811944e67a6bdd
+  - enabled: 1
+    path: Assets/Scenes/Loading Screens/Smaller/LoadingScreen 0-Tutorial.unity
+    guid: 853440583e6157e4098ceed276357a9a
+  - enabled: 1
+    path: Assets/Scenes/Loading Screens/Smaller/LoadingScreen 1.unity
+    guid: e4ddea20679de2e48b11e77612135027
+  - enabled: 1
+    path: Assets/Scenes/Loading Screens/Smaller/LoadingScreen 2.unity
+    guid: b210a272fa0f29a41b82dd90b4254700
+  - enabled: 1
+    path: Assets/Scenes/Loading Screens/Smaller/LoadingScreen 3.unity
+    guid: 8994c3fc4c265a14aa2c5b6abf99d223

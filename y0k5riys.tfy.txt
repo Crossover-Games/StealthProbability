@@ -1,0 +1,72 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch dev
+# Your branch is up-to-date with 'origin/dev'.
+#
+# Changes to be committed:
+#	modified:   Assets/Scenes/William/Level1William.unity
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats.exe
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/Assembly-CSharp-firstpass.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/Assembly-CSharp.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/Assembly-UnityScript.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/Boo.Lang.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/Mono.Security.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/System.Core.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/System.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/UnityEngine.Networking.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/UnityEngine.UI.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/UnityEngine.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/UnityEngine.dll.mdb
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Managed/mscorlib.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/MonoPosixHelper.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/1.0/DefaultWsdlHelpGenerator.aspx
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/1.0/machine.config
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/2.0/Browsers/Compat.browser
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/2.0/machine.config
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/2.0/settings.map
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/2.0/web.config
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/browscap.ini
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/config
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/etc/mono/mconfig/config.xml
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Mono/mono.dll
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Resources/unity default resources
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/Resources/unity_builtin_extra
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/app.info
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/globalgamemanagers
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/globalgamemanagers.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/globalgamemanagers.assets.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level0
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level1
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level1.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level2
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level2.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level3
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level4
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level5
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level6
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level7
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/level8
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/resources.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/resources.assets.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets0.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets0.assets.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets0.resource
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets1.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets1.assets.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets1.resource
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets2.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets3.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets3.assets.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets4.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets4.assets.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets4.resource
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets5.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets5.assets.resS
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets6.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets7.assets
+#	new file:   Builds/SHADOWCATS-FINAL/ShadowCats_Data/sharedassets8.assets
+#	modified:   ProjectSettings/EditorBuildSettings.asset
+#
+
