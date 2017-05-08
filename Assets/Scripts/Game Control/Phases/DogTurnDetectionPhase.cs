@@ -45,11 +45,10 @@ public class DogTurnDetectionPhase : GameControlPhase {
 			DetectionMatchup currentCheck = allChecks.Dequeue ();
 			currentCheck.CameraHalfway ();
 			DetectionManager.SetConflictHighlight (currentCheck);
-			bool checkResult = currentCheck.SimulateDetectionCheck (out lastRolledChance);
+			bool checkResult = DetectionMeter.ConductRollAndAnimate (currentCheck);
 			if (checkResult) {
 				lastCatRekt = currentCheck.catInDanger;
 			}
-			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult, currentCheck.catInDanger);
 		}
 		else {
 			EndChecking ();

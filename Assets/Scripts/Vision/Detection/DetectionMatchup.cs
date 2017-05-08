@@ -22,22 +22,4 @@ public class DetectionMatchup {
 	public void CameraHalfway () {
 		CameraOverheadControl.SetCamFocusPoint (catInDanger.myTile.topCenterPoint.HalfwayTo (watchingDog.myTile.topCenterPoint));
 	}
-
-	/// <summary>
-	/// Returns true if the cat should be busted.
-	/// </summary>
-	public bool SimulateDetectionCheck (out float rolledChance) {
-		rolledChance = Random.value;
-		/*if (catInDanger.isWet) {
-			rolledChance = 1 - rolledChance;
-		}*/
-		return rolledChance < danger;
-	}
-	/// <summary>
-	/// Returns true if the cat should be busted.
-	/// </summary>
-	public bool SimulateDetectionCheck () {
-		float f;
-		return SimulateDetectionCheck (out f);
-	}
 }

@@ -43,9 +43,7 @@ public class CatTurnDetectionPhase : GameControlPhase {
 			selectedCat = currentCheck.catInDanger;
 			currentCheck.CameraHalfway ();
 			DetectionManager.SetConflictHighlight (currentCheck);
-			bool checkResult = currentCheck.SimulateDetectionCheck (out lastRolledChance);
-			rekt = rekt || checkResult;
-			DetectionMeter.AnimateRoll (currentCheck.danger, lastRolledChance, checkResult, selectedCat);
+			rekt = rekt || DetectionMeter.ConductRollAndAnimate (currentCheck);
 		}
 		else if (rekt) {
 			if (selectedCat.hasWildCard) {
