@@ -124,6 +124,12 @@ public class DetectionManager : MonoBehaviour {
 		return checks;
 	}
 
+	public static void ClearDangerByCat (Cat c) {
+		if (staticInstance.danger.ContainsKey (c)) {
+			staticInstance.danger.Remove (c);
+		}
+	}
+
 	/// <summary>
 	/// Returns all checks that must be made for all cats. There should be no pending danger after this.
 	/// </summary>

@@ -20,6 +20,8 @@ public class Cat : GameCharacter {
 		get { return "Cat: Grunt unit of the international fashion police"; }
 	}
 
+	[SerializeField] private GameObject wetEffect;
+
 	[SerializeField] private int m_maxEnergy;
 	/// <summary>
 	/// The measure for how much a cat can do in a turn. Converts to movement and extra stealth.
@@ -28,12 +30,15 @@ public class Cat : GameCharacter {
 		get { return m_maxEnergy; }
 	}
 
+	public int stealthStacks = 0;
+
 	/// <summary>
 	/// Evade detection once.
 	/// </summary>
 	public bool hasWildCard = true;
 
 	public void Soak () {
+		wetEffect.SetActive (true);
 		m_wetTurns = maxWetTurns;
 	}
 
@@ -50,7 +55,7 @@ public class Cat : GameCharacter {
 	private static int maxWetTurns {
 		get { return 4; }
 	}
-	[SerializeField] private int m_wetTurns = 0;
+	private int m_wetTurns = 0;
 	/// <summary>
 	/// Turns the cat remains wet
 	/// </summary>
@@ -61,6 +66,9 @@ public class Cat : GameCharacter {
 	public void DecrementWetTurns () {
 		if (isWet) {
 			m_wetTurns--;
+			if (!isWet) {
+				wetEffect.SetActive (false);
+			}
 		}
 	}
 	/// <summary>

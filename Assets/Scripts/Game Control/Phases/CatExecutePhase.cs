@@ -15,13 +15,17 @@ public class CatExecutePhase : GameControlPhase {
 	/// Puts the CatExecutePhase in control.
 	/// </summary>
 	public static void TakeControl (Cat selectedCat, List<Tile> tilePath) {
-		triggerButtonActionThisTurn = null;
+		buttonThisTurn = null;
+		triggerPressurePlatesThisTurn = null;
+		immediateFail = false;
 		staticInstance.selectedCat = selectedCat;
 		staticInstance.tilePath = tilePath;
 		staticInstance.InstanceTakeControl ();
 	}
 
-	private static bool? triggerButtonActionThisTurn;
+	private static bool? triggerPressurePlatesThisTurn;
+	private static ButtonTileOnePress buttonThisTurn;
+	private static bool immediateFail;
 
 	void Awake () {
 		staticInstance = this;
@@ -45,22 +49,32 @@ public class CatExecutePhase : GameControlPhase {
 
 	override public void OnTakeControl () {
 		CameraOverheadControl.SetCamFollowTarget (selectedCat.transform);
-		purrSound.Play ();
-		selectedCat.walkingAnimation = true;
+		if (tilePath.Count > 0) {
+			purrSound.Play ();
+			selectedCat.walkingAnimation = true;
+		}
+		selectedCat.stealthStacks = selectedCat.maxEnergy - tilePath.Count;
 	}
 
 	override public void StandardUpdate () {
-		if (Input.GetKey (KeyCode.Space) && triggerButtonActionThisTurn == null) {
+		if (Input.GetKey (KeyCode.Space) && triggerPressurePlatesThisTurn == null) {
 			Time.timeScale = 100f;
 		}
 	}
 
 	override public void ControlUpdate () {
 		if (tilePath.Count > 0) {
+			if (tilePath [0] is ButtonTileOnePress) {
+				buttonThisTurn = tilePath [0] as ButtonTileOnePress;
+			}
+			if (tilePath [0].occupant != null && tilePath [0].occupant is Dog) {
+				immediateFail = true;
+				tilePath [0].occupant.PlaySound ();
+			}
 			selectedCat.MoveTo (tilePath [0]);
 			tilePath.RemoveAt (0);
 		}
-		else if (triggerButtonActionThisTurn == null) {
+		else if (triggerPressurePlatesThisTurn == null) {   // always comes after movement
 			while (charactersCrossed.Count > 0) {
 				charactersCrossed.Pop ().FindMyTile ();
 			}
@@ -69,7 +83,6 @@ public class CatExecutePhase : GameControlPhase {
 			UIManager.masterInfoBox.ClearAllData ();
 			CameraOverheadControl.StopFollowing ();
 			purrSound.Stop ();
-			selectedCat.DecrementWetTurns ();
 			if (GameBrain.dogManager.allCharacters.Length == 0 && GameBrain.catManager.availableCharacters.Length == 1) {
 				selectedCat.SetPseudoGray (true);
 			}
@@ -79,22 +92,32 @@ public class CatExecutePhase : GameControlPhase {
 
 			selectedCat.walkingAnimation = false;
 
-			if (!ButtonTile.actionAlreadyExecuted && ButtonTile.AllButtonsActivated ()) {
-				ButtonTile.CameraToFocusPoint ();
+			if (!PressurePlateMaster.actionAlreadyExecuted && PressurePlateMaster.AllButtonsActivated ()) {
+				PressurePlateMaster.CameraToFocusPoint ();
 				AnimationManager.AddStallTime (staticInstance.transform, .5f);
-				triggerButtonActionThisTurn = true;
+				triggerPressurePlatesThisTurn = true;
 			}
 			else {
-				triggerButtonActionThisTurn = false;
+				if (buttonThisTurn != null) {
+					buttonThisTurn.ActivateVisuals ();
+					buttonThisTurn.CameraToFocusPoint ();
+					AnimationManager.AddStallTime (staticInstance.transform, .5f);
+				}
+				triggerPressurePlatesThisTurn = false;
 			}
 		}
-		else if (triggerButtonActionThisTurn.GetValueOrDefault ()) {  //trigger sprinklers
-			ButtonTile.ActivateAll ();
+		else if (buttonThisTurn != null) {
+			buttonThisTurn.ActivateAll ();
 			AnimationManager.AddStallTime (staticInstance.transform, 1.5f);
-			triggerButtonActionThisTurn = false;
+			buttonThisTurn = null;
+		}
+		else if (triggerPressurePlatesThisTurn.GetValueOrDefault ()) {  //trigger sprinklers
+			PressurePlateMaster.ActivateAll ();
+			AnimationManager.AddStallTime (staticInstance.transform, 1.5f);
+			triggerPressurePlatesThisTurn = false;
 		}
 		else {
-			CatTurnDetectionPhase.TakeControl ();
+			CatTurnDetectionPhase.TakeControl (selectedCat, immediateFail);
 		}
 	}
 

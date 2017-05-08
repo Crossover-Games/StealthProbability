@@ -8,10 +8,13 @@ using UnityEngine;
 public class FloatingPowerup : MonoBehaviour {
 
 	[Tooltip ("Length of one cycle in seconds. Do not set to zero")]
-	[SerializeField] private float cycleLength = 1f;
+	[SerializeField]
+	private float cycleLength = 1f;
 
 	[Tooltip ("Max change from starting elevation")]
-	[SerializeField] private float elevationDifference;
+	[SerializeField]
+	private float elevationDifference;
+	[SerializeField] private bool reverseDirection = false;
 
 	private float currentTime;
 
@@ -24,7 +27,7 @@ public class FloatingPowerup : MonoBehaviour {
 	}
 
 	private float elevation {
-		get { 
+		get {
 			if (ratio < 0.5f) {
 				return defaultElevation + Interpolation.Interpolate (elevationDifference, -elevationDifference, ratio * 2f, InterpolationMethod.Sinusoidal);
 			}
@@ -51,7 +54,9 @@ public class FloatingPowerup : MonoBehaviour {
 	private void ApplyTransformation () {
 		Quaternion tempQuat = transform.rotation;
 		Vector3 tempEuler = tempQuat.eulerAngles;
-		tempEuler.y = 360f * ratio;
+		float newY = reverseDirection ? -360f : 360f;
+		newY *= ratio;
+		tempEuler.y = newY;
 		tempQuat.eulerAngles = tempEuler;
 		transform.rotation = tempQuat;
 

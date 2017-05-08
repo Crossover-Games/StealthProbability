@@ -14,6 +14,7 @@ public class DogTurnDetectionPhase : GameControlPhase {
 	/// Puts the DogTurnDetectionPhase in control.
 	/// </summary>
 	public static void TakeControl () {
+		staticInstance.goteem = false;
 		staticInstance.InstanceTakeControl ();
 	}
 	void Awake () {
@@ -22,6 +23,8 @@ public class DogTurnDetectionPhase : GameControlPhase {
 
 	private float lastRolledChance;
 	private Cat lastCatRekt;
+
+	private bool goteem;
 
 	private Queue<DetectionMatchup> allChecks;
 
@@ -36,6 +39,7 @@ public class DogTurnDetectionPhase : GameControlPhase {
 				lastCatRekt.hasWildCard = false;
 			}
 			else {
+				goteem = true;
 				AnimationManager.AddAnimation (lastCatRekt.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
 				GameBrain.catManager.Remove (lastCatRekt);
 			}
@@ -45,8 +49,7 @@ public class DogTurnDetectionPhase : GameControlPhase {
 			DetectionMatchup currentCheck = allChecks.Dequeue ();
 			currentCheck.CameraHalfway ();
 			DetectionManager.SetConflictHighlight (currentCheck);
-			bool checkResult = DetectionMeter.ConductRollAndAnimate (currentCheck);
-			if (checkResult) {
+			if (DetectionMeter.ConductRollAndAnimate (currentCheck)) {
 				lastCatRekt = currentCheck.catInDanger;
 			}
 		}
@@ -59,11 +62,11 @@ public class DogTurnDetectionPhase : GameControlPhase {
 	/// Advances the phase when there are no more cats to check.
 	/// </summary>
 	private void EndChecking () {
-		if (VictoryTile.gameWon) {
-			VictoryPhase.TakeControl ();
-		}
-		else if (VictoryTile.gameLost) {
+		if (goteem) {
 			LosePhase.TakeControl ();
+		}
+		else if (VictoryTile.gameWon) {
+			VictoryPhase.TakeControl ();
 		}
 		else {
 			DogSelectorPhase.TakeControl ();

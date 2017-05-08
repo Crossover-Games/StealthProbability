@@ -66,17 +66,37 @@ public class DetectionMeter : MonoBehaviour {
 		return staticInstance.RollHelper (matchup);
 	}
 
-	private void QueueAdjustBars (float updatedDanger) {
-		AnimationManager.AddAnimation (dangerBar, new AnimationDestination (null, null, new Vector3 (-updatedDanger, 1f, 1f), adjustTime, InterpolationMethod.Quadratic), true);
-		AnimationManager.AddAnimation (safeBar, new AnimationDestination (null, null, new Vector3 (1f - updatedDanger, 1f, 1f), adjustTime, InterpolationMethod.Quadratic), true);
-		AnimationManager.AddStallTime (transform, adjustTime, true);
+	private void QueueAdjustBars (float oldDanger, float newDanger) {
+		AnimationManager.AddAnimation (dangerBar, new AnimationDestination (null, null, new Vector3 (-newDanger, 1f, 1f), adjustTime, InterpolationMethod.Quadratic), true);
+		AnimationManager.AddAnimation (safeBar, new AnimationDestination (null, null, new Vector3 (1f - newDanger, 1f, 1f), adjustTime, InterpolationMethod.Quadratic), true);
 		AnimationManager.AddStallTime (pointerTransform, adjustTime, true);
+		//AnimationManager.AddStallTime (transform, adjustTime, true);
+		float partialCycle = Mathf.Abs (adjustTime * 0.5f / (FloatToPercent (oldDanger) - FloatToPercent (newDanger)));
+		if (oldDanger > newDanger) {
+			for (int x = FloatToPercent (oldDanger) - 1; x >= FloatToPercent (newDanger); x--) {
+				AnimationManager.AddStallTime (transform, partialCycle, true, ChangePercentText (x));
+			}
+		}
+		else {
+			for (int x = FloatToPercent (oldDanger) + 1; x <= FloatToPercent (newDanger); x++) {
+				AnimationManager.AddStallTime (transform, partialCycle, true, ChangePercentText (x));
+			}
+		}
 	}
 
 	private ExecuteMultipleCommands ChangeMainText (string text, Color? color = null) {
 		Stack<IActionCommand> textCommands = new Stack<IActionCommand> ();
 		textCommands.Push (new ChangeTextMeshCommand (wildCardText, text, color));
 		textCommands.Push (new ChangeTextMeshCommand (wildCardTextShadow, text));
+		return new ExecuteMultipleCommands (textCommands);
+	}
+
+	private ExecuteMultipleCommands ChangePercentText (int number) {
+		string percentRichText = number.ToString () + percentHack;
+
+		Stack<IActionCommand> textCommands = new Stack<IActionCommand> ();
+		textCommands.Push (new ChangeTextMeshCommand (percentText, percentRichText));
+		textCommands.Push (new ChangeTextMeshCommand (percentTextShadow, percentRichText));
 		return new ExecuteMultipleCommands (textCommands);
 	}
 
@@ -103,19 +123,19 @@ public class DetectionMeter : MonoBehaviour {
 		AnimationManager.AddStallTime (safeBar, duration, true);
 	}
 
+	private int FloatToPercent (float danger) {
+		return Mathf.FloorToInt (danger * 100);
+	}
+
 	private bool RollHelper (DetectionMatchup matchup) {
-		Color dangerColor = TileDangerData.DangerToColor (matchup.danger);
-		new ChangeRendererEmissionColor (pointerRenderer, Color.black).Execute ();
-
-		string percentRichText = Mathf.FloorToInt (matchup.danger * 100).ToString () + percentHack; ;
-		percentText.text = percentRichText;
-		percentTextShadow.text = percentRichText;
-		percentText.color = dangerColor;
-
-		ChangeTextForWildCard (matchup).Execute ();
-
 		float effectiveDanger = matchup.danger;
 		float rolledChance = Random.value;
+
+		Color dangerColor = TileDangerData.DangerToColor (effectiveDanger);
+		new ChangeRendererEmissionColor (pointerRenderer, Color.black).Execute ();
+
+		ChangePercentText (FloatToPercent (effectiveDanger)).Execute ();
+		ChangeTextForWildCard (matchup).Execute ();
 
 		dangerBarRenderer.material.color = dangerColor.AlphaDifferent (0.5f);
 		pointerTransform.localPosition = Vector3.zero;
@@ -132,18 +152,20 @@ public class DetectionMeter : MonoBehaviour {
 		if (matchup.catInDanger.isWet) {
 			StallAll (waitTime);
 			QueueAction (ChangeMainText (waterText, WetFloor.waterColor));
+			float prevDanger = effectiveDanger;
 			effectiveDanger = 1f - effectiveDanger;
-			QueueAdjustBars (effectiveDanger);
+			QueueAdjustBars (prevDanger, effectiveDanger);
 			QueueAction (ChangeTextForWildCard (matchup));
 		}
 
 		// scale for danger reduction
-		int stealthStacksOnCat = 0;
+		
 		float stealthMultiplier = 0.1f;
-		if (stealthStacksOnCat > 0) {
+		if (matchup.catInDanger.stealthStacks > 0) {
 			QueueAction (ChangeMainText (reductionText, Color.green));
-			effectiveDanger = Mathf.Clamp01 (effectiveDanger - stealthStacksOnCat * stealthMultiplier);
-			QueueAdjustBars (effectiveDanger);
+			float prevDanger = effectiveDanger;
+			effectiveDanger = Mathf.Clamp01 (effectiveDanger - matchup.catInDanger.stealthStacks * stealthMultiplier);
+			QueueAdjustBars (prevDanger, effectiveDanger);
 			QueueAction (ChangeTextForWildCard (matchup));
 		}
 

@@ -18,11 +18,11 @@ public class GameBrain : MonoBehaviour {
 
 	// ---REFERENCES
 
-	private static TeamMananger<Cat> m_catManager;
+	private static CatManager m_catManager;
 	/// <summary>
 	/// Has knowledge of all cats.
 	/// </summary>
-	public static TeamMananger<Cat> catManager {
+	public static CatManager catManager {
 		get { return m_catManager; }
 	}
 
@@ -45,7 +45,7 @@ public class GameBrain : MonoBehaviour {
 
 	void Awake () {
 		Transform charactersParent = GameObject.FindGameObjectWithTag ("CharactersParent").transform;
-		m_catManager = new TeamMananger<Cat> (new List<Cat> (charactersParent.Find ("Cat Parent").GetComponentsInChildren<Cat> ()));
+		m_catManager = new CatManager (new List<Cat> (charactersParent.Find ("Cat Parent").GetComponentsInChildren<Cat> ()));
 		m_dogManager = new TeamMananger<Dog> (new List<Dog> (charactersParent.Find ("Dog Parent").GetComponentsInChildren<Dog> ()));
 		m_machineManager = new TeamMananger<Dog> (new List<Dog> (charactersParent.Find ("Machine Parent").GetComponentsInChildren<Dog> ()));
 	}
@@ -143,17 +143,17 @@ public class GameBrain : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Calls the operating GameControlPhase's UIActionButtonEvent().
+	/// Calls the operating GameControlPhase's UIStayButtonEvent().
 	/// </summary>
-	public static void RaiseUIActionButtonEvent () {
+	public static void RaiseUIStayButtonEvent () {
 		if (inControl != null) {
-			inControl.UIActionButtonEvent ();
+			inControl.UIStayButtonEvent ();
 		}
 	}
 	/// <summary>
-	/// Calls the operating GameControlPhase's UIActionButtonEvent().
+	/// Calls the operating GameControlPhase's UIStayButtonEvent().
 	/// </summary>
-	public static void InstanceRaiseUIActionButtonEvent () {
-		GameBrain.RaiseUIActionButtonEvent ();
+	public void InstanceRaiseUIStayButtonEvent () {
+		GameBrain.RaiseUIStayButtonEvent ();
 	}
 }

@@ -11,9 +11,9 @@ public class WetFloor : ActionTile {
 		get { return active ? "-SPRINKLER-" : "-SPRINKLER (OFF)-"; }
 	}
 	public override string infoText {
-		get { return active ? "Soak cats by sending them over a sprinkler! Wet cats have negated responses to risk probabilities." : "All pressure plates in the level must be simultaneously pressed to activate the sprinklers."; }
+		get { return active ? "Soak cats by sending them over a sprinkler! Wet cats have negated responses to risk probabilities." : "Place cats on all pressure plates in the level to activate this sprinkler."; }
 	}
-	public override Color infoTextColor { get { return waterColor; } }
+	public override Color infoTextColor { get { return active ? waterColor : Color.gray; } }
 
 	public override Vector3 cursorConnectionPoint {
 		get {

@@ -37,7 +37,7 @@ public class CatContextMenuPhase : GameControlPhase {
 	override public void OnTakeControl () {
 		TileManager.ClearAllShimmer ();
 		Tile last = tilePath.LastElement ();
-		UIManager.CenterPathEndMenuOnWorldPoint (last.topCenterPoint);
+		UIManager.CenterMenusOnWorldPoint (last.topCenterPoint);
 		UIManager.pathEndMenuState = true;
 		last.shimmer = true;
 		TileManager.cursorTile = last;

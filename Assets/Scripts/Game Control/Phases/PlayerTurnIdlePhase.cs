@@ -15,11 +15,14 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Puts the PlayerTurnIdlePhase in control
 	/// </summary>
 	public static void TakeControl () {
+		staticInstance.lastCatClicked = null;
 		staticInstance.InstanceTakeControl ();
 	}
 	void Awake () {
 		staticInstance = this;
 	}
+
+	private Cat lastCatClicked;
 
 	/// <summary>
 	/// Moves the cursor, updates UI and highlights. Does not trigger click events.
@@ -45,14 +48,23 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 				UIManager.masterInfoBox.headerText = t.occupant.name;
 				if (t.occupant.characterType == CharacterType.Cat) {
 					Cat thisCat = (t.occupant as Cat);
+					lastCatClicked = thisCat;
 					if (thisCat.isWet) {
-						UIManager.masterInfoBox.AddData ("SOAKED! Dry after " + thisCat.wetTurnsRemaining + " turns", WetFloor.waterColor);
+						string soakText = "SOAKED! Dry after " + thisCat.wetTurnsRemaining + " turn";
+						if (thisCat.wetTurnsRemaining != 1) {
+							soakText += "s";
+						}
+						UIManager.masterInfoBox.AddData (soakText, WetFloor.waterColor);
 					}
 					if (thisCat.hasWildCard) {
 						UIManager.masterInfoBox.AddData ("Second chance ready", Color.white);
 					}
 					else {
 						UIManager.masterInfoBox.AddData ("Second chance depleted", Color.gray);
+					}
+
+					if (thisCat.stealthStacks > 0) {
+						UIManager.masterInfoBox.AddData (thisCat.stealthStacks.ToString () + " energy converted " + thisCat.stealthStacks.ToString () + "0% danger reduction", Color.cyan);
 					}
 
 					if (!t.occupant.grayedOut) {
@@ -126,7 +138,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 	/// Switches to the drag arrow phase.
 	/// </summary>
 	override public void TileDragEvent (Tile t) {
-		if (Input.GetMouseButton (0) && TileManager.cursorTile.occupant != null && TileManager.cursorTile.occupant.characterType == CharacterType.Cat && !TileManager.cursorTile.occupant.grayedOut) {
+		if (Input.GetMouseButton (0) && TileManager.cursorTile != null && TileManager.cursorTile.occupant != null && TileManager.cursorTile.occupant.characterType == CharacterType.Cat && !TileManager.cursorTile.occupant.grayedOut) {
 			DrawArrowPhase.TakeControl (TileManager.cursorTile.occupant as Cat);
 		}
 	}
@@ -138,8 +150,15 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 		CameraOverheadControl.dragControlAllowed = true;
 	}
 
+	override public void UIStayButtonEvent () {
+		TileManager.ClearAllShimmer ();
+		TileManager.cursorTile = null;
+		CatExecutePhase.TakeControl (lastCatClicked, new List<Tile> ());
+	}
+
 	override public void OnLeaveControl () {
 		CameraOverheadControl.dragControlAllowed = false;
+		UIManager.stayMenuState = false;
 	}
 
 	/// <summary>
@@ -150,7 +169,19 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 			DogSelectorPhase.TakeControl ();
 		}
 		else if (Input.GetMouseButtonDown (0)) {
-			CustomTileClickEvent (TileManager.tileMousedOver);
+			if (UIManager.stayMenuState) {
+				if (!UIManager.mouseOverStayMenu) {
+					UIManager.stayMenuState = false;
+					CustomTileClickEvent (TileManager.tileMousedOver);
+				}
+			}
+			else {
+				CustomTileClickEvent (TileManager.tileMousedOver);
+			}
+		}
+		else if (Input.GetMouseButtonUp (0) && TileManager.tileMousedOver != null && TileManager.tileMousedOver.occupant != null && TileManager.tileMousedOver.occupant is Cat && !TileManager.tileMousedOver.occupant.grayedOut) {
+			UIManager.CenterMenusOnWorldPoint (TileManager.tileMousedOver.topCenterPoint);
+			UIManager.stayMenuState = true;
 		}
 	}
 }

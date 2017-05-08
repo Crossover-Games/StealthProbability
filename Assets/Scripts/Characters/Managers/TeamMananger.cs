@@ -19,14 +19,14 @@ public class TeamMananger<T> where T : GameCharacter {
 	/// <summary>
 	/// All characters on this team.
 	/// </summary>
-	public T[] allCharacters {
+	public T [] allCharacters {
 		get { return m_characters.ToArray (); }
 	}
 
 	/// <summary>
 	/// All characters currently available to move.
 	/// </summary>
-	public T[] availableCharacters {
+	public T [] availableCharacters {
 		get {
 			List<T> tmp = new List<T> ();
 			foreach (T character in m_characters) {
@@ -57,14 +57,18 @@ public class TeamMananger<T> where T : GameCharacter {
 	/// </summary>
 	public void RejuvenateAll () {
 		foreach (T character in m_characters) {
-			character.grayedOut = false;
+			Rejuvenate (character);
 		}
+	}
+
+	public virtual void Rejuvenate (T character) {
+		character.grayedOut = false;
 	}
 
 	/// <summary>
 	/// Remove the specified character from this team. Used when a cat is detected and removed from the board.
 	/// </summary>
-	public void Remove (T character) {
+	public virtual void Remove (T character) {
 		if (character != null && m_characters.Contains (character)) {
 			m_characters.Remove (character);
 			character.myTile.SetOccupant (null);

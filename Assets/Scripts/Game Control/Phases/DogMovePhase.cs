@@ -15,6 +15,8 @@ public class DogMovePhase : GameControlPhase {
 	/// Puts the DogMovePhase in control.
 	/// </summary>
 	public static void TakeControl (Dog selectedDog, List<Tile> tilePath) {
+		staticInstance.goteem = false;
+		staticInstance.trampled = new Stack<Cat> ();
 		staticInstance.selectedDog = selectedDog;
 		staticInstance.tilePath = tilePath;
 		staticInstance.InstanceTakeControl ();
@@ -22,6 +24,9 @@ public class DogMovePhase : GameControlPhase {
 	void Awake () {
 		staticInstance = this;
 	}
+
+	private bool goteem;
+	private Stack<Cat> trampled;
 
 	/// <summary>
 	/// The dog that will move.
@@ -48,12 +53,26 @@ public class DogMovePhase : GameControlPhase {
 	}
 
 	override public void ControlUpdate () {
-		if (tilePath.Count > 0) {
+		if (trampled.Count > 0) {
+			goteem = true;
+			Cat selectedCat = trampled.Pop ();
+			AnimationManager.AddAnimation (selectedCat.transform, new AnimationDestination (null, null, Vector3.zero, 1f, InterpolationMethod.SquareRoot));
+			GameBrain.catManager.Remove (selectedCat);
+		}
+		else if (tilePath.Count > 0) {
+			if (tilePath [0].occupant != null && tilePath [0].occupant is Cat) {
+				trampled.Push (tilePath [0].occupant as Cat);
+			}
 			selectedDog.MoveTo (tilePath [0]);
 			tilePath.RemoveAt (0);
 		}
 		else {
-			DogTurnDetectionPhase.TakeControl ();
+			if (goteem) {
+				LosePhase.TakeControl ();
+			}
+			else {
+				DogTurnDetectionPhase.TakeControl ();
+			}
 		}
 	}
 

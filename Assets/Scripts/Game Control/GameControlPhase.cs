@@ -85,9 +85,9 @@ public abstract class GameControlPhase : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Called by GameBrain when the action button is clicked.
+	/// Called by GameBrain when the stay button is clicked.
 	/// </summary>
-	virtual public void UIActionButtonEvent () {
+	virtual public void UIStayButtonEvent () {
 		// by default, do nothing
 	}
 }

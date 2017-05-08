@@ -15,6 +15,10 @@ public class VictoryTile : Floor {
 		get { return "-EXTRACTION POINT-"; }
 	}
 
+	public override string infoText {
+		get { return "You win when all extraction points are occupied by cats."; }
+	}
+
 	private static List<VictoryTile> allVictoryTiles = new List<VictoryTile> ();
 
 	/// <summary>
