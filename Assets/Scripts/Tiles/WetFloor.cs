@@ -2,22 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WetFloor : Floor {
+public class WetFloor : ActionTile {
 	public override TileType tileType {
 		get { return TileType.WetFloor; }
 	}
 
 	public override string tileName {
-		get { return flooded ? "-WET FLOOR-" : "-FLOOR-"; }
+		get { return active ? "-SPRINKLER-" : "-SPRINKLER (OFF)-"; }
+	}
+	public override string infoText {
+		get { return active ? "Soak cats by sending them over a sprinkler! Wet cats have negated responses to risk probabilities." : "All pressure plates in the level must be simultaneously pressed to activate the sprinklers."; }
+	}
+	public override Color infoTextColor { get { return waterColor; } }
+
+	public override Vector3 cursorConnectionPoint {
+		get {
+			if (occupant == null) {
+				return topCenterPoint + Vector3.up * 0.25f;
+			}
+			else {
+				return new Vector3 (transform.position.x, occupant.elevationOfTop, transform.position.z);
+			}
+		}
 	}
 
+	[SerializeField] private FloatingPowerup spinEffect;
 	[SerializeField] private GameObject waterGraphic;
 	/// <summary>
 	/// Is this tile filled with water?
 	/// </summary>
-	public bool flooded {
+	public override bool active {
 		get { return waterGraphic.activeSelf; }
-		set { waterGraphic.SetActive (value); }
+	}
+
+	public override void Activate () {
+		if (!active) {
+			//PlaySound ();
+			spinEffect.enabled = true;
+			waterGraphic.SetActive (true);
+		}
 	}
 
 	/// <summary>

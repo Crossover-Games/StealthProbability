@@ -131,7 +131,6 @@ namespace LevelBuilderRemake {
 					}
 				}
 			}
-			List<Path> allPaths = new List<Path> ();
 
 			foreach (StepNode sn in allNodes) {
 				RegisterConnections (sn, allNodes);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class ButtonTile : Floor {
 	private static List<ButtonTile> allButtons;
 
-	private static WetFloor [] allWetFloors;
+	private static ActionTile [] allActionTiles;
 	private static bool m_actionExecuted;
 
 	/// <summary>
@@ -15,17 +15,25 @@ public class ButtonTile : Floor {
 		get { return m_actionExecuted; }
 	}
 
+	public override string tileName {
+		get { return "-PRESSURE PLATE-"; }
+	}
+
+	public override string infoText {
+		get { return "If all pressure plates are simultaneously occupied by different cats, something special will happen!"; }
+	}
+
 	protected override void LateAwake () {
 		base.LateAwake ();
 		allButtons = new List<ButtonTile> ();
-		allWetFloors = null;
+		allActionTiles = null;
 		m_actionExecuted = false;
 	}
 
 	protected override void LateStart () {
 		allButtons.Add (this);
-		if (allWetFloors == null) {
-			allWetFloors = GameObject.FindObjectsOfType<WetFloor> ();
+		if (allActionTiles == null) {
+			allActionTiles = GameObject.FindObjectsOfType<ActionTile> ();
 		}
 	}
 
@@ -44,17 +52,17 @@ public class ButtonTile : Floor {
 	/// <summary>
 	/// Turn on all sprinklers.
 	/// </summary>
-	public static void Activate () {
+	public static void ActivateAll () {
 		m_actionExecuted = true;
-		foreach (WetFloor w in allWetFloors) {
-			w.flooded = true;
+		foreach (ActionTile w in allActionTiles) {
+			w.Activate ();
 		}
 	}
 
 	/// <summary>
 	/// Focus the camera on the sprinklers.
 	/// </summary>
-	public static void CameraToSprinklers () {
-		CameraOverheadControl.SetCamFocusPoint (allWetFloors [0].topCenterPoint);
+	public static void CameraToFocusPoint () {
+		CameraOverheadControl.SetCamFocusPoint (allActionTiles [0].topCenterPoint);
 	}
 }

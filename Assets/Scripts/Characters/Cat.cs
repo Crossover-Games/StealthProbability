@@ -79,7 +79,7 @@ public class Cat : GameCharacter {
 			if (dangerArray.Length > 0) {
 				DetectionManager.AddDanger (this, dangerArray);
 			}
-			if (destination.tileType == TileType.WetFloor && (destination as WetFloor).flooded) {
+			if (destination.tileType == TileType.WetFloor && (destination as WetFloor).active) {
 				Soak ();
 			}
 		}

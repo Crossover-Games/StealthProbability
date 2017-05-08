@@ -28,15 +28,16 @@ public class DetectionMatchup {
 	/// </summary>
 	public bool SimulateDetectionCheck (out float rolledChance) {
 		rolledChance = Random.value;
-    if(catInDanger.isWet){
-        rolledChance = 1 - rolledChance;
-    }
+		/*if (catInDanger.isWet) {
+			rolledChance = 1 - rolledChance;
+		}*/
 		return rolledChance < danger;
 	}
 	/// <summary>
 	/// Returns true if the cat should be busted.
 	/// </summary>
 	public bool SimulateDetectionCheck () {
-		return Random.value < danger;
+		float f;
+		return SimulateDetectionCheck (out f);
 	}
 }

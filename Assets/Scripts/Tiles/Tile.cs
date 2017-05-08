@@ -28,6 +28,12 @@ public abstract class Tile : MonoBehaviour {
 	/// The name that will appear when this tile is selected.
 	/// </summary>
 	public abstract string tileName { get; }
+	/// <summary>
+	/// Description text for this tile.
+	/// </summary>
+	/// <returns></returns>
+	public virtual string infoText { get { return ""; } }
+	public virtual Color infoTextColor { get { return Color.white; } }
 
 	/// <summary>
 	/// Can a cat end its movement on this square?

@@ -36,6 +36,12 @@ public class MasterInfoBox : MonoBehaviour {
 		}
 	}
 
+	public void AddDataFromTile (Tile t) {
+		if (t != null && t.infoText.Length > 0) {
+			AddData (t.infoText, t.infoTextColor);
+		}
+	}
+
 	/// <summary>
 	/// Adds the data from tile danger data using a convention.
 	/// </summary>

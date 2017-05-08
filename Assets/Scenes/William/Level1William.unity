@@ -10955,6 +10955,48 @@ MonoBehaviour:
   immediateChoiceMaterial: {fileID: 2100000, guid: a370fa9bf9a0c9f4a864ccdea9736d4a,
     type: 2}
   m_path: {fileID: 0}
+--- !u!1001 &1890203053
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4634467708953942, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634467708953942, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 55.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634467708953942, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634467708953942, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634467708953942, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634467708953942, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634467708953942, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4634467708953942, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f787ba6143fee0448aa481778fa9d28f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!4 &1892090815 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4706363867811756, guid: 84255c901ae2a724094e384617812699,

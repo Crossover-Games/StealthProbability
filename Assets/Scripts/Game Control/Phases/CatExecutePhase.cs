@@ -15,13 +15,13 @@ public class CatExecutePhase : GameControlPhase {
 	/// Puts the CatExecutePhase in control.
 	/// </summary>
 	public static void TakeControl (Cat selectedCat, List<Tile> tilePath) {
-		triggerSprinklersThisTurn = null;
+		triggerButtonActionThisTurn = null;
 		staticInstance.selectedCat = selectedCat;
 		staticInstance.tilePath = tilePath;
 		staticInstance.InstanceTakeControl ();
 	}
 
-	private static bool? triggerSprinklersThisTurn;
+	private static bool? triggerButtonActionThisTurn;
 
 	void Awake () {
 		staticInstance = this;
@@ -50,7 +50,7 @@ public class CatExecutePhase : GameControlPhase {
 	}
 
 	override public void StandardUpdate () {
-		if (Input.GetKey (KeyCode.Space)) {
+		if (Input.GetKey (KeyCode.Space) && triggerButtonActionThisTurn == null) {
 			Time.timeScale = 100f;
 		}
 	}
@@ -60,7 +60,7 @@ public class CatExecutePhase : GameControlPhase {
 			selectedCat.MoveTo (tilePath [0]);
 			tilePath.RemoveAt (0);
 		}
-		else if (triggerSprinklersThisTurn == null) {
+		else if (triggerButtonActionThisTurn == null) {
 			while (charactersCrossed.Count > 0) {
 				charactersCrossed.Pop ().FindMyTile ();
 			}
@@ -80,18 +80,18 @@ public class CatExecutePhase : GameControlPhase {
 			selectedCat.walkingAnimation = false;
 
 			if (!ButtonTile.actionAlreadyExecuted && ButtonTile.AllButtonsActivated ()) {
-				ButtonTile.CameraToSprinklers ();
-				AnimationManager.AddStallTime (staticInstance.transform, 0.5f);
-				triggerSprinklersThisTurn = true;
+				ButtonTile.CameraToFocusPoint ();
+				AnimationManager.AddStallTime (staticInstance.transform, .5f);
+				triggerButtonActionThisTurn = true;
 			}
 			else {
-				triggerSprinklersThisTurn = false;
+				triggerButtonActionThisTurn = false;
 			}
 		}
-		else if (triggerSprinklersThisTurn.GetValueOrDefault ()) {  //trigger sprinklers
-			ButtonTile.Activate ();
+		else if (triggerButtonActionThisTurn.GetValueOrDefault ()) {  //trigger sprinklers
+			ButtonTile.ActivateAll ();
 			AnimationManager.AddStallTime (staticInstance.transform, 1.5f);
-			triggerSprinklersThisTurn = false;
+			triggerButtonActionThisTurn = false;
 		}
 		else {
 			CatTurnDetectionPhase.TakeControl ();

@@ -191,6 +191,7 @@ public class VisionPattern {
 		/// Chihuahua. Very small. Truncated to prevent spelling errors.
 		/// </summary>
 		Chih,
+		Pug,
 		Beacon
 	}
 
@@ -205,6 +206,8 @@ public class VisionPattern {
 				return "Chihuahua type dog: Has more bark than bite, except in large numbers";
 			case PatternType.Beacon:
 				return "Beacon: Immobile anti-cat security equipment";
+			case PatternType.Pug:
+				return "Pug: Adorable pug eyes make for better lateral vision at the cost of having poor forward vision.";
 			default:
 				return "Unique: An unpredictable unit in canine security";
 		}

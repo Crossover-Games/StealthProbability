@@ -86,9 +86,7 @@ public class PlayerTurnIdlePhase : GameControlPhase {
 					tdd.watchingDog.myTile.shimmer = true;
 				}
 				UIManager.masterInfoBox.headerText = t.tileName;
-				if (t.tileType == TileType.WetFloor && (t as WetFloor).flooded) {
-					UIManager.masterInfoBox.AddData ("Wet cats have negated responses to risk probabilities.", WetFloor.waterColor);
-				}
+				UIManager.masterInfoBox.AddDataFromTile (t);
 				UIManager.routeCurrentlyDisplayed = null;
 			}
 		}
