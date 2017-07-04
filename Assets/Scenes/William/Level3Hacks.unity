@@ -7097,7 +7097,7 @@ Prefab:
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4150478999487464, guid: 88ea0e327323cde4a989d1c8e85360f4, type: 2}
       propertyPath: m_LocalPosition.x
@@ -7141,13 +7141,14 @@ Prefab:
         type: 2}
       propertyPath: m_messages.Array.data[2]
       value: This way, it is only 5%! You will need to reapply the sprinkler after
-        getting through three lasers,
+        getting through three lasers, as our agents can only stand the dreaded water
+        for so long.
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[3]
-      value: ' as our agents can only stand the dreaded water for so long. The top
-        agent must then open the exit for the wet agent. Good Luck Operative!'
+      value: '  The top agent must then open the exit for the wet agent. Good Luck
+        Operative!'
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
@@ -7166,8 +7167,7 @@ Prefab:
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[4]
-      value: ' as our agents can only stand the dreaded water for so long. The top
-        agent must then open the exit for the wet agent. Good Luck Operative!'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
@@ -13080,7 +13080,7 @@ Prefab:
     - target: {fileID: 224376053087091410, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -13100,7 +13100,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -95
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -13110,7 +13110,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -13130,7 +13130,7 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -195.32846
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -13140,12 +13140,12 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30.656935
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224597049839826336, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 230.65694
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224644170561741736, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}

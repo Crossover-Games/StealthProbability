@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.22510481, g: 0.25166202, b: 0.32264084, a: 1}
+  m_IndirectSpecularColor: {r: 0.22410199, g: 0.25158736, b: 0.32268625, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1940,7 +1940,7 @@ Prefab:
     - target: {fileID: 224376053087091410, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -1960,7 +1960,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -95
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -1970,7 +1970,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -1990,7 +1990,7 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -195.32846
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -2000,12 +2000,12 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30.656935
       objectReference: {fileID: 0}
     - target: {fileID: 224597049839826336, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 230.65694
       objectReference: {fileID: 0}
     - target: {fileID: 1182296328554118, guid: c0708eb52ee4c694c9f856d41efc5d0d, type: 2}
       propertyPath: m_IsActive
@@ -2402,37 +2402,37 @@ Prefab:
       propertyPath: m_messages.Array.data[2]
       value: "First things first: You'll need to move the camera with the arrow keys
         or right click. Try to find the extraction point in this level. You can't
-        miss it's blue glow.\r\n\r\n"
+        miss it is blue glow.\r\n\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[4]
-      value: Click and drag a cat to move it. Dogs are bad news, so you'll want to
-        stay out of their fields of view.
+      value: Click and drag an agent to move it. Dogs are bad news, so you'll want
+        to stay out of their fields of view.
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[5]
-      value: You can be caught on both your turn and dog turns, so stay sharp.
+      value: You can be caught on both your agent's turn and dog turns, so stay sharp.
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[6]
-      value: While moving, a cat is only checked for the most dangerous square it
-        walks over per dog. This means that if you pass by two dogs, you get checked
+      value: While moving, an agent is only checked for the most dangerous square
+        it walks over per dog. This means that if you pass by two dogs, you get checked
         twice.
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[7]
-      value: If a cat has any unspent energy after moving, it is converted to a stealth
-        bonus for the next turn. Sometimes slow and steady wins the race!
+      value: If an agent has any unspent energy after moving, it is converted to a
+        stealth bonus for the next turn. Sometimes slow and steady wins the race!
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[8]
-      value: If you get caught once, it's not the end of the world. All cats in the
-        Shadow Cats resistance movement are issued one "SECOND CHANCE" per mission.
+      value: If you get caught once, it's not the end of the world. All agents in
+        the Shadow Cats resistance movement are issued one "SECOND CHANCE" per mission.
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}

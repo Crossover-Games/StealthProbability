@@ -12146,7 +12146,7 @@ Prefab:
     - target: {fileID: 224376053087091410, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -12166,7 +12166,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -95
       objectReference: {fileID: 0}
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -12176,7 +12176,7 @@ Prefab:
     - target: {fileID: 224929853597544304, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -12196,7 +12196,7 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -195.32846
       objectReference: {fileID: 0}
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
@@ -12206,12 +12206,12 @@ Prefab:
     - target: {fileID: 224254547551962552, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 30.656935
       objectReference: {fileID: 0}
     - target: {fileID: 224597049839826336, guid: c0708eb52ee4c694c9f856d41efc5d0d,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 230.65694
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0708eb52ee4c694c9f856d41efc5d0d, type: 2}
@@ -24312,8 +24312,8 @@ Prefab:
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
       propertyPath: m_messages.Array.data[1]
-      value: Now, you need to get your two operatives to the elevators at the same
-        time. You can use the pressure pads to get past some of the guards!
+      value: Now, you need to get your two agents to the elevators at the same time.
+        You can use the pressure pads to get past some of the guards!
       objectReference: {fileID: 0}
     - target: {fileID: 114967519013999868, guid: 88ea0e327323cde4a989d1c8e85360f4,
         type: 2}
