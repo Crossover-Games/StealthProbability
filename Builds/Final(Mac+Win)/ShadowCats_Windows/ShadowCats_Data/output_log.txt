@@ -1,0 +1,755 @@
+Initialize engine version: 5.6.2f1 (a2913c821e27)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) HD Graphics 5500 (ID=0x1616)
+    Vendor:   Intel
+    VRAM:     2087 MB
+    Driver:   20.19.15.4531
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.131 seconds
+Platform assembly: C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Brian Fischer\Downloads\Finished Game files-20171127T040901Z-001\Finished Game files\ShadowCats_Windows\ShadowCats_Data\Managed\System.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.727874 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 3284 -> priority: 1 
+  Thread -> id: 27b4 -> priority: 1 
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 22.115183 ms
+
+Unloading 208 unused Assets to reduce memory usage. Loaded Objects now: 846.
+Total: 11.681446 ms (FindLiveObjects: 0.370386 ms CreateObjectMapping: 0.348520 ms MarkObjects: 0.971929 ms  DeleteObjects: 9.987488 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+WARNING: Shader Unsupported: 'Unlit/Color Transparent' - Pass '' has no vertex shader
+UnloadTime: 3.342401 ms
+
+Unloading 12 unused Assets to reduce memory usage. Loaded Objects now: 5432.
+Total: 4.034532 ms (FindLiveObjects: 0.405639 ms CreateObjectMapping: 0.243651 ms MarkObjects: 2.868485 ms  DeleteObjects: 0.515416 ms)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Sub-emitters must be children of the system that spawns them
+ 
+(Filename:  Line: 2694)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.498673 ms
+
+Unloading 172 unused Assets to reduce memory usage. Loaded Objects now: 872.
+Total: 9.336411 ms (FindLiveObjects: 0.099067 ms CreateObjectMapping: 0.087018 ms MarkObjects: 0.745234 ms  DeleteObjects: 8.404197 ms)
+
